@@ -102,11 +102,12 @@ const Testimonials = () => {
             <Quote className="h-16 w-16 mx-auto mb-6 opacity-25" />
             <p className="text-2xl md:text-3xl italic font-light max-w-4xl mx-auto mb-8">Dr. Wong is not just a skilled dentist; he's an artist who transformed my smile and gave me back my confidence. His practice combines cutting-edge technology with genuine care for patients.</p>
             <div className="flex items-center justify-center">
-              <img 
-                src="https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&h=100&q=80" 
-                alt="Patient" 
-                className="w-12 h-12 rounded-full border-2 border-white mr-4 object-cover"
-              />
+              <div 
+                className="w-12 h-12 rounded-full border-2 border-white mr-4 flex items-center justify-center font-bold text-primary bg-white"
+                aria-label="Avatar for Lisa M."
+              >
+                L
+              </div>
               <div className="text-left">
                 <h4 className="font-semibold">Lisa M.</h4>
                 <p className="text-sm opacity-75">Palo Alto, CA</p>
@@ -154,12 +155,12 @@ const Testimonials = () => {
                     </div>
                     <p className="text-[#333333] italic mb-4 text-sm sm:text-base line-clamp-6">{testimonial.text}</p>
                     <div className="flex items-center mt-auto pt-2 border-t border-gray-100">
-                      <img 
-                        src={testimonial.image} 
-                        alt={testimonial.name} 
-                        className="w-10 h-10 sm:w-12 sm:h-12 rounded-full mr-3 sm:mr-4 object-cover"
-                        loading="lazy"
-                      />
+                      <div 
+                        className="w-10 h-10 sm:w-12 sm:h-12 rounded-full mr-3 sm:mr-4 flex items-center justify-center font-bold text-white bg-primary"
+                        aria-label={`Avatar for ${testimonial.name}`}
+                      >
+                        {testimonial.name.charAt(0)}
+                      </div>
                       <div>
                         <h4 className="font-semibold text-sm sm:text-base">{testimonial.name}</h4>
                         <p className="text-xs sm:text-sm text-gray-600">{testimonial.location}</p>

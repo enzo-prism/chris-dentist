@@ -49,12 +49,12 @@ const TestimonialCard = ({ testimonial, index = 0 }: TestimonialCardProps) => {
           
           {/* Author info */}
           <div className="flex items-center mt-auto pt-2 border-t border-gray-100">
-            <img 
-              src={image} 
-              alt={name} 
-              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full mr-3 sm:mr-4 object-cover"
-              loading="lazy"
-            />
+            <div 
+              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full mr-3 sm:mr-4 flex items-center justify-center font-bold text-white bg-primary"
+              aria-label={`Avatar for ${name}`}
+            >
+              {name.charAt(0)}
+            </div>
             <div>
               <h4 className="font-semibold text-sm sm:text-base">{name}</h4>
               <p className="text-xs sm:text-sm text-gray-600">{location}</p>
