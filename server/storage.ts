@@ -300,19 +300,22 @@ export class MemStorage implements IStorage {
         title: "Pediatric Dentistry",
         description: "Child-friendly dental care in a comfortable environment to establish good oral health habits early.",
         image: "https://i.imgur.com/BeX3mhS.png",
-        slug: "pediatric-dentistry"
+        slug: "pediatric-dentistry",
+        featured: true
       },
       {
         title: "Orthodontics",
         description: "Clear aligners and traditional braces to correctly align teeth for improved function and appearance.",
         image: "https://i.imgur.com/gqotbUv.png",
-        slug: "orthodontics"
+        slug: "orthodontics",
+        featured: false
       },
       {
         title: "Emergency Dental Care",
         description: "Prompt attention for dental emergencies such as toothaches, broken teeth, or other urgent dental issues.",
         image: "https://i.imgur.com/hYHYbBq.png",
-        slug: "emergency-dental-care"
+        slug: "emergency-dental-care",
+        featured: true
       }
     ];
 
