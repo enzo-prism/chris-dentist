@@ -1,0 +1,172 @@
+import { useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { useMutation } from "@tanstack/react-query";
+import { apiRequest } from "@/lib/queryClient";
+import { insertContactMessageSchema, InsertContactMessage } from "@shared/schema";
+import { Button } from "@/components/ui/button";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
+import { useToast } from "@/hooks/use-toast";
+
+const ContactForm = () => {
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const form = useForm<InsertContactMessage>({
+    resolver: zodResolver(insertContactMessageSchema),
+    defaultValues: {
+      fullName: "",
+      email: "",
+      phone: "",
+      subject: "",
+      message: "",
+    },
+  });
+
+  const contactMutation = useMutation({
+    mutationFn: (data: InsertContactMessage) => apiRequest("POST", "/api/contact", data),
+    onSuccess: () => {
+      toast({
+        title: "Message sent!",
+        description: "We will get back to you as soon as possible.",
+        variant: "success",
+      });
+      form.reset();
+      setIsSubmitting(false);
+    },
+    onError: (error) => {
+      console.error("Error sending message:", error);
+      toast({
+        title: "Error",
+        description: "There was a problem sending your message. Please try again.",
+        variant: "destructive",
+      });
+      setIsSubmitting(false);
+    },
+  });
+
+  const onSubmit = (data: InsertContactMessage) => {
+    setIsSubmitting(true);
+    contactMutation.mutate(data);
+  };
+
+  return (
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <div className="grid md:grid-cols-2 gap-4">
+          <FormField
+            control={form.control}
+            name="fullName"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-[#333333] font-semibold">Full Name</FormLabel>
+                <FormControl>
+                  <Input placeholder="Jane Doe" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-[#333333] font-semibold">Email Address</FormLabel>
+                <FormControl>
+                  <Input placeholder="janedoe@example.com" type="email" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+
+        <FormField
+          control={form.control}
+          name="phone"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="text-[#333333] font-semibold">Phone Number</FormLabel>
+              <FormControl>
+                <Input placeholder="(650) 555-5678" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="subject"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="text-[#333333] font-semibold">Subject</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select a subject" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="appointment">Appointment Question</SelectItem>
+                  <SelectItem value="billing">Billing & Insurance</SelectItem>
+                  <SelectItem value="services">Service Inquiry</SelectItem>
+                  <SelectItem value="feedback">Feedback</SelectItem>
+                  <SelectItem value="other">Other</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="message"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="text-[#333333] font-semibold">Message</FormLabel>
+              <FormControl>
+                <Textarea 
+                  placeholder="How can we help you?" 
+                  rows={4} 
+                  {...field} 
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <div className="flex items-start space-x-2">
+          <Checkbox
+            id="contact-privacy"
+            required
+            className="mt-1"
+          />
+          <label
+            htmlFor="contact-privacy"
+            className="text-sm text-[#333333] cursor-pointer"
+          >
+            I understand that my information is being collected in accordance with HIPAA privacy practices and consent to being contacted.
+          </label>
+        </div>
+
+        <Button 
+          type="submit" 
+          className="w-full bg-primary hover:bg-blue-700 text-white font-semibold py-3"
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? "Sending..." : "Send Message"}
+        </Button>
+      </form>
+    </Form>
+  );
+};
+
+export default ContactForm;

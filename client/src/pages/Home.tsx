@@ -1,0 +1,265 @@
+import { useQuery } from "@tanstack/react-query";
+import HeroSection from "@/components/sections/HeroSection";
+import FeaturesSection from "@/components/sections/FeaturesSection";
+import ServiceCard from "@/components/common/ServiceCard";
+import TestimonialCard from "@/components/common/TestimonialCard";
+import BlogPostCard from "@/components/common/BlogPostCard";
+import AppointmentForm from "@/components/forms/AppointmentForm";
+import { Button } from "@/components/ui/button";
+import { ArrowRight, CheckCircle, Stethoscope, Award, User, ChevronRight, Phone } from "lucide-react";
+import { Link } from "wouter";
+import { Service, BlogPost, Testimonial } from "@shared/schema";
+
+const Home = () => {
+  // Fetch services
+  const { data: services, isLoading: isLoadingServices } = useQuery<Service[]>({
+    queryKey: ["/api/services"],
+  });
+
+  // Fetch testimonials
+  const { data: testimonials, isLoading: isLoadingTestimonials } = useQuery<Testimonial[]>({
+    queryKey: ["/api/testimonials"],
+  });
+
+  // Fetch blog posts
+  const { data: blogPosts, isLoading: isLoadingBlogPosts } = useQuery<BlogPost[]>({
+    queryKey: ["/api/blog-posts"],
+  });
+
+  return (
+    <>
+      <HeroSection />
+
+      <FeaturesSection />
+
+      {/* About Section */}
+      <section id="about" className="py-16 bg-[#F5F9FC]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold font-heading text-[#333333] mb-4">About Dr. Christopher B. Wong</h2>
+            <div className="w-24 h-1 bg-primary mx-auto"></div>
+          </div>
+          
+          <div className="md:flex items-center">
+            <div className="md:w-1/3 mb-8 md:mb-0">
+              <img 
+                src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" 
+                alt="Dr. Christopher B. Wong" 
+                className="rounded-lg shadow-xl mx-auto"
+              />
+            </div>
+            <div className="md:w-2/3 md:pl-12">
+              <h3 className="text-2xl font-bold font-heading text-[#333333] mb-4">Experienced Dental Care You Can Trust</h3>
+              <p className="text-[#333333] mb-4">Dr. Christopher Wong has over 15 years of experience in comprehensive dental care, with specialized training in cosmetic dentistry, dental implants, and minimally invasive techniques. After graduating with honors from the University of California, San Francisco School of Dentistry, he completed advanced training at Stanford Medical Center.</p>
+              <p className="text-[#333333] mb-6">His practice philosophy centers on providing personalized care using evidence-based approaches and cutting-edge technology to ensure the best outcomes for his patients.</p>
+              
+              <div className="grid grid-cols-2 gap-4">
+                <div className="flex items-start">
+                  <CheckCircle className="h-5 w-5 text-primary mt-1 mr-2" />
+                  <span>UCSF School of Dentistry Graduate</span>
+                </div>
+                <div className="flex items-start">
+                  <CheckCircle className="h-5 w-5 text-primary mt-1 mr-2" />
+                  <span>American Dental Association</span>
+                </div>
+                <div className="flex items-start">
+                  <CheckCircle className="h-5 w-5 text-primary mt-1 mr-2" />
+                  <span>California Dental Association</span>
+                </div>
+                <div className="flex items-start">
+                  <CheckCircle className="h-5 w-5 text-primary mt-1 mr-2" />
+                  <span>Academy of Cosmetic Dentistry</span>
+                </div>
+              </div>
+              
+              <div className="mt-8">
+                <Link href="/about">
+                  <Button className="bg-primary text-white font-semibold px-6 py-3 rounded-md hover:bg-blue-700">
+                    Meet Our Team
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section id="services" className="py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold font-heading text-[#333333] mb-4">Our Services</h2>
+            <p className="text-[#333333] max-w-3xl mx-auto">Comprehensive dental care using the latest techniques and technology to improve your oral health and enhance your smile.</p>
+            <div className="w-24 h-1 bg-primary mx-auto mt-4"></div>
+          </div>
+          
+          {isLoadingServices ? (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[...Array(3)].map((_, index) => (
+                <div key={index} className="bg-white rounded-lg shadow-md h-64 animate-pulse">
+                  <div className="w-full h-48 bg-gray-200 rounded-t-lg"></div>
+                  <div className="p-6">
+                    <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
+                    <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {services?.slice(0, 3).map((service) => (
+                <ServiceCard key={service.id} service={service} />
+              ))}
+            </div>
+          )}
+          
+          <div className="text-center mt-12">
+            <Link href="/services">
+              <Button className="bg-[#00AA90] text-white font-semibold px-8 py-3 rounded-md hover:bg-teal-700 inline-flex items-center">
+                View All Services
+                <ArrowRight className="h-5 w-5 ml-2" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Appointment Section */}
+      <section id="appointment" className="py-16 bg-[#F5F9FC]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-white rounded-lg shadow-xl overflow-hidden">
+            <div className="md:flex">
+              <div className="md:w-1/2 bg-primary p-8 md:p-12 text-white">
+                <h2 className="text-3xl font-bold font-heading mb-4">Schedule Your Appointment</h2>
+                <p className="mb-6">Choose between in-person visits or convenient virtual consultations for your initial assessment.</p>
+                <div className="mb-6">
+                  <div className="flex items-center mb-3">
+                    <CheckCircle className="h-5 w-5 mr-3" />
+                    <span>HIPAA-compliant secure scheduling</span>
+                  </div>
+                  <div className="flex items-center mb-3">
+                    <CheckCircle className="h-5 w-5 mr-3" />
+                    <span>Same-day appointments available</span>
+                  </div>
+                  <div className="flex items-center">
+                    <CheckCircle className="h-5 w-5 mr-3" />
+                    <span>Easy rescheduling if needed</span>
+                  </div>
+                </div>
+                <div className="p-4 bg-blue-900 bg-opacity-50 rounded-lg mb-6">
+                  <h3 className="font-bold mb-2">Office Hours</h3>
+                  <div className="grid grid-cols-2 gap-2 text-sm">
+                    <div>Monday - Thursday</div>
+                    <div>8:00 AM - 5:00 PM</div>
+                    <div>Friday</div>
+                    <div>8:00 AM - 2:00 PM</div>
+                    <div>Saturday - Sunday</div>
+                    <div>Closed</div>
+                  </div>
+                </div>
+                <a href="tel:+16505551234" className="flex items-center text-xl font-bold hover:text-blue-200 transition-colors">
+                  <Phone className="h-6 w-6 mr-2" />
+                  (650) 555-1234
+                </a>
+              </div>
+              
+              <div className="md:w-1/2 p-8 md:p-12">
+                <AppointmentForm />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section id="testimonials" className="py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold font-heading text-[#333333] mb-4">What Our Patients Say</h2>
+            <p className="text-[#333333] max-w-3xl mx-auto">Real experiences from our patients who have trusted us with their dental care.</p>
+            <div className="w-24 h-1 bg-primary mx-auto mt-4"></div>
+          </div>
+          
+          {isLoadingTestimonials ? (
+            <div className="grid md:grid-cols-3 gap-8">
+              {[...Array(3)].map((_, index) => (
+                <div key={index} className="bg-white p-6 rounded-lg shadow-md animate-pulse">
+                  <div className="h-4 bg-gray-200 rounded w-3/4 mb-4"></div>
+                  <div className="h-4 bg-gray-200 rounded w-full mb-2"></div>
+                  <div className="h-4 bg-gray-200 rounded w-full mb-2"></div>
+                  <div className="h-4 bg-gray-200 rounded w-1/2 mb-4"></div>
+                  <div className="flex items-center">
+                    <div className="rounded-full bg-gray-200 h-12 w-12 mr-4"></div>
+                    <div>
+                      <div className="h-4 bg-gray-200 rounded w-24 mb-2"></div>
+                      <div className="h-3 bg-gray-200 rounded w-32"></div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="grid md:grid-cols-3 gap-8">
+              {testimonials?.map((testimonial) => (
+                <TestimonialCard key={testimonial.id} testimonial={testimonial} />
+              ))}
+            </div>
+          )}
+          
+          <div className="text-center mt-12">
+            <Link href="/testimonials">
+              <span className="text-primary font-semibold hover:text-blue-700 inline-flex items-center cursor-pointer">
+                Read More Patient Stories
+                <ArrowRight className="h-5 w-5 ml-1" />
+              </span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Blog Section */}
+      <section id="blog" className="py-16 bg-[#F5F9FC]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold font-heading text-[#333333] mb-4">Dental Health Blog</h2>
+            <p className="text-[#333333] max-w-3xl mx-auto">Stay informed with the latest in dental health news, tips, and advances in dental technology.</p>
+            <div className="w-24 h-1 bg-primary mx-auto mt-4"></div>
+          </div>
+          
+          {isLoadingBlogPosts ? (
+            <div className="grid md:grid-cols-3 gap-8">
+              {[...Array(3)].map((_, index) => (
+                <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden animate-pulse">
+                  <div className="w-full h-48 bg-gray-200"></div>
+                  <div className="p-6">
+                    <div className="h-3 bg-gray-200 rounded w-1/4 mb-2"></div>
+                    <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
+                    <div className="h-4 bg-gray-200 rounded w-full mb-4"></div>
+                    <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="grid md:grid-cols-3 gap-8">
+              {blogPosts?.map((post) => (
+                <BlogPostCard key={post.id} post={post} />
+              ))}
+            </div>
+          )}
+          
+          <div className="text-center mt-12">
+            <Link href="/blog">
+              <Button variant="outline" className="bg-white border-2 border-primary text-primary font-semibold px-8 py-3 rounded-md hover:bg-[#F5F9FC] inline-flex items-center">
+                View All Articles
+                <ArrowRight className="h-5 w-5 ml-2" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+};
+
+export default Home;
