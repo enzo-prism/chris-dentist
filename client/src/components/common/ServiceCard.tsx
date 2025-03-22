@@ -21,10 +21,10 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
         <h3 className="text-xl font-bold font-heading text-[#333333] mb-2">{service.title}</h3>
         <p className="text-[#333333] mb-4">{service.description}</p>
         <Link href={`/services#${service.slug}`}>
-          <a className="text-primary font-semibold hover:text-blue-700 flex items-center group transition-colors">
+          <div className="text-primary font-semibold hover:text-blue-700 flex items-center group transition-colors cursor-pointer">
             Learn More
             <ArrowRight className="h-5 w-5 ml-1 group-hover:translate-x-1 transition-transform" />
-          </a>
+          </div>
         </Link>
       </CardContent>
     </Card>
