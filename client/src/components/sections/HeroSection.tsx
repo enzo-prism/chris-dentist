@@ -45,8 +45,8 @@ const HeroSection = () => {
           </div>
           <div className="md:w-1/2 md:pl-12">
             <img 
-              src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
-              alt="Modern dental office" 
+              src="/images/dr-wong-office-2.png" 
+              alt="Dr. Wong's Modern Dental Office" 
               className="rounded-lg shadow-xl w-full h-auto object-cover"
             />
           </div>

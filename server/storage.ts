@@ -272,37 +272,37 @@ export class MemStorage implements IStorage {
       {
         title: "Preventive Dentistry",
         description: "Regular check-ups, cleanings, and screenings to maintain optimal oral health and prevent issues before they start.",
-        image: "https://images.unsplash.com/photo-1606811971618-4486d14f3f99?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        image: "/images/dr-wong-lab-1.png",
         slug: "preventive-dentistry"
       },
       {
         title: "Cosmetic Dentistry",
         description: "Teeth whitening, veneers, and other aesthetic procedures to enhance your smile and boost your confidence.",
-        image: "https://images.unsplash.com/photo-1600170311833-c2cf5280ce49?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        image: "/images/dr-wong-lab-2.png",
         slug: "cosmetic-dentistry"
       },
       {
         title: "Restorative Dentistry",
         description: "Fillings, crowns, bridges, and implants to repair damage and restore full function to your teeth.",
-        image: "https://images.unsplash.com/photo-1581585502787-5ede8cf0c2d5?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        image: "/images/dr-wong-lab-3.png",
         slug: "restorative-dentistry"
       },
       {
         title: "Pediatric Dentistry",
         description: "Child-friendly dental care in a comfortable environment to establish good oral health habits early.",
-        image: "https://images.unsplash.com/photo-1620775997780-a01e050a9ed7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        image: "/images/dr-wong-office-1.png",
         slug: "pediatric-dentistry"
       },
       {
         title: "Orthodontics",
         description: "Clear aligners and traditional braces to correctly align teeth for improved function and appearance.",
-        image: "https://images.unsplash.com/photo-1532947974358-a218d18d8d14?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        image: "/images/dr-wong-office-3.png",
         slug: "orthodontics"
       },
       {
         title: "Emergency Dental Care",
         description: "Prompt attention for dental emergencies such as toothaches, broken teeth, or other urgent dental issues.",
-        image: "https://images.unsplash.com/photo-1622467827417-bbe2237067a9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        image: "/images/dr-wong-office-4.png",
         slug: "emergency-dental-care"
       }
     ];
@@ -317,21 +317,21 @@ export class MemStorage implements IStorage {
       {
         title: "The Link Between Oral Health and Overall Wellness",
         content: "Discover how maintaining good oral hygiene practices can significantly impact your general health and prevent various systemic conditions.",
-        image: "https://images.unsplash.com/photo-1541604193435-22287d80f1c2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        image: "/images/dr-wong-office-2.png",
         date: "June 15, 2023",
         slug: "oral-health-overall-wellness"
       },
       {
         title: "Advances in Invisible Orthodontics",
         content: "Learn about the latest innovations in clear aligner technology and how they're making orthodontic treatment more comfortable and discreet than ever.",
-        image: "https://images.unsplash.com/photo-1513757378314-e46255f6ed16?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        image: "/images/dr-wong-waiting-room.png",
         date: "May 22, 2023",
         slug: "advances-invisible-orthodontics"
       },
       {
         title: "Nutrition Tips for Healthier Teeth",
         content: "Explore which foods promote dental health and which ones to avoid to maintain strong teeth and gums for years to come.",
-        image: "https://images.unsplash.com/photo-1609759287343-14a2a729fda9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        image: "/images/dr-wong-reception.png",
         date: "April 10, 2023",
         slug: "nutrition-tips-healthier-teeth"
       }
