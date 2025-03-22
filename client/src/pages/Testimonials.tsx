@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "wouter";
 import TestimonialCard from "@/components/common/TestimonialCard";
 import { Testimonial } from "@shared/schema";
+import { motion } from "framer-motion";
 
 const Testimonials = () => {
   const { data: testimonials, isLoading } = useQuery<Testimonial[]>({
