@@ -1,41 +1,40 @@
 import { useState } from 'react';
 import { ArrowLeft, ArrowRight, X } from 'lucide-react';
-import { drWongImages } from '@/lib/imageUrls';
 
 const OfficeGallerySection = () => {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
 
   const images = [
     {
-      src: drWongImages.drWongOffice1,
+      src: '/images/dr-wong-office-1.png',
       alt: 'Dr. Wong Office Interior - Zen Garden',
     },
     {
-      src: drWongImages.drWongOffice2,
+      src: '/images/dr-wong-office-2.png',
       alt: 'Dr. Wong Office Interior - Zen Garden View',
     },
     {
-      src: drWongImages.drWongOffice3,
+      src: '/images/dr-wong-office-3.png',
       alt: 'Dr. Wong Office Interior - Courtyard',
     },
     {
-      src: drWongImages.drWongOffice4,
+      src: '/images/dr-wong-office-4.png',
       alt: 'Dr. Wong Office Interior - Treatment Room View',
     },
     {
-      src: drWongImages.drWongReception,
+      src: '/images/dr-wong-reception.png',
       alt: 'Dr. Wong Office - Reception Area',
     },
     {
-      src: drWongImages.drWongWaiting,
+      src: '/images/dr-wong-waiting-room.png',
       alt: 'Dr. Wong Office - Waiting Room',
     },
     {
-      src: drWongImages.drWongLab1,
+      src: '/images/dr-wong-lab-1.png',
       alt: 'Dr. Wong Office - Treatment Room',
     },
     {
-      src: drWongImages.drWongLab2,
+      src: '/images/dr-wong-lab-2.png',
       alt: 'Dr. Wong Office - Dental Chair',
     },
   ];
