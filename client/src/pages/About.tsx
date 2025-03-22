@@ -2,31 +2,32 @@ import { CheckCircle, Award, UserCheck, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import OfficeGallerySection from "@/components/sections/OfficeGallerySection";
+import { drWongImages } from "@/lib/imageUrls";
 
 const About = () => {
   const teamMembers = [
     {
       name: "Dr. Christopher B. Wong",
       role: "Lead Dentist",
-      image: "/images/dr-wong-portrait-1.png",
+      image: drWongImages.drWongPortrait1,
       bio: "Dr. Wong has over 15 years of experience in comprehensive dental care, with specialized training in cosmetic dentistry, dental implants, and minimally invasive techniques."
     },
     {
       name: "Dr. Maria Rodriguez",
       role: "Orthodontist",
-      image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+      image: "https://i.imgur.com/NdoPLp2.png",
       bio: "Dr. Rodriguez specializes in orthodontics and has been transforming smiles for over 10 years. She is an expert in both traditional braces and clear aligner therapy."
     },
     {
       name: "Sarah Johnson",
       role: "Dental Hygienist",
-      image: "https://images.unsplash.com/photo-1614608682850-e0d6ed316d47?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+      image: "https://i.imgur.com/7JHEcuJ.png",
       bio: "Sarah has been a dental hygienist for 8 years and is passionate about preventive care and patient education. She's known for her gentle technique and thorough cleanings."
     },
     {
       name: "Michael Chen",
       role: "Office Manager",
-      image: "https://images.unsplash.com/photo-1545167622-3a6ac756afa4?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+      image: "https://i.imgur.com/wLCU8JD.png",
       bio: "Michael ensures that our office runs smoothly so our clinical team can focus on providing exceptional patient care. He handles scheduling, insurance, and patient questions."
     }
   ];
@@ -49,7 +50,7 @@ const About = () => {
           <div className="md:flex items-center">
             <div className="md:w-1/3 mb-8 md:mb-0">
               <img 
-                src="/images/dr-wong-portrait-2.png" 
+                src={drWongImages.drWongPortrait2} 
                 alt="Dr. Christopher B. Wong" 
                 className="rounded-lg shadow-xl mx-auto"
               />

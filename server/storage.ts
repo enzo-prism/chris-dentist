@@ -273,37 +273,37 @@ export class MemStorage implements IStorage {
       {
         title: "Preventive Dentistry",
         description: "Regular check-ups, cleanings, and screenings to maintain optimal oral health and prevent issues before they start.",
-        image: "/images/dr-wong-lab-1.png",
+        image: "https://i.imgur.com/qK5nPtS.png",
         slug: "preventive-dentistry"
       },
       {
         title: "Cosmetic Dentistry",
         description: "Teeth whitening, veneers, and other aesthetic procedures to enhance your smile and boost your confidence.",
-        image: "/images/dr-wong-lab-2.png",
+        image: "https://i.imgur.com/bUkVVSo.png",
         slug: "cosmetic-dentistry"
       },
       {
         title: "Restorative Dentistry",
         description: "Fillings, crowns, bridges, and implants to repair damage and restore full function to your teeth.",
-        image: "/images/dr-wong-lab-3.png",
+        image: "https://i.imgur.com/rIGaK9S.png",
         slug: "restorative-dentistry"
       },
       {
         title: "Pediatric Dentistry",
         description: "Child-friendly dental care in a comfortable environment to establish good oral health habits early.",
-        image: "/images/dr-wong-office-1.png",
+        image: "https://i.imgur.com/BeX3mhS.png",
         slug: "pediatric-dentistry"
       },
       {
         title: "Orthodontics",
         description: "Clear aligners and traditional braces to correctly align teeth for improved function and appearance.",
-        image: "/images/dr-wong-office-3.png",
+        image: "https://i.imgur.com/gqotbUv.png",
         slug: "orthodontics"
       },
       {
         title: "Emergency Dental Care",
         description: "Prompt attention for dental emergencies such as toothaches, broken teeth, or other urgent dental issues.",
-        image: "/images/dr-wong-office-4.png",
+        image: "https://i.imgur.com/hYHYbBq.png",
         slug: "emergency-dental-care"
       }
     ];
@@ -318,21 +318,21 @@ export class MemStorage implements IStorage {
       {
         title: "The Link Between Oral Health and Overall Wellness",
         content: "Discover how maintaining good oral hygiene practices can significantly impact your general health and prevent various systemic conditions.",
-        image: "/images/dr-wong-office-2.png",
+        image: "https://i.imgur.com/sW9DVZF.png",
         date: "June 15, 2023",
         slug: "oral-health-overall-wellness"
       },
       {
         title: "Advances in Invisible Orthodontics",
         content: "Learn about the latest innovations in clear aligner technology and how they're making orthodontic treatment more comfortable and discreet than ever.",
-        image: "/images/dr-wong-waiting-room.png",
+        image: "https://i.imgur.com/AC5lGu3.png",
         date: "May 22, 2023",
         slug: "advances-invisible-orthodontics"
       },
       {
         title: "Nutrition Tips for Healthier Teeth",
         content: "Explore which foods promote dental health and which ones to avoid to maintain strong teeth and gums for years to come.",
-        image: "/images/dr-wong-reception.png",
+        image: "https://i.imgur.com/nGlhUdH.png",
         date: "April 10, 2023",
         slug: "nutrition-tips-healthier-teeth"
       }
@@ -350,21 +350,21 @@ export class MemStorage implements IStorage {
         location: "Palo Alto, CA",
         rating: 5,
         text: "Dr. Wong and his staff provided exceptional care for my dental implant procedure. They explained everything clearly, made sure I was comfortable, and the results are fantastic. Highly recommend!",
-        image: "/images/polaroid-dr-wong.png"
+        image: "https://i.imgur.com/mVvasLs.png"
       },
       {
         name: "Michael T.",
         location: "Menlo Park, CA",
         rating: 5,
         text: "As someone with dental anxiety, I can't express how comfortable Dr. Wong made me feel. His practice uses the latest technology, and the virtual consultation option was extremely convenient for my busy schedule.",
-        image: "/images/dr-wong-portrait-1.png"
+        image: "https://i.imgur.com/4Hp7oKM.png"
       },
       {
         name: "Jennifer R.",
         location: "Palo Alto, CA",
         rating: 5,
         text: "Our entire family sees Dr. Wong, and we couldn't be happier. From my 5-year-old's first visit to my husband's complex crown work, everyone receives personalized attention. The online patient portal makes managing appointments easy.",
-        image: "/images/dr-wong-portrait-2.png"
+        image: "https://i.imgur.com/iqBXT9y.png"
       }
     ];
 

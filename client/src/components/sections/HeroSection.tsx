@@ -1,6 +1,7 @@
 import { CheckCircle, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
+import { drWongImages } from "@/lib/imageUrls";
 
 const HeroSection = () => {
   return (
@@ -45,7 +46,7 @@ const HeroSection = () => {
           </div>
           <div className="md:w-1/2 md:pl-12">
             <img 
-              src="/images/dr-wong-office-2.png" 
+              src={drWongImages.heroImage || drWongImages.drWongOffice2} 
               alt="Dr. Wong's Modern Dental Office" 
               className="rounded-lg shadow-xl w-full h-auto object-cover"
             />
