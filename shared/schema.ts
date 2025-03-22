@@ -83,6 +83,8 @@ export const blogPosts = pgTable("blog_posts", {
   image: text("image").notNull(),
   date: text("date").notNull(),
   slug: text("slug").notNull().unique(),
+  category: text("category"),
+  readTime: integer("read_time"),
 });
 
 export const insertBlogPostSchema = createInsertSchema(blogPosts).omit({

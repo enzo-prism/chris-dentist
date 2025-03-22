@@ -202,7 +202,9 @@ export class MemStorage implements IStorage {
 
   async createService(serviceData: InsertService): Promise<Service> {
     const id = this.serviceCurrentId++;
-    const service: Service = { ...serviceData, id };
+    // Ensure featured field is populated with default if undefined
+    const serviceFeatured = serviceData.featured === undefined ? false : serviceData.featured;
+    const service: Service = { ...serviceData, id, featured: serviceFeatured };
     this.services.set(id, service);
     return service;
   }
@@ -224,7 +226,10 @@ export class MemStorage implements IStorage {
 
   async createBlogPost(postData: InsertBlogPost): Promise<BlogPost> {
     const id = this.blogPostCurrentId++;
-    const post: BlogPost = { ...postData, id };
+    // Ensure optional fields are populated with defaults if undefined
+    const category = postData.category === undefined ? null : postData.category;
+    const readTime = postData.readTime === undefined ? null : postData.readTime;
+    const post: BlogPost = { ...postData, id, category, readTime };
     this.blogPosts.set(id, post);
     return post;
   }
@@ -274,19 +279,22 @@ export class MemStorage implements IStorage {
         title: "Preventive Dentistry",
         description: "Regular check-ups, cleanings, and screenings to maintain optimal oral health and prevent issues before they start.",
         image: "https://i.imgur.com/qK5nPtS.png",
-        slug: "preventive-dentistry"
+        slug: "preventive-dentistry",
+        featured: true
       },
       {
         title: "Cosmetic Dentistry",
         description: "Teeth whitening, veneers, and other aesthetic procedures to enhance your smile and boost your confidence.",
         image: "https://i.imgur.com/bUkVVSo.png",
-        slug: "cosmetic-dentistry"
+        slug: "cosmetic-dentistry",
+        featured: true
       },
       {
         title: "Restorative Dentistry",
         description: "Fillings, crowns, bridges, and implants to repair damage and restore full function to your teeth.",
         image: "https://i.imgur.com/rIGaK9S.png",
-        slug: "restorative-dentistry"
+        slug: "restorative-dentistry",
+        featured: false
       },
       {
         title: "Pediatric Dentistry",
@@ -320,21 +328,27 @@ export class MemStorage implements IStorage {
         content: "Discover how maintaining good oral hygiene practices can significantly impact your general health and prevent various systemic conditions.",
         image: "https://i.imgur.com/sW9DVZF.png",
         date: "June 15, 2023",
-        slug: "oral-health-overall-wellness"
+        slug: "oral-health-overall-wellness",
+        category: "Wellness",
+        readTime: 5
       },
       {
         title: "Advances in Invisible Orthodontics",
         content: "Learn about the latest innovations in clear aligner technology and how they're making orthodontic treatment more comfortable and discreet than ever.",
         image: "https://i.imgur.com/AC5lGu3.png",
         date: "May 22, 2023",
-        slug: "advances-invisible-orthodontics"
+        slug: "advances-invisible-orthodontics",
+        category: "Orthodontics",
+        readTime: 7
       },
       {
         title: "Nutrition Tips for Healthier Teeth",
         content: "Explore which foods promote dental health and which ones to avoid to maintain strong teeth and gums for years to come.",
         image: "https://i.imgur.com/nGlhUdH.png",
         date: "April 10, 2023",
-        slug: "nutrition-tips-healthier-teeth"
+        slug: "nutrition-tips-healthier-teeth",
+        category: "Nutrition",
+        readTime: 4
       }
     ];
 
