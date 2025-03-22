@@ -126,6 +126,7 @@ export class MemStorage implements IStorage {
     const appointment: Appointment = { 
       ...appointmentData, 
       id, 
+      notes: appointmentData.notes === undefined ? null : appointmentData.notes,
       createdAt: new Date() 
     };
     this.appointments.set(id, appointment);
@@ -349,21 +350,21 @@ export class MemStorage implements IStorage {
         location: "Palo Alto, CA",
         rating: 5,
         text: "Dr. Wong and his staff provided exceptional care for my dental implant procedure. They explained everything clearly, made sure I was comfortable, and the results are fantastic. Highly recommend!",
-        image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&h=100&q=80"
+        image: "/images/polaroid-dr-wong.png"
       },
       {
         name: "Michael T.",
         location: "Menlo Park, CA",
         rating: 5,
         text: "As someone with dental anxiety, I can't express how comfortable Dr. Wong made me feel. His practice uses the latest technology, and the virtual consultation option was extremely convenient for my busy schedule.",
-        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&h=100&q=80"
+        image: "/images/dr-wong-portrait-1.png"
       },
       {
         name: "Jennifer R.",
         location: "Palo Alto, CA",
         rating: 5,
         text: "Our entire family sees Dr. Wong, and we couldn't be happier. From my 5-year-old's first visit to my husband's complex crown work, everyone receives personalized attention. The online patient portal makes managing appointments easy.",
-        image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&h=100&q=80"
+        image: "/images/dr-wong-portrait-2.png"
       }
     ];
 
