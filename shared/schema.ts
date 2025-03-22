@@ -68,6 +68,7 @@ export const services = pgTable("services", {
   description: text("description").notNull(),
   image: text("image").notNull(),
   slug: text("slug").notNull().unique(),
+  featured: boolean("featured").default(false),
 });
 
 export const insertServiceSchema = createInsertSchema(services).omit({
