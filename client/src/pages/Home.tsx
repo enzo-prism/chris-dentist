@@ -43,7 +43,7 @@ const Home = () => {
           <div className="md:flex items-center">
             <div className="md:w-1/3 mb-8 md:mb-0">
               <img 
-                src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" 
+                src="/images/dr-wong-portrait-1.png" 
                 alt="Dr. Christopher B. Wong" 
                 className="rounded-lg shadow-xl mx-auto"
               />

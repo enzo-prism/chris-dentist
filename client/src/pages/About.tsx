@@ -1,13 +1,14 @@
 import { CheckCircle, Award, UserCheck, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
+import OfficeGallerySection from "@/components/sections/OfficeGallerySection";
 
 const About = () => {
   const teamMembers = [
     {
       name: "Dr. Christopher B. Wong",
       role: "Lead Dentist",
-      image: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+      image: "/images/dr-wong-portrait-1.png",
       bio: "Dr. Wong has over 15 years of experience in comprehensive dental care, with specialized training in cosmetic dentistry, dental implants, and minimally invasive techniques."
     },
     {
@@ -48,7 +49,7 @@ const About = () => {
           <div className="md:flex items-center">
             <div className="md:w-1/3 mb-8 md:mb-0">
               <img 
-                src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" 
+                src="/images/dr-wong-portrait-2.png" 
                 alt="Dr. Christopher B. Wong" 
                 className="rounded-lg shadow-xl mx-auto"
               />
