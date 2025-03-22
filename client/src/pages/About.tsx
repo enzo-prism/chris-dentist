@@ -148,42 +148,8 @@ const About = () => {
         </div>
       </section>
 
-      {/* Our Office */}
-      <section className="py-16 bg-[#F5F9FC]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold font-heading text-[#333333] mb-4">Our Modern Dental Office</h2>
-            <p className="text-[#333333] max-w-3xl mx-auto">Designed with your comfort in mind, our office features state-of-the-art equipment in a welcoming environment.</p>
-            <div className="w-24 h-1 bg-primary mx-auto mt-4"></div>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            <img 
-              src="https://images.unsplash.com/photo-1629909614088-d6d7a3a85395?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
-              alt="Reception area" 
-              className="rounded-lg shadow-md w-full h-64 object-cover"
-            />
-            <img 
-              src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
-              alt="Treatment room" 
-              className="rounded-lg shadow-md w-full h-64 object-cover"
-            />
-            <img 
-              src="https://images.unsplash.com/photo-1629909615780-f01004712827?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
-              alt="Dental equipment" 
-              className="rounded-lg shadow-md w-full h-64 object-cover"
-            />
-          </div>
-
-          <div className="text-center mt-12">
-            <Link href="/contact#appointment">
-              <Button className="bg-primary text-white font-semibold px-8 py-3 rounded-md hover:bg-blue-700">
-                Schedule Your Visit
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* Our Office Gallery */}
+      <OfficeGallerySection />
     </>
   );
 };

@@ -69,13 +69,13 @@ const Contact = () => {
                   </div>
                 </div>
                 
-                {/* Map Placeholder */}
-                <div className="mt-8 bg-gray-200 rounded-lg h-64 flex items-center justify-center">
-                  <div className="text-center p-4">
-                    <MapPin className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                    <p className="text-gray-500">Google Maps</p>
-                    <p className="text-gray-500 text-sm">Map showing 123 University Avenue, Palo Alto, CA 94301</p>
-                  </div>
+                {/* Office Photo */}
+                <div className="mt-8 rounded-lg overflow-hidden shadow-md">
+                  <img 
+                    src="/images/dr-wong-reception.png" 
+                    alt="Dr. Wong Dental Office Reception" 
+                    className="w-full h-64 object-cover"
+                  />
                 </div>
               </div>
             </div>
