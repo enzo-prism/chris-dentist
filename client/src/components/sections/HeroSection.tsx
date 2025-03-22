@@ -28,7 +28,7 @@ const HeroSection = () => {
             
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
-              <Link href="/contact#appointment">
+              <Link href="/schedule#appointment">
                 <Button 
                   className="bg-primary text-white text-center font-semibold text-sm sm:text-base px-6 sm:px-8 py-4 sm:py-6 rounded-md hover:bg-blue-700 transition-all hover:-translate-y-1 hover:shadow-md"
                 >

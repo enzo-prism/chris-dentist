@@ -121,7 +121,7 @@ const Services = () => {
           <h2 className="text-3xl md:text-4xl font-bold font-heading text-white mb-6">Ready to Schedule Your Appointment?</h2>
           <p className="text-white text-xl mb-8 max-w-3xl mx-auto">Contact us today to book your visit and take the first step toward optimal dental health.</p>
           <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-            <Link href="/contact#appointment">
+            <Link href="/schedule#appointment">
               <Button className="bg-white text-primary hover:bg-gray-100 font-semibold px-8 py-3 rounded-md">
                 Schedule Appointment
               </Button>

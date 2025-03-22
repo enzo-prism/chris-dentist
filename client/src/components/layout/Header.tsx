@@ -94,7 +94,7 @@ const Header = () => {
 
           {/* Appointment Button - Always visible but changes size based on screen */}
           <div className="hidden sm:block">
-            <Link href="/contact#appointment">
+            <Link href="/schedule#appointment">
               <Button className="bg-[#E63946] hover:bg-red-600 text-white font-semibold px-3 sm:px-4 md:px-6 py-1 sm:py-2 rounded-md transition-all hover:-translate-y-1 hover:shadow-md text-xs sm:text-sm md:text-base">
                 Book Appointment
               </Button>
@@ -117,7 +117,7 @@ const Header = () => {
                 </Link>
               ))}
               <div className="sm:hidden">
-                <Link href="/contact#appointment">
+                <Link href="/schedule#appointment">
                   <Button 
                     className="bg-[#E63946] hover:bg-red-600 text-white font-semibold px-4 py-2 rounded-md w-full mt-2"
                     onClick={() => setMobileMenuOpen(false)}
