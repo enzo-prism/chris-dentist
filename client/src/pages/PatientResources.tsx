@@ -336,7 +336,7 @@ const PatientResources = () => {
                     </div>
                   </div>
                   
-                  <Link href="/contact#appointment">
+                  <Link href="/schedule#appointment">
                     <Button className="w-full bg-primary text-white font-semibold hover:bg-blue-700">
                       Schedule Your First Visit
                     </Button>
