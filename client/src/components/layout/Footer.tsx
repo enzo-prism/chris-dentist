@@ -109,18 +109,18 @@ const Footer = () => {
             <p className="mb-4">Subscribe to our newsletter for dental health tips, practice updates, and special offers.</p>
             <NewsletterForm />
             <div className="flex space-x-4 mt-4">
-              <a href="#" className="text-white hover:text-blue-200 transition-colors">
+              <div className="text-white hover:text-blue-200 transition-colors cursor-pointer">
                 <FaFacebook className="h-6 w-6" />
-              </a>
-              <a href="#" className="text-white hover:text-blue-200 transition-colors">
+              </div>
+              <div className="text-white hover:text-blue-200 transition-colors cursor-pointer">
                 <FaTwitter className="h-6 w-6" />
-              </a>
-              <a href="#" className="text-white hover:text-blue-200 transition-colors">
+              </div>
+              <div className="text-white hover:text-blue-200 transition-colors cursor-pointer">
                 <FaInstagram className="h-6 w-6" />
-              </a>
-              <a href="#" className="text-white hover:text-blue-200 transition-colors">
+              </div>
+              <div className="text-white hover:text-blue-200 transition-colors cursor-pointer">
                 <FaLinkedin className="h-6 w-6" />
-              </a>
+              </div>
             </div>
           </div>
         </div>
