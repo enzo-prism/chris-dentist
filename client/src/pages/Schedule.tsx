@@ -3,7 +3,7 @@ import AppointmentSection from "@/components/sections/AppointmentSection";
 import OfficeInformationSection from "@/components/sections/OfficeInformationSection";
 import ContactForm from "@/components/forms/ContactForm";
 
-const Contact = () => {
+const Schedule = () => {
   return (
     <>
       {/* Hero Section */}
@@ -178,4 +178,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default Schedule;
