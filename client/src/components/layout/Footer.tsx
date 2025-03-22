@@ -35,32 +35,32 @@ const Footer = () => {
             <ul className="space-y-2">
               <li>
                 <Link href="/">
-                  <a className="hover:text-blue-200 transition-colors">Home</a>
+                  <span className="hover:text-blue-200 transition-colors cursor-pointer">Home</span>
                 </Link>
               </li>
               <li>
                 <Link href="/about">
-                  <a className="hover:text-blue-200 transition-colors">About Dr. Wong</a>
+                  <span className="hover:text-blue-200 transition-colors cursor-pointer">About Dr. Wong</span>
                 </Link>
               </li>
               <li>
                 <Link href="/services">
-                  <a className="hover:text-blue-200 transition-colors">Our Services</a>
+                  <span className="hover:text-blue-200 transition-colors cursor-pointer">Our Services</span>
                 </Link>
               </li>
               <li>
                 <Link href="/patient-resources">
-                  <a className="hover:text-blue-200 transition-colors">Patient Resources</a>
+                  <span className="hover:text-blue-200 transition-colors cursor-pointer">Patient Resources</span>
                 </Link>
               </li>
               <li>
                 <Link href="/blog">
-                  <a className="hover:text-blue-200 transition-colors">Dental Health Blog</a>
+                  <span className="hover:text-blue-200 transition-colors cursor-pointer">Dental Health Blog</span>
                 </Link>
               </li>
               <li>
                 <Link href="/contact">
-                  <a className="hover:text-blue-200 transition-colors">Contact Us</a>
+                  <span className="hover:text-blue-200 transition-colors cursor-pointer">Contact Us</span>
                 </Link>
               </li>
             </ul>
@@ -72,32 +72,32 @@ const Footer = () => {
             <ul className="space-y-2">
               <li>
                 <Link href="/services#preventive-dentistry">
-                  <a className="hover:text-blue-200 transition-colors">Preventive Dentistry</a>
+                  <span className="hover:text-blue-200 transition-colors cursor-pointer">Preventive Dentistry</span>
                 </Link>
               </li>
               <li>
                 <Link href="/services#cosmetic-dentistry">
-                  <a className="hover:text-blue-200 transition-colors">Cosmetic Dentistry</a>
+                  <span className="hover:text-blue-200 transition-colors cursor-pointer">Cosmetic Dentistry</span>
                 </Link>
               </li>
               <li>
                 <Link href="/services#restorative-dentistry">
-                  <a className="hover:text-blue-200 transition-colors">Restorative Dentistry</a>
+                  <span className="hover:text-blue-200 transition-colors cursor-pointer">Restorative Dentistry</span>
                 </Link>
               </li>
               <li>
                 <Link href="/services#pediatric-dentistry">
-                  <a className="hover:text-blue-200 transition-colors">Pediatric Dentistry</a>
+                  <span className="hover:text-blue-200 transition-colors cursor-pointer">Pediatric Dentistry</span>
                 </Link>
               </li>
               <li>
                 <Link href="/services#orthodontics">
-                  <a className="hover:text-blue-200 transition-colors">Orthodontics</a>
+                  <span className="hover:text-blue-200 transition-colors cursor-pointer">Orthodontics</span>
                 </Link>
               </li>
               <li>
                 <Link href="/services#emergency-dental-care">
-                  <a className="hover:text-blue-200 transition-colors">Emergency Dental Care</a>
+                  <span className="hover:text-blue-200 transition-colors cursor-pointer">Emergency Dental Care</span>
                 </Link>
               </li>
             </ul>
@@ -131,19 +131,19 @@ const Footer = () => {
           <p>&copy; {currentYear} Dr. Christopher B. Wong, DDS. All rights reserved.</p>
           <div className="flex justify-center space-x-4 mt-4">
             <Link href="/privacy-policy">
-              <a className="hover:text-blue-200 transition-colors">Privacy Policy</a>
+              <span className="hover:text-blue-200 transition-colors cursor-pointer">Privacy Policy</span>
             </Link>
             <span>|</span>
             <Link href="/terms">
-              <a className="hover:text-blue-200 transition-colors">Terms of Service</a>
+              <span className="hover:text-blue-200 transition-colors cursor-pointer">Terms of Service</span>
             </Link>
             <span>|</span>
             <Link href="/hipaa">
-              <a className="hover:text-blue-200 transition-colors">HIPAA Notice</a>
+              <span className="hover:text-blue-200 transition-colors cursor-pointer">HIPAA Notice</span>
             </Link>
             <span>|</span>
             <Link href="/accessibility">
-              <a className="hover:text-blue-200 transition-colors">Accessibility</a>
+              <span className="hover:text-blue-200 transition-colors cursor-pointer">Accessibility</span>
             </Link>
           </div>
         </div>
