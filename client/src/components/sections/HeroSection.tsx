@@ -1,8 +1,9 @@
-import { CheckCircle, ArrowRight, ChevronDown, Calendar } from "lucide-react";
+import { ArrowRight, Calendar, CheckCircle, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { drWongImages } from "@/lib/imageUrls";
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 const HeroSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -12,26 +13,50 @@ const HeroSection = () => {
     setIsVisible(true);
   }, []);
 
+  // Features list
+  const features = [
+    {
+      title: "Accepting new patients",
+      description: "No waiting list required"
+    },
+    {
+      title: "Insurance accepted",
+      description: "Most plans covered"
+    },
+    {
+      title: "Advanced technology",
+      description: "Cutting-edge equipment"
+    },
+    {
+      title: "Family-friendly",
+      description: "All ages welcome"
+    }
+  ];
+
   return (
-    <section className="relative bg-gradient-to-b from-gray-50 to-white py-16 md:py-24 lg:py-28 overflow-hidden">
+    <section className="bg-white pt-20 pb-16 md:pt-28 md:pb-20 overflow-hidden">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Main content */}
-        <div className="flex flex-col lg:flex-row items-center">
-          {/* Text content */}
-          <div className={`w-full lg:w-1/2 mb-12 lg:mb-0 transition-all duration-700 ${isVisible ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'}`}>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 leading-tight mb-6">
-              Modern dental care for your family
+        {/* Hero layout */}
+        <div className="flex flex-col lg:flex-row items-center lg:items-start gap-12 lg:gap-16">
+          {/* Text content - left side */}
+          <motion.div 
+            className="w-full lg:w-5/12 lg:sticky lg:top-28"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-gray-900 leading-tight mb-6">
+              Modern dental care with a gentle touch
             </h1>
-            <p className="text-lg text-gray-600 leading-relaxed mb-8">
-              Dr. Wong provides comprehensive, gentle dental care using advanced techniques for optimal oral health.
+            
+            <p className="text-lg text-gray-600 leading-relaxed mb-8 max-w-md">
+              Dr. Wong provides comprehensive dental care using advanced techniques for your optimal oral health.
             </p>
             
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-3 sm:space-y-0">
+            {/* CTA Buttons with updated styling */}
+            <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-3 sm:space-y-0 mb-12">
               <Link href="/schedule#appointment">
-                <Button 
-                  className="bg-primary hover:bg-primary/90 text-white font-medium flex items-center justify-center space-x-2 px-5 py-3 rounded-full shadow-sm transition-all"
-                >
+                <Button className="bg-primary hover:bg-primary/90 text-white font-medium flex items-center justify-center gap-2 px-5 py-6 h-auto rounded-full shadow-sm transition-all">
                   <Calendar className="h-4 w-4" />
                   <span>Book Appointment</span>
                 </Button>
@@ -39,7 +64,7 @@ const HeroSection = () => {
               <Link href="/services">
                 <Button 
                   variant="outline" 
-                  className="border-primary/20 text-primary bg-white hover:bg-primary/5 font-medium flex items-center justify-center space-x-2 px-5 py-3 rounded-full transition-all"
+                  className="border-gray-200 text-gray-700 hover:text-primary hover:border-primary/30 bg-transparent font-medium flex items-center justify-center gap-2 px-5 py-6 h-auto rounded-full transition-all"
                 >
                   <span>Explore Services</span>
                   <ArrowRight className="h-4 w-4" />
@@ -47,79 +72,65 @@ const HeroSection = () => {
               </Link>
             </div>
             
-            {/* Features */}
-            <div className="mt-10 grid sm:grid-cols-2 gap-4">
-              <div className="flex items-start space-x-3 group">
-                <div className="mt-0.5 bg-primary/10 rounded-full p-1 text-primary group-hover:bg-primary/20 transition-colors">
-                  <CheckCircle className="h-4 w-4" />
+            {/* Scroll indicator - now at bottom of text column */}
+            <div className="hidden lg:flex justify-center mt-12 -ml-2">
+              <a 
+                href="#features" 
+                className="group flex flex-col items-center gap-2 text-sm text-gray-500 hover:text-primary transition-colors"
+              >
+                <span>Scroll to learn more</span>
+                <div className="p-2 rounded-full border border-gray-200 group-hover:border-primary/30 transition-colors">
+                  <ChevronDown className="h-4 w-4" />
                 </div>
-                <div>
-                  <p className="text-gray-800 font-medium">Accepting new patients</p>
-                  <p className="text-sm text-gray-500 mt-0.5">No waiting list required</p>
-                </div>
-              </div>
-              <div className="flex items-start space-x-3 group">
-                <div className="mt-0.5 bg-primary/10 rounded-full p-1 text-primary group-hover:bg-primary/20 transition-colors">
-                  <CheckCircle className="h-4 w-4" />
-                </div>
-                <div>
-                  <p className="text-gray-800 font-medium">Insurance accepted</p>
-                  <p className="text-sm text-gray-500 mt-0.5">Most plans covered</p>
-                </div>
-              </div>
-              <div className="flex items-start space-x-3 group">
-                <div className="mt-0.5 bg-primary/10 rounded-full p-1 text-primary group-hover:bg-primary/20 transition-colors">
-                  <CheckCircle className="h-4 w-4" />
-                </div>
-                <div>
-                  <p className="text-gray-800 font-medium">Advanced technology</p>
-                  <p className="text-sm text-gray-500 mt-0.5">Cutting-edge equipment</p>
-                </div>
-              </div>
-              <div className="flex items-start space-x-3 group">
-                <div className="mt-0.5 bg-primary/10 rounded-full p-1 text-primary group-hover:bg-primary/20 transition-colors">
-                  <CheckCircle className="h-4 w-4" />
-                </div>
-                <div>
-                  <p className="text-gray-800 font-medium">Family-friendly</p>
-                  <p className="text-sm text-gray-500 mt-0.5">All ages welcome</p>
-                </div>
-              </div>
+              </a>
             </div>
-          </div>
+          </motion.div>
           
-          {/* Image with styling */}
-          <div className={`w-full lg:w-1/2 lg:pl-16 transition-all duration-700 ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'}`}>
-            <div className="relative rounded-2xl overflow-hidden shadow-lg">
-              {/* Main image */}
+          {/* Right side: Image and features */}
+          <motion.div 
+            className="w-full lg:w-7/12"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+          >
+            {/* Main image with styling */}
+            <div className="relative rounded-2xl overflow-hidden shadow-sm mb-12">
               <img 
                 src={drWongImages.heroImage || drWongImages.drWongOffice2} 
                 alt="Dr. Wong's Modern Dental Office" 
-                className="w-full h-auto object-cover rounded-2xl"
+                className="w-full h-auto object-cover rounded-2xl aspect-[4/3]"
               />
               
-              {/* Subtle overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-gray-900/20 to-transparent"></div>
-              
-              {/* Badge overlay */}
-              <div className="absolute bottom-4 left-4 bg-white/95 px-3 py-1.5 rounded-full shadow-sm text-xs font-medium text-gray-800 flex items-center">
-                <span className="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+              {/* Status badge */}
+              <div className="absolute bottom-5 left-5 bg-white px-4 py-2 rounded-full shadow-sm text-sm font-medium text-gray-900 flex items-center">
+                <span className="w-2 h-2 bg-green-500 rounded-full mr-2.5 animate-pulse"></span>
                 <span>Now accepting new patients</span>
               </div>
             </div>
-          </div>
-        </div>
-        
-        {/* Scroll indicator */}
-        <div className="hidden md:flex justify-center mt-12 animate-bounce">
-          <a href="#about" className="bg-primary/10 rounded-full p-2 text-primary hover:bg-primary/20 transition-colors">
-            <ChevronDown className="h-5 w-5" />
-          </a>
+            
+            {/* Features grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {features.map((feature, index) => (
+                <motion.div 
+                  key={index}
+                  className="flex items-start gap-4"
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.3 + (index * 0.1), ease: "easeOut" }}
+                >
+                  <div className="mt-0.5 bg-primary/10 rounded-full p-1.5 text-primary">
+                    <CheckCircle className="h-4 w-4" />
+                  </div>
+                  <div>
+                    <p className="text-gray-900 font-medium">{feature.title}</p>
+                    <p className="text-sm text-gray-500 mt-1">{feature.description}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </div>
-      
-      {/* Subtle divider */}
-      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent"></div>
     </section>
   );
 };

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ArrowLeft, ArrowRight, X, ImageIcon } from 'lucide-react';
+import { ArrowLeft, ArrowRight, X, ImageIcon, ExternalLink } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const OfficeGallerySection = () => {
@@ -128,65 +128,65 @@ const OfficeGallerySection = () => {
 
   return (
     <>
-      <section className="py-10 sm:py-16" id="office-gallery">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Section header */}
+      <section className="py-16 md:py-24 bg-gray-50" id="office-gallery">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Section header with minimal styling */}
           <motion.div 
-            className="text-center mb-8 sm:mb-12"
+            className="text-center mb-10 md:mb-16"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-heading text-[#333333] mb-3">
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-gray-900 mb-4">
               Our Office
             </h2>
-            <p className="text-[#333333] max-w-3xl mx-auto text-sm sm:text-base">
+            <p className="text-base text-gray-600 max-w-xl mx-auto">
               Experience our modern, comfortable dental office designed with your relaxation and care in mind.
             </p>
-            <div className="w-16 sm:w-24 h-1 bg-primary mx-auto mt-4"></div>
           </motion.div>
           
-          {/* Gallery grid - responsive from 1 to 4 columns */}
+          {/* Gallery grid with consistent spacing and minimal shadows */}
           <motion.div 
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.5, staggerChildren: 0.1 }}
+            transition={{ duration: 0.5 }}
             viewport={{ once: true }}
           >
             {images.map((image, index) => (
               <motion.div 
                 key={index} 
-                className="group overflow-hidden rounded-lg shadow-md cursor-pointer relative"
-                whileHover={{ scale: 1.02 }}
+                className="group overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm hover:shadow transition-all duration-200 cursor-pointer"
+                whileHover={{ y: -3 }}
                 onClick={() => setSelectedImage(index)}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.2, delay: index * 0.05 }}
+                transition={{ duration: 0.4, delay: index * 0.05 }}
                 viewport={{ once: true, margin: "-50px" }}
               >
                 {/* Image container with fixed aspect ratio */}
-                <div className="aspect-w-4 aspect-h-3 relative">
+                <div className="aspect-[4/3] relative overflow-hidden">
                   <img 
                     src={image.src} 
                     alt={image.alt} 
-                    className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     loading={index < 4 ? "eager" : "lazy"}
                   />
                   
-                  {/* Hover overlay with info */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-3 sm:p-4">
-                    <div className="text-white">
-                      <h3 className="font-bold text-sm sm:text-base">{image.alt.split(' - ')[1]}</h3>
-                      <p className="text-xs sm:text-sm text-white/80 hidden sm:block">{image.description}</p>
+                  {/* Subtle overlay with consistent branding */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <div className="bg-white/90 rounded-full p-2.5 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                      <ExternalLink className="h-5 w-5 text-primary" />
                     </div>
                   </div>
                 </div>
                 
-                {/* Small indicator on mobile */}
-                <div className="absolute top-2 right-2 bg-black/50 rounded-full p-1 sm:hidden">
-                  <ImageIcon className="h-4 w-4 text-white" />
+                {/* Caption with cleaner styling */}
+                <div className="p-4">
+                  <h3 className="font-medium text-gray-900 text-sm group-hover:text-primary transition-colors">
+                    {image.alt.split(' - ')[1]}
+                  </h3>
                 </div>
               </motion.div>
             ))}
@@ -194,11 +194,11 @@ const OfficeGallerySection = () => {
         </div>
       </section>
 
-      {/* Lightbox Modal - with responsive design for mobile touch */}
+      {/* Lightbox Modal with cleaner styling */}
       <AnimatePresence>
         {selectedImage !== null && (
           <motion.div 
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-95 p-4"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -207,57 +207,59 @@ const OfficeGallerySection = () => {
             onTouchMove={onTouchMove}
             onTouchEnd={onTouchEnd}
           >
-            {/* Close button - bigger touch target */}
+            {/* Close button with better positioning */}
             <button 
-              className="absolute top-3 right-3 text-white hover:text-gray-300 z-10 p-2"
+              className="absolute top-4 right-4 text-white/70 hover:text-white p-2 z-10 transition-colors"
               onClick={closeModal}
               aria-label="Close gallery"
             >
-              <X className="h-6 w-6 sm:h-8 sm:w-8" />
+              <X className="h-6 w-6" />
             </button>
             
-            {/* Navigation buttons - hidden on smallest screens (use swipe instead) */}
-            <div className="absolute inset-x-0 flex justify-between items-center px-2 sm:px-4">
+            {/* Navigation buttons with consistent styling */}
+            <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-between items-center px-4 md:px-8">
               <button 
-                className="hidden sm:flex text-white hover:text-gray-300 p-2 bg-black/30 hover:bg-black/50 rounded-full"
+                className="hidden sm:flex bg-white/10 hover:bg-white/20 p-3 rounded-full text-white/80 hover:text-white transition-colors"
                 onClick={handlePrevious}
                 aria-label="Previous image"
               >
-                <ArrowLeft className="h-5 w-5 sm:h-6 sm:w-6" />
+                <ArrowLeft className="h-5 w-5" />
               </button>
               
               <button 
-                className="hidden sm:flex text-white hover:text-gray-300 p-2 bg-black/30 hover:bg-black/50 rounded-full"
+                className="hidden sm:flex bg-white/10 hover:bg-white/20 p-3 rounded-full text-white/80 hover:text-white transition-colors"
                 onClick={handleNext}
                 aria-label="Next image"
               >
-                <ArrowRight className="h-5 w-5 sm:h-6 sm:w-6" />
+                <ArrowRight className="h-5 w-5" />
               </button>
             </div>
             
-            {/* Image and caption container */}
+            {/* Image and caption container with improved animation */}
             <motion.div 
-              className="max-w-5xl max-h-[85vh] overflow-hidden"
+              className="max-w-4xl w-full max-h-[90vh] overflow-hidden"
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ duration: 0.2 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
             >
               <img 
                 src={images[selectedImage].src} 
                 alt={images[selectedImage].alt} 
-                className="max-h-[70vh] max-w-full object-contain mx-auto rounded-md"
+                className="max-h-[70vh] w-full object-contain mx-auto rounded-lg"
               />
-              <div className="text-white text-center mt-4 px-2">
-                <h3 className="font-bold text-base sm:text-lg mb-1">{images[selectedImage].alt}</h3>
-                <p className="text-xs sm:text-sm text-gray-300">{images[selectedImage].description}</p>
+              <div className="text-center mt-5 px-4">
+                <h3 className="font-medium text-white text-lg mb-2">{images[selectedImage].alt}</h3>
+                <p className="text-sm text-gray-300">{images[selectedImage].description}</p>
               </div>
               
-              {/* Mobile instruction */}
-              <p className="text-gray-400 text-xs text-center mt-4 sm:hidden">Swipe left or right to navigate</p>
+              {/* Mobile instruction with subtle styling */}
+              <p className="text-gray-400 text-xs text-center mt-6 sm:hidden">
+                Swipe left or right to navigate
+              </p>
               
-              {/* Image counter */}
-              <div className="text-gray-400 text-xs sm:text-sm text-center mt-2">
+              {/* Image counter with minimal styling */}
+              <div className="text-gray-400 text-xs text-center mt-4 md:mt-6">
                 {selectedImage + 1} / {images.length}
               </div>
             </motion.div>

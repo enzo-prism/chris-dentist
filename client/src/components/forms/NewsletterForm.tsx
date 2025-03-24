@@ -27,7 +27,6 @@ const NewsletterForm = () => {
       toast({
         title: "Subscribed!",
         description: "Thank you for subscribing to our newsletter.",
-        variant: "success",
       });
       form.reset();
       setIsSubmitting(false);
