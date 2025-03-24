@@ -24,40 +24,41 @@ const TestimonialCard = ({ testimonial, index = 0 }: TestimonialCardProps) => {
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.4, delay: index * 0.1 }}
     >
-      <Card className="h-full bg-white p-4 sm:p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 relative overflow-hidden">
+      <Card className="h-full bg-white p-6 rounded-xl border-0 shadow-sm hover:shadow-md transition-all duration-300 relative overflow-hidden">
         {/* Decorative quote icon */}
-        <div className="absolute -top-1 -right-1 text-primary/5">
-          <Quote className="w-16 h-16 sm:w-20 sm:h-20" strokeWidth={1} />
+        <div className="absolute -top-2 -right-2 text-primary/5">
+          <Quote className="w-16 h-16" strokeWidth={1} />
         </div>
         
         <CardContent className="p-0 relative z-10">
           {/* Star rating */}
-          <div className="flex text-yellow-400 mb-3 sm:mb-4">
+          <div className="flex text-amber-400 mb-4">
             {Array(5).fill(0).map((_, i) => (
               <Star 
                 key={i} 
-                className="h-4 w-4 sm:h-5 sm:w-5" 
+                className="h-4 w-4 mr-0.5" 
                 fill={i < rating ? "currentColor" : "none"} 
+                strokeWidth={1.5}
               />
             ))}
           </div>
           
           {/* Testimonial text */}
-          <p className="text-[#333333] italic mb-4 text-sm sm:text-base line-clamp-6 sm:line-clamp-none">
+          <p className="text-gray-700 mb-5 text-sm leading-relaxed line-clamp-4">
             "{text}"
           </p>
           
-          {/* Author info */}
-          <div className="flex items-center mt-auto pt-2 border-t border-gray-100">
+          {/* Author info with modern styling */}
+          <div className="flex items-center">
             <div 
-              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full mr-3 sm:mr-4 flex items-center justify-center font-bold text-white bg-primary"
+              className="w-10 h-10 rounded-full mr-3 flex items-center justify-center font-medium text-white bg-gradient-to-br from-primary to-primary/80 shadow-sm"
               aria-label={`Avatar for ${name}`}
             >
               {name.charAt(0)}
             </div>
             <div>
-              <h4 className="font-semibold text-sm sm:text-base">{name}</h4>
-              <p className="text-xs sm:text-sm text-gray-600">{location}</p>
+              <h4 className="font-medium text-gray-900 text-sm">{name}</h4>
+              <p className="text-xs text-gray-500">{location}</p>
             </div>
           </div>
         </CardContent>

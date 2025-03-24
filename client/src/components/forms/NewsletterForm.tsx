@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
+import { ArrowRight } from "lucide-react";
 
 const NewsletterForm = () => {
   const { toast } = useToast();
@@ -49,8 +50,8 @@ const NewsletterForm = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="mb-4">
-        <div className="flex">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="mb-2">
+        <div className="flex rounded-full bg-white/20 p-1">
           <FormField
             control={form.control}
             name="email"
@@ -60,7 +61,7 @@ const NewsletterForm = () => {
                   <Input 
                     placeholder="Your email address" 
                     type="email" 
-                    className="w-full rounded-r-none focus:ring-primary text-[#333333]"
+                    className="w-full border-0 bg-transparent text-white placeholder:text-white/60 focus:ring-0 text-sm"
                     {...field}
                   />
                 </FormControl>
@@ -69,10 +70,16 @@ const NewsletterForm = () => {
           />
           <Button 
             type="submit" 
-            className="bg-[#00AA90] hover:bg-teal-700 text-white rounded-l-none"
+            size="sm"
+            className="bg-white text-primary hover:bg-white/90 rounded-full px-3 min-w-[80px]"
             disabled={isSubmitting}
           >
-            {isSubmitting ? "..." : "Subscribe"}
+            {isSubmitting ? "..." : (
+              <span className="flex items-center">
+                <span>Join</span>
+                <ArrowRight className="ml-1 h-3 w-3" />
+              </span>
+            )}
           </Button>
         </div>
       </form>

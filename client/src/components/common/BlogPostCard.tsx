@@ -1,5 +1,5 @@
 import { ArrowRight, Calendar, Clock } from "lucide-react";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "wouter";
 import { BlogPost } from "@shared/schema";
@@ -20,57 +20,61 @@ const BlogPostCard = ({ post }: BlogPostCardProps) => {
 
   return (
     <Card 
-      className="h-full bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col" 
+      className="h-full bg-white rounded-xl border-0 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col group" 
       id={post.slug}
     >
       {/* Image container with responsive height */}
-      <div className="relative h-40 sm:h-48 overflow-hidden">
+      <div className="relative h-48 overflow-hidden">
         <img 
           src={post.image} 
           alt={post.title} 
-          className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           loading="lazy"
         />
         
+        {/* Subtle gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-gray-900/30 to-transparent"></div>
+        
         {/* Category Badge */}
-        <Badge className="absolute top-3 left-3 bg-primary/90 text-white hover:bg-primary">
+        <Badge className="absolute top-3 left-3 bg-white/90 text-primary hover:bg-white px-2 py-0.5 text-xs font-medium rounded-full">
           {category}
         </Badge>
       </div>
       
-      <CardContent className="p-4 sm:p-6 flex-grow">
-        {/* Date with icon */}
-        <div className="flex items-center text-xs sm:text-sm text-gray-500 mb-2">
-          <Calendar className="h-3.5 w-3.5 mr-1.5" />
+      <CardContent className="p-5 flex-grow">
+        {/* Date and reading time with subtle styling */}
+        <div className="flex items-center text-xs text-gray-500 mb-3">
+          <Calendar className="h-3 w-3 mr-1.5 text-gray-400" />
           <span>{post.date}</span>
           
           {/* Optional reading time */}
           {post.readTime && (
             <>
-              <span className="mx-2">•</span>
-              <Clock className="h-3.5 w-3.5 mr-1.5" />
+              <span className="mx-2 text-gray-300">•</span>
+              <Clock className="h-3 w-3 mr-1.5 text-gray-400" />
               <span>{post.readTime} min read</span>
             </>
           )}
         </div>
         
-        {/* Title */}
-        <h3 className="text-lg sm:text-xl font-bold font-heading text-[#333333] mb-2">{post.title}</h3>
+        {/* Title with hover effect */}
+        <h3 className="text-lg font-medium text-gray-900 mb-2 group-hover:text-primary transition-colors line-clamp-2">
+          {post.title}
+        </h3>
         
         {/* Content preview with line clamp */}
-        <p className="text-sm sm:text-base text-[#333333] mb-4 line-clamp-3">
+        <p className="text-sm text-gray-600 mb-5 line-clamp-2 leading-relaxed">
           {truncateContent(post.content)}
         </p>
-      </CardContent>
-      
-      <CardFooter className="px-4 sm:px-6 py-4 border-t border-gray-100">
-        <Link href={`/blog#${post.slug}`} className="w-full">
-          <div className="text-primary font-semibold hover:text-blue-700 flex items-center group transition-colors cursor-pointer text-sm sm:text-base">
-            Read Article
-            <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 ml-1 group-hover:translate-x-1 transition-transform" />
+
+        {/* Read more link */}
+        <Link href={`/blog#${post.slug}`}>
+          <div className="inline-flex items-center text-sm font-medium text-primary hover:text-primary/80 transition-colors cursor-pointer group/link">
+            <span>Read article</span>
+            <ArrowRight className="h-3.5 w-3.5 ml-1 transition-transform group-hover/link:translate-x-0.5" />
           </div>
         </Link>
-      </CardFooter>
+      </CardContent>
     </Card>
   );
 };
