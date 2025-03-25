@@ -6,6 +6,8 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "wouter";
 import PatientForm from "@/components/forms/PatientForm";
+import MetaTags from "@/components/common/MetaTags";
+import { drWongImages } from "@/lib/imageUrls";
 
 const PatientResources = () => {
   const [activeTab, setActiveTab] = useState("forms");
@@ -39,6 +41,11 @@ const PatientResources = () => {
 
   return (
     <>
+      <MetaTags 
+        title="Patient Resources | Dr. Christopher B. Wong, DDS"
+        description="Access patient forms, insurance information, FAQs, and helpful resources for your dental visit to Dr. Wong's practice in Palo Alto."
+        image={drWongImages.waitingRoom}
+      />
       {/* Hero Section */}
       <section className="bg-[#F5F9FC] py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

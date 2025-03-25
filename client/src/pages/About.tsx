@@ -4,6 +4,7 @@ import { Link } from "wouter";
 import OfficeGallerySection from "@/components/sections/OfficeGallerySection";
 import { drWongImages } from "@/lib/imageUrls";
 import * as data from "@/lib/data";
+import MetaTags from "@/components/common/MetaTags";
 
 const About = () => {
   // Using the team members from shared data
@@ -22,6 +23,11 @@ const About = () => {
 
   return (
     <>
+      <MetaTags 
+        title="About Dr. Christopher B. Wong | Meet Our Dental Team"
+        description="Meet Dr. Christopher B. Wong and our exceptional dental team. Learn about our approach to patient-centered care and dental excellence in Palo Alto."
+        image={drWongImages.drWongPortrait2}
+      />
       {/* Hero Section */}
       <section className="bg-[#F5F9FC] py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

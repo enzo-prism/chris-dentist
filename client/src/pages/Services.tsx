@@ -3,6 +3,8 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import ServiceCard from "@/components/common/ServiceCard";
+import MetaTags from "@/components/common/MetaTags";
+import { drWongImages } from "@/lib/imageUrls";
 import { Service } from "@shared/schema";
 
 const Services = () => {
@@ -12,6 +14,11 @@ const Services = () => {
 
   return (
     <>
+      <MetaTags 
+        title="Dental Services | Dr. Christopher B. Wong, DDS"
+        description="Explore our comprehensive dental services including preventive care, cosmetic treatments, restorative procedures, and more at Dr. Wong's Palo Alto practice."
+        image={drWongImages.treatmentRoom}
+      />
       {/* Hero Section */}
       <section className="bg-[#F5F9FC] py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
