@@ -2,10 +2,17 @@ import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import AppointmentSection from "@/components/sections/AppointmentSection";
 import OfficeInformationSection from "@/components/sections/OfficeInformationSection";
 import ContactForm from "@/components/forms/ContactForm";
+import MetaTags from "@/components/common/MetaTags";
+import { drWongImages } from "@/lib/imageUrls";
 
 const Schedule = () => {
   return (
     <>
+      <MetaTags 
+        title="Schedule an Appointment | Dr. Christopher B. Wong, DDS"
+        description="Book your dental visit with Dr. Wong's practice in Palo Alto. We offer flexible scheduling options to fit your busy lifestyle."
+        image={drWongImages.drWongOffice1}
+      />
       {/* Hero Section */}
       <section className="bg-[#F5F9FC] py-12 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

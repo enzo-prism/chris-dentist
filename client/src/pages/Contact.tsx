@@ -8,6 +8,11 @@ import { drWongImages } from "@/lib/imageUrls";
 const Contact = () => {
   return (
     <>
+      <MetaTags 
+        title="Contact Us | Dr. Christopher B. Wong, DDS"
+        description="Schedule your dental appointment with Dr. Wong in Palo Alto. We offer flexible scheduling to fit your busy lifestyle."
+        image={drWongImages.drWongReception}
+      />
       {/* Hero Section */}
       <section className="bg-[#F5F9FC] py-12 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
