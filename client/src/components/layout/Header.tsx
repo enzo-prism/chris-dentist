@@ -69,9 +69,9 @@ const Header = () => {
       
       {/* Main navigation */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-16 relative">
           {/* Logo */}
-          <div className="flex-shrink-0">
+          <div className="flex-shrink-0 lg:w-1/4">
             <Link href="/">
               <div className="flex items-center cursor-pointer">
                 <span className="text-gray-900 font-medium text-xl">Dr. Christopher B.</span>
@@ -81,18 +81,19 @@ const Header = () => {
           </div>
 
           {/* Desktop navigation - center aligned */}
-          <nav className="hidden lg:flex items-center justify-center flex-1 px-8">
-            <ul className="flex space-x-8">
+          <nav className="hidden lg:flex items-center justify-center flex-1">
+            <ul className="flex items-center justify-center w-full mx-auto">
               {navLinks.map((link) => (
-                <li key={link.href}>
+                <li key={link.href} className="mx-3">
                   <Link href={link.href}>
-                    <div className={`px-1 py-2 relative ${isActive(link.href) ? 'text-primary' : 'text-gray-700'}`}>
-                      <span className="text-sm cursor-pointer hover:text-primary transition-colors">
+                    <div className={`px-2 py-2 relative text-center group ${isActive(link.href) ? 'text-primary' : 'text-gray-700'}`}>
+                      <span className="text-sm font-medium cursor-pointer hover:text-primary transition-colors">
                         {link.label}
                       </span>
                       {isActive(link.href) && (
-                        <span className="absolute bottom-0 left-0 w-full h-0.5 bg-primary"></span>
+                        <span className="absolute bottom-0 left-0 right-0 mx-auto w-full h-0.5 bg-primary"></span>
                       )}
+                      <span className="absolute bottom-0 left-0 right-0 mx-auto w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300 ease-in-out"></span>
                     </div>
                   </Link>
                 </li>
@@ -101,7 +102,7 @@ const Header = () => {
           </nav>
 
           {/* Right side actions */}
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-3 lg:w-1/4 justify-end">
             {/* Search button */}
             <Button
               variant="ghost"
