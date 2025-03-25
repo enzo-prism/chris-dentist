@@ -278,42 +278,42 @@ export class MemStorage implements IStorage {
       {
         title: "Preventive Dentistry",
         description: "Regular check-ups, cleanings, and screenings to maintain optimal oral health and prevent issues before they start.",
-        image: "https://i.imgur.com/Zuro5VZ.jpg",
+        image: "https://i.imgur.com/MuWZWEY.jpg",
         slug: "preventive-dentistry",
         featured: true
       },
       {
         title: "Cosmetic Dentistry",
         description: "Teeth whitening, veneers, and other aesthetic procedures to enhance your smile and boost your confidence.",
-        image: "https://i.imgur.com/3iTw6Dx.jpg",
+        image: "https://i.imgur.com/Zuro5VZ.jpg",
         slug: "cosmetic-dentistry",
         featured: true
       },
       {
         title: "Restorative Dentistry",
         description: "Fillings, crowns, bridges, and implants to repair damage and restore full function to your teeth.",
-        image: "https://i.imgur.com/MuWZWEY.jpg",
+        image: "https://i.imgur.com/HcIu4Tr.jpg",
         slug: "restorative-dentistry",
         featured: false
       },
       {
         title: "Pediatric Dentistry",
         description: "Child-friendly dental care in a comfortable environment to establish good oral health habits early.",
-        image: "https://i.imgur.com/HcIu4Tr.jpg",
+        image: "https://i.imgur.com/3iTw6Dx.jpg",
         slug: "pediatric-dentistry",
         featured: true
       },
       {
         title: "Orthodontics",
         description: "Clear aligners and traditional braces to correctly align teeth for improved function and appearance.",
-        image: "https://i.imgur.com/t6yAG3i.jpg",
+        image: "https://i.imgur.com/gqotbUv.png",
         slug: "orthodontics",
         featured: false
       },
       {
         title: "Emergency Dental Care",
         description: "Prompt attention for dental emergencies such as toothaches, broken teeth, or other urgent dental issues.",
-        image: "https://i.imgur.com/hYHYbBq.png",
+        image: "https://i.imgur.com/t6yAG3i.jpg",
         slug: "emergency-dental-care",
         featured: true
       }
