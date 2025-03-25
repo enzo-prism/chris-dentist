@@ -3,33 +3,21 @@ import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import OfficeGallerySection from "@/components/sections/OfficeGallerySection";
 import { drWongImages } from "@/lib/imageUrls";
+import * as data from "@/lib/data";
 
 const About = () => {
+  // Using the team members from shared data
+  const { teamMembers: sharedTeamMembers } = data;
+  
+  // Create a full team with Dr. Wong at the top
   const teamMembers = [
     {
       name: "Dr. Christopher B. Wong",
       role: "Lead Dentist",
       image: drWongImages.drWongPortrait1,
-      bio: "Dr. Wong has over 15 years of experience in comprehensive dental care, with specialized training in cosmetic dentistry, dental implants, and minimally invasive techniques."
+      bio: data.doctorInfo.bio
     },
-    {
-      name: "Dr. Maria Rodriguez",
-      role: "Orthodontist",
-      image: "https://i.imgur.com/NdoPLp2.png",
-      bio: "Dr. Rodriguez specializes in orthodontics and has been transforming smiles for over 10 years. She is an expert in both traditional braces and clear aligner therapy."
-    },
-    {
-      name: "Sarah Johnson",
-      role: "Dental Hygienist",
-      image: "https://i.imgur.com/7JHEcuJ.png",
-      bio: "Sarah has been a dental hygienist for 8 years and is passionate about preventive care and patient education. She's known for her gentle technique and thorough cleanings."
-    },
-    {
-      name: "Michael Chen",
-      role: "Office Manager",
-      image: "https://i.imgur.com/wLCU8JD.png",
-      bio: "Michael ensures that our office runs smoothly so our clinical team can focus on providing exceptional patient care. He handles scheduling, insurance, and patient questions."
-    }
+    ...sharedTeamMembers
   ];
 
   return (
@@ -57,27 +45,19 @@ const About = () => {
             </div>
             <div className="md:w-2/3 md:pl-12">
               <h2 className="text-3xl font-bold font-heading text-[#333333] mb-4">Dr. Christopher B. Wong, DDS</h2>
-              <p className="text-[#333333] mb-4">Dr. Christopher Wong has over 15 years of experience in comprehensive dental care, with specialized training in cosmetic dentistry, dental implants, and minimally invasive techniques. After graduating with honors from the University of California, San Francisco School of Dentistry, he completed advanced training at Stanford Medical Center.</p>
-              <p className="text-[#333333] mb-4">His practice philosophy centers on providing personalized care using evidence-based approaches and cutting-edge technology to ensure the best outcomes for his patients. Dr. Wong regularly attends continuing education courses to stay at the forefront of dental innovations.</p>
-              <p className="text-[#333333] mb-6">Outside of the office, Dr. Wong is an avid cyclist and enjoys spending time with his family in the beautiful Bay Area. He's also involved in community outreach programs that provide dental care to underserved populations.</p>
+              <p className="text-[#333333] mb-6">{data.doctorInfo.bio}</p>
               
               <div className="grid md:grid-cols-2 gap-4">
-                <div className="flex items-start">
-                  <Award className="h-5 w-5 text-primary mt-1 mr-2" />
-                  <span>UCSF School of Dentistry Graduate</span>
-                </div>
-                <div className="flex items-start">
-                  <CheckCircle className="h-5 w-5 text-primary mt-1 mr-2" />
-                  <span>American Dental Association</span>
-                </div>
-                <div className="flex items-start">
-                  <CheckCircle className="h-5 w-5 text-primary mt-1 mr-2" />
-                  <span>California Dental Association</span>
-                </div>
-                <div className="flex items-start">
-                  <CheckCircle className="h-5 w-5 text-primary mt-1 mr-2" />
-                  <span>Academy of Cosmetic Dentistry</span>
-                </div>
+                {data.doctorInfo.credentials.map((credential, index) => (
+                  <div key={index} className="flex items-start">
+                    {index === 0 ? (
+                      <Award className="h-5 w-5 text-primary mt-1 mr-2" />
+                    ) : (
+                      <CheckCircle className="h-5 w-5 text-primary mt-1 mr-2" />
+                    )}
+                    <span>{credential}</span>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
