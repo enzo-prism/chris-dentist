@@ -16,8 +16,8 @@ const AboutDoctorSection: React.FC = () => {
         <div className="md:flex items-center">
           <div className="md:w-1/3 mb-8 md:mb-0">
             <img 
-              src={drWongImages.drWongPortrait1}
-              alt="Dr. Christopher B. Wong" 
+              src={drWongImages.drWongWaiting}
+              alt="Dr. Wong's dental office waiting area" 
               className="rounded-lg shadow-xl mx-auto"
             />
           </div>
