@@ -30,15 +30,16 @@ export const doctorInfo = {
     "University of the Pacific Arthur A. Dugoni School of Dentistry Graduate",
     "American Dental Association",
     "California Dental Association",
-    "Academy of Cosmetic Dentistry",
+    "Santa Clara County Dental Society",
   ],
-  experience: "15+ years",
+  experience: "Since 2018",
   specialties: [
     "Conservative Dentistry",
     "Invisalign®",
     "Implant Restoration",
+    "Restorative Care",
   ],
-  bio: "Dr. Christopher B. Wong is a dedicated and experienced dentist specializing in conservative dentistry, Invisalign®, and implant restoration. A graduate of the University of the Pacific Arthur A. Dugoni School of Dentistry, Dr. Wong emphasizes prevention and early detection to maintain and improve patients' oral health. Outside the clinic, he enjoys staying active, traveling, and exploring new cuisines.",
+  bio: "Dr. Christopher B. Wong was born and raised in Sacramento and earned his bachelor's degree in Biology from the University of California, Davis. He graduated from the prestigious University of the Pacific Arthur A. Dugoni School of Dentistry in San Francisco in 2018. Dr. Wong is passionate about delivering high-quality, conservative dentistry to help patients achieve healthy, functional, and brilliant smiles. He specializes in Invisalign®, implant restoration, and restorative care while practicing ethical and non-invasive dentistry. Dr. Wong stays current with the latest advancements in dentistry and is an active member of the American Dental Association (ADA), California Dental Association (CDA), and Santa Clara County Dental Society (SCCDS). Outside the office, he enjoys staying active through working out, running, hiking, golfing, and basketball. He also loves traveling, experiencing new cultures, cooking international cuisines, and is an avid car enthusiast.",
 };
 
 export const teamMembers = [

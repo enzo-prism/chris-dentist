@@ -50,7 +50,7 @@ const HeroSection = () => {
             </h1>
             
             <p className="text-lg text-gray-600 leading-relaxed mb-8 max-w-md">
-              Dr. Wong provides comprehensive dental care using advanced techniques for your optimal oral health.
+              Dr. Wong provides comprehensive dental care with a focus on conservative, ethical approaches to help you achieve a healthy, functional, and brilliant smile.
             </p>
             
             {/* CTA Buttons with updated styling */}

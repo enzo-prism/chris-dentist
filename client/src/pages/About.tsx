@@ -25,7 +25,7 @@ const About = () => {
     <>
       <MetaTags 
         title="About Dr. Christopher B. Wong | Meet Our Dental Team"
-        description="Meet Dr. Christopher B. Wong and our exceptional dental team. Learn about our approach to patient-centered care and dental excellence in Palo Alto."
+        description="Meet Dr. Christopher B. Wong, a UC Davis graduate and University of the Pacific School of Dentistry alum specializing in conservative, ethical dentistry. Learn about our patient-centered approach in Palo Alto."
         image={drWongImages.drWongPortrait2}
       />
       {/* Hero Section */}

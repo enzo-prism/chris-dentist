@@ -22,22 +22,23 @@ const AboutDoctorSection: React.FC = () => {
             />
           </div>
           <div className="md:w-2/3 md:pl-12">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">Experienced Dental Care You Can Trust</h3>
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">Conservative Dental Care You Can Trust</h3>
             <p className="text-gray-700 mb-4">
-              Dr. Christopher Wong has over 15 years of experience in comprehensive dental care, with specialized
-              training in cosmetic dentistry, dental implants, and minimally invasive techniques. After graduating with
-              honors from the University of California, San Francisco School of Dentistry, he completed advanced
-              training at Stanford Medical Center.
+              Dr. Christopher Wong was born and raised in Sacramento and earned his bachelor's degree in Biology from UC Davis. 
+              He graduated from the prestigious University of the Pacific Arthur A. Dugoni School of Dentistry in San Francisco in 2018.
+              He is passionate about delivering high-quality care using conservative dentistry to help patients achieve healthy, 
+              functional, and brilliant smiles.
             </p>
             <p className="text-gray-700 mb-6">
-              His practice philosophy centers on providing personalized care using evidence-based approaches and
-              cutting-edge technology to ensure the best outcomes for his patients.
+              Dr. Wong practices ethical and non-invasive dentistry with special interests in Invisalign®, implant restoration, 
+              and restorative care. He focuses on prevention and early detection, helping patients retain their natural tooth 
+              structure while maintaining long-term oral health.
             </p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="flex items-start">
                 <CheckCircle className="h-5 w-5 text-primary mt-1 mr-2" />
-                <span>UCSF School of Dentistry Graduate</span>
+                <span>University of the Pacific School of Dentistry</span>
               </div>
               <div className="flex items-start">
                 <CheckCircle className="h-5 w-5 text-primary mt-1 mr-2" />
@@ -49,7 +50,7 @@ const AboutDoctorSection: React.FC = () => {
               </div>
               <div className="flex items-start">
                 <CheckCircle className="h-5 w-5 text-primary mt-1 mr-2" />
-                <span>Academy of Cosmetic Dentistry</span>
+                <span>Santa Clara County Dental Society</span>
               </div>
             </div>
             
