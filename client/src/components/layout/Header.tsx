@@ -74,8 +74,7 @@ const Header = () => {
           <div className="flex-shrink-0 lg:w-1/4">
             <Link href="/">
               <div className="flex items-center cursor-pointer">
-                <span className="text-gray-900 font-medium text-xl">Dr. Christopher B.</span>
-                <span className="text-primary ml-1.5">Wong</span>
+                <span className="text-gray-900 font-medium text-xl">Dr. Wong</span>
               </div>
             </Link>
           </div>
