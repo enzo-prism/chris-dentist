@@ -54,8 +54,8 @@ const OfficeGallerySection = () => {
     },
     {
       src: 'https://i.imgur.com/rIGaK9S.png', // drWongLab3
-      alt: 'Dr. Wong Office - Sterilization Area',
-      description: 'Our state-of-the-art sterilization area ensures the highest standards of safety and hygiene.'
+      alt: 'Dr. Wong Office - Reception Area',
+      description: 'Our modern reception area where we welcome patients with comfort and care.'
     },
   ];
 
