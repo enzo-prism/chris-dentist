@@ -306,7 +306,7 @@ export class MemStorage implements IStorage {
       {
         title: "Orthodontics",
         description: "Clear aligners and traditional braces to correctly align teeth for improved function and appearance.",
-        image: "https://i.imgur.com/gqotbUv.png",
+        image: "https://i.imgur.com/XVLlcob.jpg",
         slug: "orthodontics",
         featured: false
       },
@@ -338,7 +338,7 @@ export class MemStorage implements IStorage {
       {
         title: "Advances in Invisible Orthodontics",
         content: "Learn about the latest innovations in clear aligner technology and how they're making orthodontic treatment more comfortable and discreet than ever.",
-        image: "https://i.imgur.com/AC5lGu3.png",
+        image: "https://i.imgur.com/XVLlcob.jpg",
         date: "May 22, 2023",
         slug: "advances-invisible-orthodontics",
         category: "Orthodontics",
