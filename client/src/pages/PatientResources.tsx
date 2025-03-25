@@ -44,7 +44,7 @@ const PatientResources = () => {
       <MetaTags 
         title="Patient Resources | Dr. Christopher B. Wong, DDS"
         description="Access patient forms, insurance information, FAQs, and helpful resources for your dental visit to Dr. Wong's practice in Palo Alto."
-        image={drWongImages.waitingRoom}
+        image={drWongImages.drWongWaiting}
       />
       {/* Hero Section */}
       <section className="bg-[#F5F9FC] py-16 md:py-24">

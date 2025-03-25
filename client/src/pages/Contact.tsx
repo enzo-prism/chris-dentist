@@ -2,6 +2,8 @@ import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import AppointmentSection from "@/components/sections/AppointmentSection";
 import OfficeInformationSection from "@/components/sections/OfficeInformationSection";
 import ContactForm from "@/components/forms/ContactForm";
+import MetaTags from "@/components/common/MetaTags";
+import { drWongImages } from "@/lib/imageUrls";
 
 const Contact = () => {
   return (

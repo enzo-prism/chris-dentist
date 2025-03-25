@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "wouter";
 import TestimonialCard from "@/components/common/TestimonialCard";
+import MetaTags from "@/components/common/MetaTags";
+import { drWongImages } from "@/lib/imageUrls";
 import { Testimonial } from "@shared/schema";
 import { motion } from "framer-motion";
 
@@ -39,6 +41,11 @@ const Testimonials = () => {
 
   return (
     <>
+      <MetaTags 
+        title="Patient Testimonials | Dr. Christopher B. Wong, DDS"
+        description="Read what our patients have to say about their experience with Dr. Wong and our dental practice in Palo Alto. Real stories from real patients."
+        image={drWongImages.drWongPortrait1}
+      />
       {/* Hero Section */}
       <section className="bg-[#F5F9FC] py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

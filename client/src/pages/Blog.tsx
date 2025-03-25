@@ -5,6 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Link } from "wouter";
 import BlogPostCard from "@/components/common/BlogPostCard";
+import MetaTags from "@/components/common/MetaTags";
+import { drWongImages } from "@/lib/imageUrls";
 import { BlogPost } from "@shared/schema";
 import { useState } from "react";
 
@@ -45,6 +47,11 @@ const Blog = () => {
 
   return (
     <>
+      <MetaTags 
+        title="Dental Health Blog | Dr. Christopher B. Wong, DDS"
+        description="Stay informed with the latest dental health tips, news, and advances in dental technology from Dr. Wong's practice in Palo Alto."
+        image={drWongImages.drWongLab1}
+      />
       {/* Hero Section */}
       <section className="bg-[#F5F9FC] py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
