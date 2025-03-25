@@ -40,7 +40,7 @@ const Contact = () => {
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="rounded-lg overflow-hidden shadow-md">
               <img 
-                src="/images/dr-wong-reception.png" 
+                src="https://i.imgur.com/rIGaK9S.png" 
                 alt="Dr. Wong Dental Office Reception" 
                 className="w-full h-64 md:h-80 object-cover"
               />
