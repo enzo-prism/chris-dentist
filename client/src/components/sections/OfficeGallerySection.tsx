@@ -10,47 +10,52 @@ const OfficeGallerySection = () => {
   // Minimum swipe distance (in px)
   const minSwipeDistance = 50;
 
-  // Gallery images
+  // Gallery images using Imgur URLs from imageUrls.ts
   const images = [
     {
-      src: '/images/dr-wong-office-1.png',
-      alt: 'Dr. Wong Office Interior - Zen Garden',
-      description: 'Our tranquil Zen garden provides a calming atmosphere for patients.'
+      src: 'https://i.imgur.com/BeX3mhS.png', // drWongOffice1
+      alt: 'Dr. Wong Office Interior - Treatment Room',
+      description: 'Our modern treatment rooms are designed for your comfort and care.'
     },
     {
-      src: '/images/dr-wong-office-2.png',
-      alt: 'Dr. Wong Office Interior - Zen Garden View',
-      description: 'Relax and enjoy the peaceful view while waiting for your appointment.'
+      src: 'https://i.imgur.com/sW9DVZF.png', // drWongOffice2
+      alt: 'Dr. Wong Office Interior - Examination Room',
+      description: 'High-tech examination rooms with state-of-the-art equipment.'
     },
     {
-      src: '/images/dr-wong-office-3.png',
-      alt: 'Dr. Wong Office Interior - Courtyard',
-      description: 'Our courtyard features natural light and a connection to nature.'
+      src: 'https://i.imgur.com/gqotbUv.png', // drWongOffice3
+      alt: 'Dr. Wong Office Interior - Operatory',
+      description: 'Our operatory features ergonomic design and the latest dental technology.'
     },
     {
-      src: '/images/dr-wong-office-4.png',
+      src: 'https://i.imgur.com/hYHYbBq.png', // drWongOffice4
       alt: 'Dr. Wong Office Interior - Treatment Room View',
       description: 'Enjoy calming views during your dental procedure.'
     },
     {
-      src: '/images/dr-wong-reception.png',
+      src: 'https://i.imgur.com/nGlhUdH.png', // drWongReception
       alt: 'Dr. Wong Office - Reception Area',
       description: 'Our welcoming reception area combines comfort and modern design.'
     },
     {
-      src: '/images/dr-wong-waiting-room.png',
+      src: 'https://i.imgur.com/AC5lGu3.png', // drWongWaiting
       alt: 'Dr. Wong Office - Waiting Room',
       description: 'Comfortable seating and a relaxing atmosphere to ease any dental anxiety.'
     },
     {
-      src: '/images/dr-wong-lab-1.png',
-      alt: 'Dr. Wong Office - Treatment Room',
-      description: 'State-of-the-art equipment in a comfortable, clean environment.'
+      src: 'https://i.imgur.com/qK5nPtS.png', // drWongLab1
+      alt: 'Dr. Wong Office - Dental Lab',
+      description: 'Our in-house dental lab ensures high-quality restorations and faster turnaround times.'
     },
     {
-      src: '/images/dr-wong-lab-2.png',
-      alt: 'Dr. Wong Office - Dental Chair',
-      description: 'Ergonomic dental chairs with the latest technology for your comfort.'
+      src: 'https://i.imgur.com/bUkVVSo.png', // drWongLab2
+      alt: 'Dr. Wong Office - Dental Equipment',
+      description: 'Advanced dental equipment for precise and comfortable treatment.'
+    },
+    {
+      src: 'https://i.imgur.com/rIGaK9S.png', // drWongLab3
+      alt: 'Dr. Wong Office - Sterilization Area',
+      description: 'Our state-of-the-art sterilization area ensures the highest standards of safety and hygiene.'
     },
   ];
 
@@ -185,7 +190,7 @@ const OfficeGallerySection = () => {
                 {/* Caption with cleaner styling */}
                 <div className="p-4">
                   <h3 className="font-medium text-gray-900 text-sm group-hover:text-primary transition-colors">
-                    {image.alt.split(' - ')[1]}
+                    {image.alt.includes(' - ') ? image.alt.split(' - ')[1] : image.alt.split(' - Dr. Wong Office ')[1] || image.alt}
                   </h3>
                 </div>
               </motion.div>
