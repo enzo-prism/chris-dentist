@@ -12,7 +12,7 @@ export const drWongImages = {
   drWongPortrait2: "https://i.imgur.com/iqBXT9y.png",
   drWongWaiting: "https://i.imgur.com/AC5lGu3.png",
   drWongReception: "https://i.imgur.com/nGlhUdH.png",
-  heroImage: "https://i.imgur.com/OUGj1pF.png",
+  heroImage: "https://i.imgur.com/BeX3mhS.png",
   teamPhoto: "https://i.imgur.com/ypt5eZ7.png",
   officeEntrance: "https://i.imgur.com/wt7peyr.png",
   treatmentRoom: "https://i.imgur.com/hO02YQ0.png",
