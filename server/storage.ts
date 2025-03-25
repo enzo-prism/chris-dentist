@@ -278,7 +278,7 @@ export class MemStorage implements IStorage {
       {
         title: "Preventive Dentistry",
         description: "Regular check-ups, cleanings, and screenings to maintain optimal oral health and prevent issues before they start.",
-        image: "https://i.imgur.com/qK5nPtS.png",
+        image: "https://www.123dentist.com/wp-content/uploads/2016/04/checkup.jpg",
         slug: "preventive-dentistry",
         featured: true
       },
