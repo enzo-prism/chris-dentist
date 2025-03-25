@@ -1,22 +1,22 @@
-import { ClipboardList, Clock, ShieldCheck } from "lucide-react";
+import { Heart, Award, Star, Users, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 
 const FeaturesSection = () => {
   const features = [
     {
-      icon: <ClipboardList className="h-5 w-5 text-primary" />,
-      title: "Advanced Technology",
-      description: "State-of-the-art equipment and techniques for precise diagnostics and comfortable treatment.",
+      icon: <Star className="h-5 w-5 text-primary" />,
+      title: "Exceptional Results",
+      description: "Our patients consistently achieve outstanding outcomes through our personalized care approach and attention to detail.",
     },
     {
-      icon: <Clock className="h-5 w-5 text-primary" />,
-      title: "Convenient Scheduling",
-      description: "Book appointments online 24/7 with options for both in-person and virtual consultations.",
+      icon: <Heart className="h-5 w-5 text-primary" />,
+      title: "Patient-First Experience",
+      description: "Every aspect of your visit is designed with your comfort and satisfaction in mind, from scheduling to treatment.",
     },
     {
-      icon: <ShieldCheck className="h-5 w-5 text-primary" />,
-      title: "HIPAA Compliant",
-      description: "Secure online forms and communications that protect your privacy and meet all regulatory requirements.",
+      icon: <Users className="h-5 w-5 text-primary" />,
+      title: "Community-Loved Team",
+      description: "Our dedicated team has earned the trust and affection of the local community through years of compassionate service.",
     },
   ];
 
@@ -44,7 +44,7 @@ const FeaturesSection = () => {
             Why Choose Dr. Wong
           </h2>
           <p className="text-base text-gray-600 max-w-2xl mx-auto">
-            Experience dental care that combines modern technology with personalized attention
+            Discover a dental practice committed to exceptional service, outstanding results, and a patient experience that has earned the trust of our community
           </p>
         </div>
         
