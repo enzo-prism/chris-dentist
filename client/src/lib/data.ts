@@ -1,8 +1,8 @@
 export const officeInfo = {
   name: "Dr. Christopher B. Wong, DDS",
   address: {
-    line1: "123 University Avenue",
-    line2: "Palo Alto, CA 94301",
+    line1: "409 Cambridge Ave",
+    line2: "Palo Alto, CA 94306",
   },
   hours: {
     monday: "8:00 AM - 5:00 PM",

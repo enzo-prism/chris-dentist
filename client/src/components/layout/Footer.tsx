@@ -68,7 +68,7 @@ const Footer = () => {
                 </p>
                 <p className="flex items-start text-sm text-white/90">
                   <MapPin className="h-4 w-4 mr-3 mt-0.5 flex-shrink-0 text-white/70" />
-                  <span>123 Main Street, Palo Alto, CA 94301</span>
+                  <span>409 Cambridge Ave, Palo Alto, CA 94306</span>
                 </p>
               </div>
             </div>
@@ -181,7 +181,7 @@ const Footer = () => {
               </p>
               <p className="flex items-start text-sm">
                 <MapPin className="h-4 w-4 mr-3 mt-0.5 flex-shrink-0 text-white/70" />
-                <span>123 Main Street, Palo Alto, CA 94301</span>
+                <span>409 Cambridge Ave, Palo Alto, CA 94306</span>
               </p>
             </div>
           </div>

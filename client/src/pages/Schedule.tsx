@@ -51,7 +51,7 @@ const Schedule = () => {
                 <MapPin className="h-6 w-6 text-primary mr-3 mt-1 flex-shrink-0" />
                 <div>
                   <h4 className="font-semibold mb-1">Office Address</h4>
-                  <p className="text-[#333333]">123 University Avenue<br />Palo Alto, CA 94301</p>
+                  <p className="text-[#333333]">409 Cambridge Ave<br />Palo Alto, CA 94306</p>
                 </div>
               </div>
               
