@@ -13,49 +13,49 @@ const OfficeGallerySection = () => {
   // Gallery images using Imgur URLs from imageUrls.ts
   const images = [
     {
-      src: 'https://i.imgur.com/BeX3mhS.png', // drWongOffice1
-      alt: 'Dr. Wong Office Interior - Treatment Room',
-      description: 'Our modern treatment rooms are designed for your comfort and care.'
+      src: 'https://i.imgur.com/BeX3mhS.png', // Top Left
+      alt: 'Reception Area with Dentist',
+      description: 'Our dentist standing near the reception desk, welcoming patients to our practice.'
     },
     {
-      src: 'https://i.imgur.com/sW9DVZF.png', // drWongOffice2
-      alt: 'Dr. Wong Office Interior - Examination Room',
-      description: 'High-tech examination rooms with state-of-the-art equipment.'
+      src: 'https://i.imgur.com/sW9DVZF.png', // Top Middle
+      alt: 'Garden Courtyard View',
+      description: 'A serene garden courtyard visible through glass windows, creating a calming environment.'
     },
     {
-      src: 'https://i.imgur.com/gqotbUv.png', // drWongOffice3
-      alt: 'Dr. Wong Office Interior - Operatory',
-      description: 'Our operatory features ergonomic design and the latest dental technology.'
+      src: 'https://i.imgur.com/gqotbUv.png', // Top Right
+      alt: 'Courtyard from Operatory View',
+      description: 'A unique perspective of our courtyard, viewed from inside the building.'
     },
     {
-      src: 'https://i.imgur.com/hYHYbBq.png', // drWongOffice4
-      alt: 'Dr. Wong Office Interior - Treatment Room View',
-      description: 'Enjoy calming views during your dental procedure.'
+      src: 'https://i.imgur.com/hYHYbBq.png', // Middle Left
+      alt: 'Exterior Hallway View',
+      description: 'A glass-walled corridor overlooking the courtyard, with a clear view of interior rooms.'
     },
     {
-      src: 'https://i.imgur.com/nGlhUdH.png', // drWongReception
-      alt: 'Dr. Wong Office - Reception Area',
-      description: 'Our welcoming reception area combines comfort and modern design.'
+      src: 'https://i.imgur.com/nGlhUdH.png', // Middle Center
+      alt: 'Exterior Signage and Entryway',
+      description: 'The front entrance with professional signage indicating our dental practice and beautiful landscaping.'
     },
     {
-      src: 'https://i.imgur.com/AC5lGu3.png', // drWongWaiting
-      alt: 'Dr. Wong Office - Waiting Room',
-      description: 'Comfortable seating and a relaxing atmosphere to ease any dental anxiety.'
+      src: 'https://i.imgur.com/AC5lGu3.png', // Middle Right
+      alt: 'Operatory Room',
+      description: 'Our dentist in a state-of-the-art operatory room with modern dental equipment for patient treatment.'
     },
     {
-      src: 'https://i.imgur.com/qK5nPtS.png', // drWongLab1
-      alt: 'Dr. Wong Office - Dental Lab',
-      description: 'Our in-house dental lab ensures high-quality restorations and faster turnaround times.'
+      src: 'https://i.imgur.com/qK5nPtS.png', // Bottom Left
+      alt: 'Historical Photos',
+      description: 'Displayed signed photos of our dentist, providing a personal touch to our practice.'
     },
     {
-      src: 'https://i.imgur.com/bUkVVSo.png', // drWongLab2
-      alt: 'Dr. Wong Office - Dental Equipment',
-      description: 'Advanced dental equipment for precise and comfortable treatment.'
+      src: 'https://i.imgur.com/bUkVVSo.png', // Bottom Center
+      alt: 'Dental Operatory Equipment',
+      description: 'Close-up of our advanced dental chairs and equipment within a treatment room.'
     },
     {
-      src: 'https://i.imgur.com/rIGaK9S.png', // drWongLab3
-      alt: 'Dr. Wong Office - Reception Area',
-      description: 'Our modern reception area where we welcome patients with comfort and care.'
+      src: 'https://i.imgur.com/rIGaK9S.png', // Bottom Right
+      alt: 'Reception Desk',
+      description: 'Our modern reception area with wood paneling and a welcoming front desk for patient check-in.'
     },
   ];
 

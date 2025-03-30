@@ -1,17 +1,18 @@
 // Dr. Wong images
 export const drWongImages = {
   polaroid: "https://i.imgur.com/mVvasLs.png",
-  drWongOffice1: "https://i.imgur.com/BeX3mhS.png",
-  drWongOffice2: "https://i.imgur.com/sW9DVZF.png",
-  drWongOffice3: "https://i.imgur.com/gqotbUv.png", 
-  drWongOffice4: "https://i.imgur.com/hYHYbBq.png",
-  drWongLab1: "https://i.imgur.com/qK5nPtS.png",
-  drWongLab2: "https://i.imgur.com/bUkVVSo.png",
-  drWongLab3: "https://i.imgur.com/rIGaK9S.png",
+  // Gallery images with new labels
+  drWongOffice1: "https://i.imgur.com/BeX3mhS.png", // Top Left: Reception Area with Dentist
+  drWongOffice2: "https://i.imgur.com/sW9DVZF.png", // Top Middle: Garden Courtyard View
+  drWongOffice3: "https://i.imgur.com/gqotbUv.png", // Top Right: Courtyard from Operatory View
+  drWongOffice4: "https://i.imgur.com/hYHYbBq.png", // Middle Left: Exterior Hallway View
+  drWongLab1: "https://i.imgur.com/qK5nPtS.png", // Bottom Left: Historical Photos
+  drWongLab2: "https://i.imgur.com/bUkVVSo.png", // Bottom Center: Dental Operatory Equipment
+  drWongLab3: "https://i.imgur.com/rIGaK9S.png", // Bottom Right: Reception Desk
   drWongPortrait1: "https://i.imgur.com/4Hp7oKM.png",
   drWongPortrait2: "https://i.imgur.com/iqBXT9y.png",
-  drWongWaiting: "https://i.imgur.com/AC5lGu3.png",
-  drWongReception: "https://i.imgur.com/nGlhUdH.png",
+  drWongWaiting: "https://i.imgur.com/AC5lGu3.png", // Middle Right: Operatory Room
+  drWongReception: "https://i.imgur.com/nGlhUdH.png", // Middle Center: Exterior Signage and Entryway
   heroImage: "https://i.imgur.com/BeX3mhS.png",
   teamPhoto: "https://i.imgur.com/ypt5eZ7.png",
   officeEntrance: "https://i.imgur.com/wt7peyr.png",

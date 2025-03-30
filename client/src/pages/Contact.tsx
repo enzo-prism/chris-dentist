@@ -41,7 +41,7 @@ const Contact = () => {
             <div className="rounded-lg overflow-hidden shadow-md">
               <img 
                 src="https://i.imgur.com/rIGaK9S.png" 
-                alt="Dr. Wong Dental Office Reception" 
+                alt="Reception Desk" 
                 className="w-full h-64 md:h-80 object-cover"
               />
             </div>
