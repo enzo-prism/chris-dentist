@@ -61,23 +61,35 @@ const PatientResources = () => {
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Tabs defaultValue="forms" onValueChange={setActiveTab} className="w-full">
-            <div className="flex justify-center mb-8">
-              <TabsList className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <TabsTrigger value="forms" className="px-4 py-3">
-                  <FileText className="h-5 w-5 mr-2" />
-                  Forms
+            <div className="flex justify-center mb-10">
+              <TabsList className="w-full max-w-3xl bg-blue-50 p-1.5 rounded-full overflow-hidden shadow-sm border border-blue-100 flex flex-wrap md:flex-nowrap">
+                <TabsTrigger 
+                  value="forms" 
+                  className="flex-1 rounded-full px-4 md:px-6 py-3 text-sm md:text-base font-medium transition-all data-[state=active]:bg-white data-[state=active]:text-primary data-[state=active]:shadow-sm"
+                >
+                  <FileText className="h-5 w-5 mr-1 md:mr-2 flex-shrink-0" />
+                  <span className="whitespace-nowrap">Forms</span>
                 </TabsTrigger>
-                <TabsTrigger value="insurance" className="px-4 py-3">
-                  <CreditCard className="h-5 w-5 mr-2" />
-                  Insurance
+                <TabsTrigger 
+                  value="insurance" 
+                  className="flex-1 rounded-full px-4 md:px-6 py-3 text-sm md:text-base font-medium transition-all data-[state=active]:bg-white data-[state=active]:text-primary data-[state=active]:shadow-sm"
+                >
+                  <CreditCard className="h-5 w-5 mr-1 md:mr-2 flex-shrink-0" />
+                  <span className="whitespace-nowrap">Insurance</span>
                 </TabsTrigger>
-                <TabsTrigger value="faq" className="px-4 py-3">
-                  <HelpCircle className="h-5 w-5 mr-2" />
-                  FAQs
+                <TabsTrigger 
+                  value="faq" 
+                  className="flex-1 rounded-full px-4 md:px-6 py-3 text-sm md:text-base font-medium transition-all data-[state=active]:bg-white data-[state=active]:text-primary data-[state=active]:shadow-sm"
+                >
+                  <HelpCircle className="h-5 w-5 mr-1 md:mr-2 flex-shrink-0" />
+                  <span className="whitespace-nowrap">FAQs</span>
                 </TabsTrigger>
-                <TabsTrigger value="first-visit" className="px-4 py-3">
-                  <Calendar className="h-5 w-5 mr-2" />
-                  First Visit
+                <TabsTrigger 
+                  value="first-visit" 
+                  className="flex-1 rounded-full px-4 md:px-6 py-3 text-sm md:text-base font-medium transition-all data-[state=active]:bg-white data-[state=active]:text-primary data-[state=active]:shadow-sm"
+                >
+                  <Calendar className="h-5 w-5 mr-1 md:mr-2 flex-shrink-0" />
+                  <span className="whitespace-nowrap">First Visit</span>
                 </TabsTrigger>
               </TabsList>
             </div>
