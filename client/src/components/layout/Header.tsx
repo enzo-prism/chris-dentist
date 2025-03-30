@@ -61,7 +61,7 @@ const Header = () => {
             </a>
             <div className="text-gray-500 flex items-center">
               <MapPin className="h-3 w-3 mr-1.5" />
-              <span>123 Main Street, Palo Alto, CA</span>
+              <span>409 Cambridge Ave, Palo Alto, CA 94306</span>
             </div>
           </div>
         </div>
