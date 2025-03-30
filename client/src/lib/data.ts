@@ -82,13 +82,13 @@ export const teamMembers = [
   {
     name: "Angelisa",
     role: "Registered Dental Hygienist",
-    image: "https://i.imgur.com/bUkVVSo.png", // Lab 2
+    image: "https://cdn.prod.website-files.com/6647633c9b317c62a46de335/67193243ca1a4de1d9de30fc_Facetune_18-10-2024-15-56-06-p-800.png", // Updated headshot image
     bio: "Angelisa has been a dedicated dental hygienist in our office since 2008. A proud mother of three boys, aged 21, 16, and 7, she loves spending quality time with her family and is committed to helping patients feel at ease while providing exceptional care."
   },
   {
     name: "Jamal",
     role: "Registered Dental Assistant",
-    image: "https://i.imgur.com/sW9DVZF.png", // Office 2
+    image: "https://cdn.prod.website-files.com/6647633c9b317c62a46de335/675657f005f625f86a662b85_image2-p-800.jpeg", // Updated headshot image
     bio: "Jamal is our skilled Registered Dental Assistant who provides excellent chairside support to our dentists and ensures patients are comfortable during procedures."
   }
 ];
