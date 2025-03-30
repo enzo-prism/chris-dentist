@@ -47,14 +47,12 @@ const About = () => {
           </div>
           
           <div className="bg-white rounded-xl shadow-lg overflow-hidden md:flex">
-            <div className="md:w-2/5 relative">
-              <div className="absolute inset-0 bg-primary opacity-10"></div>
+            <div className="md:w-2/5">
               <img 
-                src={drWongImages.drWongPortrait2} 
-                alt="Dr. Christopher B. Wong" 
-                className="w-full h-full object-cover relative z-10"
+                src="https://cdn.prod.website-files.com/6647633c9b317c62a46de335/67e986d38336152373ca94ad_Frame%201-min.png" 
+                alt="Dr. Christopher B. Wong's Dental Office" 
+                className="w-full h-full object-cover"
               />
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent h-24 z-20"></div>
             </div>
             
             <div className="md:w-3/5 p-8 md:p-10">
@@ -63,23 +61,30 @@ const About = () => {
               </p>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
-                {data.doctorInfo.credentials.map((credential, index) => (
-                  <div key={index} 
-                    className="flex items-center p-3 rounded-lg transition-all hover:bg-[#F5F9FC] border border-transparent hover:border-primary/10">
-                    <div className="mr-3 flex-shrink-0">
-                      {index === 0 ? (
-                        <div className="bg-primary/10 p-2 rounded-full">
-                          <Award className="h-5 w-5 text-primary" />
-                        </div>
-                      ) : (
-                        <div className="bg-primary/10 p-2 rounded-full">
-                          <CheckCircle className="h-5 w-5 text-primary" />
-                        </div>
-                      )}
-                    </div>
-                    <span className="text-[#333333] font-medium">{credential}</span>
+                <div className="flex items-center">
+                  <div className="text-primary mr-2">
+                    <Award className="h-5 w-5" />
                   </div>
-                ))}
+                  <span className="text-[#333333]">University of the Pacific Arthur A. Dugoni School of Dentistry Graduate</span>
+                </div>
+                <div className="flex items-center">
+                  <div className="text-primary mr-2">
+                    <CheckCircle className="h-5 w-5" />
+                  </div>
+                  <span className="text-[#333333]">American Dental Association</span>
+                </div>
+                <div className="flex items-center">
+                  <div className="text-primary mr-2">
+                    <CheckCircle className="h-5 w-5" />
+                  </div>
+                  <span className="text-[#333333]">California Dental Association</span>
+                </div>
+                <div className="flex items-center">
+                  <div className="text-primary mr-2">
+                    <CheckCircle className="h-5 w-5" />
+                  </div>
+                  <span className="text-[#333333]">Santa Clara County Dental Society</span>
+                </div>
               </div>
             </div>
           </div>
