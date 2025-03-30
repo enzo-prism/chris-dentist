@@ -1,6 +1,9 @@
 
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Link } from "wouter";
+import { ArrowRight } from "lucide-react";
 
 import { Service } from "@shared/schema";
 
@@ -9,9 +12,29 @@ interface ServiceCardProps {
 }
 
 const ServiceCard = ({ service }: ServiceCardProps) => {
+  // Custom CTA text based on service type
+  const getCtaText = (serviceTitle: string): string => {
+    switch(serviceTitle) {
+      case "Preventive Dentistry":
+        return "Schedule Your Checkup";
+      case "Cosmetic Dentistry":
+        return "Transform Your Smile";
+      case "Restorative Dentistry":
+        return "Restore Your Teeth";
+      case "Pediatric Dentistry":
+        return "Book a Kid's Visit";
+      case "Orthodontics":
+        return "Start Your Alignment";
+      case "Emergency Dental Care":
+        return "Get Urgent Care";
+      default:
+        return "Book Your Appointment";
+    }
+  };
+
   return (
     <Card 
-      className="h-full overflow-hidden bg-white rounded-xl border-0 shadow-sm hover:shadow-md transition-all duration-300 group" 
+      className="h-full overflow-hidden bg-white rounded-xl border-0 shadow-sm hover:shadow-md transition-all duration-300 group flex flex-col" 
       id={service.slug}
     >
       {/* Image container with responsive height */}
@@ -36,7 +59,7 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
         )}
       </div>
       
-      <CardContent className="p-5">
+      <CardContent className="p-5 flex-grow">
         <h3 className="text-lg font-medium text-gray-900 mb-2 group-hover:text-primary transition-colors">
           {service.title}
         </h3>
@@ -46,6 +69,15 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
           {service.description}
         </p>
       </CardContent>
+      
+      <CardFooter className="px-5 pb-5 pt-0">
+        <Link href="/schedule#appointment">
+          <Button className="w-full bg-primary text-white hover:bg-primary/90 group">
+            {getCtaText(service.title)}
+            <ArrowRight className="h-4 w-4 ml-2 transition-transform group-hover:translate-x-1" />
+          </Button>
+        </Link>
+      </CardFooter>
     </Card>
   );
 };
