@@ -52,7 +52,7 @@ export const teamMembers = [
   {
     name: "Dr. Tran",
     role: "Dentist",
-    image: "https://i.imgur.com/gqotbUv.png", // Office 3
+    image: "https://cdn.prod.website-files.com/6647633c9b317c62a46de335/6654ce3ca8d5b7e52b0ba9a2_Screenshot%202024-05-27%20at%2011.17.22%20AM-p-800.png", // Updated headshot image
     bio: "Dr. Tran, a DMD graduate, served in the Navy and specializes in periodontics and orofacial pain. She is a Diplomate of the American Board of Periodontology and loves re-establishing her practice in the Bay Area."
   },
   {
