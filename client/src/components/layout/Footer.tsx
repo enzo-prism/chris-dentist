@@ -48,7 +48,7 @@ const Footer = () => {
       {/* Desktop footer - hidden on mobile */}
       <div className="hidden md:block py-12">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10">
             {/* Practice Info */}
             <div>
               <h3 className="text-lg font-medium tracking-tight mb-4">Dr. Christopher B. Wong</h3>
@@ -70,6 +70,18 @@ const Footer = () => {
                   <MapPin className="h-4 w-4 mr-3 mt-0.5 flex-shrink-0 text-white/70" />
                   <span>409 Cambridge Ave, Palo Alto, CA 94306</span>
                 </p>
+                <div className="flex space-x-3 mt-3">
+                  {socialMedia.map((social, index) => (
+                    <a 
+                      key={index} 
+                      href={social.href} 
+                      className="text-white/80 hover:text-white transition-colors bg-white/10 p-2 rounded-full"
+                      aria-label={social.label}
+                    >
+                      {social.icon}
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
             
@@ -104,25 +116,6 @@ const Footer = () => {
                   </li>
                 ))}
               </ul>
-            </div>
-            
-            {/* Newsletter */}
-            <div>
-              <h3 className="text-sm uppercase tracking-wider mb-4 font-medium">Newsletter</h3>
-              <p className="text-sm text-white/80 mb-4 leading-relaxed">Stay informed with the latest dental care tips and office updates.</p>
-              <NewsletterForm />
-              <div className="flex space-x-3 mt-5">
-                {socialMedia.map((social, index) => (
-                  <a 
-                    key={index} 
-                    href={social.href} 
-                    className="text-white/80 hover:text-white transition-colors bg-white/10 p-2 rounded-full"
-                    aria-label={social.label}
-                  >
-                    {social.icon}
-                  </a>
-                ))}
-              </div>
             </div>
           </div>
           
@@ -226,13 +219,6 @@ const Footer = () => {
               </AccordionContent>
             </AccordionItem>
           </Accordion>
-          
-          {/* Newsletter - Simplified for mobile */}
-          <div className="mb-8">
-            <h3 className="text-sm uppercase tracking-wider mb-3 font-medium text-center">Newsletter</h3>
-            <p className="text-sm text-white/80 mb-4 text-center">Stay updated with our latest news.</p>
-            <NewsletterForm />
-          </div>
           
           <Separator className="bg-white/20 mb-6" />
           

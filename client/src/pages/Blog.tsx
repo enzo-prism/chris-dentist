@@ -150,15 +150,7 @@ const Blog = () => {
                 </ul>
               </div>
               
-              <div className="bg-white rounded-lg shadow-md p-6 mt-6">
-                <h3 className="text-xl font-bold font-heading text-[#333333] mb-4">Subscribe</h3>
-                <p className="text-[#333333] mb-4">Get the latest dental health tips and news delivered to your inbox.</p>
-                <Link href="/#newsletter">
-                  <Button className="w-full bg-[#00AA90] hover:bg-teal-700 text-white">
-                    Subscribe to Newsletter
-                  </Button>
-                </Link>
-              </div>
+
             </div>
             
             {/* Main Content - Blog Posts */}
@@ -233,18 +225,7 @@ const Blog = () => {
         </div>
       </section>
 
-      {/* Newsletter Section */}
-      <section className="py-16 bg-primary text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold font-heading mb-6">Stay Informed</h2>
-          <p className="text-xl mb-8 max-w-3xl mx-auto">Subscribe to our newsletter to receive dental health tips, special offers, and the latest industry news.</p>
-          <Link href="/#newsletter">
-            <Button className="bg-white text-primary hover:bg-gray-100 font-semibold px-8 py-3 rounded-md">
-              Subscribe Now
-            </Button>
-          </Link>
-        </div>
-      </section>
+
     </>
   );
 };
