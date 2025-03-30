@@ -95,49 +95,24 @@ const PatientResources = () => {
                   <p className="text-[#333333] mb-6">Print and complete these forms at home before your appointment.</p>
                   
                   <div className="space-y-4">
-                    <div className="flex justify-between items-center p-4 border rounded-md hover:bg-[#F5F9FC] transition-colors">
-                      <div className="flex items-center">
-                        <FileText className="h-5 w-5 text-primary mr-3" />
-                        <span>New Patient Registration</span>
-                      </div>
-                      <Button variant="ghost" size="sm" className="text-primary hover:text-primary hover:bg-blue-50">
-                        <Download className="h-4 w-4 mr-1" />
-                        PDF
-                      </Button>
-                    </div>
-                    
-                    <div className="flex justify-between items-center p-4 border rounded-md hover:bg-[#F5F9FC] transition-colors">
-                      <div className="flex items-center">
-                        <FileText className="h-5 w-5 text-primary mr-3" />
-                        <span>Medical History Form</span>
-                      </div>
-                      <Button variant="ghost" size="sm" className="text-primary hover:text-primary hover:bg-blue-50">
-                        <Download className="h-4 w-4 mr-1" />
-                        PDF
-                      </Button>
-                    </div>
-                    
-                    <div className="flex justify-between items-center p-4 border rounded-md hover:bg-[#F5F9FC] transition-colors">
-                      <div className="flex items-center">
-                        <FileText className="h-5 w-5 text-primary mr-3" />
-                        <span>HIPAA Consent Form</span>
-                      </div>
-                      <Button variant="ghost" size="sm" className="text-primary hover:text-primary hover:bg-blue-50">
-                        <Download className="h-4 w-4 mr-1" />
-                        PDF
-                      </Button>
-                    </div>
-                    
-                    <div className="flex justify-between items-center p-4 border rounded-md hover:bg-[#F5F9FC] transition-colors">
-                      <div className="flex items-center">
-                        <FileText className="h-5 w-5 text-primary mr-3" />
-                        <span>Insurance Information Form</span>
-                      </div>
-                      <Button variant="ghost" size="sm" className="text-primary hover:text-primary hover:bg-blue-50">
-                        <Download className="h-4 w-4 mr-1" />
-                        PDF
-                      </Button>
-                    </div>
+                    {patientResources.forms.map((form, index) => (
+                      <a 
+                        key={index} 
+                        href={form.url} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="flex justify-between items-center p-4 border rounded-md hover:bg-[#F5F9FC] transition-colors"
+                      >
+                        <div className="flex items-center">
+                          <FileText className="h-5 w-5 text-primary mr-3" />
+                          <span>{form.name}</span>
+                        </div>
+                        <Button variant="ghost" size="sm" className="text-primary hover:text-primary hover:bg-blue-50">
+                          <Download className="h-4 w-4 mr-1" />
+                          {form.type}
+                        </Button>
+                      </a>
+                    ))}
                   </div>
                 </div>
                 

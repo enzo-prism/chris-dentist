@@ -138,18 +138,7 @@ export const patientResources = {
     {
       name: "New Patient Registration",
       type: "PDF",
-    },
-    {
-      name: "Medical History Form",
-      type: "PDF",
-    },
-    {
-      name: "HIPAA Consent Form",
-      type: "PDF",
-    },
-    {
-      name: "Insurance Information Form",
-      type: "PDF",
+      url: "https://drive.google.com/file/d/13T6fZKNgGt9xbs3yD22I07r4frlUBy6j/view",
     }
   ],
   prepareForVisit: [
