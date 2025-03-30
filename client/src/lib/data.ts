@@ -64,19 +64,19 @@ export const teamMembers = [
   {
     name: "Helen Wong-Algarin",
     role: "Registered Dental Hygienist",
-    image: "https://i.imgur.com/rIGaK9S.png", // Lab 3
+    image: "https://cdn.prod.website-files.com/6647633c9b317c62a46de335/6654cda8ab0d44f1a5d628e6_Screenshot%202024-05-27%20at%2011.14.57%20AM.png", // Updated headshot image
     bio: "Helen, a UCSD graduate, has over 15 years of experience in dental hygiene. She has practiced in Japan and San Diego and has three grown children."
   },
   {
     name: "Rachel Hamamoto",
     role: "Insurance Coordinator",
-    image: "https://i.imgur.com/nGlhUdH.png", // Reception
+    image: "https://cdn.prod.website-files.com/6647633c9b317c62a46de335/6682f353af25e00b2a11953d_chris%20wong%20dental%20practice%20team%20in%20palo%20alot-p-800.jpeg", // Updated headshot image
     bio: "After graduating from San Jose State University, Rachel Hamamoto started working at the office in 2019. She currently works as Dr. Wong's insurance coordinator and front desk. She likes to do arts and crafts, watch Asian dramas and spend time with family and friends."
   },
   {
     name: "Kelty",
     role: "Scheduling Coordinator",
-    image: "https://i.imgur.com/wt7peyr.png", // Office Entrance
+    image: "https://cdn.prod.website-files.com/6647633c9b317c62a46de335/6688562093f736a3acf5cc97_2DF3B8DB-4D59-40C2-A5CD-12511AC46FD5-p-800.jpeg", // Updated headshot image
     bio: "Kelty is a native San Franciscan who graduated from Loyola Marymount University with a bachelor's degree in health and human sciences and a minor in psychology. She was first introduced into the dental field by her mother, a retired dentist and dental professor at the University of the Pacific."
   },
   {
