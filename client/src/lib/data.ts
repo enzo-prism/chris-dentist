@@ -58,7 +58,7 @@ export const teamMembers = [
   {
     name: "Jasmine Kaye Minas",
     role: "Registered Dental Hygienist",
-    image: "https://i.imgur.com/BeX3mhS.png", // Office 1
+    image: "https://cdn.prod.website-files.com/6647633c9b317c62a46de335/6682f3e9ef1db58aafe7165c_palo%20alto%20dentist-p-800.jpeg", // Updated headshot image
     bio: "Kaye became part of our team in 2024 as a registered dental hygienist. She graduated with honors in Dental Hygiene from Carrington College in San Jose, California and is also a licensed Doctor of Dental Medicine in the Philippines."
   },
   {
