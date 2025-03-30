@@ -46,7 +46,7 @@ export const teamMembers = [
   {
     name: "Dr. Kris Hamamoto",
     role: "Dentist",
-    image: "https://i.imgur.com/hO02YQ0.png", // Treatment Room
+    image: "https://i.imgur.com/m0kHJc0.png", // New headshot image
     bio: "Dr. Kris Hamamoto, a UCSF School of Dentistry graduate, served in the U.S. Navy before establishing her practice. She is dedicated to continuing education and enjoys outdoor activities, including marathons."
   },
   {
