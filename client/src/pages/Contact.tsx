@@ -70,8 +70,8 @@ const Contact = () => {
                 <div>
                   <h4 className="font-semibold mb-1">Phone</h4>
                   <p className="text-[#333333]">
-                    <a href="tel:+16505551234" className="hover:text-primary transition-colors">
-                      (650) 555-1234
+                    <a href="tel:+16503266319" className="hover:text-primary transition-colors">
+                      (650) 326-6319
                     </a>
                   </p>
                 </div>
@@ -174,7 +174,7 @@ const Contact = () => {
                 <p className="text-[#333333] mb-4">For patients without insurance, we offer flexible payment options and an in-house dental plan to make quality dental care accessible.</p>
                 <p className="flex items-center text-[#333333]">
                   <Phone className="h-5 w-5 text-primary mr-2" />
-                  Call us at: (650) 555-1234
+                  Call us at: (650) 326-6319
                 </p>
               </div>
             </div>

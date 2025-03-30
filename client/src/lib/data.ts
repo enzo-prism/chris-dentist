@@ -13,7 +13,7 @@ export const officeInfo = {
     saturday: "Closed",
     sunday: "Closed",
   },
-  phone: "(650) 555-1234",
+  phone: "(650) 326-6319",
   email: "info@drwongdental.com",
   socialMedia: {
     facebook: "https://facebook.com/drwongdental",

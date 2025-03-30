@@ -56,8 +56,8 @@ const Footer = () => {
               <div className="space-y-4">
                 <p className="flex items-center text-sm text-white/90">
                   <Phone className="h-4 w-4 mr-3 flex-shrink-0 text-white/70" />
-                  <a href="tel:+16505551234" className="hover:text-white transition-colors">
-                    (650) 555-1234
+                  <a href="tel:+16503266319" className="hover:text-white transition-colors">
+                    (650) 326-6319
                   </a>
                 </p>
                 <p className="flex items-center text-sm text-white/90">
@@ -169,8 +169,8 @@ const Footer = () => {
             <div className="space-y-3">
               <p className="flex items-center text-sm">
                 <Phone className="h-4 w-4 mr-3 flex-shrink-0 text-white/70" />
-                <a href="tel:+16505551234" className="hover:text-white transition-colors">
-                  (650) 555-1234
+                <a href="tel:+16503266319" className="hover:text-white transition-colors">
+                  (650) 326-6319
                 </a>
               </p>
               <p className="flex items-center text-sm">

@@ -55,9 +55,9 @@ const Header = () => {
       <div className="border-b border-gray-100">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-8">
           <div className="hidden md:flex items-center space-x-4 text-sm text-gray-500">
-            <a href="tel:+16505551234" className="text-gray-500 hover:text-primary flex items-center">
+            <a href="tel:+16503266319" className="text-gray-500 hover:text-primary flex items-center">
               <Phone className="h-3 w-3 mr-1.5" />
-              <span>(650) 555-1234</span>
+              <span>(650) 326-6319</span>
             </a>
             <div className="text-gray-500 flex items-center">
               <MapPin className="h-3 w-3 mr-1.5" />
