@@ -301,7 +301,7 @@ const PatientResources = () => {
                   
                   <div className="space-y-4 mb-8">
                     <div className="flex items-start">
-                      <div className="bg-blue-600 rounded-full p-3 w-12 h-12 flex items-center justify-center mr-4">
+                      <div className="bg-primary rounded-full p-3 w-12 h-12 flex items-center justify-center mr-4">
                         <FileText className="h-6 w-6 text-white" />
                       </div>
                       <div className="flex-1">
@@ -311,7 +311,7 @@ const PatientResources = () => {
                     </div>
                     
                     <div className="flex items-start">
-                      <div className="bg-blue-600 rounded-full p-3 w-12 h-12 flex items-center justify-center mr-4">
+                      <div className="bg-primary rounded-full p-3 w-12 h-12 flex items-center justify-center mr-4">
                         <CreditCard className="h-6 w-6 text-white" />
                       </div>
                       <div className="flex-1">
@@ -321,7 +321,7 @@ const PatientResources = () => {
                     </div>
                     
                     <div className="flex items-start">
-                      <div className="bg-blue-600 rounded-full p-3 w-12 h-12 flex items-center justify-center mr-4">
+                      <div className="bg-primary rounded-full p-3 w-12 h-12 flex items-center justify-center mr-4">
                         <Calendar className="h-6 w-6 text-white" />
                       </div>
                       <div className="flex-1">
