@@ -102,8 +102,8 @@ const About = () => {
 
           <div className="grid md:grid-cols-3 gap-8">
             <div className="bg-white p-6 rounded-lg shadow-md">
-              <div className="rounded-full bg-primary bg-opacity-10 p-3 w-12 h-12 flex items-center justify-center mb-4">
-                <UserCheck className="h-6 w-6 text-primary" />
+              <div className="rounded-full bg-blue-100 p-3 w-12 h-12 flex items-center justify-center mb-4">
+                <UserCheck className="h-6 w-6 text-blue-600" />
               </div>
               <h3 className="text-xl font-bold font-heading text-[#333333] mb-2">Patient-Centered Care</h3>
               <p className="text-[#333333]">We take the time to listen to your concerns and goals, creating personalized treatment plans that address your specific needs.</p>
