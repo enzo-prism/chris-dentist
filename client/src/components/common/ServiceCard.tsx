@@ -1,7 +1,7 @@
-import { ArrowRight } from "lucide-react";
+
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Link } from "wouter";
+
 import { Service } from "@shared/schema";
 
 interface ServiceCardProps {
@@ -42,17 +42,9 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
         </h3>
         
         {/* Description with line clamp for consistent card heights */}
-        <p className="text-sm text-gray-600 mb-4 line-clamp-2 leading-relaxed">
+        <p className="text-sm text-gray-600 leading-relaxed">
           {service.description}
         </p>
-        
-        {/* Learn more link */}
-        <Link href={`/services#${service.slug}`}>
-          <div className="inline-flex items-center text-sm font-medium text-primary hover:text-primary/80 transition-colors cursor-pointer group/link">
-            <span>Learn more</span>
-            <ArrowRight className="h-3.5 w-3.5 ml-1 transition-transform group-hover/link:translate-x-0.5" />
-          </div>
-        </Link>
       </CardContent>
     </Card>
   );
