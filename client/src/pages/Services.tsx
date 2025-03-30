@@ -113,8 +113,8 @@ const Services = () => {
             </div>
             <div className="md:w-1/2 md:pl-12">
               <img 
-                src="https://images.unsplash.com/photo-1556742031-c6961e8560b0?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
-                alt="Dental insurance" 
+                src="https://imgur.com/hO02YQ0.jpg" 
+                alt="Payment processing with mobile device" 
                 className="rounded-lg shadow-xl"
               />
             </div>
