@@ -1,7 +1,6 @@
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import AppointmentSection from "@/components/sections/AppointmentSection";
 import OfficeInformationSection from "@/components/sections/OfficeInformationSection";
-import ContactForm from "@/components/forms/ContactForm";
 import MetaTags from "@/components/common/MetaTags";
 import { drWongImages } from "@/lib/imageUrls";
 
@@ -89,16 +88,6 @@ const Contact = () => {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Form Section - Made less prominent */}
-      <section className="py-12 bg-[#F5F9FC]">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <h3 className="text-xl font-bold font-heading text-[#333333] mb-4 text-center">Have Questions? Send Us a Message</h3>
-            <ContactForm />
           </div>
         </div>
       </section>
