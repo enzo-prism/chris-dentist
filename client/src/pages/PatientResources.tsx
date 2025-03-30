@@ -301,30 +301,30 @@ const PatientResources = () => {
                   
                   <div className="space-y-4 mb-8">
                     <div className="flex items-start">
-                      <div className="bg-primary bg-opacity-10 rounded-full p-2 mr-4">
-                        <FileText className="h-5 w-5 text-primary" />
+                      <div className="bg-blue-600 rounded-full p-3 w-12 h-12 flex items-center justify-center mr-4">
+                        <FileText className="h-6 w-6 text-white" />
                       </div>
-                      <div>
+                      <div className="flex-1">
                         <h4 className="font-semibold text-[#333333] mb-1">Complete Your Forms</h4>
                         <p className="text-sm text-[#333333]">Save time by completing your new patient forms before your appointment, either online or by downloading and bringing them with you.</p>
                       </div>
                     </div>
                     
                     <div className="flex items-start">
-                      <div className="bg-primary bg-opacity-10 rounded-full p-2 mr-4">
-                        <CreditCard className="h-5 w-5 text-primary" />
+                      <div className="bg-blue-600 rounded-full p-3 w-12 h-12 flex items-center justify-center mr-4">
+                        <CreditCard className="h-6 w-6 text-white" />
                       </div>
-                      <div>
+                      <div className="flex-1">
                         <h4 className="font-semibold text-[#333333] mb-1">Bring Your Insurance Information</h4>
                         <p className="text-sm text-[#333333]">Have your dental insurance card and identification ready so we can help maximize your benefits.</p>
                       </div>
                     </div>
                     
                     <div className="flex items-start">
-                      <div className="bg-primary bg-opacity-10 rounded-full p-2 mr-4">
-                        <Calendar className="h-5 w-5 text-primary" />
+                      <div className="bg-blue-600 rounded-full p-3 w-12 h-12 flex items-center justify-center mr-4">
+                        <Calendar className="h-6 w-6 text-white" />
                       </div>
-                      <div>
+                      <div className="flex-1">
                         <h4 className="font-semibold text-[#333333] mb-1">Arrive 15 Minutes Early</h4>
                         <p className="text-sm text-[#333333]">This gives you time to check in, complete any remaining paperwork, and get comfortable before your appointment.</p>
                       </div>
