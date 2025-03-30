@@ -39,29 +39,45 @@ const About = () => {
       </section>
 
       {/* Doctor Profile */}
-      <section className="py-16">
+      <section className="py-16 bg-gradient-to-b from-white to-[#F5F9FC]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="md:flex items-center">
-            <div className="md:w-1/3 mb-8 md:mb-0">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl md:text-4xl font-bold font-heading text-[#333333] mb-3">Dr. Christopher B. Wong, DDS</h2>
+            <div className="w-24 h-1 bg-primary mx-auto"></div>
+          </div>
+          
+          <div className="bg-white rounded-xl shadow-lg overflow-hidden md:flex">
+            <div className="md:w-2/5 relative">
+              <div className="absolute inset-0 bg-primary opacity-10"></div>
               <img 
                 src={drWongImages.drWongPortrait2} 
                 alt="Dr. Christopher B. Wong" 
-                className="rounded-lg shadow-xl mx-auto"
+                className="w-full h-full object-cover relative z-10"
               />
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent h-24 z-20"></div>
             </div>
-            <div className="md:w-2/3 md:pl-12">
-              <h2 className="text-3xl font-bold font-heading text-[#333333] mb-4">Dr. Christopher B. Wong, DDS</h2>
-              <p className="text-[#333333] mb-6">{data.doctorInfo.bio}</p>
+            
+            <div className="md:w-3/5 p-8 md:p-10">
+              <p className="text-[#333333] mb-6 leading-relaxed">
+                {data.doctorInfo.bio}
+              </p>
               
-              <div className="grid md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
                 {data.doctorInfo.credentials.map((credential, index) => (
-                  <div key={index} className="flex items-start">
-                    {index === 0 ? (
-                      <Award className="h-5 w-5 text-primary mt-1 mr-2" />
-                    ) : (
-                      <CheckCircle className="h-5 w-5 text-primary mt-1 mr-2" />
-                    )}
-                    <span>{credential}</span>
+                  <div key={index} 
+                    className="flex items-center p-3 rounded-lg transition-all hover:bg-[#F5F9FC] border border-transparent hover:border-primary/10">
+                    <div className="mr-3 flex-shrink-0">
+                      {index === 0 ? (
+                        <div className="bg-primary/10 p-2 rounded-full">
+                          <Award className="h-5 w-5 text-primary" />
+                        </div>
+                      ) : (
+                        <div className="bg-primary/10 p-2 rounded-full">
+                          <CheckCircle className="h-5 w-5 text-primary" />
+                        </div>
+                      )}
+                    </div>
+                    <span className="text-[#333333] font-medium">{credential}</span>
                   </div>
                 ))}
               </div>
