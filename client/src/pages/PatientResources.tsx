@@ -8,6 +8,7 @@ import { Link } from "wouter";
 import PatientForm from "@/components/forms/PatientForm";
 import MetaTags from "@/components/common/MetaTags";
 import { drWongImages } from "@/lib/imageUrls";
+import { officeInfo, faqItems, patientResources } from "@/lib/data";
 
 const PatientResources = () => {
   const [activeTab, setActiveTab] = useState("forms");
@@ -375,15 +376,15 @@ const PatientResources = () => {
                 <div className="space-y-4">
                   <div className="flex items-start">
                     <ArrowRight className="h-5 w-5 text-primary mt-1 mr-3" />
-                    <span>Call us at (650) 555-1234</span>
+                    <span>Call us at {officeInfo.phone}</span>
                   </div>
                   <div className="flex items-start">
                     <ArrowRight className="h-5 w-5 text-primary mt-1 mr-3" />
-                    <span>Email us at info@drwongdental.com</span>
+                    <span>Email us at {officeInfo.email}</span>
                   </div>
                   <div className="flex items-start">
                     <ArrowRight className="h-5 w-5 text-primary mt-1 mr-3" />
-                    <span>Visit our office at 123 University Avenue, Palo Alto, CA 94301</span>
+                    <span>Visit our office at {officeInfo.address.line1}, {officeInfo.address.line2}</span>
                   </div>
                 </div>
                 <div className="mt-8">
