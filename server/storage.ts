@@ -285,7 +285,7 @@ export class MemStorage implements IStorage {
       {
         title: "Cosmetic Dentistry",
         description: "Teeth whitening, veneers, and other aesthetic procedures to enhance your smile and boost your confidence.",
-        image: "https://i.imgur.com/Zuro5VZ.jpg",
+        image: "https://cdn.prod.website-files.com/6647633c9b317c62a46de335/67e98b5ee7cebcc5e1b3eae3_mode%3B.png",
         slug: "cosmetic-dentistry",
         featured: true
       },
