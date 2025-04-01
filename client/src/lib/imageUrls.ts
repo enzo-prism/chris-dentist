@@ -9,7 +9,7 @@ export const drWongImages = {
   drWongLab1: "https://i.imgur.com/qK5nPtS.png", // Bottom Left: Historical Photos
   drWongLab2: "https://i.imgur.com/bUkVVSo.png", // Bottom Center: Dental Operatory Equipment
   drWongLab3: "https://i.imgur.com/rIGaK9S.png", // Bottom Right: Reception Desk
-  drWongPortrait1: "https://i.imgur.com/4Hp7oKM.png",
+  drWongPortrait1: "https://i.imgur.com/aeEDdtx.png",
   drWongPortrait2: "https://i.imgur.com/iqBXT9y.png",
   drWongWaiting: "https://i.imgur.com/AC5lGu3.png", // Middle Right: Operatory Room
   drWongReception: "https://i.imgur.com/nGlhUdH.png", // Middle Center: Exterior Signage and Entryway
