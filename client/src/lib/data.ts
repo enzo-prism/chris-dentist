@@ -44,31 +44,31 @@ export const doctorInfo = {
 
 export const teamMembers = [
   {
-    name: "Dr. Kris Hamamoto",
+    name: "Dr. Kris",
     role: "Dentist",
     image: "https://cdn.prod.website-files.com/6647633c9b317c62a46de335/6654ce1938d7ef27a6854612_Screenshot%202024-05-27%20at%2011.16.44%20AM-p-800.png", // External headshot image
     bio: "Dr. Kris Hamamoto, a UCSF School of Dentistry graduate, served in the U.S. Navy before establishing her practice. She is dedicated to continuing education and enjoys outdoor activities, including marathons."
   },
   {
-    name: "Dr. Tran",
-    role: "Dentist",
+    name: "Dr. Pearl Tran",
+    role: "Periodontist",
     image: "https://cdn.prod.website-files.com/6647633c9b317c62a46de335/6654ce3ca8d5b7e52b0ba9a2_Screenshot%202024-05-27%20at%2011.17.22%20AM-p-800.png", // Updated headshot image
     bio: "Dr. Tran, a DMD graduate, served in the Navy and specializes in periodontics and orofacial pain. She is a Diplomate of the American Board of Periodontology and loves re-establishing her practice in the Bay Area."
   },
   {
-    name: "Jasmine Kaye Minas",
+    name: "Kaye Minas",
     role: "Registered Dental Hygienist",
     image: "https://cdn.prod.website-files.com/6647633c9b317c62a46de335/6682f3e9ef1db58aafe7165c_palo%20alto%20dentist-p-800.jpeg", // Updated headshot image
     bio: "Kaye became part of our team in 2024 as a registered dental hygienist. She graduated with honors in Dental Hygiene from Carrington College in San Jose, California and is also a licensed Doctor of Dental Medicine in the Philippines."
   },
   {
-    name: "Helen Wong-Algarin",
+    name: "Helen",
     role: "Registered Dental Hygienist",
     image: "https://cdn.prod.website-files.com/6647633c9b317c62a46de335/6654cda8ab0d44f1a5d628e6_Screenshot%202024-05-27%20at%2011.14.57%20AM.png", // Updated headshot image
     bio: "Helen, a UCSD graduate, has over 15 years of experience in dental hygiene. She has practiced in Japan and San Diego and has three grown children."
   },
   {
-    name: "Rachel Hamamoto",
+    name: "Rachel",
     role: "Insurance Coordinator",
     image: "https://cdn.prod.website-files.com/6647633c9b317c62a46de335/6682f353af25e00b2a11953d_chris%20wong%20dental%20practice%20team%20in%20palo%20alot-p-800.jpeg", // Updated headshot image
     bio: "After graduating from San Jose State University, Rachel Hamamoto started working at the office in 2019. She currently works as Dr. Wong's insurance coordinator and front desk. She likes to do arts and crafts, watch Asian dramas and spend time with family and friends."
