@@ -56,7 +56,7 @@ export const teamMembers = [
     bio: "Dr. Tran, a DMD graduate, served in the Navy and specializes in periodontics and orofacial pain. She is a Diplomate of the American Board of Periodontology and loves re-establishing her practice in the Bay Area."
   },
   {
-    name: "Kaye Minas",
+    name: "Kaye",
     role: "Registered Dental Hygienist",
     image: "https://cdn.prod.website-files.com/6647633c9b317c62a46de335/6682f3e9ef1db58aafe7165c_palo%20alto%20dentist-p-800.jpeg", // Updated headshot image
     bio: "Kaye became part of our team in 2024 as a registered dental hygienist. She graduated with honors in Dental Hygiene from Carrington College in San Jose, California and is also a licensed Doctor of Dental Medicine in the Philippines."
