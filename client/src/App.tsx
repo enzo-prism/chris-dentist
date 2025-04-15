@@ -7,6 +7,7 @@ import NotFound from "@/pages/not-found";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import GoogleAnalytics from "@/components/common/GoogleAnalytics";
+import HotjarTracking from "@/components/common/HotjarTracking";
 import Redirects from "@/components/common/Redirects";
 import Home from "@/pages/Home";
 import About from "@/pages/About";
@@ -44,6 +45,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <HelmetProvider>
         <GoogleAnalytics />
+        <HotjarTracking />
         <Redirects />
         <Router />
         <Toaster />
