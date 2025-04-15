@@ -194,17 +194,12 @@ const PatientResources = () => {
                   <div className="space-y-4">
                     <div className="p-4 border rounded-md hover:bg-[#F5F9FC] transition-colors">
                       <h4 className="font-semibold text-[#333333] mb-1">Credit Cards</h4>
-                      <p className="text-sm text-[#333333]">We accept all major credit cards including Visa, MasterCard, American Express, and Discover.</p>
+                      <p className="text-sm text-[#333333]">We accept Visa and MasterCard.</p>
                     </div>
                     
                     <div className="p-4 border rounded-md hover:bg-[#F5F9FC] transition-colors">
                       <h4 className="font-semibold text-[#333333] mb-1">Flexible Spending Accounts (FSA)</h4>
                       <p className="text-sm text-[#333333]">We accept FSA cards for qualified dental procedures and treatments.</p>
-                    </div>
-                    
-                    <div className="p-4 border rounded-md hover:bg-[#F5F9FC] transition-colors">
-                      <h4 className="font-semibold text-[#333333] mb-1">CareCredit</h4>
-                      <p className="text-sm text-[#333333]">We offer financing through CareCredit, which provides convenient payment plans and promotional financing options.</p>
                     </div>
                     
                     <div className="p-4 border rounded-md hover:bg-[#F5F9FC] transition-colors">
