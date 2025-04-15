@@ -10,6 +10,7 @@ import GoogleAnalytics from "@/components/common/GoogleAnalytics";
 import HotjarTracking from "@/components/common/HotjarTracking";
 import SitemapLink from "@/components/common/SitemapLink";
 import Redirects from "@/components/common/Redirects";
+import Favicons from "@/components/common/Favicons";
 import Home from "@/pages/Home";
 import About from "@/pages/About";
 import Services from "@/pages/Services";
@@ -48,6 +49,7 @@ function App() {
         <GoogleAnalytics />
         <HotjarTracking />
         <SitemapLink />
+        <Favicons />
         <Redirects />
         <Router />
         <Toaster />
