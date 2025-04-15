@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import OfficeGallerySection from "@/components/sections/OfficeGallerySection";
 import { drWongImages } from "@/lib/imageUrls";
+import { ogImages } from "@/lib/ogImages";
+import { pageTitles, pageDescriptions } from "@/lib/metaContent";
 import * as data from "@/lib/data";
 import MetaTags from "@/components/common/MetaTags";
 
@@ -24,9 +26,9 @@ const About = () => {
   return (
     <>
       <MetaTags 
-        title="About Dr. Christopher B. Wong | Meet Our Dental Team"
-        description="Meet Dr. Christopher B. Wong, a UC Davis graduate and University of the Pacific School of Dentistry alum specializing in conservative, ethical dentistry. Learn about our patient-centered approach in Palo Alto."
-        image={drWongImages.drWongPortrait2}
+        title={pageTitles.about}
+        description={pageDescriptions.about}
+        image={ogImages.about}
       />
       {/* Hero Section */}
       <section className="bg-[#F5F9FC] py-16 md:py-24">

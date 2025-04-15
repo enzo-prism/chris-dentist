@@ -7,6 +7,8 @@ import { Link } from "wouter";
 import BlogPostCard from "@/components/common/BlogPostCard";
 import MetaTags from "@/components/common/MetaTags";
 import { drWongImages } from "@/lib/imageUrls";
+import { ogImages } from "@/lib/ogImages";
+import { pageTitles, pageDescriptions } from "@/lib/metaContent";
 import { BlogPost } from "@shared/schema";
 import { useState } from "react";
 
@@ -48,9 +50,9 @@ const Blog = () => {
   return (
     <>
       <MetaTags 
-        title="Dental Health Blog | Dr. Christopher B. Wong, DDS"
-        description="Stay informed with the latest dental health tips, news, and advances in dental technology from Dr. Wong's practice in Palo Alto."
-        image={drWongImages.drWongLab1}
+        title={pageTitles.blog}
+        description={pageDescriptions.blog}
+        image={ogImages.blog}
       />
       {/* Hero Section */}
       <section className="bg-[#F5F9FC] py-16 md:py-24">

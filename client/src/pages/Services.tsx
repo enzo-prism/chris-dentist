@@ -5,6 +5,8 @@ import { Link } from "wouter";
 import ServiceCard from "@/components/common/ServiceCard";
 import MetaTags from "@/components/common/MetaTags";
 import { drWongImages } from "@/lib/imageUrls";
+import { ogImages } from "@/lib/ogImages";
+import { pageTitles, pageDescriptions } from "@/lib/metaContent";
 import { Service } from "@shared/schema";
 
 const Services = () => {
@@ -15,9 +17,9 @@ const Services = () => {
   return (
     <>
       <MetaTags 
-        title="Dental Services | Dr. Christopher B. Wong, DDS"
-        description="Explore our comprehensive dental services including preventive care, cosmetic treatments, restorative procedures, and more at Dr. Wong's Palo Alto practice."
-        image={drWongImages.treatmentRoom}
+        title={pageTitles.services}
+        description={pageDescriptions.services}
+        image={ogImages.services}
       />
       {/* Hero Section */}
       <section className="bg-[#F5F9FC] py-16 md:py-24">

@@ -13,6 +13,7 @@ import { Link } from "wouter";
 import { Service, BlogPost, Testimonial } from "@shared/schema";
 import { ogImages } from "@/lib/ogImages";
 import { pageTitles, pageDescriptions } from "@/lib/metaContent";
+import { drWongImages } from "@/lib/imageUrls";
 
 const Home = () => {
   // Fetch services
