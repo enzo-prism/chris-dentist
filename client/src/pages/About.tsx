@@ -10,13 +10,13 @@ const About = () => {
   // Using the team members from shared data
   const { teamMembers: sharedTeamMembers } = data;
   
-  // Create a full team with Dr. Wong at the top
+  // Create a full team with Dr. Wong at the top, using shorter bio for team display
   const teamMembers = [
     {
       name: "Dr. Christopher B. Wong",
       role: "Lead Dentist",
       image: drWongImages.drWongPortrait1,
-      bio: data.doctorInfo.bio
+      bio: "Dr. Christopher B. Wong was born and raised in Sacramento and earned his bachelor's degree in Biology from UC Davis. He graduated from the University of the Pacific School of Dentistry in San Francisco in 2018. He specializes in conservative dentistry, Invisalign®, and implant restoration while practicing ethical and non-invasive care."
     },
     ...sharedTeamMembers
   ];
