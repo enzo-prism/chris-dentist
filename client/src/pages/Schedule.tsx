@@ -3,14 +3,16 @@ import AppointmentSection from "@/components/sections/AppointmentSection";
 import OfficeInformationSection from "@/components/sections/OfficeInformationSection";
 import MetaTags from "@/components/common/MetaTags";
 import { drWongImages } from "@/lib/imageUrls";
+import { ogImages } from "@/lib/ogImages";
+import { pageTitles, pageDescriptions } from "@/lib/metaContent";
 
 const Schedule = () => {
   return (
     <>
       <MetaTags 
-        title="Schedule an Appointment | Dr. Christopher B. Wong, DDS"
-        description="Book your dental visit with Dr. Wong's practice in Palo Alto. We offer flexible scheduling options to fit your busy lifestyle."
-        image={drWongImages.drWongOffice1}
+        title={pageTitles.schedule}
+        description={pageDescriptions.schedule}
+        image={ogImages.schedule}
       />
       {/* Hero Section */}
       <section className="bg-[#F5F9FC] py-12 md:py-20">

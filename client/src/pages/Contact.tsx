@@ -10,9 +10,9 @@ const Contact = () => {
   return (
     <>
       <MetaTags 
-        title="Contact Us | Dr. Christopher B. Wong, DDS"
-        description="Schedule your dental appointment with Dr. Wong in Palo Alto. We offer flexible scheduling to fit your busy lifestyle."
-        image={drWongImages.drWongReception}
+        title={pageTitles.contact}
+        description={pageDescriptions.contact}
+        image={ogImages.contact}
       />
       {/* Hero Section */}
       <section className="bg-[#F5F9FC] py-12 md:py-20">
