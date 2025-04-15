@@ -42,6 +42,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <HelmetProvider>
+        <GoogleAnalytics />
         <Router />
         <Toaster />
       </HelmetProvider>
