@@ -6,6 +6,103 @@ import { ZodError } from "zod";
 import { fromZodError } from "zod-validation-error";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Robots.txt route
+  app.get("/robots.txt", (_req: Request, res: Response) => {
+    res.header('Content-Type', 'text/plain');
+    res.send(`User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: ${process.env.BASE_URL || `${_req.protocol}://${_req.get('host')}`}/sitemap.xml
+
+# Disallow access to admin area (if it exists in the future)
+# Disallow: /admin/
+
+# Allow crawling of all content
+Allow: /about
+Allow: /services
+Allow: /patient-resources
+Allow: /testimonials
+Allow: /blog
+Allow: /contact
+Allow: /schedule`);
+  });
+
+  // Sitemap route
+  app.get("/sitemap.xml", async (req: Request, res: Response) => {
+    try {
+      // Get dynamic content for the sitemap
+      const [services, blogPosts] = await Promise.all([
+        storage.getServices(),
+        storage.getBlogPosts()
+      ]);
+      
+      // Set the content type
+      res.header('Content-Type', 'application/xml');
+      
+      // Get the base URL from request or use a default
+      const baseUrl = process.env.BASE_URL || `${req.protocol}://${req.get('host')}`;
+      
+      // Current date in format YYYY-MM-DD
+      const today = new Date().toISOString().split('T')[0];
+      
+      // Build the XML content
+      let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
+      xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
+      
+      // Add static pages
+      const staticPages = [
+        { url: '/', priority: '1.0', changefreq: 'weekly' },
+        { url: '/about', priority: '0.8', changefreq: 'monthly' },
+        { url: '/services', priority: '0.9', changefreq: 'weekly' },
+        { url: '/patient-resources', priority: '0.7', changefreq: 'monthly' },
+        { url: '/testimonials', priority: '0.6', changefreq: 'monthly' },
+        { url: '/blog', priority: '0.8', changefreq: 'weekly' },
+        { url: '/contact', priority: '0.7', changefreq: 'monthly' },
+        { url: '/schedule', priority: '0.9', changefreq: 'weekly' }
+      ];
+      
+      // Add static pages to the sitemap
+      staticPages.forEach(page => {
+        xml += '  <url>\n';
+        xml += `    <loc>${baseUrl}${page.url}</loc>\n`;
+        xml += `    <lastmod>${today}</lastmod>\n`;
+        xml += `    <changefreq>${page.changefreq}</changefreq>\n`;
+        xml += `    <priority>${page.priority}</priority>\n`;
+        xml += '  </url>\n';
+      });
+      
+      // Add service pages using anchor links since they're on the services page
+      services.forEach(service => {
+        xml += '  <url>\n';
+        xml += `    <loc>${baseUrl}/services#${service.slug}</loc>\n`;
+        xml += `    <lastmod>${today}</lastmod>\n`;
+        xml += `    <changefreq>monthly</changefreq>\n`;
+        xml += `    <priority>0.7</priority>\n`;
+        xml += '  </url>\n';
+      });
+      
+      // Add blog post pages using anchor links since they're on the blog page
+      blogPosts.forEach(post => {
+        xml += '  <url>\n';
+        xml += `    <loc>${baseUrl}/blog#${post.slug}</loc>\n`;
+        xml += `    <lastmod>${today}</lastmod>\n`;
+        xml += `    <changefreq>monthly</changefreq>\n`;
+        xml += `    <priority>0.6</priority>\n`;
+        xml += '  </url>\n';
+      });
+      
+      // Close the XML
+      xml += '</urlset>';
+      
+      // Send the response
+      res.send(xml);
+    } catch (error) {
+      console.error("Error generating sitemap:", error);
+      res.status(500).send("Error generating sitemap");
+    }
+  });
+
   // API routes
   app.get("/api/services", async (req: Request, res: Response) => {
     try {

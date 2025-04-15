@@ -8,6 +8,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import GoogleAnalytics from "@/components/common/GoogleAnalytics";
 import HotjarTracking from "@/components/common/HotjarTracking";
+import SitemapLink from "@/components/common/SitemapLink";
 import Redirects from "@/components/common/Redirects";
 import Home from "@/pages/Home";
 import About from "@/pages/About";

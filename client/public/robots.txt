@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: /sitemap.xml
+
+# Disallow access to admin area (if it exists in the future)
+# Disallow: /admin/
+
+# Allow crawling of all content
+Allow: /about
+Allow: /services
+Allow: /patient-resources
+Allow: /testimonials
+Allow: /blog
+Allow: /contact
+Allow: /schedule
