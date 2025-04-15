@@ -11,7 +11,8 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle, Stethoscope, Award, User, ChevronRight, Phone } from "lucide-react";
 import { Link } from "wouter";
 import { Service, BlogPost, Testimonial } from "@shared/schema";
-import { drWongImages } from "@/lib/imageUrls";
+import { ogImages } from "@/lib/ogImages";
+import { pageTitles, pageDescriptions } from "@/lib/metaContent";
 
 const Home = () => {
   // Fetch services
@@ -32,9 +33,9 @@ const Home = () => {
   return (
     <>
       <MetaTags 
-        title="Dr. Christopher B. Wong, DDS | Palo Alto Dental Care"
-        description="Dr. Christopher B. Wong offers comprehensive dental care in Palo Alto, CA. Schedule your appointment today and experience exceptional dental services."
-        image={drWongImages.heroImage}
+        title={pageTitles.home}
+        description={pageDescriptions.home}
+        image={ogImages.home}
       />
       <HeroSection />
 
