@@ -64,7 +64,7 @@ export const teamMembers = [
   {
     name: "Helen",
     role: "Registered Dental Hygienist",
-    image: "https://cdn.prod.website-files.com/6647633c9b317c62a46de335/6654cda8ab0d44f1a5d628e6_Screenshot%202024-05-27%20at%2011.14.57%20AM.png", // Updated headshot image
+    image: "/images/helen_headshot.png", // Updated headshot image
     bio: "Helen, a UCSD graduate, has over 15 years of experience in dental hygiene. She has practiced in Japan and San Diego and has three grown children."
   },
   {
