@@ -8,6 +8,8 @@ import { Link } from "wouter";
 import PatientForm from "@/components/forms/PatientForm";
 import MetaTags from "@/components/common/MetaTags";
 import { drWongImages } from "@/lib/imageUrls";
+import { ogImages } from "@/lib/ogImages";
+import { pageTitles, pageDescriptions } from "@/lib/metaContent";
 import { officeInfo, faqItems, patientResources } from "@/lib/data";
 
 const PatientResources = () => {
@@ -43,9 +45,9 @@ const PatientResources = () => {
   return (
     <>
       <MetaTags 
-        title="Patient Resources | Dr. Christopher B. Wong, DDS"
-        description="Access patient forms, insurance information, FAQs, and helpful resources for your dental visit to Dr. Wong's practice in Palo Alto."
-        image={drWongImages.drWongWaiting}
+        title={pageTitles.patientResources}
+        description={pageDescriptions.patientResources}
+        image={ogImages.patientResources}
       />
       {/* Hero Section */}
       <section className="bg-[#F5F9FC] py-16 md:py-24">

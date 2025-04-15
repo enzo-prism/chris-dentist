@@ -6,6 +6,8 @@ import { Link } from "wouter";
 import TestimonialCard from "@/components/common/TestimonialCard";
 import MetaTags from "@/components/common/MetaTags";
 import { drWongImages } from "@/lib/imageUrls";
+import { ogImages } from "@/lib/ogImages";
+import { pageTitles, pageDescriptions } from "@/lib/metaContent";
 import { Testimonial } from "@shared/schema";
 import { motion } from "framer-motion";
 
@@ -42,9 +44,9 @@ const Testimonials = () => {
   return (
     <>
       <MetaTags 
-        title="Patient Testimonials | Dr. Christopher B. Wong, DDS"
-        description="Read what our patients have to say about their experience with Dr. Wong and our dental practice in Palo Alto. Real stories from real patients."
-        image={drWongImages.drWongPortrait1}
+        title={pageTitles.testimonials}
+        description={pageDescriptions.testimonials}
+        image={ogImages.testimonials}
       />
       {/* Hero Section */}
       <section className="bg-[#F5F9FC] py-16 md:py-24">

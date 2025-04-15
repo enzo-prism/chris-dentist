@@ -3,6 +3,8 @@ import AppointmentSection from "@/components/sections/AppointmentSection";
 import OfficeInformationSection from "@/components/sections/OfficeInformationSection";
 import MetaTags from "@/components/common/MetaTags";
 import { drWongImages } from "@/lib/imageUrls";
+import { ogImages } from "@/lib/ogImages";
+import { pageTitles, pageDescriptions } from "@/lib/metaContent";
 
 const Contact = () => {
   return (
