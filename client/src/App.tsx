@@ -47,6 +47,7 @@ function App() {
       <HelmetProvider>
         <GoogleAnalytics />
         <HotjarTracking />
+        <SitemapLink />
         <Redirects />
         <Router />
         <Toaster />
