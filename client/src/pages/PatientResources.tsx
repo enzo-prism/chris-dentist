@@ -147,44 +147,16 @@ const PatientResources = () => {
               <div className="grid md:grid-cols-2 gap-8">
                 <div className="bg-white rounded-lg shadow-md p-6">
                   <h3 className="text-xl font-bold font-heading text-[#333333] mb-4">Accepted Insurance Plans</h3>
-                  <p className="text-[#333333] mb-6">We accept most major dental insurance plans, including:</p>
+                  <p className="text-[#333333] mb-4">We accept most major PPO dental insurance plans only.</p>
                   
-                  <div className="grid grid-cols-2 gap-y-3">
-                    <div className="flex items-center">
-                      <CheckCircle className="h-5 w-5 text-primary mr-2" />
-                      <span>Delta Dental</span>
-                    </div>
-                    <div className="flex items-center">
-                      <CheckCircle className="h-5 w-5 text-primary mr-2" />
-                      <span>Cigna</span>
-                    </div>
-                    <div className="flex items-center">
-                      <CheckCircle className="h-5 w-5 text-primary mr-2" />
-                      <span>Aetna</span>
-                    </div>
-                    <div className="flex items-center">
-                      <CheckCircle className="h-5 w-5 text-primary mr-2" />
-                      <span>MetLife</span>
-                    </div>
-                    <div className="flex items-center">
-                      <CheckCircle className="h-5 w-5 text-primary mr-2" />
-                      <span>Guardian</span>
-                    </div>
-                    <div className="flex items-center">
-                      <CheckCircle className="h-5 w-5 text-primary mr-2" />
-                      <span>United Healthcare</span>
-                    </div>
-                    <div className="flex items-center">
-                      <CheckCircle className="h-5 w-5 text-primary mr-2" />
-                      <span>Blue Cross Blue Shield</span>
-                    </div>
-                    <div className="flex items-center">
-                      <CheckCircle className="h-5 w-5 text-primary mr-2" />
-                      <span>Humana</span>
+                  <div className="bg-gray-50 p-5 rounded-lg border border-gray-200 mb-5">
+                    <div className="flex items-start">
+                      <CheckCircle className="h-5 w-5 text-primary mt-1 mr-3 flex-shrink-0" />
+                      <p>We are in-network with most major PPO dental insurance plans. Please contact our office to verify your specific plan's coverage before your appointment.</p>
                     </div>
                   </div>
-
-                  <p className="mt-6 text-[#333333]">Not sure if we accept your insurance? Contact our office and our friendly staff will help you determine your coverage.</p>
+                  
+                  <p className="text-[#333333]">Not sure if we accept your insurance? Contact our office and our friendly staff will help you determine your coverage.</p>
                 </div>
                 
                 <div className="bg-white rounded-lg shadow-md p-6">
