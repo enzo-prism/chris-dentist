@@ -1,4 +1,4 @@
-import { CheckCircle, Award, UserCheck, Shield } from "lucide-react";
+import { CheckCircle, Award, UserCheck, Shield, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import OfficeGallerySection from "@/components/sections/OfficeGallerySection";
@@ -7,8 +7,14 @@ import { ogImages } from "@/lib/ogImages";
 import { pageTitles, pageDescriptions } from "@/lib/metaContent";
 import * as data from "@/lib/data";
 import MetaTags from "@/components/common/MetaTags";
+import { useState } from "react";
+import VideoModal from "@/components/common/VideoModal";
 
 const About = () => {
+  // State for video modal
+  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
+  const interviewVideoUrl = "https://youtu.be/HrksJeYb02Q";
+  
   // Using the team members from shared data
   const { teamMembers: sharedTeamMembers } = data;
   
@@ -88,6 +94,17 @@ const About = () => {
                   <span className="text-[#333333]">Santa Clara County Dental Society</span>
                 </div>
               </div>
+              
+              {/* Watch Interview CTA */}
+              <div className="mt-6">
+                <Button 
+                  onClick={() => setIsVideoModalOpen(true)}
+                  className="bg-primary hover:bg-primary/90 text-white flex items-center gap-2"
+                >
+                  <Play className="h-4 w-4" />
+                  Watch Interview with Dr. Wong
+                </Button>
+              </div>
             </div>
           </div>
         </div>
@@ -160,6 +177,13 @@ const About = () => {
 
       {/* Our Office Gallery */}
       <OfficeGallerySection />
+
+      {/* Video Modal */}
+      <VideoModal 
+        isOpen={isVideoModalOpen}
+        onClose={() => setIsVideoModalOpen(false)}
+        videoUrl={interviewVideoUrl}
+      />
     </>
   );
 };
