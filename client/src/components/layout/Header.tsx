@@ -66,6 +66,17 @@ const Header = () => {
               <span>409 Cambridge Ave, Palo Alto, CA 94306</span>
             </div>
           </div>
+          <div className="hidden md:flex items-center">
+            <a 
+              href={officeInfo.socialMedia.instagram} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-gray-500 hover:text-primary transition-colors" 
+              aria-label="Instagram"
+            >
+              <FaInstagram className="h-3.5 w-3.5" />
+            </a>
+          </div>
         </div>
       </div>
       
@@ -190,6 +201,21 @@ const Header = () => {
                     <span>Book Appointment</span>
                   </Button>
                 </Link>
+                
+                {/* Social media links */}
+                <div className="flex justify-center mt-4 pt-4 border-t border-gray-100">
+                  <a 
+                    href={officeInfo.socialMedia.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center text-gray-500 hover:text-primary px-3 py-2"
+                    onClick={closeMenus}
+                    aria-label="Follow us on Instagram"
+                  >
+                    <FaInstagram className="h-5 w-5 mr-2" />
+                    <span className="text-sm">Follow us on Instagram</span>
+                  </a>
+                </div>
               </nav>
             </div>
           </motion.div>
