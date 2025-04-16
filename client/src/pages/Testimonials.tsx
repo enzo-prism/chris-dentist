@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "wouter";
 import TestimonialCard from "@/components/common/TestimonialCard";
+import GoogleReviewsWidget from "@/components/common/GoogleReviewsWidget";
 import MetaTags from "@/components/common/MetaTags";
 import { drWongImages } from "@/lib/imageUrls";
 import { ogImages } from "@/lib/ogImages";
