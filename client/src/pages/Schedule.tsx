@@ -1,13 +1,30 @@
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import AppointmentSection from "@/components/sections/AppointmentSection";
 import OfficeInformationSection from "@/components/sections/OfficeInformationSection";
-import GoogleReviewsWidget from "@/components/common/GoogleReviewsWidget";
 import MetaTags from "@/components/common/MetaTags";
 import { drWongImages } from "@/lib/imageUrls";
 import { ogImages } from "@/lib/ogImages";
 import { pageTitles, pageDescriptions } from "@/lib/metaContent";
+import { useEffect } from "react";
 
 const Schedule = () => {
+  useEffect(() => {
+    // Add the Elfsight script
+    const script = document.createElement('script');
+    script.src = "https://static.elfsight.com/platform/platform.js";
+    script.async = true;
+    
+    // Add the script to the document if it doesn't already exist
+    if (!document.querySelector('script[src="https://static.elfsight.com/platform/platform.js"]')) {
+      document.body.appendChild(script);
+    }
+    
+    // Cleanup function
+    return () => {
+      // We're not removing the script on unmount because it might be used by other pages
+    };
+  }, []);
+
   return (
     <>
       <MetaTags 
@@ -104,8 +121,9 @@ const Schedule = () => {
             <div className="w-24 h-1 bg-primary mx-auto mt-4"></div>
           </div>
           
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-            <GoogleReviewsWidget className="w-full" />
+          <div className="bg-white rounded-lg shadow-lg overflow-hidden p-4">
+            {/* Elfsight Google Reviews Widget */}
+            <div className="elfsight-app-97536d24-590e-4a39-ae4c-c3fb469042f8" data-elfsight-app-lazy></div>
           </div>
         </div>
       </section>

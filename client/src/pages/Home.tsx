@@ -5,7 +5,7 @@ import AboutDoctorSection from "@/components/sections/AboutDoctorSection";
 import ServiceCard from "@/components/common/ServiceCard";
 import TestimonialCard from "@/components/common/TestimonialCard";
 import BlogPostCard from "@/components/common/BlogPostCard";
-import GoogleReviewsWidget from "@/components/common/GoogleReviewsWidget";
+import { useEffect } from "react";
 import TypeFormEmbed from "@/components/forms/TypeFormEmbed";
 import MetaTags from "@/components/common/MetaTags";
 import { Button } from "@/components/ui/button";
@@ -17,6 +17,24 @@ import { pageTitles, pageDescriptions } from "@/lib/metaContent";
 import { drWongImages } from "@/lib/imageUrls";
 
 const Home = () => {
+  // Load Elfsight script
+  useEffect(() => {
+    // Add the Elfsight script
+    const script = document.createElement('script');
+    script.src = "https://static.elfsight.com/platform/platform.js";
+    script.async = true;
+    
+    // Add the script to the document if it doesn't already exist
+    if (!document.querySelector('script[src="https://static.elfsight.com/platform/platform.js"]')) {
+      document.body.appendChild(script);
+    }
+    
+    // Cleanup function
+    return () => {
+      // We're not removing the script on unmount because it might be used by other pages
+    };
+  }, []);
+  
   // Fetch services
   const { data: services, isLoading: isLoadingServices } = useQuery<Service[]>({
     queryKey: ["/api/services"],
@@ -178,7 +196,10 @@ const Home = () => {
             <div className="p-6 bg-gray-50 border-b">
               <h3 className="text-xl font-bold font-heading text-center">Our Google Reviews</h3>
             </div>
-            <GoogleReviewsWidget className="w-full" />
+            <div className="p-4">
+              {/* Elfsight Google Reviews Widget */}
+              <div className="elfsight-app-97536d24-590e-4a39-ae4c-c3fb469042f8" data-elfsight-app-lazy></div>
+            </div>
           </div>
           
           <div className="text-center mt-8">
