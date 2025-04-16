@@ -252,6 +252,19 @@ const Testimonials = () => {
             <div className="w-24 h-1 bg-primary mx-auto mt-4"></div>
           </div>
           
+          {/* Google Reviews Widget */}
+          <motion.div
+            className="mb-16"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+          >
+            <GoogleReviewsWidget className="rounded-lg shadow-lg overflow-hidden" />
+          </motion.div>
+          
+          <h3 className="text-2xl font-bold font-heading text-[#333333] mb-8 text-center">Other Platforms</h3>
+          
           <motion.div 
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8"
             initial={{ opacity: 0 }}

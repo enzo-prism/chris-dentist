@@ -5,6 +5,7 @@ import AboutDoctorSection from "@/components/sections/AboutDoctorSection";
 import ServiceCard from "@/components/common/ServiceCard";
 import TestimonialCard from "@/components/common/TestimonialCard";
 import BlogPostCard from "@/components/common/BlogPostCard";
+import GoogleReviewsWidget from "@/components/common/GoogleReviewsWidget";
 import TypeFormEmbed from "@/components/forms/TypeFormEmbed";
 import MetaTags from "@/components/common/MetaTags";
 import { Button } from "@/components/ui/button";
@@ -172,7 +173,15 @@ const Home = () => {
             </div>
           )}
           
-          <div className="text-center mt-12">
+          {/* Google Reviews Widget */}
+          <div className="mt-12 mb-10 bg-white rounded-lg shadow-lg overflow-hidden">
+            <div className="p-6 bg-gray-50 border-b">
+              <h3 className="text-xl font-bold font-heading text-center">Our Google Reviews</h3>
+            </div>
+            <GoogleReviewsWidget className="w-full" />
+          </div>
+          
+          <div className="text-center mt-8">
             <Link href="/testimonials">
               <span className="text-primary font-semibold hover:text-blue-700 inline-flex items-center cursor-pointer">
                 Read More Patient Stories

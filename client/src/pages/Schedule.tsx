@@ -1,6 +1,7 @@
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import AppointmentSection from "@/components/sections/AppointmentSection";
 import OfficeInformationSection from "@/components/sections/OfficeInformationSection";
+import GoogleReviewsWidget from "@/components/common/GoogleReviewsWidget";
 import MetaTags from "@/components/common/MetaTags";
 import { drWongImages } from "@/lib/imageUrls";
 import { ogImages } from "@/lib/ogImages";
@@ -90,6 +91,21 @@ const Schedule = () => {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+      
+      {/* Google Reviews Section */}
+      <section className="py-16 bg-[#FFFFFF]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl md:text-3xl font-bold font-heading text-[#333333] mb-4">Why Our Patients Love Us</h2>
+            <p className="text-[#333333] max-w-3xl mx-auto">See what our patients are saying about their experience with Dr. Wong.</p>
+            <div className="w-24 h-1 bg-primary mx-auto mt-4"></div>
+          </div>
+          
+          <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+            <GoogleReviewsWidget className="w-full" />
           </div>
         </div>
       </section>
