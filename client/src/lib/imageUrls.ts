@@ -13,6 +13,7 @@ export const drWongImages = {
   drWongPortrait2: "https://i.imgur.com/iqBXT9y.png",
   drWongWaiting: "https://i.imgur.com/AC5lGu3.png", // Middle Right: Operatory Room
   drWongReception: "https://i.imgur.com/nGlhUdH.png", // Middle Center: Exterior Signage and Entryway
+  drWongOffice: "/images/dr_wong_office.png", // Dr. Wong in his office
   heroImage: "https://i.imgur.com/BeX3mhS.png",
   teamPhoto: "https://i.imgur.com/ypt5eZ7.png",
   officeEntrance: "https://i.imgur.com/wt7peyr.png",
