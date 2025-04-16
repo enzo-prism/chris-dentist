@@ -1,13 +1,30 @@
 import { Quote } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import GoogleReviewsWidget from "@/components/common/GoogleReviewsWidget";
 import MetaTags from "@/components/common/MetaTags";
 import { ogImages } from "@/lib/ogImages";
 import { pageTitles, pageDescriptions } from "@/lib/metaContent";
 import { motion } from "framer-motion";
+import { useEffect } from "react";
 
 const Testimonials = () => {
+  useEffect(() => {
+    // Add the Elfsight script
+    const script = document.createElement('script');
+    script.src = "https://static.elfsight.com/platform/platform.js";
+    script.async = true;
+    
+    // Add the script to the document if it doesn't already exist
+    if (!document.querySelector('script[src="https://static.elfsight.com/platform/platform.js"]')) {
+      document.body.appendChild(script);
+    }
+    
+    // Cleanup function
+    return () => {
+      // We're not removing the script on unmount because it might be used by other pages
+    };
+  }, []);
+  
   return (
     <>
       <MetaTags 
@@ -81,9 +98,10 @@ const Testimonials = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
             viewport={{ once: true }}
-            className="rounded-xl shadow-xl overflow-hidden bg-white border border-gray-100"
+            className="rounded-xl shadow-xl overflow-hidden bg-white border border-gray-100 p-4"
           >
-            <GoogleReviewsWidget className="w-full" />
+            {/* Elfsight Google Reviews Widget */}
+            <div className="elfsight-app-97536d24-590e-4a39-ae4c-c3fb469042f8" data-elfsight-app-lazy></div>
           </motion.div>
           
           {/* Additional benefits section */}
