@@ -5,6 +5,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Button } from "@/components/ui/button"; 
 import NewsletterForm from "@/components/forms/NewsletterForm";
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { officeInfo } from "@/lib/data";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -37,10 +38,10 @@ const Footer = () => {
 
   // Social media links
   const socialMedia = [
-    { icon: <FaFacebook className="h-4 w-4" />, href: "#", label: "Facebook" },
-    { icon: <FaTwitter className="h-4 w-4" />, href: "#", label: "Twitter" },
-    { icon: <FaInstagram className="h-4 w-4" />, href: "#", label: "Instagram" },
-    { icon: <FaLinkedin className="h-4 w-4" />, href: "#", label: "LinkedIn" }
+    { icon: <FaFacebook className="h-4 w-4" />, href: officeInfo.socialMedia.facebook, label: "Facebook" },
+    { icon: <FaTwitter className="h-4 w-4" />, href: officeInfo.socialMedia.twitter, label: "Twitter" },
+    { icon: <FaInstagram className="h-4 w-4" />, href: officeInfo.socialMedia.instagram, label: "Instagram", rel: "noopener noreferrer" },
+    { icon: <FaLinkedin className="h-4 w-4" />, href: officeInfo.socialMedia.linkedin, label: "LinkedIn" }
   ];
 
   return (
@@ -77,6 +78,8 @@ const Footer = () => {
                       href={social.href} 
                       className="text-white/80 hover:text-white transition-colors bg-white/10 p-2 rounded-full"
                       aria-label={social.label}
+                      rel="noopener noreferrer"
+                      target="_blank"
                     >
                       {social.icon}
                     </a>
@@ -150,6 +153,8 @@ const Footer = () => {
                   href={social.href} 
                   className="text-white/80 hover:text-white transition-colors bg-white/10 p-2 rounded-full"
                   aria-label={social.label}
+                  rel="noopener noreferrer"
+                  target="_blank"
                 >
                   {social.icon}
                 </a>

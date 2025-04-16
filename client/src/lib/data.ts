@@ -18,7 +18,7 @@ export const officeInfo = {
   socialMedia: {
     facebook: "https://facebook.com/drwongdental",
     twitter: "https://twitter.com/drwongdental",
-    instagram: "https://instagram.com/drwongdental",
+    instagram: "https://www.instagram.com/dr_wong_paloalto/",
     linkedin: "https://linkedin.com/in/drchristopherwong",
   },
 };

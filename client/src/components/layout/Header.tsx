@@ -4,6 +4,8 @@ import { Menu, X, Phone, MapPin, Search, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import SearchBar from "./SearchBar";
+import { FaInstagram } from "react-icons/fa";
+import { officeInfo } from "@/lib/data";
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
