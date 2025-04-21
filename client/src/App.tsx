@@ -16,7 +16,6 @@ import About from "@/pages/About";
 import Services from "@/pages/Services";
 import PatientResources from "@/pages/PatientResources";
 import Testimonials from "@/pages/Testimonials";
-import Blog from "@/pages/Blog";
 import Contact from "@/pages/Contact";
 import Schedule from "@/pages/Schedule";
 
@@ -31,7 +30,6 @@ function Router() {
           <Route path="/services" component={Services} />
           <Route path="/patient-resources" component={PatientResources} />
           <Route path="/testimonials" component={Testimonials} />
-          <Route path="/blog" component={Blog} />
           <Route path="/contact" component={Contact} />
           <Route path="/schedule" component={Schedule} />
           <Route component={NotFound} />

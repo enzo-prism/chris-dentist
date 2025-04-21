@@ -4,14 +4,13 @@ import FeaturesSection from "@/components/sections/FeaturesSection";
 import AboutDoctorSection from "@/components/sections/AboutDoctorSection";
 import ServiceCard from "@/components/common/ServiceCard";
 import TestimonialCard from "@/components/common/TestimonialCard";
-import BlogPostCard from "@/components/common/BlogPostCard";
 import { useEffect } from "react";
 import TypeFormEmbed from "@/components/forms/TypeFormEmbed";
 import MetaTags from "@/components/common/MetaTags";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle, Stethoscope, Award, User, ChevronRight, Phone } from "lucide-react";
 import { Link } from "wouter";
-import { Service, BlogPost, Testimonial } from "@shared/schema";
+import { Service, Testimonial } from "@shared/schema";
 import { ogImages } from "@/lib/ogImages";
 import { pageTitles, pageDescriptions } from "@/lib/metaContent";
 import { drWongImages } from "@/lib/imageUrls";
@@ -43,11 +42,6 @@ const Home = () => {
   // Fetch testimonials
   const { data: testimonials, isLoading: isLoadingTestimonials } = useQuery<Testimonial[]>({
     queryKey: ["/api/testimonials"],
-  });
-
-  // Fetch blog posts
-  const { data: blogPosts, isLoading: isLoadingBlogPosts } = useQuery<BlogPost[]>({
-    queryKey: ["/api/blog-posts"],
   });
 
   return (
@@ -208,48 +202,6 @@ const Home = () => {
                 Read More Patient Stories
                 <ArrowRight className="h-5 w-5 ml-1" />
               </span>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Blog Section */}
-      <section id="blog" className="py-16 bg-[#F5F9FC]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold font-heading text-[#333333] mb-4">Dental Health Blog</h2>
-            <p className="text-[#333333] max-w-3xl mx-auto">Stay informed with the latest in dental health news, tips, and advances in dental technology.</p>
-            <div className="w-24 h-1 bg-primary mx-auto mt-4"></div>
-          </div>
-          
-          {isLoadingBlogPosts ? (
-            <div className="grid md:grid-cols-3 gap-8">
-              {[...Array(3)].map((_, index) => (
-                <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden animate-pulse">
-                  <div className="w-full h-48 bg-gray-200"></div>
-                  <div className="p-6">
-                    <div className="h-3 bg-gray-200 rounded w-1/4 mb-2"></div>
-                    <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
-                    <div className="h-4 bg-gray-200 rounded w-full mb-4"></div>
-                    <div className="h-4 bg-gray-200 rounded w-1/2"></div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="grid md:grid-cols-3 gap-8">
-              {blogPosts?.map((post) => (
-                <BlogPostCard key={post.id} post={post} />
-              ))}
-            </div>
-          )}
-          
-          <div className="text-center mt-12">
-            <Link href="/blog">
-              <Button variant="outline" className="bg-white border-2 border-primary text-primary font-semibold px-8 py-3 rounded-md hover:bg-[#F5F9FC] inline-flex items-center">
-                View All Articles
-                <ArrowRight className="h-5 w-5 ml-2" />
-              </Button>
             </Link>
           </div>
         </div>
