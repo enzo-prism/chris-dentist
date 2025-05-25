@@ -54,7 +54,7 @@ const HeroSection = () => {
             </p>
             
             {/* CTA Buttons with updated styling */}
-            <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-3 sm:space-y-0 mb-12">
+            <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-3 sm:space-y-0 mb-4">
               <Link href="/schedule#appointment">
                 <Button className="bg-primary hover:bg-primary/90 text-white font-medium flex items-center justify-center gap-2 px-5 py-6 h-auto rounded-full shadow-sm transition-all">
                   <Calendar className="h-4 w-4" />
@@ -70,6 +70,11 @@ const HeroSection = () => {
                   <ArrowRight className="h-4 w-4" />
                 </Button>
               </Link>
+            </div>
+            
+            {/* Memorial Day Notice */}
+            <div className="text-sm text-gray-600 italic border-l-2 border-primary/30 pl-3 mb-10 max-w-md">
+              Please note: Our office will be closed on Monday, May 26 in observance of Memorial Day.
             </div>
             
             {/* Scroll indicator - now at bottom of text column */}
