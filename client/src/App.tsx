@@ -18,6 +18,7 @@ import PatientResources from "@/pages/PatientResources";
 import Testimonials from "@/pages/Testimonials";
 import Contact from "@/pages/Contact";
 import Schedule from "@/pages/Schedule";
+import ThankYou from "@/pages/ThankYou";
 
 function Router() {
   return (
@@ -32,6 +33,7 @@ function Router() {
           <Route path="/testimonials" component={Testimonials} />
           <Route path="/contact" component={Contact} />
           <Route path="/schedule" component={Schedule} />
+          <Route path="/thank-you" component={ThankYou} />
           <Route component={NotFound} />
         </Switch>
       </main>
