@@ -5,25 +5,14 @@ import MetaTags from "@/components/common/MetaTags";
 import { ogImages } from "@/lib/ogImages";
 import { pageTitles, pageDescriptions } from "@/lib/metaContent";
 import { motion } from "framer-motion";
-import { useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
+import TestimonialCard from "@/components/common/TestimonialCard";
+import type { Testimonial } from "@shared/schema";
 
 const Testimonials = () => {
-  useEffect(() => {
-    // Add the Elfsight script
-    const script = document.createElement('script');
-    script.src = "https://static.elfsight.com/platform/platform.js";
-    script.async = true;
-    
-    // Add the script to the document if it doesn't already exist
-    if (!document.querySelector('script[src="https://static.elfsight.com/platform/platform.js"]')) {
-      document.body.appendChild(script);
-    }
-    
-    // Cleanup function
-    return () => {
-      // We're not removing the script on unmount because it might be used by other pages
-    };
-  }, []);
+  const { data: testimonials, isLoading: isLoadingTestimonials } = useQuery<Testimonial[]>({
+    queryKey: ["/api/testimonials"],
+  });
   
   return (
     <>
@@ -72,7 +61,7 @@ const Testimonials = () => {
         </div>
       </section>
 
-      {/* Google Reviews Main Section */}
+      {/* Patient Testimonials Main Section */}
       <section className="py-16 md:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -83,26 +72,47 @@ const Testimonials = () => {
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-bold font-heading text-[#333333] mb-6">
-              Our Google Reviews
+              Patient Stories
             </h2>
             <p className="text-[#333333] max-w-3xl mx-auto mb-6">
-              Read authentic reviews from our patients who have chosen Dr. Wong for their dental care needs.
+              Read authentic experiences from our patients who have chosen Dr. Wong for their dental care needs.
               We're proud of our reputation for exceptional service and quality care.
             </p>
             <div className="w-24 h-1 bg-primary mx-auto"></div>
           </motion.div>
           
-          {/* Google Reviews Widget */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="rounded-xl shadow-xl overflow-hidden bg-white border border-gray-100 p-4"
-          >
-            {/* Elfsight Google Reviews Widget */}
-            <div className="elfsight-app-97536d24-590e-4a39-ae4c-c3fb469042f8" data-elfsight-app-lazy></div>
-          </motion.div>
+          {/* Testimonials Grid */}
+          {isLoadingTestimonials ? (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[...Array(3)].map((_, index) => (
+                <div key={index} className="bg-white p-6 rounded-lg shadow-md animate-pulse">
+                  <div className="h-4 bg-gray-200 rounded w-3/4 mb-4"></div>
+                  <div className="h-4 bg-gray-200 rounded w-full mb-2"></div>
+                  <div className="h-4 bg-gray-200 rounded w-full mb-2"></div>
+                  <div className="h-4 bg-gray-200 rounded w-1/2 mb-4"></div>
+                  <div className="flex items-center">
+                    <div className="rounded-full bg-gray-200 h-12 w-12 mr-4"></div>
+                    <div>
+                      <div className="h-4 bg-gray-200 rounded w-24 mb-2"></div>
+                      <div className="h-3 bg-gray-200 rounded w-32"></div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+            >
+              {testimonials?.map((testimonial, index) => (
+                <TestimonialCard key={testimonial.id} testimonial={testimonial} index={index} />
+              ))}
+            </motion.div>
+          )}
           
           {/* Additional benefits section */}
           <motion.div 
