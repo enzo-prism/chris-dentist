@@ -381,10 +381,7 @@ const PatientResources = () => {
                     <ArrowRight className="h-5 w-5 text-primary mt-1 mr-3" />
                     <span>Call us at {officeInfo.phone}</span>
                   </div>
-                  <div className="flex items-start">
-                    <ArrowRight className="h-5 w-5 text-primary mt-1 mr-3" />
-                    <span>Email us at {officeInfo.email}</span>
-                  </div>
+
                   <div className="flex items-start">
                     <ArrowRight className="h-5 w-5 text-primary mt-1 mr-3" />
                     <span>Visit our office at {officeInfo.address.line1}, {officeInfo.address.line2}</span>
