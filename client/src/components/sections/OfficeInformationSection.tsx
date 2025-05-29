@@ -49,17 +49,7 @@ const OfficeInformationSection = () => {
         </p>
       )
     },
-    {
-      icon: <Mail className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />,
-      title: "Email",
-      content: (
-        <p className="text-[#333333] text-sm sm:text-base">
-          <a href={`mailto:${officeInfo.email}`} className="hover:text-primary transition-colors">
-            {officeInfo.email}
-          </a>
-        </p>
-      )
-    },
+
     {
       icon: <Clock className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />,
       title: "Office Hours",
@@ -94,7 +84,7 @@ const OfficeInformationSection = () => {
         </motion.div>
         
         {/* Contact cards - responsive grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
           {contactCards.map((card, index) => (
             <motion.div 
               key={index}

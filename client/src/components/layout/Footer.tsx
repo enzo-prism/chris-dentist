@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { Phone, Mail, MapPin, ExternalLink } from "lucide-react";
+import { Phone, MapPin, ExternalLink } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button"; 
@@ -37,10 +37,7 @@ const Footer = () => {
 
   // Social media links
   const socialMedia = [
-    { icon: <FaFacebook className="h-4 w-4" />, href: officeInfo.socialMedia.facebook, label: "Facebook" },
-    { icon: <FaTwitter className="h-4 w-4" />, href: officeInfo.socialMedia.twitter, label: "Twitter" },
-    { icon: <FaInstagram className="h-4 w-4" />, href: officeInfo.socialMedia.instagram, label: "Instagram", rel: "noopener noreferrer" },
-    { icon: <FaLinkedin className="h-4 w-4" />, href: officeInfo.socialMedia.linkedin, label: "LinkedIn" }
+    { icon: <FaInstagram className="h-4 w-4" />, href: officeInfo.socialMedia.instagram, label: "Instagram", rel: "noopener noreferrer" }
   ];
 
   return (
@@ -60,12 +57,7 @@ const Footer = () => {
                     (650) 326-6319
                   </a>
                 </p>
-                <p className="flex items-center text-sm text-white/90">
-                  <Mail className="h-4 w-4 mr-3 flex-shrink-0 text-white/70" />
-                  <a href="mailto:info@drwongdental.com" className="hover:text-white transition-colors">
-                    info@drwongdental.com
-                  </a>
-                </p>
+
                 <p className="flex items-start text-sm text-white/90">
                   <MapPin className="h-4 w-4 mr-3 mt-0.5 flex-shrink-0 text-white/70" />
                   <span>409 Cambridge Ave, Palo Alto, CA 94306</span>
@@ -170,12 +162,7 @@ const Footer = () => {
                   (650) 326-6319
                 </a>
               </p>
-              <p className="flex items-center text-sm">
-                <Mail className="h-4 w-4 mr-3 flex-shrink-0 text-white/70" />
-                <a href="mailto:info@drwongdental.com" className="hover:text-white transition-colors">
-                  info@drwongdental.com
-                </a>
-              </p>
+
               <p className="flex items-start text-sm">
                 <MapPin className="h-4 w-4 mr-3 mt-0.5 flex-shrink-0 text-white/70" />
                 <span>409 Cambridge Ave, Palo Alto, CA 94306</span>
