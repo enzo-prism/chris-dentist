@@ -1,4 +1,4 @@
-import { MapPin, Phone, Mail, Clock, ExternalLink } from "lucide-react";
+import { MapPin, Phone, Clock, ExternalLink } from "lucide-react";
 import { officeInfo } from "@/lib/data";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
