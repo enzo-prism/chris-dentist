@@ -59,7 +59,8 @@ Allow: /schedule`);
         { url: '/testimonials', priority: '0.6', changefreq: 'monthly' },
         { url: '/blog', priority: '0.8', changefreq: 'weekly' },
         { url: '/contact', priority: '0.7', changefreq: 'monthly' },
-        { url: '/schedule', priority: '0.9', changefreq: 'weekly' }
+        { url: '/schedule', priority: '0.9', changefreq: 'weekly' },
+        { url: '/thank-you', priority: '0.3', changefreq: 'monthly' }
       ];
       
       // Add static pages to the sitemap
