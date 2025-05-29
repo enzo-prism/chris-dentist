@@ -103,7 +103,7 @@ const PatientResources = () => {
                 <p className="text-[#333333] max-w-3xl mx-auto">Save time during your visit by completing these forms ahead of time. All forms are HIPAA-compliant and securely processed.</p>
               </div>
 
-              <div className="grid md:grid-cols-2 gap-8">
+              <div className="max-w-2xl mx-auto">
                 <div className="bg-white rounded-lg shadow-md p-6">
                   <h3 className="text-xl font-bold font-heading text-[#333333] mb-4">Download Forms</h3>
                   <p className="text-[#333333] mb-6">Print and complete these forms at home before your appointment.</p>
@@ -128,13 +128,6 @@ const PatientResources = () => {
                       </a>
                     ))}
                   </div>
-                </div>
-                
-                <div className="bg-white rounded-lg shadow-md p-6">
-                  <h3 className="text-xl font-bold font-heading text-[#333333] mb-4">Online Form Submission</h3>
-                  <p className="text-[#333333] mb-6">Complete your forms securely online and submit directly to our office.</p>
-                  
-                  <PatientForm />
                 </div>
               </div>
             </TabsContent>
