@@ -20,6 +20,10 @@ import Testimonials from "@/pages/Testimonials";
 import Contact from "@/pages/Contact";
 import Schedule from "@/pages/Schedule";
 import ThankYou from "@/pages/ThankYou";
+import PrivacyPolicy from "@/pages/PrivacyPolicy";
+import TermsOfService from "@/pages/TermsOfService";
+import HipaaNotice from "@/pages/HipaaNotice";
+import Accessibility from "@/pages/Accessibility";
 
 function Router() {
   return (
@@ -35,6 +39,10 @@ function Router() {
           <Route path="/contact" component={Contact} />
           <Route path="/schedule" component={Schedule} />
           <Route path="/thank-you" component={ThankYou} />
+          <Route path="/privacy-policy" component={PrivacyPolicy} />
+          <Route path="/terms" component={TermsOfService} />
+          <Route path="/hipaa" component={HipaaNotice} />
+          <Route path="/accessibility" component={Accessibility} />
           <Route component={NotFound} />
         </Switch>
       </main>
