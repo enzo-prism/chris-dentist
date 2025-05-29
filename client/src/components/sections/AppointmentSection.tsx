@@ -1,4 +1,4 @@
-import { CheckCircle, Phone, Calendar } from "lucide-react";
+import { CheckCircle, Phone } from "lucide-react";
 import TypeFormEmbed from "@/components/forms/TypeFormEmbed";
 import { officeInfo } from "@/lib/data";
 import { motion } from "framer-motion";
@@ -98,16 +98,11 @@ const AppointmentSection = () => {
               </div>
               
               {/* Contact options */}
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div className="flex items-center">
                 <a href={`tel:${officeInfo.phone}`} className="flex items-center text-base sm:text-lg font-bold hover:text-blue-200 transition-colors">
                   <Phone className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
                   <span>{officeInfo.phone}</span>
                 </a>
-                
-                <Button variant="outline" className="bg-white text-primary hover:bg-blue-50 font-medium">
-                  <Calendar className="mr-2 h-4 w-4" />
-                  <span>View Calendar</span>
-                </Button>
               </div>
             </div>
             

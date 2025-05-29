@@ -1,4 +1,4 @@
-import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { MapPin, Phone, Clock } from "lucide-react";
 import AppointmentSection from "@/components/sections/AppointmentSection";
 import OfficeInformationSection from "@/components/sections/OfficeInformationSection";
 import MetaTags from "@/components/common/MetaTags";
@@ -78,17 +78,7 @@ const Contact = () => {
                 </div>
               </div>
               
-              <div className="flex items-start">
-                <Mail className="h-6 w-6 text-primary mr-3 mt-1 flex-shrink-0" />
-                <div>
-                  <h4 className="font-semibold mb-1">Email</h4>
-                  <p className="text-[#333333]">
-                    <a href="mailto:info@drwongdental.com" className="hover:text-primary transition-colors">
-                      info@drwongdental.com
-                    </a>
-                  </p>
-                </div>
-              </div>
+
             </div>
           </div>
         </div>
