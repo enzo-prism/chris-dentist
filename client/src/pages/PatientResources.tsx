@@ -63,35 +63,89 @@ const PatientResources = () => {
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Tabs defaultValue="forms" onValueChange={setActiveTab} className="w-full">
-            <div className="flex justify-center mb-10">
-              <TabsList className="w-full max-w-3xl bg-blue-50 p-1.5 rounded-full overflow-hidden shadow-sm border border-blue-100 flex flex-wrap md:flex-nowrap">
+            {/* Mobile Tab Navigation */}
+            <div className="block md:hidden mb-8">
+              <div className="grid grid-cols-2 gap-3 max-w-sm mx-auto">
+                <button
+                  onClick={() => setActiveTab("forms")}
+                  className={`flex flex-col items-center justify-center p-4 rounded-lg border-2 transition-all ${
+                    activeTab === "forms" 
+                      ? "border-primary bg-primary text-white shadow-md" 
+                      : "border-gray-200 bg-white text-gray-600 hover:border-gray-300"
+                  }`}
+                >
+                  <FileText className="h-6 w-6 mb-2" />
+                  <span className="text-sm font-medium">Forms</span>
+                </button>
+                
+                <button
+                  onClick={() => setActiveTab("insurance")}
+                  className={`flex flex-col items-center justify-center p-4 rounded-lg border-2 transition-all ${
+                    activeTab === "insurance" 
+                      ? "border-primary bg-primary text-white shadow-md" 
+                      : "border-gray-200 bg-white text-gray-600 hover:border-gray-300"
+                  }`}
+                >
+                  <CreditCard className="h-6 w-6 mb-2" />
+                  <span className="text-sm font-medium">Insurance</span>
+                </button>
+                
+                <button
+                  onClick={() => setActiveTab("faq")}
+                  className={`flex flex-col items-center justify-center p-4 rounded-lg border-2 transition-all ${
+                    activeTab === "faq" 
+                      ? "border-primary bg-primary text-white shadow-md" 
+                      : "border-gray-200 bg-white text-gray-600 hover:border-gray-300"
+                  }`}
+                >
+                  <HelpCircle className="h-6 w-6 mb-2" />
+                  <span className="text-sm font-medium">FAQs</span>
+                </button>
+                
+                <button
+                  onClick={() => setActiveTab("first-visit")}
+                  className={`flex flex-col items-center justify-center p-4 rounded-lg border-2 transition-all ${
+                    activeTab === "first-visit" 
+                      ? "border-primary bg-primary text-white shadow-md" 
+                      : "border-gray-200 bg-white text-gray-600 hover:border-gray-300"
+                  }`}
+                >
+                  <Calendar className="h-6 w-6 mb-2" />
+                  <span className="text-sm font-medium">First Visit</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Desktop Tab Navigation */}
+            <div className="hidden md:flex justify-center mb-10">
+              <TabsList className="bg-blue-50 p-1.5 rounded-full shadow-sm border border-blue-100">
                 <TabsTrigger 
                   value="forms" 
-                  className="flex-1 rounded-full px-4 md:px-6 py-3 text-sm md:text-base font-medium transition-all data-[state=active]:bg-white data-[state=active]:text-primary data-[state=active]:shadow-sm"
+                  className="rounded-full px-6 py-3 text-base font-medium transition-all data-[state=active]:bg-white data-[state=active]:text-primary data-[state=active]:shadow-sm"
                 >
-                  <FileText className="h-5 w-5 mr-1 md:mr-2 flex-shrink-0" />
-                  <span className="whitespace-nowrap">Forms</span>
+                  <FileText className="h-5 w-5 mr-2" />
+                  Forms
                 </TabsTrigger>
                 <TabsTrigger 
                   value="insurance" 
-                  className="flex-1 rounded-full px-4 md:px-6 py-3 text-sm md:text-base font-medium transition-all data-[state=active]:bg-white data-[state=active]:text-primary data-[state=active]:shadow-sm"
+                  className="rounded-full px-6 py-3 text-base font-medium transition-all data-[state=active]:bg-white data-[state=active]:text-primary data-[state=active]:shadow-sm"
                 >
-                  <CreditCard className="h-5 w-5 mr-1 md:mr-2 flex-shrink-0" />
-                  <span className="whitespace-nowrap">Insurance</span>
+                  <CreditCard className="h-5 w-5 mr-2" />
+                  Insurance
                 </TabsTrigger>
                 <TabsTrigger 
                   value="faq" 
-                  className="flex-1 rounded-full px-4 md:px-6 py-3 text-sm md:text-base font-medium transition-all data-[state=active]:bg-white data-[state=active]:text-primary data-[state=active]:shadow-sm"
+                  className="rounded-full px-6 py-3 text-base font-medium transition-all data-[state=active]:bg-white data-[state=active]:text-primary data-[state=active]:shadow-sm"
                 >
-                  <HelpCircle className="h-5 w-5 mr-1 md:mr-2 flex-shrink-0" />
-                  <span className="whitespace-nowrap">FAQs</span>
+                  <HelpCircle className="h-5 w-5 mr-2" />
+                  FAQs
                 </TabsTrigger>
                 <TabsTrigger 
                   value="first-visit" 
-                  className="flex-1 rounded-full px-4 md:px-6 py-3 text-sm md:text-base font-medium transition-all data-[state=active]:bg-white data-[state=active]:text-primary data-[state=active]:shadow-sm"
+                  className="rounded-full px-6 py-3 text-base font-medium transition-all data-[state=active]:bg-white data-[state=active]:text-primary data-[state=active]:shadow-sm"
                 >
-                  <Calendar className="h-5 w-5 mr-1 md:mr-2 flex-shrink-0" />
-                  <span className="whitespace-nowrap">First Visit</span>
+                  <Calendar className="h-5 w-5 mr-2" />
+                  First Visit
                 </TabsTrigger>
               </TabsList>
             </div>
