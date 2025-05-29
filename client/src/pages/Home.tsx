@@ -53,6 +53,8 @@ const Home = () => {
         description={pageDescriptions.home}
         image={ogImages.home}
       />
+      <StructuredData type="organization" />
+      <CanonicalUrl path="/" />
       <HeroSection />
 
       <FeaturesSection />
