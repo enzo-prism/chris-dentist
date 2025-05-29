@@ -7,6 +7,8 @@ import TestimonialCard from "@/components/common/TestimonialCard";
 import { useEffect } from "react";
 import TypeFormEmbed from "@/components/forms/TypeFormEmbed";
 import MetaTags from "@/components/common/MetaTags";
+import StructuredData from "@/components/seo/StructuredData";
+import CanonicalUrl from "@/components/seo/CanonicalUrl";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle, Stethoscope, Award, User, ChevronRight, Phone } from "lucide-react";
 import { Link } from "wouter";
