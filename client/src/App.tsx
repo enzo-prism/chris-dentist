@@ -25,6 +25,7 @@ import PrivacyPolicy from "@/pages/PrivacyPolicy";
 import TermsOfService from "@/pages/TermsOfService";
 import HipaaNotice from "@/pages/HipaaNotice";
 import Accessibility from "@/pages/Accessibility";
+import DentalVeneers from "@/pages/DentalVeneers";
 
 function ScrollToTop() {
   const [location] = useLocation();
@@ -55,6 +56,7 @@ function Router() {
           <Route path="/terms" component={TermsOfService} />
           <Route path="/hipaa" component={HipaaNotice} />
           <Route path="/accessibility" component={Accessibility} />
+          <Route path="/dental-veneers" component={DentalVeneers} />
           <Route component={NotFound} />
         </Switch>
       </main>
