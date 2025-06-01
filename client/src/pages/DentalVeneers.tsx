@@ -154,7 +154,7 @@ const DentalVeneers = () => {
               className="relative"
             >
               <img 
-                src="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                src="/images/veneers.jpg" 
                 alt="Beautiful smile transformation with dental veneers" 
                 className="w-full h-96 object-cover rounded-lg shadow-lg"
               />
