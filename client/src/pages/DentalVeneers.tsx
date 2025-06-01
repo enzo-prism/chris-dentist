@@ -358,7 +358,7 @@ const DentalVeneers = () => {
                 </Button>
               </Link>
               <Link href="/contact">
-                <Button variant="outline" className="border-white text-white hover:bg-white/10 px-8 py-3">
+                <Button variant="outline" className="border-white border-2 text-white bg-white/10 hover:bg-white/20 px-8 py-3 font-medium">
                   Contact Our Practice
                 </Button>
               </Link>
