@@ -7,11 +7,9 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Serve static files from public directory in development
-if (app.get("env") === "development") {
-  const publicPath = path.resolve(process.cwd(), "public");
-  app.use(express.static(publicPath));
-}
+// Serve static files from public directory
+const publicPath = path.resolve(process.cwd(), "public");
+app.use(express.static(publicPath));
 
 app.use((req, res, next) => {
   const start = Date.now();
