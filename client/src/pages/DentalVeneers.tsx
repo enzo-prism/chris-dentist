@@ -245,8 +245,8 @@ const DentalVeneers = () => {
               viewport={{ once: true }}
             >
               <img 
-                src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
-                alt="Dr. Wong examining patient for veneer consultation" 
+                src="/images/couple.jpg" 
+                alt="Happy couple with beautiful smiles after veneer treatment" 
                 className="w-full h-96 object-cover rounded-lg shadow-lg"
               />
             </motion.div>
