@@ -4,7 +4,6 @@ import FeaturesSection from "@/components/sections/FeaturesSection";
 import AboutDoctorSection from "@/components/sections/AboutDoctorSection";
 import ServiceCard from "@/components/common/ServiceCard";
 import TestimonialCard from "@/components/common/TestimonialCard";
-import { useEffect } from "react";
 import TypeFormEmbed from "@/components/forms/TypeFormEmbed";
 import MetaTags from "@/components/common/MetaTags";
 import StructuredData from "@/components/seo/StructuredData";
