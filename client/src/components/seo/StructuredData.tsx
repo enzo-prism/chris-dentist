@@ -23,8 +23,8 @@ const StructuredData = ({ type = 'organization', serviceData, reviewData }: Stru
     "@type": "Dentist",
     "@id": `${baseUrl}/#organization`,
     "name": officeInfo.name,
-    "alternateName": "Dr. Wong's Dental Practice",
-    "description": "Premier dental care practice in Palo Alto providing comprehensive dental services with a focus on conservative, ethical approaches.",
+    "alternateName": ["Dr. Wong's Dental Practice", "Palo Alto Dentist", "Dr. Christopher Wong DDS"],
+    "description": "Premier Palo Alto dentist Dr. Christopher Wong provides exceptional dental care. Top-rated dental practice serving Palo Alto, Menlo Park, and surrounding areas with comprehensive dental services.",
     "url": baseUrl,
     "logo": `${baseUrl}/favicon/apple-touch-icon.png`,
     "image": `${baseUrl}/favicon/apple-touch-icon.png`,
@@ -60,11 +60,26 @@ const StructuredData = ({ type = 'organization', serviceData, reviewData }: Stru
     "priceRange": "$$",
     "currenciesAccepted": "USD",
     "paymentAccepted": "Cash, Credit Card, Insurance",
-    "areaServed": {
-      "@type": "City",
-      "name": "Palo Alto",
-      "sameAs": "https://en.wikipedia.org/wiki/Palo_Alto,_California"
-    },
+    "areaServed": [
+      {
+        "@type": "City",
+        "name": "Palo Alto",
+        "sameAs": "https://en.wikipedia.org/wiki/Palo_Alto,_California"
+      },
+      {
+        "@type": "City", 
+        "name": "Menlo Park"
+      },
+      {
+        "@type": "City",
+        "name": "Stanford"
+      },
+      {
+        "@type": "City",
+        "name": "Mountain View"
+      }
+    ],
+    "keywords": "Palo Alto dentist, dental care Palo Alto, dentist near me, preventive dentistry, cosmetic dentistry, emergency dental care",
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
       "name": "Dental Services",

@@ -6,34 +6,34 @@ import { officeInfo } from './data';
  */
 export const pageTitles = {
   // Home page
-  home: `${officeInfo.name} | Premier Dental Care in Palo Alto`,
+  home: `Palo Alto Dentist | Dr. Christopher Wong | Premier Dental Care`,
   
   // About page
-  about: `About Our Team | ${officeInfo.name}`,
+  about: `About Dr. Christopher Wong | Palo Alto Dentist | ${officeInfo.name}`,
   
   // Services page
-  services: `Dental Services | ${officeInfo.name}`,
+  services: `Dental Services in Palo Alto | Dr. Christopher Wong | ${officeInfo.name}`,
   
   // Patient resources
-  patientResources: `Patient Resources | ${officeInfo.name}`,
+  patientResources: `Patient Resources | Palo Alto Dentist | ${officeInfo.name}`,
   
   // Testimonials
-  testimonials: `Patient Success Stories | ${officeInfo.name}`,
+  testimonials: `Patient Reviews | Palo Alto Dentist | ${officeInfo.name}`,
   
   // Blog page
-  blog: `Dental Health Blog | ${officeInfo.name}`,
+  blog: `Dental Health Blog | Palo Alto Dentist | ${officeInfo.name}`,
   
   // Contact page
-  contact: `Contact Our Palo Alto Office | ${officeInfo.name}`,
+  contact: `Contact Palo Alto Dentist | Dr. Christopher Wong | ${officeInfo.name}`,
   
   // Schedule page
-  schedule: `Book Your Appointment | ${officeInfo.name}`,
+  schedule: `Book Appointment | Palo Alto Dentist | Dr. Christopher Wong`,
   
   // Not found page
-  notFound: `Page Not Found | ${officeInfo.name}`,
+  notFound: `Page Not Found | Palo Alto Dentist | ${officeInfo.name}`,
   
   // Default fallback
-  default: `${officeInfo.name} | Palo Alto Dental Care`
+  default: `Palo Alto Dentist | Dr. Christopher Wong | ${officeInfo.name}`
 };
 
 /**
@@ -42,32 +42,32 @@ export const pageTitles = {
  */
 export const pageDescriptions = {
   // Home page
-  home: `Experience exceptional dental care with Dr. Christopher Wong in Palo Alto. We provide comprehensive, patient-centered services in a comfortable environment.`,
+  home: `Top-rated Palo Alto dentist Dr. Christopher Wong provides exceptional dental care. Comprehensive services including cleanings, cosmetic dentistry & emergency care.`,
   
   // About page
-  about: `Meet Dr. Christopher Wong and our skilled dental team. Learn about our patient-centered approach and commitment to excellence in Palo Alto dental care.`,
+  about: `Meet Dr. Christopher Wong, experienced Palo Alto dentist with years of excellence. Learn about our patient-centered approach to dental care in Palo Alto.`,
   
   // Services page
-  services: `Comprehensive dental services in Palo Alto including preventive care, cosmetic dentistry, restorative treatments, orthodontics, and emergency care.`,
+  services: `Complete dental services in Palo Alto: preventive care, cosmetic dentistry, restorative treatments, orthodontics & emergency dental care. Top Palo Alto dentist.`,
   
   // Patient resources
-  patientResources: `Access forms, insurance information, and preparation tips for your visit to Dr. Wong's dental practice in Palo Alto. Making your care convenient.`,
+  patientResources: `Patient forms, insurance info & visit preparation for Dr. Wong's Palo Alto dental practice. Convenient resources for our dental patients.`,
   
   // Testimonials
-  testimonials: `Read authentic patient stories and testimonials about their experiences with Dr. Christopher Wong's dental practice in Palo Alto.`,
+  testimonials: `Read patient reviews for Dr. Christopher Wong, trusted Palo Alto dentist. Real testimonials from satisfied patients in Palo Alto and surrounding areas.`,
   
   // Blog page
-  blog: `Stay informed with the latest dental health tips, news, and advances in dental technology from Dr. Wong's practice in Palo Alto.`,
+  blog: `Dental health tips and news from Dr. Wong's Palo Alto dental practice. Stay informed about oral health and dental technology advances.`,
   
   // Contact page
-  contact: `Contact Dr. Wong's dental practice in Palo Alto. Our office is conveniently located at ${officeInfo.address.line1}, ${officeInfo.address.line2}.`,
+  contact: `Contact Palo Alto dentist Dr. Christopher Wong at ${officeInfo.address.line1}, ${officeInfo.address.line2}. Call ${officeInfo.phone} to schedule your visit.`,
   
   // Schedule page
-  schedule: `Book your dental appointment with Dr. Christopher Wong in Palo Alto. New patients welcome. Easy online scheduling available.`,
+  schedule: `Schedule your appointment with Palo Alto dentist Dr. Christopher Wong. New patients welcome. Easy online booking for dental care in Palo Alto.`,
   
   // Not found page
-  notFound: `The page you're looking for cannot be found. Return to our Palo Alto dental practice homepage or contact our office for assistance.`,
+  notFound: `Page not found. Return to Dr. Wong's Palo Alto dental practice homepage or contact our office for assistance with dental appointments.`,
   
   // Default fallback
-  default: `Dr. Christopher Wong offers comprehensive dental care in Palo Alto, CA. Schedule your appointment today and experience exceptional dental services.`
+  default: `Dr. Christopher Wong, trusted Palo Alto dentist offering comprehensive dental care. Schedule your appointment today for exceptional dental services.`
 };

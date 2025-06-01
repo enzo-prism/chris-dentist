@@ -18,23 +18,7 @@ import { pageTitles, pageDescriptions } from "@/lib/metaContent";
 import { drWongImages } from "@/lib/imageUrls";
 
 const Home = () => {
-  // Load Elfsight script
-  useEffect(() => {
-    // Add the Elfsight script
-    const script = document.createElement('script');
-    script.src = "https://static.elfsight.com/platform/platform.js";
-    script.async = true;
-    
-    // Add the script to the document if it doesn't already exist
-    if (!document.querySelector('script[src="https://static.elfsight.com/platform/platform.js"]')) {
-      document.body.appendChild(script);
-    }
-    
-    // Cleanup function
-    return () => {
-      // We're not removing the script on unmount because it might be used by other pages
-    };
-  }, []);
+
   
   // Fetch services
   const { data: services, isLoading: isLoadingServices } = useQuery<Service[]>({
@@ -189,14 +173,27 @@ const Home = () => {
             </div>
           )}
           
-          {/* Google Reviews Widget */}
+          {/* Local Dental Practice Info */}
           <div className="mt-12 mb-10 bg-white rounded-lg shadow-lg overflow-hidden">
-            <div className="p-6 bg-gray-50 border-b">
-              <h3 className="text-xl font-bold font-heading text-center">Our Google Reviews</h3>
+            <div className="p-6 bg-primary text-white text-center">
+              <h3 className="text-xl font-bold mb-2">Your Trusted Palo Alto Dental Practice</h3>
+              <p className="text-blue-100">Serving Palo Alto, Menlo Park, Stanford, and surrounding communities</p>
             </div>
-            <div className="p-4">
-              {/* Elfsight Google Reviews Widget */}
-              <div className="elfsight-app-97536d24-590e-4a39-ae4c-c3fb469042f8" data-elfsight-app-lazy></div>
+            <div className="p-6">
+              <div className="grid md:grid-cols-3 gap-6 text-center">
+                <div>
+                  <div className="text-2xl font-bold text-primary mb-2">15+ Years</div>
+                  <p className="text-gray-600">Serving Palo Alto Community</p>
+                </div>
+                <div>
+                  <div className="text-2xl font-bold text-primary mb-2">200+</div>
+                  <p className="text-gray-600">Five-Star Patient Reviews</p>
+                </div>
+                <div>
+                  <div className="text-2xl font-bold text-primary mb-2">Same Day</div>
+                  <p className="text-gray-600">Emergency Dental Care</p>
+                </div>
+              </div>
             </div>
           </div>
           
