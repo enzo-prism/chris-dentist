@@ -107,28 +107,29 @@ const DentalImplants = () => {
       </Helmet>
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary to-blue-700 text-white py-20">
+      <section className="bg-gradient-to-br from-primary to-blue-700 text-white py-12 sm:py-16 lg:py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="text-4xl md:text-5xl font-bold font-heading mb-6">
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold font-heading mb-4 sm:mb-6 leading-tight">
               Dental Implants in Palo Alto: A Comprehensive Guide to Restoring Your Smile
             </h1>
-            <p className="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">
+            <p className="text-base sm:text-lg lg:text-xl text-blue-100 mb-6 sm:mb-8 max-w-3xl mx-auto leading-relaxed">
               Are you missing one or more teeth and looking for a permanent, natural-looking solution in Palo Alto? 
               Dental implants offer a revolutionary way to restore not just the appearance of your smile, but its full function and health.
             </p>
-            <p className="text-lg text-blue-100 mb-8 max-w-3xl mx-auto">
+            <p className="text-sm sm:text-base lg:text-lg text-blue-100 mb-6 sm:mb-8 max-w-3xl mx-auto leading-relaxed">
               At the practice of Dr. Christopher B. Wong, DDS, we specialize in advanced implant dentistry, 
               providing durable, comfortable, and aesthetically pleasing tooth replacement options.
             </p>
             <Link href="/schedule">
-              <Button className="bg-white text-primary hover:bg-gray-100 font-medium px-8 py-3 text-lg">
-                Schedule Your Dental Implant Consultation Today
-                <ArrowRight className="ml-2 h-5 w-5" />
+              <Button className="bg-white text-primary hover:bg-gray-100 font-medium px-6 py-3 sm:px-8 sm:py-3 text-base sm:text-lg w-full sm:w-auto">
+                <span className="hidden sm:inline">Schedule Your Dental Implant Consultation Today</span>
+                <span className="sm:hidden">Schedule Consultation</span>
+                <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
               </Button>
             </Link>
           </motion.div>
@@ -136,36 +137,36 @@ const DentalImplants = () => {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-16 bg-white">
+      <section className="py-12 sm:py-16 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
+            className="text-center mb-8 sm:mb-12"
           >
-            <h2 className="text-3xl font-bold font-heading text-[#333333] mb-6">
+            <h2 className="text-2xl sm:text-3xl font-bold font-heading text-[#333333] mb-4 sm:mb-6 leading-tight">
               Why Choose Dental Implants? The Unmatched Benefits for Your Smile & Health
             </h2>
-            <p className="text-[#333333] text-lg max-w-3xl mx-auto">
+            <p className="text-[#333333] text-base sm:text-lg max-w-3xl mx-auto leading-relaxed">
               Dental implants are widely recognized as the gold standard for tooth replacement, and for good reason. 
               Unlike other options, they offer unique advantages:
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="space-y-4 sm:space-y-0 sm:grid sm:grid-cols-1 lg:grid-cols-2 sm:gap-8">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              className="space-y-6"
+              className="space-y-4 sm:space-y-6"
             >
               {benefits.slice(0, 4).map((benefit, index) => (
-                <div key={index} className="flex items-start">
-                  <CheckCircle className="h-6 w-6 text-primary mt-1 mr-4 flex-shrink-0" />
-                  <p className="text-[#333333]">{benefit}</p>
+                <div key={index} className="flex items-start bg-gray-50 p-4 rounded-lg">
+                  <CheckCircle className="h-5 w-5 sm:h-6 sm:w-6 text-primary mt-1 mr-3 sm:mr-4 flex-shrink-0" />
+                  <p className="text-[#333333] text-sm sm:text-base leading-relaxed">{benefit}</p>
                 </div>
               ))}
             </motion.div>
@@ -174,12 +175,12 @@ const DentalImplants = () => {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              className="space-y-6"
+              className="space-y-4 sm:space-y-6"
             >
               {benefits.slice(4).map((benefit, index) => (
-                <div key={index} className="flex items-start">
-                  <CheckCircle className="h-6 w-6 text-primary mt-1 mr-4 flex-shrink-0" />
-                  <p className="text-[#333333]">{benefit}</p>
+                <div key={index} className="flex items-start bg-gray-50 p-4 rounded-lg">
+                  <CheckCircle className="h-5 w-5 sm:h-6 sm:w-6 text-primary mt-1 mr-3 sm:mr-4 flex-shrink-0" />
+                  <p className="text-[#333333] text-sm sm:text-base leading-relaxed">{benefit}</p>
                 </div>
               ))}
             </motion.div>
@@ -188,19 +189,19 @@ const DentalImplants = () => {
       </section>
 
       {/* Candidacy Section */}
-      <section className="py-16 bg-[#F5F9FC]">
+      <section className="py-12 sm:py-16 bg-[#F5F9FC]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
+            className="text-center mb-8 sm:mb-12"
           >
-            <h2 className="text-3xl font-bold font-heading text-[#333333] mb-6">
+            <h2 className="text-2xl sm:text-3xl font-bold font-heading text-[#333333] mb-4 sm:mb-6 leading-tight">
               Are You a Candidate for Dental Implants in Palo Alto?
             </h2>
-            <p className="text-[#333333] text-lg mb-8">
+            <p className="text-[#333333] text-base sm:text-lg mb-6 sm:mb-8 leading-relaxed">
               Many individuals in Palo Alto missing teeth are excellent candidates for dental implants. 
               Generally, ideal candidates should have:
             </p>
@@ -211,18 +212,18 @@ const DentalImplants = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="bg-white rounded-lg shadow-lg p-8"
+            className="bg-white rounded-lg shadow-lg p-6 sm:p-8"
           >
-            <div className="space-y-6">
+            <div className="space-y-4 sm:space-y-6">
               {candidateRequirements.map((requirement, index) => (
-                <div key={index} className="flex items-start">
-                  <Heart className="h-6 w-6 text-primary mt-1 mr-4 flex-shrink-0" />
-                  <p className="text-[#333333]">{requirement}</p>
+                <div key={index} className="flex items-start p-3 bg-gray-50 rounded-lg">
+                  <Heart className="h-5 w-5 sm:h-6 sm:w-6 text-primary mt-1 mr-3 sm:mr-4 flex-shrink-0" />
+                  <p className="text-[#333333] text-sm sm:text-base leading-relaxed">{requirement}</p>
                 </div>
               ))}
             </div>
-            <div className="mt-8 p-4 bg-blue-50 rounded-lg">
-              <p className="text-[#333333]">
+            <div className="mt-6 sm:mt-8 p-4 bg-blue-50 rounded-lg">
+              <p className="text-[#333333] text-sm sm:text-base leading-relaxed">
                 During your initial consultation, Dr. Wong will conduct a thorough examination, including advanced 3D imaging 
                 (CBCT scans if necessary), to determine if dental implants are the right solution for your specific needs and oral health condition.
               </p>
@@ -232,40 +233,42 @@ const DentalImplants = () => {
       </section>
 
       {/* Procedure Section */}
-      <section className="py-16 bg-white">
+      <section className="py-12 sm:py-16 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
+            className="text-center mb-8 sm:mb-12"
           >
-            <h2 className="text-3xl font-bold font-heading text-[#333333] mb-6">
+            <h2 className="text-2xl sm:text-3xl font-bold font-heading text-[#333333] mb-4 sm:mb-6 leading-tight">
               The Dental Implant Procedure: What to Expect with Dr. Wong
             </h2>
-            <p className="text-[#333333] text-lg">
+            <p className="text-[#333333] text-base sm:text-lg leading-relaxed">
               The dental implant process is a multi-step journey tailored to your individual needs. 
               Dr. Wong and our compassionate Palo Alto team will guide you through each phase:
             </p>
           </motion.div>
 
-          <div className="space-y-8">
+          <div className="space-y-4 sm:space-y-6 lg:space-y-8">
             {procedureSteps.map((step, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="flex items-start bg-gray-50 rounded-lg p-6"
+                className="bg-gray-50 rounded-lg p-4 sm:p-6"
               >
-                <div className="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0 font-bold">
-                  {index + 1}
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold text-[#333333] mb-2">{step.title}</h3>
-                  <p className="text-[#333333]">{step.description}</p>
+                <div className="flex items-start">
+                  <div className="bg-primary text-white rounded-full w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0 font-bold text-sm sm:text-base">
+                    {index + 1}
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg sm:text-xl font-semibold text-[#333333] mb-2 sm:mb-3 leading-tight">{step.title}</h3>
+                    <p className="text-[#333333] text-sm sm:text-base leading-relaxed">{step.description}</p>
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -274,24 +277,24 @@ const DentalImplants = () => {
       </section>
 
       {/* Types of Implants Section */}
-      <section className="py-16 bg-[#F5F9FC]">
+      <section className="py-12 sm:py-16 bg-[#F5F9FC]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
+            className="text-center mb-8 sm:mb-12"
           >
-            <h3 className="text-3xl font-bold font-heading text-[#333333] mb-6">
+            <h3 className="text-2xl sm:text-3xl font-bold font-heading text-[#333333] mb-4 sm:mb-6 leading-tight">
               Types of Dental Implants We Offer
             </h3>
-            <p className="text-[#333333] text-lg">
+            <p className="text-[#333333] text-base sm:text-lg leading-relaxed">
               Depending on your specific situation, Dr. Wong may recommend different types of implant solutions:
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="space-y-4 sm:space-y-6 sm:grid sm:grid-cols-1 lg:grid-cols-2 sm:gap-6 lg:gap-8">
             {implantTypes.map((type, index) => (
               <motion.div
                 key={index}
@@ -299,10 +302,10 @@ const DentalImplants = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-white rounded-lg shadow-lg p-6"
+                className="bg-white rounded-lg shadow-lg p-5 sm:p-6"
               >
-                <h4 className="text-xl font-semibold text-[#333333] mb-3">{type.title}</h4>
-                <p className="text-[#333333]">{type.description}</p>
+                <h4 className="text-lg sm:text-xl font-semibold text-[#333333] mb-3 leading-tight">{type.title}</h4>
+                <p className="text-[#333333] text-sm sm:text-base leading-relaxed">{type.description}</p>
               </motion.div>
             ))}
           </div>
@@ -479,7 +482,7 @@ const DentalImplants = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-primary text-white">
+      <section className="py-12 sm:py-16 bg-primary text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -487,23 +490,24 @@ const DentalImplants = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl font-bold font-heading mb-6">
+            <h2 className="text-2xl sm:text-3xl font-bold font-heading mb-4 sm:mb-6 leading-tight">
               Take the Next Step Towards a Renewed Smile in Palo Alto
             </h2>
-            <p className="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">
+            <p className="text-base sm:text-lg lg:text-xl text-blue-100 mb-6 sm:mb-8 max-w-3xl mx-auto leading-relaxed">
               If you're ready to learn more about how dental implants can transform your smile, health, and confidence, 
               we invite you to schedule a consultation with Dr. Christopher B. Wong. Contact our Palo Alto dental practice today 
               – let us help you rediscover the joy of a complete and beautiful smile.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col gap-3 sm:flex-row sm:gap-4 justify-center">
               <Link href="/schedule">
-                <Button className="bg-white text-primary hover:bg-gray-100 font-medium px-8 py-3">
-                  Schedule Your Consultation
-                  <ArrowRight className="ml-2 h-5 w-5" />
+                <Button className="bg-white text-primary hover:bg-gray-100 font-medium px-6 py-3 sm:px-8 sm:py-3 w-full sm:w-auto">
+                  <span className="hidden sm:inline">Schedule Your Consultation</span>
+                  <span className="sm:hidden">Schedule Consultation</span>
+                  <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
                 </Button>
               </Link>
               <Link href="/contact">
-                <Button variant="outline" className="border-white border-2 text-white bg-white/10 hover:bg-white/20 px-8 py-3 font-medium">
+                <Button variant="outline" className="border-white border-2 text-white bg-white/10 hover:bg-white/20 px-6 py-3 sm:px-8 sm:py-3 font-medium w-full sm:w-auto">
                   Contact Our Practice
                 </Button>
               </Link>
