@@ -11,21 +11,49 @@ export async function registerRoutes(app: Express): Promise<Server> {
     res.header('Content-Type', 'text/plain');
     res.send(`User-agent: *
 Allow: /
+Crawl-delay: 1
 
 # Sitemap location
 Sitemap: ${process.env.BASE_URL || `${_req.protocol}://${_req.get('host')}`}/sitemap.xml
 
-# Disallow access to admin area (if it exists in the future)
-# Disallow: /admin/
+# Disallow access to admin and private areas
+Disallow: /admin/
+Disallow: /api/
+Disallow: /private/
+Disallow: /*?*
 
-# Allow crawling of all content
+# Allow crawling of all public content
+Allow: /
 Allow: /about
 Allow: /services
 Allow: /patient-resources
 Allow: /testimonials
 Allow: /blog
 Allow: /contact
-Allow: /schedule`);
+Allow: /schedule
+Allow: /dental-veneers
+Allow: /dental-implants
+Allow: /privacy-policy
+Allow: /terms
+Allow: /hipaa
+Allow: /accessibility
+
+# Specific bot instructions
+User-agent: Googlebot
+Crawl-delay: 1
+
+User-agent: Bingbot
+Crawl-delay: 2
+
+# Block problematic bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /`);
   });
 
   // Sitemap route
@@ -55,6 +83,8 @@ Allow: /schedule`);
         { url: '/', priority: '1.0', changefreq: 'weekly' },
         { url: '/about', priority: '0.8', changefreq: 'monthly' },
         { url: '/services', priority: '0.9', changefreq: 'weekly' },
+        { url: '/dental-veneers', priority: '0.9', changefreq: 'monthly' },
+        { url: '/dental-implants', priority: '0.9', changefreq: 'monthly' },
         { url: '/patient-resources', priority: '0.7', changefreq: 'monthly' },
         { url: '/testimonials', priority: '0.6', changefreq: 'monthly' },
         { url: '/blog', priority: '0.8', changefreq: 'weekly' },
