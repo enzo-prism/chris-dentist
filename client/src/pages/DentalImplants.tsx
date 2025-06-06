@@ -100,9 +100,9 @@ const DentalImplants = () => {
     <>
       <Helmet>
         <title>Dental Implants Palo Alto | Complete Guide with Dr. Wong</title>
-        <meta name="description" content="Restore your smile with dental implants in Palo Alto. Dr. Christopher B. Wong offers expert implant dentistry. Learn about benefits, procedure, cost & candidacy. Schedule your consult!" />
+        <meta name="description" content="Palo Alto dental implants by Dr. Christopher B. Wong. Learn about implant benefits, procedure and cost, find out if you're a candidate, and book a consultation." />
         <meta property="og:title" content="Dental Implants Palo Alto | Complete Guide with Dr. Wong" />
-        <meta property="og:description" content="Restore your smile with dental implants in Palo Alto. Dr. Christopher B. Wong offers expert implant dentistry. Learn about benefits, procedure, cost & candidacy. Schedule your consult!" />
+        <meta property="og:description" content="Palo Alto dental implants by Dr. Christopher B. Wong. Learn about implant benefits, procedure and cost, find out if you're a candidate, and book a consultation." />
         <link rel="canonical" href="/dental-implants" />
       </Helmet>
 
