@@ -7,7 +7,7 @@ const TermsOfService = () => {
     <>
       <MetaTags 
         title="Terms of Service | Dr. Christopher B. Wong, DDS"
-        description="Read the terms and conditions for using Dr. Wong's dental practice website and receiving dental services."
+        description="Read the terms and conditions for using Dr. Wong's dental practice website and the guidelines for receiving dental services in our Palo Alto office."
       />
       <CanonicalUrl path="/terms" />
       

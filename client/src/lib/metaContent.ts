@@ -42,7 +42,7 @@ export const pageTitles = {
  */
 export const pageDescriptions = {
   // Home page
-  home: `Top-rated Palo Alto dentist Dr. Christopher Wong provides exceptional dental care. Comprehensive services including cleanings, cosmetic dentistry & emergency care.`,
+  home: `Top-rated Palo Alto dentist Dr. Christopher Wong provides exceptional dental care. Services include cleanings, cosmetic dentistry and emergency treatments.`,
   
   // About page
   about: `Meet Dr. Christopher Wong, experienced Palo Alto dentist with years of excellence. Learn about our patient-centered approach to dental care in Palo Alto.`,

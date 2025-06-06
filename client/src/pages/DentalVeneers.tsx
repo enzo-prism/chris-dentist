@@ -72,7 +72,7 @@ const DentalVeneers = () => {
     <>
       <MetaTags 
         title="Dental Veneers Palo Alto | Dr. Christopher Wong | Porcelain & Composite Veneers"
-        description="Transform your smile with dental veneers in Palo Alto. Dr. Wong offers porcelain, composite, and no-prep veneers. Expert cosmetic dentistry with conservative approach."
+        description="Transform your smile with dental veneers in Palo Alto. Dr. Wong offers porcelain, composite, and no-prep options for beautiful results."
         image="/favicon/apple-touch-icon.png"
       />
       <StructuredData 
