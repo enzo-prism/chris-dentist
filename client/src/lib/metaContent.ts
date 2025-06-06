@@ -6,34 +6,34 @@ import { officeInfo } from './data';
  */
 export const pageTitles = {
   // Home page
-  home: `Palo Alto Dentist | Dr. Christopher Wong | Premier Dental Care`,
+  home: `Palo Alto Dentist | Dr. Christopher Wong DDS | Premier Care`,
   
   // About page
-  about: `About Dr. Christopher Wong | Palo Alto Dentist | ${officeInfo.name}`,
+  about: `About Dr. Christopher Wong DDS | Palo Alto Dentist`,
   
   // Services page
-  services: `Dental Services in Palo Alto | Dr. Christopher Wong | ${officeInfo.name}`,
+  services: `Palo Alto Dental Services | Dr. Christopher Wong DDS`,
   
   // Patient resources
-  patientResources: `Patient Resources | Palo Alto Dentist | ${officeInfo.name}`,
+  patientResources: `Patient Resources | Palo Alto Dentist Dr. Christopher Wong`,
   
   // Testimonials
-  testimonials: `Patient Reviews | Palo Alto Dentist | ${officeInfo.name}`,
+  testimonials: `Patient Reviews | Palo Alto Dentist Dr. Christopher Wong`,
   
   // Blog page
-  blog: `Dental Health Blog | Palo Alto Dentist | ${officeInfo.name}`,
+  blog: `Dental Health Blog | Dr. Christopher Wong DDS, Palo Alto`,
   
   // Contact page
-  contact: `Contact Palo Alto Dentist | Dr. Christopher Wong | ${officeInfo.name}`,
+  contact: `Contact Palo Alto Dentist Dr. Christopher Wong DDS`,
   
   // Schedule page
   schedule: `Book Appointment | Palo Alto Dentist | Dr. Christopher Wong`,
   
   // Not found page
-  notFound: `Page Not Found | Palo Alto Dentist | ${officeInfo.name}`,
+  notFound: `Page Not Found | Dr. Christopher Wong Palo Alto DDS`,
   
   // Default fallback
-  default: `Palo Alto Dentist | Dr. Christopher Wong | ${officeInfo.name}`
+  default: `Palo Alto Dentist | Dr. Christopher Wong DDS Dental Care`
 };
 
 /**
