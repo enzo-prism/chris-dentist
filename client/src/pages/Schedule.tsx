@@ -6,6 +6,7 @@ import { drWongImages } from "@/lib/imageUrls";
 import { ogImages } from "@/lib/ogImages";
 import { pageTitles, pageDescriptions } from "@/lib/metaContent";
 import { useEffect } from "react";
+import OptimizedImage from "@/components/seo/OptimizedImage";
 
 const Schedule = () => {
   useEffect(() => {
@@ -58,9 +59,9 @@ const Schedule = () => {
           
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="rounded-lg overflow-hidden shadow-md">
-              <img 
-                src="https://i.imgur.com/iqBXT9y.png" 
-                alt="Dr. Wong in his office" 
+              <OptimizedImage
+                src="https://i.imgur.com/iqBXT9y.png"
+                alt="Dr. Wong in his office"
                 className="w-full h-64 md:h-80 object-cover"
               />
             </div>

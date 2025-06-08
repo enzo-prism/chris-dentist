@@ -11,6 +11,7 @@ import StructuredData from "@/components/seo/StructuredData";
 import CanonicalUrl from "@/components/seo/CanonicalUrl";
 import { useState } from "react";
 import VideoModal from "@/components/common/VideoModal";
+import OptimizedImage from "@/components/seo/OptimizedImage";
 
 const About = () => {
   // State for video modal
@@ -60,9 +61,9 @@ const About = () => {
           
           <div className="bg-white rounded-xl shadow-lg overflow-hidden md:flex">
             <div className="md:w-2/5">
-              <img 
-                src="https://cdn.prod.website-files.com/6647633c9b317c62a46de335/67e986d38336152373ca94ad_Frame%201-min.png" 
-                alt="Dr. Christopher B. Wong's Dental Office" 
+              <OptimizedImage
+                src="https://cdn.prod.website-files.com/6647633c9b317c62a46de335/67e986d38336152373ca94ad_Frame%201-min.png"
+                alt="Dr. Christopher B. Wong's Dental Office"
                 className="w-full h-full object-cover"
               />
             </div>
@@ -163,9 +164,9 @@ const About = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {teamMembers.map((member, index) => (
               <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden">
-                <img 
-                  src={member.image} 
-                  alt={member.name} 
+                <OptimizedImage
+                  src={member.image}
+                  alt={member.name}
                   className="w-full h-56 object-cover"
                 />
                 <div className="p-6">

@@ -5,6 +5,7 @@ import MetaTags from "@/components/common/MetaTags";
 import StructuredData from "@/components/seo/StructuredData";
 import CanonicalUrl from "@/components/seo/CanonicalUrl";
 import { motion } from "framer-motion";
+import OptimizedImage from "@/components/seo/OptimizedImage";
 
 const DentalVeneers = () => {
   const veneerTypes = [
@@ -153,9 +154,9 @@ const DentalVeneers = () => {
               viewport={{ once: true }}
               className="relative"
             >
-              <img 
-                src="/images/veneers.jpg" 
-                alt="Beautiful smile transformation with dental veneers" 
+              <OptimizedImage
+                src="/images/veneers.jpg"
+                alt="Beautiful smile transformation with dental veneers"
                 className="w-full h-96 object-cover rounded-lg shadow-lg"
               />
               <div className="absolute inset-0 bg-primary/10 rounded-lg"></div>
@@ -244,9 +245,9 @@ const DentalVeneers = () => {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <img 
-                src="/images/couple.jpg" 
-                alt="Happy couple with beautiful smiles after veneer treatment" 
+              <OptimizedImage
+                src="/images/couple.jpg"
+                alt="Happy couple with beautiful smiles after veneer treatment"
                 className="w-full h-96 object-cover rounded-lg shadow-lg"
               />
             </motion.div>

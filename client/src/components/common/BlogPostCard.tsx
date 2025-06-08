@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "wouter";
 import { BlogPost } from "@shared/schema";
+import OptimizedImage from "@/components/seo/OptimizedImage";
 
 interface BlogPostCardProps {
   post: BlogPost;
@@ -25,11 +26,10 @@ const BlogPostCard = ({ post }: BlogPostCardProps) => {
     >
       {/* Image container with responsive height */}
       <div className="relative h-48 overflow-hidden">
-        <img 
-          src={post.image} 
-          alt={post.title} 
+        <OptimizedImage
+          src={post.image}
+          alt={post.title}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-          loading="lazy"
         />
         
         {/* Subtle gradient overlay */}

@@ -11,6 +11,7 @@ import { ogImages } from "@/lib/ogImages";
 import { pageTitles, pageDescriptions } from "@/lib/metaContent";
 import { BlogPost } from "@shared/schema";
 import { useState } from "react";
+import OptimizedImage from "@/components/seo/OptimizedImage";
 
 const Blog = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -76,9 +77,9 @@ const Blog = () => {
             <div className="bg-white rounded-lg shadow-xl overflow-hidden">
               <div className="md:flex">
                 <div className="md:w-1/2">
-                  <img 
-                    src={featuredPost.image} 
-                    alt={featuredPost.title} 
+                  <OptimizedImage
+                    src={featuredPost.image}
+                    alt={featuredPost.title}
                     className="w-full h-full object-cover"
                   />
                 </div>

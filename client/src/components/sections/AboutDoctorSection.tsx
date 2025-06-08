@@ -3,6 +3,7 @@ import { CheckCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'wouter';
 import { drWongImages } from '@/lib/imageUrls';
+import OptimizedImage from '@/components/seo/OptimizedImage';
 
 const AboutDoctorSection: React.FC = () => {
   return (
@@ -15,9 +16,9 @@ const AboutDoctorSection: React.FC = () => {
         
         <div className="md:flex items-center">
           <div className="md:w-1/3 mb-8 md:mb-0">
-            <img 
+            <OptimizedImage
               src={drWongImages.drWongPortrait1}
-              alt="Dr. Christopher B. Wong" 
+              alt="Dr. Christopher B. Wong"
               className="rounded-lg shadow-xl mx-auto"
             />
             <div className="text-center mt-4">
