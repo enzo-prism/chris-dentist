@@ -1,4 +1,5 @@
 import express, { type Request, Response, NextFunction } from "express";
+import compression from "compression";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import path from "path";
@@ -6,10 +7,11 @@ import path from "path";
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(compression());
 
 // Serve static files from public directory
 const publicPath = path.resolve(process.cwd(), "public");
-app.use(express.static(publicPath));
+app.use(express.static(publicPath, { maxAge: "1y", immutable: true }));
 
 app.use((req, res, next) => {
   const start = Date.now();
