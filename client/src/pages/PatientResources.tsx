@@ -11,6 +11,7 @@ import { drWongImages } from "@/lib/imageUrls";
 import { ogImages } from "@/lib/ogImages";
 import { pageTitles, pageDescriptions } from "@/lib/metaContent";
 import { officeInfo, faqItems, patientResources } from "@/lib/data";
+import OptimizedImage from "@/components/seo/OptimizedImage";
 
 const PatientResources = () => {
   const [activeTab, setActiveTab] = useState("forms");
@@ -271,9 +272,9 @@ const PatientResources = () => {
 
               <div className="grid md:grid-cols-2 gap-8">
                 <div className="bg-white rounded-lg shadow-md overflow-hidden">
-                  <img 
-                    src="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
-                    alt="Dental consultation" 
+                  <OptimizedImage
+                    src="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                    alt="Dental consultation"
                     className="w-full h-64 object-cover"
                   />
                   <div className="p-6">

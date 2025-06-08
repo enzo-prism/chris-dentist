@@ -6,6 +6,7 @@ import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 
 import { Service } from "@shared/schema";
+import OptimizedImage from "@/components/seo/OptimizedImage";
 
 interface ServiceCardProps {
   service: Service;
@@ -39,11 +40,10 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
     >
       {/* Image container with responsive height */}
       <div className="relative h-48 overflow-hidden">
-        <img 
-          src={service.image} 
-          alt={service.title} 
+        <OptimizedImage
+          src={service.image}
+          alt={service.title}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-          loading="lazy"
         />
         
         {/* Subtle gradient overlay */}

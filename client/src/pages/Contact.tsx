@@ -5,6 +5,7 @@ import MetaTags from "@/components/common/MetaTags";
 import { drWongImages } from "@/lib/imageUrls";
 import { ogImages } from "@/lib/ogImages";
 import { pageTitles, pageDescriptions } from "@/lib/metaContent";
+import OptimizedImage from "@/components/seo/OptimizedImage";
 
 const Contact = () => {
   return (
@@ -40,9 +41,9 @@ const Contact = () => {
           
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="rounded-lg overflow-hidden shadow-md">
-              <img 
-                src="https://i.imgur.com/rIGaK9S.png" 
-                alt="Reception Desk" 
+              <OptimizedImage
+                src="https://i.imgur.com/rIGaK9S.png"
+                alt="Reception Desk"
                 className="w-full h-64 md:h-80 object-cover"
               />
             </div>

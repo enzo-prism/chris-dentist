@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { ArrowLeft, ArrowRight, X, ImageIcon, ExternalLink } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import OptimizedImage from '@/components/seo/OptimizedImage';
 
 const OfficeGallerySection = () => {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
@@ -172,11 +173,11 @@ const OfficeGallerySection = () => {
               >
                 {/* Image container with fixed aspect ratio */}
                 <div className="aspect-[4/3] relative overflow-hidden">
-                  <img 
-                    src={image.src} 
-                    alt={image.alt} 
+                  <OptimizedImage
+                    src={image.src}
+                    alt={image.alt}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    loading={index < 4 ? "eager" : "lazy"}
+                    priority={index < 4}
                   />
                   
                   {/* Subtle overlay with consistent branding */}
@@ -248,10 +249,11 @@ const OfficeGallerySection = () => {
               exit={{ scale: 0.9, opacity: 0 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
             >
-              <img 
-                src={images[selectedImage].src} 
-                alt={images[selectedImage].alt} 
+              <OptimizedImage
+                src={images[selectedImage].src}
+                alt={images[selectedImage].alt}
                 className="max-h-[70vh] w-full object-contain mx-auto rounded-lg"
+                priority
               />
               <div className="text-center mt-5 px-4">
                 <h3 className="font-medium text-white text-lg mb-2">{images[selectedImage].alt}</h3>

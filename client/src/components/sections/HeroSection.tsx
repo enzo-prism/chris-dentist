@@ -4,6 +4,7 @@ import { Link } from "wouter";
 import { drWongImages } from "@/lib/imageUrls";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import OptimizedImage from "@/components/seo/OptimizedImage";
 
 const HeroSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -95,10 +96,11 @@ const HeroSection = () => {
           >
             {/* Main image with styling */}
             <div className="relative rounded-2xl overflow-hidden shadow-sm mb-12">
-              <img 
-                src={drWongImages.heroImage || drWongImages.drWongOffice2} 
-                alt="Dr. Wong's Modern Dental Office" 
+              <OptimizedImage
+                src={drWongImages.heroImage || drWongImages.drWongOffice2}
+                alt="Dr. Wong's Modern Dental Office"
                 className="w-full h-auto object-cover rounded-2xl aspect-[4/3]"
+                priority
               />
               
               {/* Status badge */}

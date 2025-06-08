@@ -8,6 +8,7 @@ import { drWongImages } from "@/lib/imageUrls";
 import { ogImages } from "@/lib/ogImages";
 import { pageTitles, pageDescriptions } from "@/lib/metaContent";
 import { Service } from "@shared/schema";
+import OptimizedImage from "@/components/seo/OptimizedImage";
 
 const Services = () => {
   const { data: services, isLoading } = useQuery<Service[]>({
@@ -84,9 +85,9 @@ const Services = () => {
               </Link>
             </div>
             <div className="md:w-1/2 md:pl-12">
-              <img 
-                src="https://imgur.com/hO02YQ0.jpg" 
-                alt="Payment processing with mobile device" 
+              <OptimizedImage
+                src="https://imgur.com/hO02YQ0.jpg"
+                alt="Payment processing with mobile device"
                 className="rounded-lg shadow-xl"
               />
             </div>
