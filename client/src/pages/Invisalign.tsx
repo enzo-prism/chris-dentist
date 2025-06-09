@@ -181,8 +181,8 @@ const Invisalign = () => {
               className="relative"
             >
               <OptimizedImage
-                src="/images/invisalign-aligners.jpg"
-                alt="Invisalign clear aligners showing the invisible orthodontic treatment"
+                src="/images/invisalign-treatment.jpg"
+                alt="Invisalign clear aligners treatment at Dr. Christopher B. Wong's Palo Alto practice"
                 className="w-full h-96 object-cover rounded-lg shadow-lg"
               />
               <div className="absolute inset-0 bg-primary/10 rounded-lg"></div>
