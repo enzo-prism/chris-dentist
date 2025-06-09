@@ -280,8 +280,12 @@ const Invisalign = () => {
                   </div>
                   <p className="text-[#333333]">{step.description}</p>
                 </div>
-                <div className="w-full md:w-80 h-64 bg-gray-200 rounded-lg flex items-center justify-center">
-                  <span className="text-gray-500">Step {step.step} Illustration</span>
+                <div className="w-full md:w-80 h-64 rounded-lg overflow-hidden shadow-lg">
+                  <OptimizedImage
+                    src={`/images/invisalign-step-${step.step}.png`}
+                    alt={`Invisalign treatment step ${step.step}: ${step.title}`}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
               </motion.div>
             ))}
