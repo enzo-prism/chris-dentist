@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
-import { Menu, X, Phone, MapPin, Search, Calendar } from "lucide-react";
+import { Menu, X, Phone, MapPin, Search, Calendar, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import SearchBar from "./SearchBar";
@@ -40,7 +40,16 @@ const Header = () => {
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/about", label: "About" },
-    { href: "/services", label: "Services" },
+    { 
+      href: "/services", 
+      label: "Services",
+      submenu: [
+        { href: "/invisalign", label: "Invisalign" },
+        { href: "/dental-veneers", label: "Dental Veneers" },
+        { href: "/dental-implants", label: "Dental Implants" },
+        { href: "/services", label: "All Services" }
+      ]
+    },
     { href: "/patient-resources", label: "Patient Resources" },
     { href: "/testimonials", label: "Testimonials" },
     { href: "/contact", label: "Contact" }
@@ -95,18 +104,48 @@ const Header = () => {
           <nav className="hidden lg:flex items-center justify-center flex-1">
             <ul className="flex items-center justify-center w-full mx-auto">
               {navLinks.map((link) => (
-                <li key={link.href} className="mx-3">
-                  <Link href={link.href}>
-                    <div className={`px-2 py-2 relative text-center group ${isActive(link.href) ? 'text-primary' : 'text-gray-700'}`}>
-                      <span className="text-sm font-medium cursor-pointer hover:text-primary transition-colors">
-                        {link.label}
-                      </span>
-                      {isActive(link.href) && (
-                        <span className="absolute bottom-0 left-0 right-0 mx-auto w-full h-0.5 bg-primary"></span>
-                      )}
-                      <span className="absolute bottom-0 left-0 right-0 mx-auto w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300 ease-in-out"></span>
+                <li key={link.href} className="mx-3 relative group">
+                  {link.submenu ? (
+                    <div className="relative">
+                      <Link href={link.href}>
+                        <div className={`px-2 py-2 relative text-center group/item ${isActive(link.href) || link.submenu.some(sub => isActive(sub.href)) ? 'text-primary' : 'text-gray-700'}`}>
+                          <span className="text-sm font-medium cursor-pointer hover:text-primary transition-colors flex items-center">
+                            {link.label}
+                            <ChevronDown className="h-3 w-3 ml-1 group-hover:rotate-180 transition-transform duration-200" />
+                          </span>
+                          {(isActive(link.href) || link.submenu.some(sub => isActive(sub.href))) && (
+                            <span className="absolute bottom-0 left-0 right-0 mx-auto w-full h-0.5 bg-primary"></span>
+                          )}
+                          <span className="absolute bottom-0 left-0 right-0 mx-auto w-0 h-0.5 bg-primary group-hover/item:w-full transition-all duration-300 ease-in-out"></span>
+                        </div>
+                      </Link>
+                      
+                      {/* Dropdown menu */}
+                      <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-1 w-56 bg-white rounded-lg shadow-lg border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                        <div className="py-2">
+                          {link.submenu.map((subLink, index) => (
+                            <Link key={subLink.href} href={subLink.href}>
+                              <div className={`px-4 py-3 hover:bg-gray-50 transition-colors cursor-pointer ${isActive(subLink.href) ? 'text-primary bg-primary/5' : 'text-gray-700'}`}>
+                                <span className="text-sm font-medium">{subLink.label}</span>
+                              </div>
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
                     </div>
-                  </Link>
+                  ) : (
+                    <Link href={link.href}>
+                      <div className={`px-2 py-2 relative text-center group/item ${isActive(link.href) ? 'text-primary' : 'text-gray-700'}`}>
+                        <span className="text-sm font-medium cursor-pointer hover:text-primary transition-colors">
+                          {link.label}
+                        </span>
+                        {isActive(link.href) && (
+                          <span className="absolute bottom-0 left-0 right-0 mx-auto w-full h-0.5 bg-primary"></span>
+                        )}
+                        <span className="absolute bottom-0 left-0 right-0 mx-auto w-0 h-0.5 bg-primary group-hover/item:w-full transition-all duration-300 ease-in-out"></span>
+                      </div>
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
@@ -178,18 +217,38 @@ const Header = () => {
             <div className="max-w-6xl mx-auto px-4 py-3">
               <nav className="flex flex-col space-y-1">
                 {navLinks.map((link) => (
-                  <Link key={link.href} href={link.href}>
-                    <div
-                      className={`py-3 px-2 ${
-                        isActive(link.href)
-                          ? 'text-primary font-medium'
-                          : 'text-gray-700'
-                      }`}
-                      onClick={closeMenus}
-                    >
-                      {link.label}
-                    </div>
-                  </Link>
+                  <div key={link.href}>
+                    <Link href={link.href}>
+                      <div
+                        className={`py-3 px-2 ${
+                          isActive(link.href) || (link.submenu && link.submenu.some(sub => isActive(sub.href)))
+                            ? 'text-primary font-medium'
+                            : 'text-gray-700'
+                        }`}
+                        onClick={closeMenus}
+                      >
+                        {link.label}
+                      </div>
+                    </Link>
+                    {link.submenu && (
+                      <div className="ml-4 space-y-1">
+                        {link.submenu.map((subLink) => (
+                          <Link key={subLink.href} href={subLink.href}>
+                            <div
+                              className={`py-2 px-2 text-sm ${
+                                isActive(subLink.href)
+                                  ? 'text-primary font-medium'
+                                  : 'text-gray-600'
+                              }`}
+                              onClick={closeMenus}
+                            >
+                              {subLink.label}
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 ))}
                 <Link href="/schedule#appointment">
                   <Button
