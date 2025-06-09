@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
+import { trackGAEvent } from "@/lib/analytics";
 import { ArrowRight } from "lucide-react";
 
 const NewsletterForm = () => {
@@ -28,6 +29,7 @@ const NewsletterForm = () => {
         title: "Subscribed!",
         description: "Thank you for subscribing to our newsletter.",
       });
+      trackGAEvent("generate_lead");
       form.reset();
       setIsSubmitting(false);
     },

@@ -12,6 +12,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
+import { trackGAEvent } from "@/lib/analytics";
 
 const AppointmentForm = () => {
   const { toast } = useToast();
@@ -39,6 +40,7 @@ const AppointmentForm = () => {
         description: "You will receive a confirmation email shortly.",
         variant: "success",
       });
+      trackGAEvent("booked_appointment");
       form.reset();
       setIsSubmitting(false);
     },
