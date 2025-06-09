@@ -455,7 +455,7 @@ const Invisalign = () => {
                 </Button>
               </Link>
               <Link href="/contact">
-                <Button variant="outline" className="border-white text-white hover:bg-white/10 px-8 py-3">
+                <Button variant="outline" className="border-white text-white hover:bg-white hover:text-primary px-8 py-3">
                   Ask Questions
                 </Button>
               </Link>
