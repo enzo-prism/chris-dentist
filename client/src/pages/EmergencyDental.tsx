@@ -298,7 +298,7 @@ const EmergencyDental = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-gray-50 rounded-lg p-6 border-l-4 border-red-600"
+                className="bg-gray-50 rounded-lg p-6 border-l-4 border-orange-600"
               >
                 <div className="flex items-center mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
@@ -314,7 +314,7 @@ const EmergencyDental = () => {
       </section>
 
       {/* 24/7 Availability */}
-      <section className="py-16 bg-red-600 text-white">
+      <section className="py-16 bg-primary text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -332,25 +332,25 @@ const EmergencyDental = () => {
             </p>
             
             <div className="grid md:grid-cols-3 gap-6 mb-8">
-              <div className="bg-red-700 rounded-lg p-6">
+              <div className="bg-blue-700 rounded-lg p-6">
                 <Shield className="h-8 w-8 mx-auto mb-4" />
                 <h3 className="text-lg font-bold mb-2">Immediate Relief</h3>
-                <p className="text-red-100">Fast pain management and emergency treatment</p>
+                <p className="text-blue-100">Fast pain management and emergency treatment</p>
               </div>
-              <div className="bg-red-700 rounded-lg p-6">
+              <div className="bg-blue-700 rounded-lg p-6">
                 <Heart className="h-8 w-8 mx-auto mb-4" />
                 <h3 className="text-lg font-bold mb-2">Compassionate Care</h3>
-                <p className="text-red-100">Gentle, understanding approach during stressful times</p>
+                <p className="text-blue-100">Gentle, understanding approach during stressful times</p>
               </div>
-              <div className="bg-red-700 rounded-lg p-6">
+              <div className="bg-blue-700 rounded-lg p-6">
                 <CheckCircle className="h-8 w-8 mx-auto mb-4" />
                 <h3 className="text-lg font-bold mb-2">Expert Treatment</h3>
-                <p className="text-red-100">Years of experience handling dental emergencies</p>
+                <p className="text-blue-100">Years of experience handling dental emergencies</p>
               </div>
             </div>
 
             <a href="tel:+16503266319">
-              <Button className="bg-white text-red-600 hover:bg-gray-100 font-medium px-8 py-3 text-lg">
+              <Button className="bg-white text-primary hover:bg-gray-100 font-medium px-8 py-3 text-lg">
                 Call Emergency Line Now
                 <Phone className="ml-2 h-5 w-5" />
               </Button>
@@ -413,7 +413,7 @@ const EmergencyDental = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a href="tel:+16503266319">
-                <Button className="bg-red-600 hover:bg-red-700 text-white font-medium px-8 py-3">
+                <Button className="bg-orange-600 hover:bg-orange-700 text-white font-medium px-8 py-3">
                   Call Emergency Line
                   <Phone className="ml-2 h-5 w-5" />
                 </Button>
