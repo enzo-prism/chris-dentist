@@ -29,6 +29,9 @@ export const pageTitles = {
   // Schedule page
   schedule: `Book Appointment | Palo Alto Dentist | Dr. Christopher Wong`,
   
+  // Invisalign page
+  invisalign: `Invisalign Palo Alto | Clear Aligners | Dr. Christopher Wong`,
+  
   // Not found page
   notFound: `Page Not Found | Dr. Christopher Wong Palo Alto DDS`,
   
@@ -64,6 +67,9 @@ export const pageDescriptions = {
   
   // Schedule page
   schedule: `Schedule your appointment with Palo Alto dentist Dr. Christopher Wong. New patients welcome. Easy online booking for dental care in Palo Alto.`,
+  
+  // Invisalign page
+  invisalign: `Invisalign clear aligners in Palo Alto with Dr. Christopher Wong. Discreet, comfortable orthodontic treatment for teens and adults. Virtually invisible braces.`,
   
   // Not found page
   notFound: `Page not found. Return to Dr. Wong's Palo Alto dental practice homepage or contact our office for assistance with dental appointments.`,

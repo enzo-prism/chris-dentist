@@ -27,6 +27,7 @@ import HipaaNotice from "@/pages/HipaaNotice";
 import Accessibility from "@/pages/Accessibility";
 import DentalVeneers from "@/pages/DentalVeneers";
 import DentalImplants from "@/pages/DentalImplants";
+import Invisalign from "@/pages/Invisalign";
 
 function ScrollToTop() {
   const [location] = useLocation();
@@ -59,6 +60,7 @@ function Router() {
           <Route path="/accessibility" component={Accessibility} />
           <Route path="/dental-veneers" component={DentalVeneers} />
           <Route path="/dental-implants" component={DentalImplants} />
+          <Route path="/invisalign" component={Invisalign} />
           <Route component={NotFound} />
         </Switch>
       </main>

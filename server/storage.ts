@@ -311,6 +311,13 @@ export class MemStorage implements IStorage {
         featured: false
       },
       {
+        title: "Invisalign Clear Aligners",
+        description: "Virtually invisible orthodontic treatment using custom clear aligners to straighten teeth discreetly for teens and adults.",
+        image: "https://i.imgur.com/XVLlcob.jpg",
+        slug: "invisalign",
+        featured: true
+      },
+      {
         title: "Emergency Dental Care",
         description: "Prompt attention for dental emergencies such as toothaches, broken teeth, or other urgent dental issues.",
         image: "https://i.imgur.com/t6yAG3i.jpg",
