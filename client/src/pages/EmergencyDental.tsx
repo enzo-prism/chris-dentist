@@ -1,0 +1,435 @@
+import { Phone, Clock, AlertTriangle, CheckCircle, ArrowRight, Shield, Heart, Star } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Link } from "wouter";
+import MetaTags from "@/components/common/MetaTags";
+import StructuredData from "@/components/seo/StructuredData";
+import CanonicalUrl from "@/components/seo/CanonicalUrl";
+import { motion } from "framer-motion";
+
+const EmergencyDental = () => {
+  const emergencyTypes = [
+    {
+      title: "Severe Toothache",
+      description: "Intense, persistent tooth pain that interferes with daily activities",
+      symptoms: ["Throbbing pain", "Pain when chewing", "Sensitivity to hot/cold", "Swelling around tooth"],
+      immediateAction: "Rinse with warm salt water, take over-the-counter pain medication, apply cold compress"
+    },
+    {
+      title: "Knocked-Out Tooth",
+      description: "Complete tooth displacement due to trauma or injury",
+      symptoms: ["Missing tooth", "Bleeding from socket", "Pain in affected area"],
+      immediateAction: "Keep tooth moist, handle by crown only, seek immediate dental care within 30 minutes"
+    },
+    {
+      title: "Broken or Chipped Tooth",
+      description: "Fractured tooth structure from injury or biting hard objects",
+      symptoms: ["Visible crack or chip", "Sharp edges", "Pain when biting", "Sensitivity"],
+      immediateAction: "Save any broken pieces, rinse mouth with warm water, apply cold compress for swelling"
+    },
+    {
+      title: "Lost Filling or Crown",
+      description: "Dental restoration becomes loose or falls out completely",
+      symptoms: ["Exposed tooth structure", "Sensitivity", "Discomfort when eating"],
+      immediateAction: "Keep crown/filling safe, use dental cement or sugar-free gum as temporary protection"
+    },
+    {
+      title: "Dental Abscess",
+      description: "Serious infection around tooth root or gums requiring immediate attention",
+      symptoms: ["Severe pain", "Facial swelling", "Fever", "Bad taste in mouth", "Swollen lymph nodes"],
+      immediateAction: "Rinse with salt water, take pain medication, seek immediate dental care - do not delay"
+    },
+    {
+      title: "Soft Tissue Injury",
+      description: "Cuts, tears, or injuries to gums, tongue, cheeks, or lips",
+      symptoms: ["Bleeding", "Pain", "Visible cuts or tears", "Swelling"],
+      immediateAction: "Clean area gently, apply pressure to control bleeding, use cold compress for swelling"
+    }
+  ];
+
+  const emergencySteps = [
+    {
+      step: "1",
+      title: "Stay Calm",
+      description: "Take a deep breath and assess the situation. Most dental emergencies can be effectively treated when addressed promptly."
+    },
+    {
+      step: "2", 
+      title: "Contact Us Immediately",
+      description: "Call our emergency line at (650) 326-6319. Dr. Wong provides 24/7 emergency dental care for his patients."
+    },
+    {
+      step: "3",
+      title: "Follow First Aid",
+      description: "Apply appropriate first aid measures while en route to our office. This can help manage pain and prevent further damage."
+    },
+    {
+      step: "4",
+      title: "Preserve Evidence",
+      description: "Save any broken tooth pieces, crowns, or fillings. These may be reusable in your treatment."
+    }
+  ];
+
+  const patientTestimonials = [
+    {
+      name: "Madison Ho",
+      text: "Dr. Wong is such a kind and wonderful doctor. I had a dental emergency on a Friday evening, and he graciously took the time to see me and provide excellent care.",
+      rating: 5
+    },
+    {
+      name: "Paul Pedersen", 
+      text: "Best dentist in town (Palo Alto). Quick, efficient, accurate, helpful, accommodating. Made time for me twice - both minor emergencies, and once on the 4th of July weekend! Outstanding service.",
+      rating: 5
+    },
+    {
+      name: "EEconomos (Evan)",
+      text: "Pleasant service. Willing to accommodate emergency needs. She will fit you into her schedule even if she has to come in on her day off.",
+      rating: 5
+    },
+    {
+      name: "Kim Chu",
+      text: "Dr. Hamamoto takes great care of your teeth and is always available (day and night!) should there be any issues with your teeth! Truly a 24/7 dentist!!",
+      rating: 5
+    }
+  ];
+
+  const preventionTips = [
+    "Wear a mouthguard during sports and physical activities",
+    "Avoid chewing ice, hard candies, or non-food items",
+    "Don't use teeth as tools to open packages or bottles",
+    "Maintain regular dental check-ups to catch problems early",
+    "Keep emergency dental kit with pain relievers and dental cement",
+    "Know your dentist's emergency contact information"
+  ];
+
+  return (
+    <>
+      <MetaTags 
+        title="Emergency Dental Care Palo Alto | 24/7 Dental Emergency | Dr. Wong"
+        description="24/7 emergency dental care in Palo Alto. Dr. Wong provides immediate treatment for dental emergencies including toothaches, broken teeth, and trauma."
+        image="/favicon/apple-touch-icon.png"
+      />
+      <StructuredData 
+        type="service" 
+        serviceData={{
+          name: "Emergency Dental Care",
+          description: "24/7 emergency dental services for urgent dental problems including toothaches, trauma, and infections",
+          slug: "emergency-dental"
+        }}
+      />
+      <CanonicalUrl />
+
+      {/* Hero Section */}
+      <section className="bg-gradient-to-b from-red-50 to-white py-16 md:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center"
+          >
+            <div className="flex justify-center mb-6">
+              <AlertTriangle className="h-16 w-16 text-red-600" />
+            </div>
+            <h1 className="text-4xl md:text-5xl font-bold font-heading text-[#333333] mb-6">
+              24/7 Emergency Dental Care in Palo Alto
+            </h1>
+            <p className="text-xl text-[#333333] max-w-4xl mx-auto mb-8">
+              Don't let dental pain wait. Dr. Christopher B. Wong provides immediate emergency dental care 
+              for patients in Palo Alto and surrounding areas. Available day and night for urgent dental needs.
+            </p>
+            
+            {/* Emergency Contact */}
+            <div className="bg-red-600 text-white rounded-lg p-6 max-w-2xl mx-auto mb-8">
+              <div className="flex items-center justify-center mb-4">
+                <Phone className="h-8 w-8 mr-3" />
+                <div>
+                  <h3 className="text-xl font-bold">Emergency Hotline</h3>
+                  <p className="text-red-100">Available 24/7 for dental emergencies</p>
+                </div>
+              </div>
+              <a href="tel:+16503266319" className="text-3xl font-bold hover:text-red-100 transition-colors">
+                (650) 326-6319
+              </a>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a href="tel:+16503266319">
+                <Button className="bg-red-600 hover:bg-red-700 text-white font-medium px-8 py-3">
+                  Call Emergency Line
+                  <Phone className="ml-2 h-5 w-5" />
+                </Button>
+              </a>
+              <Link href="/contact">
+                <Button variant="outline" className="border-red-600 text-red-600 hover:bg-red-50 px-8 py-3">
+                  Contact Information
+                </Button>
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* When to Seek Emergency Care */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold font-heading text-[#333333] mb-6">
+              Common Dental Emergencies
+            </h2>
+            <p className="text-[#333333] max-w-3xl mx-auto">
+              Recognize the signs and know what to do before you reach our office. Quick action can often 
+              save your tooth and reduce pain and complications.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {emergencyTypes.map((emergency, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="bg-red-50 rounded-lg border-2 border-red-100 p-6"
+              >
+                <h3 className="text-xl font-bold font-heading text-[#333333] mb-3">
+                  {emergency.title}
+                </h3>
+                <p className="text-[#333333] mb-4">
+                  {emergency.description}
+                </p>
+                
+                <div className="mb-4">
+                  <h4 className="font-semibold text-[#333333] mb-2">Symptoms:</h4>
+                  <ul className="space-y-1">
+                    {emergency.symptoms.map((symptom, idx) => (
+                      <li key={idx} className="flex items-start">
+                        <AlertTriangle className="h-4 w-4 text-red-600 mt-0.5 mr-2 flex-shrink-0" />
+                        <span className="text-sm text-[#333333]">{symptom}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="border-t border-red-200 pt-4">
+                  <h4 className="font-semibold text-[#333333] mb-2">Immediate Action:</h4>
+                  <p className="text-sm text-[#333333] bg-white p-3 rounded border-l-4 border-red-600">
+                    {emergency.immediateAction}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Emergency Response Steps */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold font-heading text-[#333333] mb-6">
+              What to Do in a Dental Emergency
+            </h2>
+            <p className="text-[#333333] max-w-2xl mx-auto">
+              Follow these steps to handle your dental emergency effectively while getting to our office.
+            </p>
+          </motion.div>
+
+          <div className="space-y-6">
+            {emergencySteps.map((step, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                viewport={{ once: true }}
+                className="flex items-start bg-white p-6 rounded-lg shadow-md"
+              >
+                <div className="bg-red-600 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold text-lg mr-6 flex-shrink-0">
+                  {step.step}
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold font-heading text-[#333333] mb-2">
+                    {step.title}
+                  </h3>
+                  <p className="text-[#333333]">{step.description}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Patient Testimonials */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold font-heading text-[#333333] mb-6">
+              Emergency Care Testimonials
+            </h2>
+            <p className="text-[#333333] max-w-3xl mx-auto">
+              Real experiences from patients who received emergency dental care at our Palo Alto practice.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {patientTestimonials.map((testimonial, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="bg-gray-50 rounded-lg p-6 border-l-4 border-red-600"
+              >
+                <div className="flex items-center mb-4">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
+                  ))}
+                </div>
+                <p className="text-[#333333] mb-4 italic">"{testimonial.text}"</p>
+                <p className="font-semibold text-[#333333]">- {testimonial.name}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 24/7 Availability */}
+      <section className="py-16 bg-red-600 text-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <Clock className="h-16 w-16 mx-auto mb-6" />
+            <h2 className="text-3xl md:text-4xl font-bold font-heading mb-6">
+              Available When You Need Us Most
+            </h2>
+            <p className="text-xl mb-8 max-w-3xl mx-auto">
+              Dental emergencies don't follow a schedule, and neither do we. Dr. Wong and his team are 
+              available 24/7 to provide the emergency dental care you need, when you need it.
+            </p>
+            
+            <div className="grid md:grid-cols-3 gap-6 mb-8">
+              <div className="bg-red-700 rounded-lg p-6">
+                <Shield className="h-8 w-8 mx-auto mb-4" />
+                <h3 className="text-lg font-bold mb-2">Immediate Relief</h3>
+                <p className="text-red-100">Fast pain management and emergency treatment</p>
+              </div>
+              <div className="bg-red-700 rounded-lg p-6">
+                <Heart className="h-8 w-8 mx-auto mb-4" />
+                <h3 className="text-lg font-bold mb-2">Compassionate Care</h3>
+                <p className="text-red-100">Gentle, understanding approach during stressful times</p>
+              </div>
+              <div className="bg-red-700 rounded-lg p-6">
+                <CheckCircle className="h-8 w-8 mx-auto mb-4" />
+                <h3 className="text-lg font-bold mb-2">Expert Treatment</h3>
+                <p className="text-red-100">Years of experience handling dental emergencies</p>
+              </div>
+            </div>
+
+            <a href="tel:+16503266319">
+              <Button className="bg-white text-red-600 hover:bg-gray-100 font-medium px-8 py-3 text-lg">
+                Call Emergency Line Now
+                <Phone className="ml-2 h-5 w-5" />
+              </Button>
+            </a>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Prevention Tips */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl font-bold font-heading text-[#333333] mb-6">
+              Preventing Dental Emergencies
+            </h2>
+            <p className="text-[#333333] max-w-2xl mx-auto">
+              While accidents happen, many dental emergencies can be prevented with proper care and precautions.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {preventionTips.map((tip, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="flex items-start bg-white p-6 rounded-lg shadow-md"
+              >
+                <CheckCircle className="h-5 w-5 text-green-600 mt-1 mr-3 flex-shrink-0" />
+                <span className="text-[#333333]">{tip}</span>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="py-16 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl font-bold font-heading text-[#333333] mb-6">
+              Don't Wait - Get Emergency Dental Care Now
+            </h2>
+            <p className="text-xl text-[#333333] mb-8 max-w-3xl mx-auto">
+              If you're experiencing a dental emergency, time is critical. Contact Dr. Wong's office 
+              immediately for prompt, professional emergency dental care in Palo Alto.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a href="tel:+16503266319">
+                <Button className="bg-red-600 hover:bg-red-700 text-white font-medium px-8 py-3">
+                  Call Emergency Line
+                  <Phone className="ml-2 h-5 w-5" />
+                </Button>
+              </a>
+              <Link href="/schedule">
+                <Button variant="outline" className="border-primary text-primary hover:bg-primary/5 px-8 py-3">
+                  Schedule Regular Visit
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+    </>
+  );
+};
+
+export default EmergencyDental;

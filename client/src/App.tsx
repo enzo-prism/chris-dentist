@@ -28,6 +28,7 @@ import Accessibility from "@/pages/Accessibility";
 import DentalVeneers from "@/pages/DentalVeneers";
 import DentalImplants from "@/pages/DentalImplants";
 import Invisalign from "@/pages/Invisalign";
+import EmergencyDental from "@/pages/EmergencyDental";
 
 function ScrollToTop() {
   const [location] = useLocation();
@@ -61,6 +62,7 @@ function Router() {
           <Route path="/dental-veneers" component={DentalVeneers} />
           <Route path="/dental-implants" component={DentalImplants} />
           <Route path="/invisalign" component={Invisalign} />
+          <Route path="/emergency-dental" component={EmergencyDental} />
           <Route component={NotFound} />
         </Switch>
       </main>

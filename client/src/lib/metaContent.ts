@@ -32,6 +32,9 @@ export const pageTitles = {
   // Invisalign page
   invisalign: `Invisalign Palo Alto | Clear Aligners | Dr. Christopher Wong`,
   
+  // Emergency dental page
+  emergencyDental: `Emergency Dental Care Palo Alto | 24/7 Dental Emergency | Dr. Wong`,
+  
   // Not found page
   notFound: `Page Not Found | Dr. Christopher Wong Palo Alto DDS`,
   
@@ -70,6 +73,9 @@ export const pageDescriptions = {
   
   // Invisalign page
   invisalign: `Invisalign clear aligners in Palo Alto with Dr. Christopher Wong. Discreet, comfortable orthodontic treatment for teens and adults. Virtually invisible braces.`,
+  
+  // Emergency dental page
+  emergencyDental: `24/7 emergency dental care in Palo Alto. Dr. Wong provides immediate treatment for dental emergencies including toothaches, broken teeth, and trauma.`,
   
   // Not found page
   notFound: `Page not found. Return to Dr. Wong's Palo Alto dental practice homepage or contact our office for assistance with dental appointments.`,

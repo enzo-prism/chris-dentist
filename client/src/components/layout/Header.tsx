@@ -47,6 +47,7 @@ const Header = () => {
         { href: "/invisalign", label: "Invisalign" },
         { href: "/dental-veneers", label: "Dental Veneers" },
         { href: "/dental-implants", label: "Dental Implants" },
+        { href: "/emergency-dental", label: "Emergency Care" },
         { href: "/services", label: "All Services" }
       ]
     },

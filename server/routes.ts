@@ -86,6 +86,7 @@ Disallow: /`);
         { url: '/dental-veneers', priority: '0.9', changefreq: 'monthly' },
         { url: '/dental-implants', priority: '0.9', changefreq: 'monthly' },
         { url: '/invisalign', priority: '0.9', changefreq: 'monthly' },
+        { url: '/emergency-dental', priority: '1.0', changefreq: 'monthly' },
         { url: '/patient-resources', priority: '0.7', changefreq: 'monthly' },
         { url: '/testimonials', priority: '0.6', changefreq: 'monthly' },
         { url: '/blog', priority: '0.8', changefreq: 'weekly' },

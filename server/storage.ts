@@ -319,9 +319,9 @@ export class MemStorage implements IStorage {
       },
       {
         title: "Emergency Dental Care",
-        description: "Prompt attention for dental emergencies such as toothaches, broken teeth, or other urgent dental issues.",
+        description: "24/7 emergency dental services for urgent dental problems including severe toothaches, trauma, broken teeth, and infections.",
         image: "https://i.imgur.com/t6yAG3i.jpg",
-        slug: "emergency-dental-care",
+        slug: "emergency-dental",
         featured: true
       }
     ];
