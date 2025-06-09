@@ -119,7 +119,7 @@ const EmergencyDental = () => {
       <CanonicalUrl />
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-b from-red-50 to-white py-16 md:py-24">
+      <section className="bg-gradient-to-b from-orange-50 to-white py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -128,7 +128,7 @@ const EmergencyDental = () => {
             className="text-center"
           >
             <div className="flex justify-center mb-6">
-              <AlertTriangle className="h-16 w-16 text-red-600" />
+              <AlertTriangle className="h-16 w-16 text-orange-600" />
             </div>
             <h1 className="text-4xl md:text-5xl font-bold font-heading text-[#333333] mb-6">
               24/7 Emergency Dental Care in Palo Alto
@@ -139,28 +139,28 @@ const EmergencyDental = () => {
             </p>
             
             {/* Emergency Contact */}
-            <div className="bg-red-600 text-white rounded-lg p-6 max-w-2xl mx-auto mb-8">
+            <div className="bg-primary text-white rounded-lg p-6 max-w-2xl mx-auto mb-8">
               <div className="flex items-center justify-center mb-4">
                 <Phone className="h-8 w-8 mr-3" />
                 <div>
                   <h3 className="text-xl font-bold">Emergency Hotline</h3>
-                  <p className="text-red-100">Available 24/7 for dental emergencies</p>
+                  <p className="text-blue-100">Available 24/7 for dental emergencies</p>
                 </div>
               </div>
-              <a href="tel:+16503266319" className="text-3xl font-bold hover:text-red-100 transition-colors">
+              <a href="tel:+16503266319" className="text-3xl font-bold hover:text-blue-100 transition-colors">
                 (650) 326-6319
               </a>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a href="tel:+16503266319">
-                <Button className="bg-red-600 hover:bg-red-700 text-white font-medium px-8 py-3">
+                <Button className="bg-orange-600 hover:bg-orange-700 text-white font-medium px-8 py-3">
                   Call Emergency Line
                   <Phone className="ml-2 h-5 w-5" />
                 </Button>
               </a>
               <Link href="/contact">
-                <Button variant="outline" className="border-red-600 text-red-600 hover:bg-red-50 px-8 py-3">
+                <Button variant="outline" className="border-orange-600 text-orange-600 hover:bg-orange-50 px-8 py-3">
                   Contact Information
                 </Button>
               </Link>
@@ -196,7 +196,7 @@ const EmergencyDental = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-red-50 rounded-lg border-2 border-red-100 p-6"
+                className="bg-orange-50 rounded-lg border-2 border-orange-100 p-6"
               >
                 <h3 className="text-xl font-bold font-heading text-[#333333] mb-3">
                   {emergency.title}
@@ -210,16 +210,16 @@ const EmergencyDental = () => {
                   <ul className="space-y-1">
                     {emergency.symptoms.map((symptom, idx) => (
                       <li key={idx} className="flex items-start">
-                        <AlertTriangle className="h-4 w-4 text-red-600 mt-0.5 mr-2 flex-shrink-0" />
+                        <AlertTriangle className="h-4 w-4 text-orange-600 mt-0.5 mr-2 flex-shrink-0" />
                         <span className="text-sm text-[#333333]">{symptom}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
-                <div className="border-t border-red-200 pt-4">
+                <div className="border-t border-orange-200 pt-4">
                   <h4 className="font-semibold text-[#333333] mb-2">Immediate Action:</h4>
-                  <p className="text-sm text-[#333333] bg-white p-3 rounded border-l-4 border-red-600">
+                  <p className="text-sm text-[#333333] bg-white p-3 rounded border-l-4 border-orange-600">
                     {emergency.immediateAction}
                   </p>
                 </div>
@@ -257,7 +257,7 @@ const EmergencyDental = () => {
                 viewport={{ once: true }}
                 className="flex items-start bg-white p-6 rounded-lg shadow-md"
               >
-                <div className="bg-red-600 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold text-lg mr-6 flex-shrink-0">
+                <div className="bg-primary text-white rounded-full w-12 h-12 flex items-center justify-center font-bold text-lg mr-6 flex-shrink-0">
                   {step.step}
                 </div>
                 <div>
