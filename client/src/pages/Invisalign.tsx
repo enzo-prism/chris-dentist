@@ -351,8 +351,8 @@ const Invisalign = () => {
               viewport={{ once: true }}
             >
               <OptimizedImage
-                src="/images/dr-wong-consultation.jpg"
-                alt="Dr. Wong consulting with a patient about Invisalign treatment"
+                src="/images/dr-wong-polaroids.png"
+                alt="Dr. Christopher Wong in his dental practice - professional polaroid photos"
                 className="w-full h-96 object-cover rounded-lg shadow-lg"
               />
             </motion.div>
