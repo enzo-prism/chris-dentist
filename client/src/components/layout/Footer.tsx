@@ -116,7 +116,20 @@ const Footer = () => {
           <Separator className="my-8 bg-white/20" />
           
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-xs text-white/70">&copy; {currentYear} Dr. Christopher B. Wong, DDS. All rights reserved.</p>
+            <div className="flex flex-col items-center md:items-start">
+              <p className="text-xs text-white/70">&copy; {currentYear} Dr. Christopher B. Wong, DDS. All rights reserved.</p>
+              <p className="text-xs text-white/50 mt-1">
+                website built by{" "}
+                <a 
+                  href="https://www.design-prism.com/case-studies/dr-christopher-wong" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="hover:text-white/70 transition-colors underline underline-offset-2"
+                >
+                  Prism in silicon valley
+                </a>
+              </p>
+            </div>
             <div className="flex space-x-4 mt-4 md:mt-0">
               {legalLinks.map((link, index) => (
                 <Link key={index} href={link.href}>
@@ -214,7 +227,18 @@ const Footer = () => {
           <Separator className="bg-white/20 mb-6" />
           
           <div className="text-center">
-            <p className="text-xs text-white/70 mb-4">&copy; {currentYear} Dr. Christopher B. Wong, DDS. All rights reserved.</p>
+            <p className="text-xs text-white/70 mb-2">&copy; {currentYear} Dr. Christopher B. Wong, DDS. All rights reserved.</p>
+            <p className="text-xs text-white/50 mb-4">
+              website built by{" "}
+              <a 
+                href="https://www.design-prism.com/case-studies/dr-christopher-wong" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:text-white/70 transition-colors underline underline-offset-2"
+              >
+                Prism in silicon valley
+              </a>
+            </p>
             <div className="flex flex-wrap justify-center gap-4">
               {legalLinks.map((link, index) => (
                 <Link key={index} href={link.href}>
