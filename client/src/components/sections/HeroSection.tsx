@@ -50,28 +50,9 @@ const HeroSection = () => {
               Trusted Palo Alto Dentist - Dr. Christopher Wong
             </h1>
             
-            <p className="text-lg text-gray-600 leading-relaxed mb-6 max-w-md">
+            <p className="text-lg text-gray-600 leading-relaxed mb-8 max-w-md">
               Experience exceptional dental care in Palo Alto. Dr. Wong provides comprehensive dental services with a focus on conservative, ethical approaches to help you achieve a healthy, brilliant smile.
             </p>
-            
-            {/* Office Closure Notice */}
-            <motion.div 
-              className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-8 max-w-md"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-            >
-              <div className="flex items-start gap-3">
-                <AlertCircle className="h-5 w-5 text-amber-600 mt-0.5 flex-shrink-0" />
-                <div>
-                  <h3 className="text-sm font-semibold text-amber-800 mb-1">Office Closure Notice</h3>
-                  <div className="text-sm text-amber-700 space-y-1">
-                    <p>• Thursday, June 19th — CLOSED</p>
-                    <p>• Friday, June 20th — CLOSED</p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
             
             {/* CTA Buttons with updated styling */}
             <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-3 sm:space-y-0 mb-12">
