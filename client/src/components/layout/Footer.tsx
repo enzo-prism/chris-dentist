@@ -24,7 +24,6 @@ const Footer = () => {
     { href: "/services#cosmetic-dentistry", label: "Cosmetic Dentistry" },
     { href: "/services#restorative-dentistry", label: "Restorative Dentistry" },
     { href: "/services#pediatric-dentistry", label: "Pediatric Dentistry" },
-    { href: "/services#orthodontics", label: "Orthodontics" },
     { href: "/services#emergency-dental-care", label: "Emergency Dental Care" }
   ];
 

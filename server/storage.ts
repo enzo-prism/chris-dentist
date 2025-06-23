@@ -304,13 +304,6 @@ export class MemStorage implements IStorage {
         featured: true
       },
       {
-        title: "Orthodontics",
-        description: "Clear aligners and traditional braces to correctly align teeth for improved function and appearance.",
-        image: "https://i.imgur.com/XVLlcob.jpg",
-        slug: "orthodontics",
-        featured: false
-      },
-      {
         title: "Invisalign Clear Aligners",
         description: "Virtually invisible orthodontic treatment using custom clear aligners to straighten teeth discreetly for teens and adults.",
         image: "https://i.imgur.com/XVLlcob.jpg",
