@@ -202,7 +202,7 @@ const PatientResources = () => {
                   <div className="bg-gray-50 p-5 rounded-lg border border-gray-200 mb-5">
                     <div className="flex items-start">
                       <CheckCircle className="h-5 w-5 text-primary mt-1 mr-3 flex-shrink-0" />
-                      <p>We are in-network with most major PPO dental insurance plans. Please contact our office to verify your specific plan's coverage before your appointment.</p>
+                      <p>We accept most major PPO dental insurance plans as an out-of-network provider. Please contact our office to verify your specific plan's coverage before your appointment.</p>
                     </div>
                   </div>
                   
