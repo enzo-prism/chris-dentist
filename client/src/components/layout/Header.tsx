@@ -96,7 +96,12 @@ const Header = () => {
           <div className="flex-shrink-0 lg:w-1/4">
             <Link href="/">
               <div className="flex items-center cursor-pointer">
-                <span className="text-gray-900 font-medium text-xl">Dr. Wong</span>
+                <img 
+                  src="/logo.png" 
+                  alt="Dr. Christopher B. Wong DDS" 
+                  className="h-10 w-auto"
+                />
+                <span className="ml-3 text-gray-900 font-medium text-xl">Dr. Wong</span>
               </div>
             </Link>
           </div>
