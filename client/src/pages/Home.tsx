@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle, Stethoscope, Award, User, ChevronRight, Phone } from "lucide-react";
 import { Link } from "wouter";
 import { Service, Testimonial } from "@shared/schema";
+import { motion } from "framer-motion";
 import { ogImages } from "@/lib/ogImages";
 import { pageTitles, pageDescriptions } from "@/lib/metaContent";
 import { drWongImages } from "@/lib/imageUrls";
@@ -46,39 +47,49 @@ const Home = () => {
       <AboutDoctorSection />
 
       {/* Services Section */}
-      <section id="services" className="py-16">
+      <section id="services" className="py-16 md:py-20 bg-gradient-to-b from-white to-gray-50/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold font-heading text-[#333333] mb-4">Our Services</h2>
-            <p className="text-[#333333] max-w-3xl mx-auto">Comprehensive dental care using the latest techniques and technology to improve your oral health and enhance your smile.</p>
-            <div className="w-24 h-1 bg-primary mx-auto mt-4"></div>
+          {/* Header */}
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold font-heading text-gray-900 mb-6">
+              Our Services
+            </h2>
+            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              Comprehensive dental care using the latest techniques and technology to improve your oral health and enhance your smile.
+            </p>
+            <div className="w-24 h-1 bg-primary mx-auto mt-8 rounded-full"></div>
           </div>
           
+          {/* Services Grid - Responsive and Balanced */}
           {isLoadingServices ? (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8 lg:gap-10 max-w-6xl mx-auto">
               {[...Array(3)].map((_, index) => (
-                <div key={index} className="bg-white rounded-lg shadow-md h-64 animate-pulse">
-                  <div className="w-full h-48 bg-gray-200 rounded-t-lg"></div>
-                  <div className="p-6">
-                    <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
-                    <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+                <div key={index} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden animate-pulse">
+                  <div className="w-full h-48 md:h-56 bg-gray-200"></div>
+                  <div className="p-6 md:p-8">
+                    <div className="h-6 bg-gray-200 rounded w-3/4 mb-3"></div>
+                    <div className="h-4 bg-gray-200 rounded w-full mb-2"></div>
+                    <div className="h-4 bg-gray-200 rounded w-2/3"></div>
                   </div>
                 </div>
               ))}
             </div>
           ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8 lg:gap-10 max-w-6xl mx-auto">
               {services?.slice(0, 3).map((service) => (
-                <ServiceCard key={service.id} service={service} />
+                <div key={service.id} className="h-full flex">
+                  <ServiceCard service={service} />
+                </div>
               ))}
             </div>
           )}
           
-          <div className="text-center mt-12">
+          {/* CTA Button */}
+          <div className="text-center mt-16">
             <Link href="/services">
-              <Button className="bg-[#00AA90] text-white font-semibold px-8 py-3 rounded-md hover:bg-teal-700 inline-flex items-center">
-                View All Services
-                <ArrowRight className="h-5 w-5 ml-2" />
+              <Button className="bg-primary hover:bg-primary/90 text-white font-medium px-8 py-4 rounded-full inline-flex items-center gap-2 shadow-sm transition-all hover:shadow-md hover:scale-105">
+                <span>View All Services</span>
+                <ArrowRight className="h-5 w-5" />
               </Button>
             </Link>
           </div>
