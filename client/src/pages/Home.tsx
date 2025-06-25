@@ -81,21 +81,6 @@ const Home = () => {
                 <ArrowRight className="h-5 w-5 ml-2" />
               </Button>
             </Link>
-            
-            {/* Google Reviews Note */}
-            <div className="mt-6">
-              <button
-                onClick={() => {
-                  const testimonialsSection = document.getElementById('testimonials');
-                  if (testimonialsSection) {
-                    testimonialsSection.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
-                className="text-gray-500 hover:text-primary transition-colors duration-200 text-sm font-medium cursor-pointer"
-              >
-                316 5 star reviews on Google
-              </button>
-            </div>
           </div>
         </div>
       </section>

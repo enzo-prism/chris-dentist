@@ -55,7 +55,7 @@ const HeroSection = () => {
             </p>
             
             {/* CTA Buttons with updated styling */}
-            <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-3 sm:space-y-0 mb-12">
+            <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-3 sm:space-y-0 mb-8">
               <Link href="/schedule#appointment">
                 <Button className="bg-primary hover:bg-primary/90 text-white font-medium flex items-center justify-center gap-2 px-5 py-6 h-auto rounded-full shadow-sm transition-all">
                   <Calendar className="h-4 w-4" />
@@ -71,6 +71,21 @@ const HeroSection = () => {
                   <ArrowRight className="h-4 w-4" />
                 </Button>
               </Link>
+            </div>
+            
+            {/* Google Reviews Note */}
+            <div className="mb-12">
+              <button
+                onClick={() => {
+                  const testimonialsSection = document.getElementById('testimonials');
+                  if (testimonialsSection) {
+                    testimonialsSection.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+                className="text-gray-500 hover:text-primary transition-colors duration-200 text-sm font-medium cursor-pointer"
+              >
+                316 5 star reviews on Google
+              </button>
             </div>
             
             {/* Scroll indicator - now at bottom of text column */}
