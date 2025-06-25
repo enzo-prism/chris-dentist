@@ -60,24 +60,24 @@ const Home = () => {
             <div className="w-24 h-1 bg-primary mx-auto mt-8 rounded-full"></div>
           </div>
           
-          {/* Services Grid - Responsive and Balanced */}
+          {/* Services Grid - Single Row with 3 Columns */}
           {isLoadingServices ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8 lg:gap-10 max-w-6xl mx-auto">
+            <div className="grid grid-cols-3 gap-4 md:gap-6 lg:gap-8 max-w-6xl mx-auto">
               {[...Array(3)].map((_, index) => (
                 <div key={index} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden animate-pulse">
-                  <div className="w-full h-48 md:h-56 bg-gray-200"></div>
-                  <div className="p-6 md:p-8">
-                    <div className="h-6 bg-gray-200 rounded w-3/4 mb-3"></div>
-                    <div className="h-4 bg-gray-200 rounded w-full mb-2"></div>
-                    <div className="h-4 bg-gray-200 rounded w-2/3"></div>
+                  <div className="w-full h-32 sm:h-40 md:h-48 bg-gray-200"></div>
+                  <div className="p-3 md:p-6">
+                    <div className="h-4 md:h-6 bg-gray-200 rounded w-3/4 mb-2 md:mb-3"></div>
+                    <div className="h-3 md:h-4 bg-gray-200 rounded w-full mb-1 md:mb-2"></div>
+                    <div className="h-3 md:h-4 bg-gray-200 rounded w-2/3"></div>
                   </div>
                 </div>
               ))}
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8 lg:gap-10 max-w-6xl mx-auto">
+            <div className="grid grid-cols-3 gap-4 md:gap-6 lg:gap-8 max-w-6xl mx-auto">
               {services?.slice(0, 3).map((service) => (
-                <div key={service.id} className="h-full flex">
+                <div key={service.id} className="h-full">
                   <ServiceCard service={service} />
                 </div>
               ))}
