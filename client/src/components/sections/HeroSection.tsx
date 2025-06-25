@@ -47,11 +47,11 @@ const HeroSection = () => {
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-gray-900 leading-tight mb-6">
-              Trusted Palo Alto Dentist - Dr. Christopher Wong
+              Palo Alto Dentist – Dr. Christopher B. Wong
             </h1>
             
             <p className="text-lg text-gray-600 leading-relaxed mb-8 max-w-md">
-              Experience exceptional dental care in Palo Alto. Dr. Wong provides comprehensive dental services with a focus on conservative, ethical approaches to help you achieve a healthy, brilliant smile.
+              Trusted by the community for long-term oral health and confident smiles.
             </p>
             
             {/* CTA Buttons with updated styling */}
