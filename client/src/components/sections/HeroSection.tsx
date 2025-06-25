@@ -35,8 +35,15 @@ const HeroSection = () => {
   ];
 
   return (
-    <section className="bg-white pt-20 pb-16 md:pt-28 md:pb-20 overflow-hidden">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="bg-white pt-20 pb-16 md:pt-28 md:pb-20 overflow-hidden relative">
+      {/* Subtle animated background */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-primary/3 to-blue-100/5 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-gradient-to-tr from-teal-50/8 to-primary/4 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-transparent via-primary/2 to-transparent rounded-full blur-3xl animate-spin" style={{ animationDuration: '30s' }}></div>
+      </div>
+      
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Hero layout */}
         <div className="flex flex-col lg:flex-row items-center lg:items-start gap-12 lg:gap-16">
           {/* Text content - left side */}
