@@ -98,8 +98,8 @@ const Invisalign = () => {
   return (
     <>
       <MetaTags 
-        title="Invisalign Palo Alto | Clear Aligners | Dr. Christopher Wong"
-        description="Transform your smile discreetly with Invisalign clear aligners in Palo Alto. Dr. Wong offers invisible orthodontic treatment for teens and adults."
+        title="Invisalign® Treatment in Palo Alto | Clear Aligners | Dr. Christopher Wong"
+        description="Transform your smile discreetly with Invisalign® treatment in Palo Alto. Dr. Wong offers invisible orthodontic treatment for teens and adults."
         image="/favicon/apple-touch-icon.png"
       />
       <StructuredData 
@@ -122,7 +122,7 @@ const Invisalign = () => {
             className="text-center"
           >
             <h1 className="text-4xl md:text-5xl font-bold font-heading text-[#333333] mb-6">
-              Straighten Your Teeth Invisibly with Invisalign
+              Straighten Your Teeth Invisibly with Invisalign® Treatment in Palo Alto
             </h1>
             <p className="text-xl text-[#333333] max-w-4xl mx-auto mb-8">
               Achieve the smile you've always wanted with Invisalign clear aligners at Dr. Christopher B. Wong's 
