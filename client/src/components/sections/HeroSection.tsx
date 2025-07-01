@@ -36,6 +36,16 @@ const HeroSection = () => {
 
   return (
     <section className="bg-white pt-20 pb-16 md:pt-28 md:pb-20 overflow-hidden relative">
+      {/* Holiday Notice */}
+      <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-20">
+        <div className="bg-gradient-to-r from-red-50 to-blue-50 border border-red-100/50 rounded-full px-4 py-2 shadow-sm">
+          <p className="text-xs md:text-sm text-gray-700 font-medium flex items-center gap-2">
+            <span className="text-base">🇺🇸</span>
+            <span>Office closed July 3rd & 4th for Independence Day</span>
+          </p>
+        </div>
+      </div>
+
       {/* Subtle animated background */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-primary/3 to-blue-100/5 rounded-full blur-3xl animate-pulse"></div>
