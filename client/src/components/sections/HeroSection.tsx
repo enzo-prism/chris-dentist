@@ -44,20 +44,7 @@ const HeroSection = () => {
       </div>
       
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Holiday Notice */}
-        <div className="flex justify-center mb-8 lg:mb-12">
-          <motion.div 
-            className="bg-gradient-to-r from-red-50/80 to-blue-50/80 backdrop-blur-sm border border-red-100/30 rounded-full px-4 py-2.5 shadow-sm"
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <p className="text-xs sm:text-sm text-gray-700 font-medium flex items-center justify-center gap-2">
-              <span className="text-sm">🇺🇸</span>
-              <span className="whitespace-nowrap">Office closed July 3rd & 4th</span>
-            </p>
-          </motion.div>
-        </div>
+
         {/* Hero layout */}
         <div className="flex flex-col lg:flex-row items-center lg:items-start gap-12 lg:gap-16">
           {/* Text content - left side */}
