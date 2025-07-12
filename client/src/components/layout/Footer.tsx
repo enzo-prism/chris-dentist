@@ -123,7 +123,7 @@ const Footer = () => {
               <p className="text-xs text-white/50 mt-1">
                 website built by{" "}
                 <a 
-                  href="https://www.design-prism.com/case-studies/dr-christopher-wong" 
+                  href="https://www.design-prism.com/case-studies/dr-christopher-wong?utm_source=drwong&utm_medium=referral&utm_campaign=drwong_2025-07" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="hover:text-white/70 transition-colors underline underline-offset-2"
@@ -236,7 +236,7 @@ const Footer = () => {
             <p className="text-xs text-white/50 mb-4">
               website built by{" "}
               <a 
-                href="https://www.design-prism.com/case-studies/dr-christopher-wong" 
+                href="https://www.design-prism.com/case-studies/dr-christopher-wong?utm_source=drwong&utm_medium=referral&utm_campaign=drwong_2025-07" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="hover:text-white/70 transition-colors underline underline-offset-2"
