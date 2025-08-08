@@ -11,7 +11,7 @@ interface MetaTagsProps {
 
 export default function MetaTags({
   title = "Palo Alto Dentist | Dr. Christopher Wong DDS | Premier Care",
-  description = "Dr. Christopher B. Wong offers comprehensive dental care in Palo Alto, CA. Schedule your appointment today and experience exceptional dental services.",
+  description = "Dr. Christopher B. Wong, trusted Palo Alto dentist offering comprehensive dental care. Schedule your appointment today for exceptional dental services.",
   image = drWongImages.drWongPortrait1,
   url,
   type = "website"
@@ -38,6 +38,10 @@ export default function MetaTags({
       <title>{title}</title>
       <meta name="title" content={title} />
       <meta name="description" content={description} />
+      
+      {/* SEO and duplicate content prevention */}
+      <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+      <link rel="canonical" href={normalizedUrl} />
       
       {/* Open Graph / Facebook */}
       <meta property="og:type" content={type} />

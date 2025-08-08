@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://www.chriswongdds.com/sitemap.xml
+
+# Preferred host to prevent duplicate content
+Host: www.chriswongdds.com

@@ -10,11 +10,14 @@ const app = express();
 app.use((req: Request, res: Response, next: NextFunction) => {
   const host = req.get('host');
   
-  // Only redirect in production and if host doesn't start with www
-  if (host && 
-      host === 'chriswongdds.com' && 
-      !host.startsWith('www.') &&
-      process.env.NODE_ENV === 'production') {
+  // Always redirect non-www to www for chriswongdds.com domain (removed production check)
+  if (host && host === 'chriswongdds.com') {
+    const redirectUrl = `https://www.${host}${req.originalUrl}`;
+    return res.redirect(301, redirectUrl);
+  }
+  
+  // Also handle any other non-www variations
+  if (host && host.startsWith('chriswongdds.com') && !host.startsWith('www.')) {
     const redirectUrl = `https://www.${host}${req.originalUrl}`;
     return res.redirect(301, redirectUrl);
   }
