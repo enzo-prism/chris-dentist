@@ -68,8 +68,18 @@ Disallow: /`);
       // Set the content type
       res.header('Content-Type', 'application/xml');
       
-      // Get the base URL from request or use a default
-      const baseUrl = process.env.BASE_URL || `${req.protocol}://${req.get('host')}`;
+      // Get the base URL - always force HTTPS for production domains
+      const host = req.get('host') || 'www.chriswongdds.com';
+      let baseUrl = process.env.BASE_URL || 'https://www.chriswongdds.com';
+      
+      // Override to force HTTPS for production domains
+      if (host && host.includes('chriswongdds.com')) {
+        const normalizedHost = host.startsWith('www.') ? host : 'www.' + host;
+        baseUrl = `https://${normalizedHost}`;
+      } else if (!process.env.BASE_URL && !host.includes('chriswongdds.com')) {
+        // For local development only
+        baseUrl = `${req.protocol}://${host}`;
+      }
       
       // Current date in format YYYY-MM-DD
       const today = new Date().toISOString().split('T')[0];
