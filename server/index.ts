@@ -5,6 +5,23 @@ import { setupVite, serveStatic, log } from "./vite";
 import path from "path";
 
 const app = express();
+
+// Redirect non-www to www for SEO canonical consistency
+app.use((req: Request, res: Response, next: NextFunction) => {
+  const host = req.get('host');
+  
+  // Only redirect in production and if host doesn't start with www
+  if (host && 
+      host === 'chriswongdds.com' && 
+      !host.startsWith('www.') &&
+      process.env.NODE_ENV === 'production') {
+    const redirectUrl = `https://www.${host}${req.originalUrl}`;
+    return res.redirect(301, redirectUrl);
+  }
+  
+  next();
+});
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(compression());

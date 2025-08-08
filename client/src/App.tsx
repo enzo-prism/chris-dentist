@@ -13,6 +13,7 @@ import SitemapLink from "@/components/common/SitemapLink";
 import Redirects from "@/components/common/Redirects";
 import Favicons from "@/components/common/Favicons";
 import PreloadResources from "@/components/seo/PreloadResources";
+import DomainRedirect from "@/components/seo/DomainRedirect";
 import Home from "@/pages/Home";
 import About from "@/pages/About";
 import Services from "@/pages/Services";
@@ -75,6 +76,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <HelmetProvider>
+        <DomainRedirect />
         <GoogleAnalytics />
         <HotjarTracking />
         <SitemapLink />

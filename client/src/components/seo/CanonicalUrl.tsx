@@ -5,9 +5,30 @@ interface CanonicalUrlProps {
 }
 
 const CanonicalUrl = ({ path }: CanonicalUrlProps) => {
-  const baseUrl = typeof window !== 'undefined' ? window.location.origin : '';
-  const currentPath = path || (typeof window !== 'undefined' ? window.location.pathname : '');
-  const canonicalUrl = `${baseUrl}${currentPath}`;
+  // Always normalize to www version for canonical URLs
+  const canonicalUrl = (() => {
+    if (typeof window === 'undefined') return '';
+    
+    const urlObj = new URL(window.location.href);
+    
+    // Force www subdomain for canonical consistency
+    if (!urlObj.hostname.startsWith('www.') && urlObj.hostname === 'chriswongdds.com') {
+      urlObj.hostname = 'www.chriswongdds.com';
+    }
+    
+    // Use provided path or current pathname
+    if (path !== undefined) {
+      urlObj.pathname = path;
+    }
+    
+    // Remove search params and hash for clean canonical URLs
+    urlObj.search = '';
+    urlObj.hash = '';
+    
+    return urlObj.toString();
+  })();
+
+  if (!canonicalUrl) return null;
 
   return (
     <Helmet>

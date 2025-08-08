@@ -10,12 +10,25 @@ interface MetaTagsProps {
 }
 
 export default function MetaTags({
-  title = "Dr. Christopher B. Wong, DDS | Palo Alto Dental Care",
+  title = "Palo Alto Dentist | Dr. Christopher Wong DDS | Premier Care",
   description = "Dr. Christopher B. Wong offers comprehensive dental care in Palo Alto, CA. Schedule your appointment today and experience exceptional dental services.",
   image = drWongImages.drWongPortrait1,
-  url = window.location.href,
+  url,
   type = "website"
 }: MetaTagsProps) {
+  // Normalize URL to always use the www version for consistency
+  const normalizedUrl = url || (() => {
+    const currentUrl = window.location.href;
+    const urlObj = new URL(currentUrl);
+    
+    // Force www subdomain for canonical consistency
+    if (!urlObj.hostname.startsWith('www.') && urlObj.hostname === 'chriswongdds.com') {
+      urlObj.hostname = 'www.chriswongdds.com';
+    }
+    
+    return urlObj.toString();
+  })();
+  
   // Ensure the image URL is absolute
   const fullImageUrl = image.startsWith('http') ? image : `${window.location.origin}${image}`;
   
@@ -28,14 +41,14 @@ export default function MetaTags({
       
       {/* Open Graph / Facebook */}
       <meta property="og:type" content={type} />
-      <meta property="og:url" content={url} />
+      <meta property="og:url" content={normalizedUrl} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={fullImageUrl} />
       
       {/* Twitter */}
       <meta property="twitter:card" content="summary_large_image" />
-      <meta property="twitter:url" content={url} />
+      <meta property="twitter:url" content={normalizedUrl} />
       <meta property="twitter:title" content={title} />
       <meta property="twitter:description" content={description} />
       <meta property="twitter:image" content={fullImageUrl} />
