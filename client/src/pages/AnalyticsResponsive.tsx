@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { 
   Calendar, Users, TrendingUp, Eye, Target, Globe, Clock, Star, 
   CheckCircle2, AlertCircle, MapPin, Zap, ChevronRight, Menu, X,
@@ -17,10 +18,21 @@ import {
 } from "lucide-react";
 import MetaTags from "@/components/common/MetaTags";
 import { julyAnalyticsData } from "@/data/analytics-july-2025";
+import { augustAnalyticsData } from "@/data/analytics-august-2025";
 import { cn } from "@/lib/utils";
 
 const COLORS = ['#005f40', '#00a86b', '#4ade80', '#86efac', '#bbf7d0'];
-const data = julyAnalyticsData;
+
+// Month data mapping
+const monthsData = {
+  "july": julyAnalyticsData,
+  "august": augustAnalyticsData
+};
+
+const availableMonths = [
+  { value: "july", label: "July 2025", status: "complete" },
+  { value: "august", label: "August 2025", status: "in_progress" }
+];
 
 // Enhanced metric card with responsive design
 function MetricCard({ 
@@ -132,6 +144,7 @@ export default function Analytics() {
   const [showPasswordDialog, setShowPasswordDialog] = useState(false);
   const [selectedSection, setSelectedSection] = useState("overview");
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [selectedMonth, setSelectedMonth] = useState("july");
 
   // Check for existing session
   useEffect(() => {
@@ -142,21 +155,26 @@ export default function Analytics() {
       setShowPasswordDialog(true);
     }
   }, []);
+  
+  // Get current month data
+  const data = monthsData[selectedMonth as keyof typeof monthsData];
 
   const handleAuthenticate = () => {
     setIsAuthenticated(true);
     sessionStorage.setItem("analytics-auth", "true");
   };
 
-  // Format acquisition data for charts
-  const acquisitionData = Object.entries(data.acquisition.firstTimeUsers).map(([key, value]) => ({
-    name: key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1'),
-    value: value,
-    fullName: key
-  }));
+  // Format acquisition data for charts (handle empty data for August)
+  const acquisitionData = data.acquisition.firstTimeUsers && Object.keys(data.acquisition.firstTimeUsers).length > 0
+    ? Object.entries(data.acquisition.firstTimeUsers).map(([key, value]) => ({
+        name: key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1'),
+        value: value,
+        fullName: key
+      }))
+    : [];
 
-  // Prepare radar chart data for behavior metrics
-  const behaviorRadarData = [
+  // Prepare radar chart data for behavior metrics (handle in-progress data)
+  const behaviorRadarData = data.status === "in_progress" ? [] : [
     { metric: 'Session Duration', value: parseInt(data.behavior.metrics.avgSessionDuration) * 20 },
     { metric: 'Pages/Session', value: data.behavior.metrics.pagesPerSession * 25 },
     { metric: 'Engagement', value: 100 - data.behavior.metrics.bounceRate },
@@ -221,13 +239,41 @@ export default function Analytics() {
           "transform transition-transform duration-300"
         )}>
           <div className="p-6">
-            <div className="mb-8">
+            <div className="mb-6">
               <h1 className="text-2xl font-bold text-gray-900">Analytics</h1>
-              <p className="text-sm text-gray-600 mt-1">July 2025 Report</p>
-              <div className="flex items-center gap-2 text-xs text-gray-500 mt-2">
-                <Clock className="w-3 h-3" />
-                {data.period.lastUpdated}
+              <p className="text-sm text-gray-600 mt-1">Performance Dashboard</p>
+            </div>
+
+            {/* Desktop Month Selector */}
+            <div className="mb-6">
+              <label className="text-xs font-semibold text-gray-600 mb-2 block">SELECT MONTH</label>
+              <div className="space-y-1">
+                {availableMonths.map((month) => (
+                  <button
+                    key={month.value}
+                    onClick={() => setSelectedMonth(month.value)}
+                    className={cn(
+                      "w-full flex items-center justify-between px-3 py-2 rounded-lg transition-all text-sm",
+                      selectedMonth === month.value
+                        ? "bg-primary text-white"
+                        : "hover:bg-gray-100 text-gray-700"
+                    )}
+                  >
+                    <span>{month.label}</span>
+                    {month.status === "in_progress" && (
+                      <Badge variant={selectedMonth === month.value ? "secondary" : "outline"} className="text-xs">
+                        Live
+                      </Badge>
+                    )}
+                  </button>
+                ))}
               </div>
+              {data.period?.lastUpdated && (
+                <div className="flex items-center gap-2 text-xs text-gray-500 mt-3">
+                  <Clock className="w-3 h-3" />
+                  {data.period.lastUpdated}
+                </div>
+              )}
             </div>
 
             <nav className="space-y-1">
@@ -256,40 +302,65 @@ export default function Analytics() {
             </nav>
 
             {/* Quick Stats Summary */}
-            <div className="mt-8 p-4 bg-gray-50 rounded-lg">
-              <h3 className="text-xs font-semibold text-gray-600 mb-3">QUICK STATS</h3>
-              <div className="space-y-2">
-                <div className="flex justify-between text-xs">
-                  <span className="text-gray-600">New Users</span>
-                  <span className="font-bold">{data.executive.newUsers.toLocaleString()}</span>
-                </div>
-                <div className="flex justify-between text-xs">
-                  <span className="text-gray-600">Bounce Rate</span>
-                  <span className="font-bold">{data.executive.bounceRate}%</span>
-                </div>
-                <div className="flex justify-between text-xs">
-                  <span className="text-gray-600">Mobile Share</span>
-                  <span className="font-bold">{data.executive.mobileShare}%</span>
+            {data.status !== "in_progress" && (
+              <div className="mt-8 p-4 bg-gray-50 rounded-lg">
+                <h3 className="text-xs font-semibold text-gray-600 mb-3">QUICK STATS</h3>
+                <div className="space-y-2">
+                  <div className="flex justify-between text-xs">
+                    <span className="text-gray-600">New Users</span>
+                    <span className="font-bold">{typeof data.executive.newUsers === 'number' ? data.executive.newUsers.toLocaleString() : data.executive.newUsers}</span>
+                  </div>
+                  <div className="flex justify-between text-xs">
+                    <span className="text-gray-600">Bounce Rate</span>
+                    <span className="font-bold">{typeof data.executive.bounceRate === 'number' ? `${data.executive.bounceRate}%` : data.executive.bounceRate}</span>
+                  </div>
+                  <div className="flex justify-between text-xs">
+                    <span className="text-gray-600">Mobile Share</span>
+                    <span className="font-bold">{typeof data.executive.mobileShare === 'number' ? `${data.executive.mobileShare}%` : data.executive.mobileShare}</span>
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
           </div>
         </aside>
 
         {/* Mobile/Tablet Header */}
         <div className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200">
-          <div className="flex items-center justify-between px-4 py-3">
-            <div>
-              <h1 className="text-xl font-bold text-gray-900">Analytics</h1>
-              <p className="text-xs text-gray-600">July 2025</p>
+          <div className="px-4 py-3">
+            <div className="flex items-center justify-between mb-3">
+              <div>
+                <h1 className="text-xl font-bold text-gray-900">Analytics</h1>
+                <p className="text-xs text-gray-600">Performance Dashboard</p>
+              </div>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setSidebarOpen(!sidebarOpen)}
+              >
+                {sidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              </Button>
             </div>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setSidebarOpen(!sidebarOpen)}
-            >
-              {sidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </Button>
+
+            {/* Mobile Month Selector */}
+            <div className="flex items-center gap-2">
+              <Select value={selectedMonth} onValueChange={setSelectedMonth}>
+                <SelectTrigger className="w-full h-9 text-sm">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {availableMonths.map((month) => (
+                    <SelectItem key={month.value} value={month.value}>
+                      <div className="flex items-center justify-between w-full">
+                        <span>{month.label}</span>
+                        {month.status === "in_progress" && (
+                          <Badge variant="outline" className="ml-2 text-xs">Live</Badge>
+                        )}
+                      </div>
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
           </div>
 
           {/* Mobile Navigation Tabs */}
@@ -367,8 +438,63 @@ export default function Analytics() {
         </AnimatePresence>
 
         {/* Main Content Area */}
-        <main className="flex-1 lg:ml-64 pt-16 lg:pt-0">
+        <main className="flex-1 lg:ml-64 pt-24 lg:pt-0">
           <div className="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto">
+            {/* Coming Soon State for August */}
+            {data.status === "in_progress" && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mb-6"
+              >
+                <Card className="bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-200">
+                  <CardContent className="pt-6">
+                    <div className="flex items-start gap-4">
+                      <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
+                        <Activity className="w-6 h-6 text-blue-600" />
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-lg font-semibold mb-2">August Data Collection in Progress</h3>
+                        <p className="text-sm text-gray-700 mb-4">{data.message}</p>
+                        
+                        {/* Early Indicators */}
+                        {data.preview?.earlyIndicators && (
+                          <div className="mb-4">
+                            <h4 className="text-sm font-semibold mb-2">Early Indicators:</h4>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                              {data.preview.earlyIndicators.map((indicator, index) => (
+                                <div key={index} className="flex items-start gap-2">
+                                  <TrendingUp className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
+                                  <span className="text-xs text-gray-600">{indicator}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Coming Soon Features */}
+                        {data.comingSoon?.features && (
+                          <div>
+                            <h4 className="text-sm font-semibold mb-2">Coming Soon:</h4>
+                            <div className="space-y-2">
+                              {data.comingSoon.features.map((feature, index) => (
+                                <div key={index} className="bg-white/50 rounded-lg p-3">
+                                  <div className="flex items-center justify-between mb-1">
+                                    <span className="text-sm font-medium">{feature.title}</span>
+                                    <Badge variant="outline" className="text-xs">{feature.expectedDate}</Badge>
+                                  </div>
+                                  <p className="text-xs text-gray-600">{feature.description}</p>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            )}
             {/* Overview Section */}
             {selectedSection === "overview" && (
               <motion.div
@@ -383,46 +509,87 @@ export default function Analytics() {
                 </div>
 
                 {/* Key Metrics Grid */}
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 lg:gap-4">
-                  <MetricCard 
-                    label="New Users" 
-                    value={data.executive.newUsers.toLocaleString()}
-                    trend="+12% from June"
-                    icon={Users}
-                    description="First-time visitors"
-                  />
-                  <MetricCard 
-                    label="Returning" 
-                    value={data.executive.returningUsers}
-                    icon={Users}
-                    description="Repeat visitors"
-                  />
-                  <MetricCard 
-                    label="Mobile Share" 
-                    value={`${data.executive.mobileShare}%`}
-                    icon={Smartphone}
-                    description="Mobile traffic"
-                  />
-                  <MetricCard 
-                    label="Avg Session" 
-                    value={data.executive.avgSessionDuration}
-                    icon={Clock}
-                    description="Time on site"
-                  />
-                  <MetricCard 
-                    label="Pages/Session" 
-                    value={data.executive.pagesPerSession}
-                    icon={FileText}
-                    description="Page views"
-                  />
-                  <MetricCard 
-                    label="Bounce Rate" 
-                    value={`${data.executive.bounceRate}%`}
-                    trend="down 3%"
-                    icon={Activity}
-                    description="Single page exits"
-                  />
-                </div>
+                {data.status !== "in_progress" ? (
+                  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 lg:gap-4">
+                    <MetricCard 
+                      label="New Users" 
+                      value={data.executive.newUsers.toLocaleString()}
+                      trend="+12% from June"
+                      icon={Users}
+                      description="First-time visitors"
+                    />
+                    <MetricCard 
+                      label="Returning" 
+                      value={data.executive.returningUsers}
+                      icon={Users}
+                      description="Repeat visitors"
+                    />
+                    <MetricCard 
+                      label="Mobile Share" 
+                      value={`${data.executive.mobileShare}%`}
+                      icon={Smartphone}
+                      description="Mobile traffic"
+                    />
+                    <MetricCard 
+                      label="Avg Session" 
+                      value={data.executive.avgSessionDuration}
+                      icon={Clock}
+                      description="Time on site"
+                    />
+                    <MetricCard 
+                      label="Pages/Session" 
+                      value={data.executive.pagesPerSession}
+                      icon={FileText}
+                      description="Page views"
+                    />
+                    <MetricCard 
+                      label="Bounce Rate" 
+                      value={`${data.executive.bounceRate}%`}
+                      trend="down 3%"
+                      icon={Activity}
+                      description="Single page exits"
+                    />
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 lg:gap-4">
+                    <MetricCard 
+                      label="New Users" 
+                      value={data.executive.newUsers}
+                      icon={Users}
+                      description="Being tracked"
+                    />
+                    <MetricCard 
+                      label="Returning" 
+                      value={data.executive.returningUsers}
+                      icon={Users}
+                      description="Measuring..."
+                    />
+                    <MetricCard 
+                      label="Mobile Share" 
+                      value={data.executive.mobileShare}
+                      icon={Smartphone}
+                      description="Analyzing..."
+                    />
+                    <MetricCard 
+                      label="Avg Session" 
+                      value={data.executive.avgSessionDuration}
+                      icon={Clock}
+                      description="Recording..."
+                    />
+                    <MetricCard 
+                      label="Pages/Session" 
+                      value={data.executive.pagesPerSession}
+                      icon={FileText}
+                      description="Processing..."
+                    />
+                    <MetricCard 
+                      label="Bounce Rate" 
+                      value={data.executive.bounceRate}
+                      icon={Activity}
+                      description="Monitoring..."
+                    />
+                  </div>
+                )}
 
                 {/* Charts Row - Responsive Grid */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-6">
