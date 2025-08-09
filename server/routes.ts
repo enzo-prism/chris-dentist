@@ -291,6 +291,28 @@ Disallow: /`);
     }
   });
 
+  // Analytics API routes - Get all appointments
+  app.get("/api/appointments", async (_req: Request, res: Response) => {
+    try {
+      const appointments = await storage.getAppointments();
+      res.status(200).json(appointments);
+    } catch (error) {
+      console.error("Error fetching appointments:", error);
+      res.status(500).json({ message: "Failed to fetch appointments" });
+    }
+  });
+
+  // Analytics API routes - Get all contact messages
+  app.get("/api/contact", async (_req: Request, res: Response) => {
+    try {
+      const contacts = await storage.getContactMessages();
+      res.status(200).json(contacts);
+    } catch (error) {
+      console.error("Error fetching contact messages:", error);
+      res.status(500).json({ message: "Failed to fetch contact messages" });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }

@@ -35,6 +35,9 @@ export const pageTitles = {
   // Emergency dental page
   emergencyDental: `Emergency Dental Care Palo Alto | 24/7 Dental Emergency | Dr. Wong`,
   
+  // Analytics page
+  analytics: `Analytics Dashboard | Practice Performance Metrics | Dr. Wong`,
+  
   // Not found page
   notFound: `Page Not Found | Dr. Christopher Wong Palo Alto DDS`,
   
@@ -76,6 +79,9 @@ export const pageDescriptions = {
   
   // Emergency dental page
   emergencyDental: `24/7 emergency dental care in Palo Alto. Dr. Wong provides immediate treatment for dental emergencies including toothaches, broken teeth, and trauma.`,
+  
+  // Analytics page
+  analytics: `Secure analytics dashboard showing practice performance metrics, marketing ROI, and patient engagement data for Dr. Wong's dental practice.`,
   
   // Not found page
   notFound: `Page not found. Return to Dr. Wong's Palo Alto dental practice homepage or contact our office for assistance with dental appointments.`,
