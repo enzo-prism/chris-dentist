@@ -1,68 +1,22 @@
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell, AreaChart, Area } from "recharts";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell, AreaChart, Area, RadialBarChart, RadialBar, Legend } from "recharts";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Calendar, Users, MessageCircle, Phone, TrendingUp, Eye, MousePointer, Target, Globe, Clock } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
+import { Calendar, Users, MessageCircle, Phone, TrendingUp, Eye, MousePointer, Target, Globe, Clock, Star, CheckCircle2, AlertCircle, Search, MapPin, ScrollText, Zap, Award } from "lucide-react";
 import MetaTags from "@/components/common/MetaTags";
 import { pageTitles } from "@/lib/metaContent";
 import { Appointment, ContactMessage, Service, Testimonial } from "@shared/schema";
-
-interface AnalyticsData {
-  appointments: Appointment[];
-  contacts: ContactMessage[];
-  services: Service[];
-  testimonials: Testimonial[];
-}
-
-interface GAMetrics {
-  sessions: number;
-  pageViews: number;
-  bounceRate: number;
-  avgSessionDuration: string;
-  topPages: Array<{ page: string; views: number; }>;
-  deviceTypes: Array<{ device: string; sessions: number; }>;
-  trafficSources: Array<{ source: string; sessions: number; }>;
-  conversions: Array<{ goal: string; completions: number; }>;
-}
-
-// Mock Google Analytics data - in production, this would come from GA API
-const mockGAMetrics: GAMetrics = {
-  sessions: 2847,
-  pageViews: 8234,
-  bounceRate: 23.4,
-  avgSessionDuration: "3:42",
-  topPages: [
-    { page: "/", views: 2341 },
-    { page: "/services", views: 1567 },
-    { page: "/about", views: 1234 },
-    { page: "/dental-veneers", views: 987 },
-    { page: "/contact", views: 654 }
-  ],
-  deviceTypes: [
-    { device: "Mobile", sessions: 1821 },
-    { device: "Desktop", sessions: 876 },
-    { device: "Tablet", sessions: 150 }
-  ],
-  trafficSources: [
-    { source: "Organic Search", sessions: 1456 },
-    { source: "Direct", sessions: 823 },
-    { source: "Social Media", sessions: 324 },
-    { source: "Referral", sessions: 244 }
-  ],
-  conversions: [
-    { goal: "Appointment Requests", completions: 89 },
-    { goal: "Contact Form", completions: 134 },
-    { goal: "Phone Clicks", completions: 267 }
-  ]
-};
+import { julyAnalyticsData } from "@/data/analytics-july-2025";
 
 const COLORS = ['#005f40', '#00a86b', '#4ade80', '#86efac', '#bbf7d0'];
+const data = julyAnalyticsData;
 
 function PasswordDialog({ open, onOpenChange, onAuthenticate }: { 
   open: boolean; 
@@ -133,63 +87,11 @@ export default function Analytics() {
     sessionStorage.setItem("analytics-auth", "true");
   };
 
-  // Fetch data from our existing APIs
-  const { data: appointments = [] } = useQuery<Appointment[]>({
-    queryKey: ["/api/appointments"],
-    enabled: isAuthenticated,
-  });
-
-  const { data: contacts = [] } = useQuery<ContactMessage[]>({
-    queryKey: ["/api/contact"],
-    enabled: isAuthenticated,
-  });
-
-  const { data: services = [] } = useQuery<Service[]>({
-    queryKey: ["/api/services"],
-    enabled: isAuthenticated,
-  });
-
-  const { data: testimonials = [] } = useQuery<Testimonial[]>({
-    queryKey: ["/api/testimonials"],
-    enabled: isAuthenticated,
-  });
-
-  // Process data for analytics
-  const processedData = {
-    // Appointments by month (last 6 months)
-    appointmentsByMonth: [
-      { month: 'Feb', count: 23, conversions: 18 },
-      { month: 'Mar', count: 31, conversions: 24 },
-      { month: 'Apr', count: 28, conversions: 22 },
-      { month: 'May', count: 35, conversions: 28 },
-      { month: 'Jun', count: 42, conversions: 34 },
-      { month: 'Jul', count: 38, conversions: 31 }
-    ],
-    
-    // Service popularity
-    servicePopularity: [
-      { service: 'Cleanings', requests: 145, revenue: 21750 },
-      { service: 'Veneers', requests: 67, revenue: 134000 },
-      { service: 'Implants', requests: 43, revenue: 172000 },
-      { service: 'Invisalign', requests: 89, revenue: 356000 },
-      { service: 'Emergency', requests: 76, revenue: 38000 }
-    ],
-
-    // Contact methods
-    contactMethods: [
-      { method: 'Online Form', count: contacts.length || 134 },
-      { method: 'Phone', count: 267 },
-      { method: 'TypeForm', count: appointments.length || 89 }
-    ],
-
-    // Marketing performance
-    marketingROI: [
-      { channel: 'Google Ads', spend: 2400, leads: 45, cost_per_lead: 53.33 },
-      { channel: 'Facebook Ads', spend: 800, leads: 12, cost_per_lead: 66.67 },
-      { channel: 'SEO', spend: 1200, leads: 89, cost_per_lead: 13.48 },
-      { channel: 'Yelp Ads', spend: 600, leads: 8, cost_per_lead: 75.00 }
-    ]
-  };
+  // Format acquisition data for pie chart
+  const acquisitionData = Object.entries(data.acquisition.firstTimeUsers).map(([key, value]) => ({
+    name: key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1'),
+    value: value
+  }));
 
   if (!isAuthenticated) {
     return (
@@ -240,134 +142,83 @@ export default function Analytics() {
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
               <h1 className="text-3xl md:text-4xl font-bold text-gray-900">Analytics Dashboard</h1>
-              <p className="text-lg text-gray-600">Practice Performance & Marketing Insights</p>
+              <p className="text-lg text-gray-600">July 2025 Performance Report</p>
             </div>
             <div className="flex items-center gap-2 text-sm text-gray-500">
               <Clock className="w-4 h-4" />
-              Last updated: {new Date().toLocaleDateString()}
+              Last updated: {data.period.lastUpdated}
             </div>
           </div>
 
-          {/* Key Metrics Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
-              <Card>
-                <CardHeader className="flex flex-row items-center justify-between pb-2">
-                  <CardTitle className="text-sm font-medium text-gray-600">Total Sessions</CardTitle>
-                  <Globe className="w-4 h-4 text-primary" />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">{mockGAMetrics.sessions.toLocaleString()}</div>
-                  <div className="flex items-center text-xs text-green-600 mt-1">
-                    <TrendingUp className="w-3 h-3 mr-1" />
-                    +12.4% from last month
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
-              <Card>
-                <CardHeader className="flex flex-row items-center justify-between pb-2">
-                  <CardTitle className="text-sm font-medium text-gray-600">Page Views</CardTitle>
-                  <Eye className="w-4 h-4 text-primary" />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">{mockGAMetrics.pageViews.toLocaleString()}</div>
-                  <div className="flex items-center text-xs text-green-600 mt-1">
-                    <TrendingUp className="w-3 h-3 mr-1" />
-                    +8.2% from last month
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
-              <Card>
-                <CardHeader className="flex flex-row items-center justify-between pb-2">
-                  <CardTitle className="text-sm font-medium text-gray-600">Conversion Rate</CardTitle>
-                  <Target className="w-4 h-4 text-primary" />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">4.8%</div>
-                  <div className="flex items-center text-xs text-green-600 mt-1">
-                    <TrendingUp className="w-3 h-3 mr-1" />
-                    +2.1% from last month
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
-              <Card>
-                <CardHeader className="flex flex-row items-center justify-between pb-2">
-                  <CardTitle className="text-sm font-medium text-gray-600">Bounce Rate</CardTitle>
-                  <MousePointer className="w-4 h-4 text-primary" />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">{mockGAMetrics.bounceRate}%</div>
-                  <div className="flex items-center text-xs text-green-600 mt-1">
-                    <TrendingUp className="w-3 h-3 mr-1 transform scale-y-[-1]" />
-                    -3.7% from last month
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          </div>
+          {/* Executive Summary */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Executive Summary</CardTitle>
+              <CardDescription>{data.executive.summary}</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                <div>
+                  <p className="text-sm text-gray-600">New Users</p>
+                  <p className="text-2xl font-bold">{data.executive.newUsers.toLocaleString()}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-600">Returning Users</p>
+                  <p className="text-2xl font-bold">{data.executive.returningUsers}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-600">Active Users</p>
+                  <p className="text-2xl font-bold">{data.executive.activeUsers}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-600">Mobile Share</p>
+                  <p className="text-2xl font-bold">{data.executive.mobileShare}%</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-600">Avg Session</p>
+                  <p className="text-2xl font-bold">{data.executive.avgSessionDuration}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-600">Bounce Rate</p>
+                  <p className="text-2xl font-bold">{data.executive.bounceRate}%</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
 
           {/* Dashboard Tabs */}
-          <Tabs defaultValue="overview" className="space-y-6">
-            <TabsList className="grid w-full grid-cols-3 lg:grid-cols-5">
-              <TabsTrigger value="overview">Overview</TabsTrigger>
-              <TabsTrigger value="appointments">Appointments</TabsTrigger>
-              <TabsTrigger value="marketing">Marketing</TabsTrigger>
-              <TabsTrigger value="services">Services</TabsTrigger>
-              <TabsTrigger value="traffic">Traffic</TabsTrigger>
+          <Tabs defaultValue="acquisition" className="space-y-6">
+            <TabsList className="grid w-full grid-cols-2 lg:grid-cols-6">
+              <TabsTrigger value="acquisition">Acquisition</TabsTrigger>
+              <TabsTrigger value="behavior">Behavior</TabsTrigger>
+              <TabsTrigger value="search">Search</TabsTrigger>
+              <TabsTrigger value="reputation">Reputation</TabsTrigger>
+              <TabsTrigger value="highlights">Highlights</TabsTrigger>
+              <TabsTrigger value="targets">Targets</TabsTrigger>
             </TabsList>
 
-            {/* Overview Tab */}
-            <TabsContent value="overview" className="space-y-6">
+            {/* Acquisition Tab */}
+            <TabsContent value="acquisition" className="space-y-6">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {/* Appointments Trend */}
                 <Card>
                   <CardHeader>
-                    <CardTitle>Appointment Requests Trend</CardTitle>
-                    <CardDescription>Monthly appointment requests and conversions</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <ResponsiveContainer width="100%" height={300}>
-                      <AreaChart data={processedData.appointmentsByMonth}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="month" />
-                        <YAxis />
-                        <Tooltip />
-                        <Area type="monotone" dataKey="count" stroke="#005f40" fill="#005f40" fillOpacity={0.1} />
-                        <Area type="monotone" dataKey="conversions" stroke="#00a86b" fill="#00a86b" fillOpacity={0.3} />
-                      </AreaChart>
-                    </ResponsiveContainer>
-                  </CardContent>
-                </Card>
-
-                {/* Device Breakdown */}
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Traffic by Device</CardTitle>
-                    <CardDescription>User sessions by device type</CardDescription>
+                    <CardTitle>First-Time Users by Source</CardTitle>
+                    <CardDescription>How new visitors are finding your practice</CardDescription>
                   </CardHeader>
                   <CardContent>
                     <ResponsiveContainer width="100%" height={300}>
                       <PieChart>
                         <Pie
-                          data={mockGAMetrics.deviceTypes}
+                          data={acquisitionData}
                           cx="50%"
                           cy="50%"
                           labelLine={false}
-                          label={({ device, sessions, percent }) => `${device}: ${(percent * 100).toFixed(0)}%`}
+                          label={({ name, value }) => `${name}: ${value}%`}
                           outerRadius={80}
                           fill="#8884d8"
-                          dataKey="sessions"
+                          dataKey="value"
                         >
-                          {mockGAMetrics.deviceTypes.map((entry, index) => (
+                          {acquisitionData.map((entry, index) => (
                             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                           ))}
                         </Pie>
@@ -376,225 +227,359 @@ export default function Analytics() {
                     </ResponsiveContainer>
                   </CardContent>
                 </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Sessions by Source</CardTitle>
+                    <CardDescription>Traffic volume from each platform</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <ResponsiveContainer width="100%" height={300}>
+                      <BarChart data={data.acquisition.sessionsBySource}>
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="source" />
+                        <YAxis />
+                        <Tooltip />
+                        <Bar dataKey="sessions" fill="#005f40" />
+                      </BarChart>
+                    </ResponsiveContainer>
+                  </CardContent>
+                </Card>
               </div>
 
-              {/* Top Pages */}
               <Card>
                 <CardHeader>
-                  <CardTitle>Top Performing Pages</CardTitle>
-                  <CardDescription>Most visited pages on your website</CardDescription>
+                  <CardTitle>Top Cities</CardTitle>
+                  <CardDescription>Geographic distribution of your visitors</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="space-y-4">
-                    {mockGAMetrics.topPages.map((page, index) => (
-                      <div key={page.page} className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                          <Badge variant="outline">#{index + 1}</Badge>
-                          <span className="font-medium">{page.page === '/' ? 'Homepage' : page.page.replace('/', '').replace('-', ' ')}</span>
-                        </div>
-                        <div className="text-right">
-                          <div className="font-semibold">{page.views.toLocaleString()}</div>
-                          <div className="text-sm text-gray-500">views</div>
-                        </div>
-                      </div>
+                  <div className="flex flex-wrap gap-2">
+                    {data.acquisition.topCities.map((city, index) => (
+                      <Badge key={city} variant={index < 3 ? "default" : "secondary"}>
+                        <MapPin className="w-3 h-3 mr-1" />
+                        {city}
+                      </Badge>
                     ))}
                   </div>
                 </CardContent>
               </Card>
             </TabsContent>
 
-            {/* Appointments Tab */}
-            <TabsContent value="appointments" className="space-y-6">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Appointment Requests by Month</CardTitle>
-                    <CardDescription>Total requests and conversion rate</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <ResponsiveContainer width="100%" height={300}>
-                      <BarChart data={processedData.appointmentsByMonth}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="month" />
-                        <YAxis />
-                        <Tooltip />
-                        <Bar dataKey="count" fill="#005f40" name="Requests" />
-                        <Bar dataKey="conversions" fill="#00a86b" name="Conversions" />
-                      </BarChart>
-                    </ResponsiveContainer>
-                  </CardContent>
-                </Card>
-
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Contact Methods</CardTitle>
-                    <CardDescription>How patients are reaching out</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-4">
-                      {processedData.contactMethods.map((method) => (
-                        <div key={method.method} className="flex items-center justify-between">
-                          <span className="font-medium">{method.method}</span>
-                          <div className="text-right">
-                            <div className="font-semibold">{method.count}</div>
-                            <div className="text-sm text-gray-500">contacts</div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-            </TabsContent>
-
-            {/* Marketing Tab */}
-            <TabsContent value="marketing" className="space-y-6">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Marketing ROI by Channel</CardTitle>
-                    <CardDescription>Cost per lead by marketing channel</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <ResponsiveContainer width="100%" height={300}>
-                      <BarChart data={processedData.marketingROI}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="channel" />
-                        <YAxis />
-                        <Tooltip formatter={(value, name) => name === 'cost_per_lead' ? [`$${value}`, 'Cost per Lead'] : [value, name]} />
-                        <Bar dataKey="leads" fill="#00a86b" name="Leads Generated" />
-                      </BarChart>
-                    </ResponsiveContainer>
-                  </CardContent>
-                </Card>
-
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Traffic Sources</CardTitle>
-                    <CardDescription>Where your visitors are coming from</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-4">
-                      {mockGAMetrics.trafficSources.map((source, index) => (
-                        <div key={source.source} className="flex items-center justify-between">
-                          <div className="flex items-center gap-3">
-                            <div className={`w-3 h-3 rounded-full`} style={{ backgroundColor: COLORS[index % COLORS.length] }}></div>
-                            <span className="font-medium">{source.source}</span>
-                          </div>
-                          <div className="text-right">
-                            <div className="font-semibold">{source.sessions}</div>
-                            <div className="text-sm text-gray-500">sessions</div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-
-              {/* Marketing Performance Table */}
+            {/* Behavior Tab */}
+            <TabsContent value="behavior" className="space-y-6">
               <Card>
                 <CardHeader>
-                  <CardTitle>Marketing Channel Performance</CardTitle>
-                  <CardDescription>Detailed breakdown of marketing spend and results</CardDescription>
+                  <CardTitle>User Behavior Metrics</CardTitle>
+                  <CardDescription>{data.behavior.insight}</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="overflow-x-auto">
-                    <table className="w-full">
-                      <thead>
-                        <tr className="border-b">
-                          <th className="text-left p-2">Channel</th>
-                          <th className="text-right p-2">Spend</th>
-                          <th className="text-right p-2">Leads</th>
-                          <th className="text-right p-2">Cost per Lead</th>
-                          <th className="text-right p-2">ROI</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {processedData.marketingROI.map((channel) => (
-                          <tr key={channel.channel} className="border-b">
-                            <td className="p-2 font-medium">{channel.channel}</td>
-                            <td className="text-right p-2">${channel.spend}</td>
-                            <td className="text-right p-2">{channel.leads}</td>
-                            <td className="text-right p-2">${channel.cost_per_lead.toFixed(2)}</td>
-                            <td className="text-right p-2">
-                              <Badge variant={channel.cost_per_lead < 30 ? "default" : channel.cost_per_lead < 60 ? "secondary" : "destructive"}>
-                                {channel.cost_per_lead < 30 ? "Excellent" : channel.cost_per_lead < 60 ? "Good" : "Needs Improvement"}
-                              </Badge>
-                            </td>
-                          </tr>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                    <div className="text-center">
+                      <p className="text-sm text-gray-600">Avg Session</p>
+                      <p className="text-2xl font-bold">{data.behavior.metrics.avgSessionDuration}</p>
+                    </div>
+                    <div className="text-center">
+                      <p className="text-sm text-gray-600">Pages/Session</p>
+                      <p className="text-2xl font-bold">{data.behavior.metrics.pagesPerSession}</p>
+                    </div>
+                    <div className="text-center">
+                      <p className="text-sm text-gray-600">Bounce Rate</p>
+                      <p className="text-2xl font-bold">{data.behavior.metrics.bounceRate}%</p>
+                    </div>
+                    <div className="text-center">
+                      <p className="text-sm text-gray-600">Avg Scroll</p>
+                      <p className="text-2xl font-bold">{data.behavior.metrics.avgScrollDepth}%</p>
+                    </div>
+                  </div>
+
+                  <Separator className="my-6" />
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <h4 className="font-semibold mb-3">Top Pages (Sessions)</h4>
+                      <div className="space-y-2">
+                        {data.behavior.topPages.map((page) => (
+                          <div key={page.page} className="flex justify-between items-center">
+                            <span className="text-sm">{page.page}</span>
+                            <Badge variant="secondary">{page.sessions}</Badge>
+                          </div>
                         ))}
-                      </tbody>
-                    </table>
+                      </div>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold mb-3">Top Clicks</h4>
+                      <div className="space-y-2">
+                        {data.behavior.topClicks.map((click) => (
+                          <div key={click.element} className="flex justify-between items-center">
+                            <span className="text-sm">{click.element}</span>
+                            <Badge variant="secondary">{click.clicks}</Badge>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  <Separator className="my-6" />
+
+                  <div className="bg-green-50 p-4 rounded-lg">
+                    <p className="text-sm text-green-800">
+                      <CheckCircle2 className="inline w-4 h-4 mr-1" />
+                      Friction: {data.behavior.friction.note}
+                    </p>
                   </div>
                 </CardContent>
               </Card>
             </TabsContent>
 
-            {/* Services Tab */}
-            <TabsContent value="services" className="space-y-6">
+            {/* Search Visibility Tab */}
+            <TabsContent value="search" className="space-y-6">
               <Card>
                 <CardHeader>
-                  <CardTitle>Service Popularity & Revenue</CardTitle>
-                  <CardDescription>Most requested services and their revenue impact</CardDescription>
+                  <CardTitle>Search Visibility</CardTitle>
+                  <CardDescription>{data.searchVisibility.insight}</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <ResponsiveContainer width="100%" height={400}>
-                    <BarChart data={processedData.servicePopularity}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="service" />
-                      <YAxis yAxisId="left" />
-                      <YAxis yAxisId="right" orientation="right" />
-                      <Tooltip formatter={(value, name) => name === 'revenue' ? [`$${value.toLocaleString()}`, 'Revenue'] : [value, 'Requests']} />
-                      <Bar yAxisId="left" dataKey="requests" fill="#005f40" name="Requests" />
-                      <Bar yAxisId="right" dataKey="revenue" fill="#00a86b" name="Revenue" />
-                    </BarChart>
-                  </ResponsiveContainer>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <h4 className="font-semibold mb-3">Landing Pages by Impressions</h4>
+                      <div className="space-y-2">
+                        {data.searchVisibility.landingPagesByImpressions.map((page) => (
+                          <div key={page.page} className="flex justify-between items-center">
+                            <span className="text-sm font-mono text-gray-600">{page.page}</span>
+                            <Badge>{page.impressions.toLocaleString()}</Badge>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold mb-3">Queries by Clicks</h4>
+                      <div className="space-y-2">
+                        {data.searchVisibility.queriesByClicks.map((query) => (
+                          <div key={query.query} className="flex justify-between items-center">
+                            <span className="text-sm">{query.query}</span>
+                            <Badge variant="secondary">{query.clicks}</Badge>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Conversions Card */}
+              <Card className="border-orange-200 bg-orange-50">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <AlertCircle className="w-5 h-5 text-orange-600" />
+                    Conversion Tracking
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-2 gap-4 mb-4">
+                    <div>
+                      <p className="text-sm text-gray-600">Qualified Leads</p>
+                      <p className="text-2xl font-bold">{data.conversions.qualifiedLeads}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-600">Converted Leads</p>
+                      <p className="text-2xl font-bold">{data.conversions.convertedLeads}</p>
+                    </div>
+                  </div>
+                  <Badge variant="destructive" className="mb-2">{data.conversions.status}</Badge>
+                  <p className="text-sm text-gray-700">{data.conversions.message}</p>
                 </CardContent>
               </Card>
             </TabsContent>
 
-            {/* Traffic Tab */}
-            <TabsContent value="traffic" className="space-y-6">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Sessions Over Time</CardTitle>
-                    <CardDescription>Website traffic trend</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <ResponsiveContainer width="100%" height={300}>
-                      <LineChart data={processedData.appointmentsByMonth.map(item => ({ ...item, sessions: item.count * 67 }))}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="month" />
-                        <YAxis />
-                        <Tooltip />
-                        <Line type="monotone" dataKey="sessions" stroke="#005f40" strokeWidth={3} />
-                      </LineChart>
-                    </ResponsiveContainer>
-                  </CardContent>
-                </Card>
+            {/* Reputation Tab */}
+            <TabsContent value="reputation" className="space-y-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Reputation & Social Proof</CardTitle>
+                  <CardDescription>Reviews build trust and lift conversion rates on every channel</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <div className="text-center">
+                      <p className="text-sm text-gray-600">New Reviews (July)</p>
+                      <p className="text-3xl font-bold">{data.reputation.july.newReviewsCount}</p>
+                      <div className="flex justify-center gap-2 mt-2">
+                        <Badge variant="outline">Google: {data.reputation.july.platformBreakdown.google}</Badge>
+                        <Badge variant="outline">Yelp: {data.reputation.july.platformBreakdown.yelp}</Badge>
+                      </div>
+                    </div>
+                    <div className="text-center">
+                      <p className="text-sm text-gray-600">Average Rating</p>
+                      <div className="flex justify-center items-center gap-1">
+                        {[...Array(5)].map((_, i) => (
+                          <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                        ))}
+                      </div>
+                      <p className="text-lg font-semibold mt-1">{data.reputation.july.avgRatingNew.toFixed(1)}</p>
+                    </div>
+                    <div className="text-center">
+                      <p className="text-sm text-gray-600">Preview (August)</p>
+                      <p className="text-3xl font-bold">{data.reputation.previewAug.newReviewsCount}</p>
+                      <p className="text-xs text-gray-500 mt-1">Already incoming</p>
+                    </div>
+                  </div>
 
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Conversion Goals</CardTitle>
-                    <CardDescription>Goal completions this month</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-4">
-                      {mockGAMetrics.conversions.map((conversion) => (
-                        <div key={conversion.goal} className="flex items-center justify-between">
-                          <span className="font-medium">{conversion.goal}</span>
-                          <div className="text-right">
-                            <div className="font-semibold">{conversion.completions}</div>
-                            <div className="text-sm text-gray-500">completions</div>
+                  <Separator className="my-6" />
+
+                  <div>
+                    <h4 className="font-semibold mb-3">Recent Review Highlights</h4>
+                    <div className="space-y-3">
+                      {data.reputation.july.topQuotes.map((quote, index) => (
+                        <div key={index} className="bg-gray-50 p-4 rounded-lg">
+                          <p className="text-sm italic mb-2">"{quote.excerpt}"</p>
+                          <div className="flex justify-between items-center">
+                            <Badge variant="outline">{quote.source} • {quote.date}</Badge>
+                            <div className="flex gap-1">
+                              {[...Array(5)].map((_, i) => (
+                                <Star key={i} className="w-3 h-3 fill-yellow-400 text-yellow-400" />
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                      {data.reputation.previewAug.quotes?.map((quote, index) => (
+                        <div key={`aug-${index}`} className="bg-blue-50 p-4 rounded-lg">
+                          <Badge className="mb-2" variant="default">August Preview</Badge>
+                          <p className="text-sm italic mb-2">"{quote.excerpt}"</p>
+                          <div className="flex justify-between items-center">
+                            <Badge variant="outline">{quote.source} • {quote.date}</Badge>
+                            <div className="flex gap-1">
+                              {[...Array(5)].map((_, i) => (
+                                <Star key={i} className="w-3 h-3 fill-yellow-400 text-yellow-400" />
+                              ))}
+                            </div>
                           </div>
                         </div>
                       ))}
                     </div>
-                  </CardContent>
-                </Card>
-              </div>
+                  </div>
+
+                  <Separator className="my-6" />
+
+                  <div>
+                    <h4 className="font-semibold mb-3">Common Themes</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {data.reputation.july.themes.map((theme) => (
+                        <Badge key={theme} variant="secondary">
+                          {theme}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="mt-6 p-4 bg-blue-50 rounded-lg">
+                    <p className="text-sm text-blue-800">
+                      <TrendingUp className="inline w-4 h-4 mr-1" />
+                      {data.reputation.insight}
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            {/* Highlights Tab */}
+            <TabsContent value="highlights" className="space-y-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Shipped This Month (Prism Highlights)</CardTitle>
+                  <CardDescription>Proof of work and value delivered</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    {data.highlights.map((highlight, index) => (
+                      <div key={index} className="border-l-4 border-primary pl-4 py-2">
+                        <div className="flex items-start justify-between">
+                          <div className="flex-1">
+                            <div className="flex items-center gap-2 mb-1">
+                              <h4 className="font-semibold">{highlight.title}</h4>
+                              {highlight.status === 'complete' ? (
+                                <Badge variant="default">Complete</Badge>
+                              ) : (
+                                <Badge variant="secondary">In Progress</Badge>
+                              )}
+                            </div>
+                            <p className="text-sm text-gray-600 mb-2">{highlight.impact}</p>
+                            <div className="space-y-1">
+                              {highlight.evidence.map((item, i) => (
+                                <div key={i} className="flex items-center gap-2">
+                                  <CheckCircle2 className="w-3 h-3 text-green-600 flex-shrink-0" />
+                                  <span className="text-xs text-gray-500">{item}</span>
+                                </div>
+                              ))}
+                            </div>
+                            {highlight.statusNote && (
+                              <p className="text-xs text-orange-600 mt-2">{highlight.statusNote}</p>
+                            )}
+                          </div>
+                          <span className="text-xs text-gray-400">{highlight.date}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <Separator className="my-6" />
+
+                  <div className="bg-gray-50 p-4 rounded-lg">
+                    <h4 className="font-semibold mb-2 flex items-center gap-2">
+                      <Zap className="w-4 h-4 text-primary" />
+                      Tech Stack
+                    </h4>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <p className="text-xs text-gray-600 mb-1">Analytics Tools</p>
+                        <div className="flex flex-wrap gap-1">
+                          {data.stack.analytics.map((tool) => (
+                            <Badge key={tool} variant="outline" className="text-xs">
+                              {tool}
+                            </Badge>
+                          ))}
+                        </div>
+                      </div>
+                      <div>
+                        <p className="text-xs text-gray-600 mb-1">AI Models</p>
+                        <div className="flex flex-wrap gap-1">
+                          {data.stack.aiModels.map((model) => (
+                            <Badge key={model} variant="outline" className="text-xs">
+                              {model}
+                            </Badge>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                    <p className="text-xs text-gray-500 mt-2">{data.stack.notes}</p>
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            {/* Targets Tab */}
+            <TabsContent value="targets" className="space-y-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle>August Targets</CardTitle>
+                  <CardDescription>Priority actions to maintain momentum</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    {data.targetsNextMonth.map((target) => (
+                      <div key={target.priority} className="flex gap-4 items-start">
+                        <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary text-white text-sm font-bold flex-shrink-0">
+                          {target.priority}
+                        </div>
+                        <div className="flex-1">
+                          <h4 className="font-semibold mb-1">{target.title}</h4>
+                          <p className="text-sm text-gray-600">{target.description}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
             </TabsContent>
           </Tabs>
         </div>
