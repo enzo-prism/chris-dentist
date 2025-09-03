@@ -78,7 +78,7 @@ This is a full-stack dental practice website built for Dr. Christopher B. Wong, 
 
 ### External Services
 - Neon Database for PostgreSQL hosting
-- Google Analytics for website tracking
+- Google Analytics for website tracking (G-94WRBJY51J)
 - Hotjar for user behavior analytics
 - TypeForm for appointment scheduling
 
@@ -107,6 +107,10 @@ This is a full-stack dental practice website built for Dr. Christopher B. Wong, 
 
 ## Changelog
 
+- January 31, 2025. Updated Google Analytics tracking ID
+  - Replaced old tracking ID (G-9B141WTH4R) with new correct data stream ID (G-94WRBJY51J)
+  - Updated in both index.html and GoogleAnalytics component
+  - Maintains existing page view tracking and event tracking functionality
 - January 10, 2025. Comprehensive responsive redesign of Analytics Dashboard
   - Built fully responsive analytics page (AnalyticsResponsive.tsx) optimized for all devices
   - **Mobile (< 768px)**: Hamburger menu, stacked cards, touch-optimized controls, progressive disclosure

@@ -8,7 +8,7 @@ const GoogleAnalytics = () => {
   // Track page views
   const trackPageView = useCallback((path: string) => {
     if (typeof window !== 'undefined' && 'gtag' in window) {
-      window.gtag('config', 'G-9B141WTH4R', {
+      window.gtag('config', 'G-94WRBJY51J', {
         page_path: path,
       });
     }
