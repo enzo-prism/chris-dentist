@@ -9,13 +9,22 @@ interface TestimonialCardProps {
 }
 
 const TestimonialCard = ({ testimonial, index = 0 }: TestimonialCardProps) => {
-  const { name, location, rating, text, image } = testimonial;
-
-  // Truncate text if it's too long (for very small screens)
-  const truncateText = (str: string, maxLength: number = 180) => {
-    if (str.length <= maxLength) return str;
-    return str.substring(0, maxLength) + '...';
-  };
+  const { name, rating, text, image } = testimonial;
+  const gradients = [
+    "from-[#EEF5FF] to-white",
+    "from-[#FFF5F7] to-white",
+    "from-[#F5FBF7] to-white",
+    "from-[#F7F5FF] to-white",
+  ];
+  const badges = [
+    "text-[#2563EB] bg-[#2563EB0D]",
+    "text-[#DB2777] bg-[#DB27770D]",
+    "text-[#059669] bg-[#0596690D]",
+    "text-[#7C3AED] bg-[#7C3AED0D]",
+  ];
+  const gradientClass = gradients[index % gradients.length];
+  const badgeClass = badges[index % badges.length];
+  const hasImage = Boolean(image && image.trim().length > 0);
 
   return (
     <motion.div
@@ -24,42 +33,44 @@ const TestimonialCard = ({ testimonial, index = 0 }: TestimonialCardProps) => {
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.4, delay: index * 0.1 }}
     >
-      <Card className="h-full bg-white p-6 rounded-xl border-0 shadow-sm hover:shadow-md transition-all duration-300 relative overflow-hidden">
-        {/* Decorative quote icon */}
-        <div className="absolute -top-2 -right-2 text-primary/5">
-          <Quote className="w-16 h-16" strokeWidth={1} />
+      <Card className={`h-full border-0 shadow-sm hover:shadow-xl transition-all duration-300 relative overflow-hidden`}>
+        <div className={`absolute inset-0 bg-gradient-to-br ${gradientClass}`} aria-hidden="true" />
+        <div className="absolute -top-8 -right-8 text-primary/5">
+          <Quote className="w-28 h-28" strokeWidth={1} />
         </div>
-        
-        <CardContent className="p-0 relative z-10">
-          {/* Star rating */}
-          <div className="flex text-amber-400 mb-4">
-            {Array(5).fill(0).map((_, i) => (
-              <Star 
-                key={i} 
-                className="h-4 w-4 mr-0.5" 
-                fill={i < rating ? "currentColor" : "none"} 
+
+        <CardContent className="p-6 sm:p-7 relative z-10">
+          <div className="flex items-center justify-end mb-4 text-amber-400">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <Star
+                key={i}
+                className="h-4 w-4 ml-0.5"
+                fill={i < rating ? "currentColor" : "none"}
                 strokeWidth={1.5}
               />
             ))}
           </div>
-          
-          {/* Testimonial text */}
-          <p className="text-gray-700 mb-5 text-sm leading-relaxed line-clamp-4">
+
+          <p className="text-gray-700 mb-6 text-sm sm:text-base leading-relaxed">
             "{text}"
           </p>
-          
-          {/* Author info with modern styling */}
+
           <div className="flex items-center">
-            <div 
-              className="w-10 h-10 rounded-full mr-3 flex items-center justify-center font-medium text-white bg-gradient-to-br from-primary to-primary/80 shadow-sm"
-              aria-label={`Avatar for ${name}`}
-            >
-              {name.charAt(0)}
-            </div>
-            <div>
-              <h4 className="font-medium text-gray-900 text-sm">{name}</h4>
-              <p className="text-xs text-gray-500">{location}</p>
-            </div>
+            {hasImage ? (
+              <img
+                src={image}
+                alt={name}
+                className="w-12 h-12 rounded-full object-cover mr-3 border border-white/60 shadow-sm"
+              />
+            ) : (
+              <div
+                className="w-12 h-12 rounded-full mr-3 flex items-center justify-center font-medium text-white bg-gradient-to-br from-primary to-primary/70 shadow-sm uppercase"
+                aria-label={`Avatar for ${name}`}
+              >
+                {name.charAt(0)}
+              </div>
+            )}
+            <h4 className="font-semibold text-gray-900 text-sm sm:text-base">{name}</h4>
           </div>
         </CardContent>
       </Card>

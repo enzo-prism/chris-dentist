@@ -7,6 +7,7 @@ import {
   BlogPost, InsertBlogPost, blogPosts,
   Testimonial, InsertTestimonial, testimonials
 } from "@shared/schema";
+import { buildInsertTestimonial, testimonialSeedData } from "@shared/testimonialsData";
 
 export interface IStorage {
   // User methods
@@ -361,32 +362,8 @@ export class MemStorage implements IStorage {
   }
 
   private initializeTestimonials() {
-    const testimonialsList: InsertTestimonial[] = [
-      {
-        name: "Sarah L.",
-        location: "Palo Alto, CA",
-        rating: 5,
-        text: "Dr. Wong and his staff provided exceptional care for my dental implant procedure. They explained everything clearly, made sure I was comfortable, and the results are fantastic. Highly recommend!",
-        image: "https://i.imgur.com/mVvasLs.png"
-      },
-      {
-        name: "Michael T.",
-        location: "Menlo Park, CA",
-        rating: 5,
-        text: "As someone with dental anxiety, I can't express how comfortable Dr. Wong made me feel. His practice uses the latest technology, and the virtual consultation option was extremely convenient for my busy schedule.",
-        image: "https://i.imgur.com/4Hp7oKM.png"
-      },
-      {
-        name: "Jennifer R.",
-        location: "Palo Alto, CA",
-        rating: 5,
-        text: "Our entire family sees Dr. Wong, and we couldn't be happier. From my 5-year-old's first visit to my husband's complex crown work, everyone receives personalized attention. The online patient portal makes managing appointments easy.",
-        image: "https://i.imgur.com/iqBXT9y.png"
-      }
-    ];
-
-    testimonialsList.forEach(testimonial => {
-      this.createTestimonial(testimonial);
+    testimonialSeedData.forEach((seed, index) => {
+      void this.createTestimonial(buildInsertTestimonial(seed, index));
     });
   }
 }

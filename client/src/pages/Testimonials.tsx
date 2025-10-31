@@ -1,4 +1,4 @@
-import { Quote } from "lucide-react";
+import { Quote, Star, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import MetaTags from "@/components/common/MetaTags";
@@ -8,11 +8,30 @@ import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import TestimonialCard from "@/components/common/TestimonialCard";
 import type { Testimonial } from "@shared/schema";
+import { useMemo } from "react";
+import { buildInsertTestimonial, testimonialSeedData } from "@shared/testimonialsData";
 
 const Testimonials = () => {
   const { data: testimonials, isLoading: isLoadingTestimonials } = useQuery<Testimonial[]>({
     queryKey: ["/api/testimonials"],
   });
+  const fallbackTestimonials = useMemo<Testimonial[]>(() => {
+    return testimonialSeedData.map((seed, index) => ({
+      id: index + 1,
+      ...buildInsertTestimonial(seed, index),
+    }));
+  }, []);
+  const apiCount = testimonials?.length ?? 0;
+  const fallbackCount = fallbackTestimonials.length;
+  const shouldUseApiData = apiCount >= fallbackCount && apiCount > 0;
+  const reviews = shouldUseApiData ? testimonials! : fallbackTestimonials;
+  const totalReviews = reviews.length;
+  const fiveStarShare = reviews.length
+    ? Math.round((reviews.filter((review) => review.rating === 5).length / reviews.length) * 100)
+    : 0;
+  const spotlightReview =
+    reviews.find((review) => review.text.length > 180) ?? reviews[0];
+  const showSkeleton = isLoadingTestimonials && apiCount === 0;
   
   return (
     <>
@@ -23,78 +42,90 @@ const Testimonials = () => {
       />
       
       {/* Hero Section */}
-      <section className="bg-gradient-to-b from-[#F5F9FC] to-white py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold font-heading text-[#333333] mb-6">
-              Patient Testimonials
-            </h1>
-            <p className="text-xl text-[#333333] max-w-3xl mx-auto opacity-90">
-              Discover what our patients are saying about their experience with Dr. Christopher B. Wong
-            </p>
-          </div>
+      <section className="bg-gradient-to-b from-[#F5F9FC] via-white to-white py-16 md:py-24">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+          <motion.span
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-semibold tracking-wide uppercase"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+          >
+            <Sparkles className="h-4 w-4" />
+            Loved by patients
+          </motion.span>
+          <motion.h1
+            className="text-4xl md:text-5xl font-bold font-heading text-[#1F2933] leading-tight"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.1 }}
+          >
+            A community of smiles that keeps coming back
+          </motion.h1>
+          <motion.p
+            className="text-lg md:text-xl text-[#4B5563] leading-relaxed max-w-3xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.2 }}
+          >
+            From emergency visits to decades-long relationships, patients across the Peninsula share how Dr. Wong, Dr. Hamamoto, and the entire team combine gentle care with modern dentistry.
+          </motion.p>
         </div>
       </section>
 
-      {/* Featured Quote */}
-      <section className="py-16 bg-primary text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <Quote className="h-16 w-16 mx-auto mb-6 opacity-25" />
-            <p className="text-2xl md:text-3xl italic font-light max-w-4xl mx-auto mb-8">
-              Dr. Wong is not just a skilled dentist; he's an artist who transformed my smile and gave me back my confidence. 
-              His practice combines cutting-edge technology with genuine care for patients.
+      {/* Spotlight Review */}
+      {spotlightReview && (
+        <section className="py-16 bg-primary text-white">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+            <Quote className="h-16 w-16 mx-auto opacity-20" />
+            <p className="text-2xl md:text-3xl font-light leading-relaxed">
+              "{spotlightReview.text}"
             </p>
-            <div className="flex items-center justify-center">
-              <div 
-                className="w-12 h-12 rounded-full border-2 border-white mr-4 flex items-center justify-center font-bold text-primary bg-white"
-                aria-label="Avatar for Lisa M."
+            <div className="flex items-center justify-center gap-4 pt-4">
+              <div
+                className="w-12 h-12 rounded-full border-2 border-white flex items-center justify-center font-semibold text-primary bg-white uppercase"
+                aria-label={`Avatar for ${spotlightReview.name}`}
               >
-                L
+                {spotlightReview.name.charAt(0)}
               </div>
               <div className="text-left">
-                <h4 className="font-semibold">Lisa M.</h4>
-                <p className="text-sm opacity-75">Palo Alto, CA</p>
+                <div className="flex items-center gap-2">
+                  <h4 className="font-semibold text-white">{spotlightReview.name}</h4>
+                  <div className="flex text-amber-300">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star
+                        key={i}
+                        className="h-3.5 w-3.5"
+                        fill={i < spotlightReview.rating ? "currentColor" : "none"}
+                        strokeWidth={1.2}
+                      />
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Patient Testimonials Main Section */}
       <section className="py-16 md:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold font-heading text-[#333333] mb-6">
-              Patient Stories
-            </h2>
-            <p className="text-[#333333] max-w-3xl mx-auto mb-6">
-              Read authentic experiences from our patients who have chosen Dr. Wong for their dental care needs.
-              We're proud of our reputation for exceptional service and quality care.
-            </p>
-            <div className="w-24 h-1 bg-primary mx-auto"></div>
-          </motion.div>
-          
           {/* Testimonials Grid */}
-          {isLoadingTestimonials ? (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {[...Array(3)].map((_, index) => (
-                <div key={index} className="bg-white p-6 rounded-lg shadow-md animate-pulse">
-                  <div className="h-4 bg-gray-200 rounded w-3/4 mb-4"></div>
-                  <div className="h-4 bg-gray-200 rounded w-full mb-2"></div>
-                  <div className="h-4 bg-gray-200 rounded w-full mb-2"></div>
-                  <div className="h-4 bg-gray-200 rounded w-1/2 mb-4"></div>
-                  <div className="flex items-center">
-                    <div className="rounded-full bg-gray-200 h-12 w-12 mr-4"></div>
-                    <div>
-                      <div className="h-4 bg-gray-200 rounded w-24 mb-2"></div>
-                      <div className="h-3 bg-gray-200 rounded w-32"></div>
+          {showSkeleton ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
+              {Array.from({ length: 8 }).map((_, index) => (
+                <div key={index} className="bg-white border border-[#E5E7EB] rounded-2xl p-6 animate-pulse space-y-4">
+                  <div className="h-3 w-24 bg-gray-200 rounded-full"></div>
+                  <div className="space-y-2">
+                    <div className="h-4 bg-gray-200 rounded"></div>
+                    <div className="h-4 bg-gray-200 rounded w-11/12"></div>
+                    <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+                  </div>
+                  <div className="flex items-center gap-3 pt-2">
+                    <div className="h-10 w-10 rounded-full bg-gray-200" />
+                    <div className="space-y-2">
+                      <div className="h-3 bg-gray-200 rounded w-24"></div>
+                      <div className="h-3 bg-gray-200 rounded w-20"></div>
                     </div>
                   </div>
                 </div>
@@ -106,34 +137,52 @@ const Testimonials = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
               viewport={{ once: true }}
-              className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+              className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6"
             >
-              {testimonials?.map((testimonial, index) => (
-                <TestimonialCard key={testimonial.id} testimonial={testimonial} index={index} />
+              {reviews.map((testimonial, index) => (
+                <TestimonialCard key={`${testimonial.id}-${index}`} testimonial={testimonial} index={index} />
               ))}
             </motion.div>
           )}
           
-          {/* Additional benefits section */}
-          <motion.div 
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
             viewport={{ once: true }}
-            className="grid md:grid-cols-3 gap-8 mt-16"
+            className="grid gap-6 md:grid-cols-2 xl:grid-cols-4 mt-16"
           >
-            <div className="bg-[#F5F9FC] p-6 rounded-lg text-center">
-              <div className="text-primary text-4xl font-bold mb-2">200+</div>
-              <p className="text-[#333333] font-medium">5-Star Reviews</p>
-            </div>
-            <div className="bg-[#F5F9FC] p-6 rounded-lg text-center">
-              <div className="text-primary text-4xl font-bold mb-2">15+</div>
-              <p className="text-[#333333] font-medium">Years of Excellence</p>
-            </div>
-            <div className="bg-[#F5F9FC] p-6 rounded-lg text-center">
-              <div className="text-primary text-4xl font-bold mb-2">98%</div>
-              <p className="text-[#333333] font-medium">Patient Satisfaction</p>
-            </div>
+            {[
+              {
+                value: `${totalReviews}+`,
+                label: "glowing patient reviews",
+                description: "Shared across Google, Yelp, and in-practice surveys.",
+              },
+              {
+                value: `${fiveStarShare}%`,
+                label: "five-star satisfaction",
+                description: "Patients who would recommend us to friends and family.",
+              },
+              {
+                value: "40+",
+                label: "years serving the Peninsula",
+                description: "Multi-generational care for Palo Alto and the surrounding communities.",
+              },
+              {
+                value: "Same-day",
+                label: "emergency support",
+                description: "When something unexpected happens, we make room for you.",
+              },
+            ].map((stat) => (
+              <div
+                key={stat.label}
+                className="bg-[#F5F9FC] border border-[#E5E7EB] rounded-2xl px-6 py-8 text-left shadow-sm"
+              >
+                <p className="text-3xl font-bold text-primary mb-2">{stat.value}</p>
+                <p className="text-[#1F2933] font-semibold mb-2">{stat.label}</p>
+                <p className="text-sm text-[#4B5563]">{stat.description}</p>
+              </div>
+            ))}
           </motion.div>
         </div>
       </section>

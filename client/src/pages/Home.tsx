@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import HeroSection from "@/components/sections/HeroSection";
 import FeaturesSection from "@/components/sections/FeaturesSection";
@@ -9,13 +10,14 @@ import MetaTags from "@/components/common/MetaTags";
 import StructuredData from "@/components/seo/StructuredData";
 import CanonicalUrl from "@/components/seo/CanonicalUrl";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, CheckCircle, Stethoscope, Award, User, ChevronRight, Phone } from "lucide-react";
+import { ArrowRight, CheckCircle, Phone } from "lucide-react";
 import { Link } from "wouter";
 import { Service, Testimonial } from "@shared/schema";
 import { motion } from "framer-motion";
 import { ogImages } from "@/lib/ogImages";
 import { pageTitles, pageDescriptions } from "@/lib/metaContent";
 import { drWongImages } from "@/lib/imageUrls";
+import { buildInsertTestimonial, testimonialSeedData } from "@shared/testimonialsData";
 
 const Home = () => {
 
@@ -26,9 +28,22 @@ const Home = () => {
   });
 
   // Fetch testimonials
-  const { data: testimonials, isLoading: isLoadingTestimonials } = useQuery<Testimonial[]>({
+  const { data: testimonials } = useQuery<Testimonial[]>({
     queryKey: ["/api/testimonials"],
   });
+
+  const fallbackTestimonials = useMemo<Testimonial[]>(() => {
+    return testimonialSeedData.map((seed, index) => ({
+      id: index + 1,
+      ...buildInsertTestimonial(seed, index),
+    }));
+  }, []);
+
+  const apiCount = testimonials?.length ?? 0;
+  const fallbackCount = fallbackTestimonials.length;
+  const shouldUseApiData = apiCount >= fallbackCount && apiCount > 0;
+  const testimonialsData = shouldUseApiData ? testimonials! : fallbackTestimonials;
+  const testimonialsToShow = testimonialsData.slice(0, 4);
 
   return (
     <>
@@ -40,6 +55,33 @@ const Home = () => {
       <StructuredData type="organization" />
       <CanonicalUrl path="/" />
       <HeroSection />
+
+      {/* Patient Testimonials Spotlight */}
+      <section className="py-16 md:py-20 bg-gradient-to-b from-white via-[#F5F9FC] to-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold font-heading text-[#1F2933]">Loved by our patients</h2>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6"
+          >
+            {testimonialsToShow.map((testimonial, index) => (
+              <TestimonialCard key={`${testimonial.id}-${index}`} testimonial={testimonial} index={index} />
+            ))}
+          </motion.div>
+        </div>
+      </section>
 
       <FeaturesSection />
 
@@ -157,31 +199,11 @@ const Home = () => {
             <div className="w-24 h-1 bg-primary mx-auto mt-4"></div>
           </div>
           
-          {isLoadingTestimonials ? (
-            <div className="grid md:grid-cols-3 gap-8">
-              {[...Array(3)].map((_, index) => (
-                <div key={index} className="bg-white p-6 rounded-lg shadow-md animate-pulse">
-                  <div className="h-4 bg-gray-200 rounded w-3/4 mb-4"></div>
-                  <div className="h-4 bg-gray-200 rounded w-full mb-2"></div>
-                  <div className="h-4 bg-gray-200 rounded w-full mb-2"></div>
-                  <div className="h-4 bg-gray-200 rounded w-1/2 mb-4"></div>
-                  <div className="flex items-center">
-                    <div className="rounded-full bg-gray-200 h-12 w-12 mr-4"></div>
-                    <div>
-                      <div className="h-4 bg-gray-200 rounded w-24 mb-2"></div>
-                      <div className="h-3 bg-gray-200 rounded w-32"></div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="grid md:grid-cols-3 gap-8">
-              {testimonials?.map((testimonial) => (
-                <TestimonialCard key={testimonial.id} testimonial={testimonial} />
-              ))}
-            </div>
-          )}
+          <div className="grid md:grid-cols-3 gap-8">
+            {testimonialsData.slice(0, 3).map((testimonial, index) => (
+              <TestimonialCard key={`${testimonial.id}-${index}`} testimonial={testimonial} index={index} />
+            ))}
+          </div>
           
           {/* Local Dental Practice Info */}
           <div className="mt-12 mb-10 bg-white rounded-lg shadow-lg overflow-hidden">

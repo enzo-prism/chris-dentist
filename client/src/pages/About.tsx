@@ -61,41 +61,49 @@ const About = () => {
           </div>
           
           <motion.div 
-            className="bg-white rounded-xl shadow-lg overflow-hidden"
+            className="bg-white rounded-3xl shadow-lg overflow-hidden border border-[#E0E6EF]/70"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            {/* Mobile-first layout: Image on top, content below */}
-            <div className="md:flex">
+            <div className="grid md:grid-cols-5">
               <motion.div 
-                className="w-full md:w-2/5 h-64 sm:h-72 md:h-auto"
+                className="relative bg-gradient-to-br from-[#F5F9FC] via-[#EEF4FB] to-[#D7E8FF] p-6 sm:p-10 flex items-center justify-center md:col-span-2"
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                <OptimizedImage
-                  src="https://cdn.prod.website-files.com/6647633c9b317c62a46de335/67e986d38336152373ca94ad_Frame%201-min.png"
-                  alt="Dr. Christopher B. Wong's Dental Office"
-                  className="w-full h-full object-cover"
-                />
+                <div className="relative w-full max-w-sm sm:max-w-md">
+                  <div className="absolute -inset-4 hidden md:block rounded-[32px] bg-white/40 blur-md"></div>
+                  <div className="relative rounded-[28px] bg-white/70 backdrop-blur-sm shadow-xl border border-white/60 p-4 sm:p-6 flex items-center justify-center">
+                    <OptimizedImage
+                      src="https://cdn.prod.website-files.com/6647633c9b317c62a46de335/67e986d38336152373ca94ad_Frame%201-min.png"
+                      alt="Portrait of Dr. Christopher B. Wong"
+                      className="w-full h-full object-contain max-h-[520px]"
+                    />
+                  </div>
+                </div>
               </motion.div>
               
               <motion.div 
-                className="w-full md:w-3/5 p-6 sm:p-8 md:p-10"
+                className="md:col-span-3 p-6 sm:p-8 md:p-10 space-y-8"
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.3 }}
               >
-                <p className="text-[#333333] mb-6 leading-relaxed text-sm sm:text-base">
-                  {data.doctorInfo.bio}
-                </p>
+                <div className="space-y-4 text-left">
+                  <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 text-primary px-4 py-1 text-xs sm:text-sm font-semibold tracking-wide">
+                    <span>Meet Dr. Wong</span>
+                  </div>
+                  <p className="text-[#333333] leading-relaxed text-sm sm:text-base">
+                    {data.doctorInfo.bio}
+                  </p>
+                </div>
                 
-                {/* Mobile-optimized credentials grid */}
-                <div className="grid grid-cols-1 gap-3 sm:gap-4 mt-6 sm:mt-8">
+                <div className="grid gap-3 sm:gap-4">
                   {[
                     { icon: Award, text: "University of the Pacific Arthur A. Dugoni School of Dentistry Graduate" },
                     { icon: CheckCircle, text: "American Dental Association" },
@@ -104,28 +112,30 @@ const About = () => {
                   ].map((credential, index) => (
                     <motion.div 
                       key={index}
-                      className="flex items-start sm:items-center"
+                      className="flex items-start gap-3 rounded-2xl border border-[#E0E6EF] bg-[#F7FAFE] px-4 py-3 sm:px-5 sm:py-4"
                       initial={{ opacity: 0, x: 20 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.4, delay: 0.4 + (index * 0.1) }}
                     >
-                      <div className="text-primary mr-3 mt-1 sm:mt-0 flex-shrink-0">
-                        <credential.icon className="h-4 w-4 sm:h-5 sm:w-5" />
-                      </div>
+                      <credential.icon className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
                       <span className="text-[#333333] text-sm sm:text-base leading-relaxed">{credential.text}</span>
                     </motion.div>
                   ))}
                 </div>
                 
-                {/* Watch Interview CTA - Mobile optimized */}
                 <motion.div 
-                  className="mt-6 sm:mt-8"
+                  className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: 0.8 }}
                 >
+                  <div className="text-left bg-[#F5F9FC] border border-[#E0E6EF] rounded-2xl px-5 py-4">
+                    <p className="text-[#666666] text-xs sm:text-sm uppercase tracking-[0.2em] font-semibold">Experience</p>
+                    <p className="text-lg sm:text-xl font-heading text-[#333333]">Practicing since 2018</p>
+                  </div>
+                  
                   <Button 
                     onClick={() => setIsVideoModalOpen(true)}
                     className="bg-primary hover:bg-primary/90 text-white flex items-center gap-2 w-full sm:w-auto justify-center text-sm sm:text-base px-4 sm:px-6 py-3 hover:scale-105 transition-transform duration-200"
