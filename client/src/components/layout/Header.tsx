@@ -1,15 +1,13 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
-import { Menu, X, Phone, MapPin, Search, Calendar, ChevronDown } from "lucide-react";
+import { Menu, X, Phone, MapPin, Calendar, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
-import SearchBar from "./SearchBar";
 import { FaInstagram } from "react-icons/fa";
 import { officeInfo } from "@/lib/data";
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
   const [location] = useLocation();
   const [scrolled, setScrolled] = useState(false);
 
@@ -24,17 +22,10 @@ const Header = () => {
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
-    if (searchOpen) setSearchOpen(false);
-  };
-
-  const toggleSearch = () => {
-    setSearchOpen(!searchOpen);
-    if (mobileMenuOpen) setMobileMenuOpen(false);
   };
 
   const closeMenus = () => {
     setMobileMenuOpen(false);
-    setSearchOpen(false);
   };
 
   const navLinks = [
@@ -164,17 +155,6 @@ const Header = () => {
 
           {/* Right side actions */}
           <div className="flex items-center space-x-3 lg:w-1/4 justify-end">
-            {/* Search button */}
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={toggleSearch}
-              aria-label="Search"
-              className="text-gray-700 rounded-full h-9 w-9 p-0"
-            >
-              <Search className="h-4 w-4" />
-            </Button>
-
             {/* Appointment button */}
             <Link href="/schedule#appointment">
               <Button
@@ -198,21 +178,6 @@ const Header = () => {
             </div>
           </div>
         </div>
-
-        {/* Search bar */}
-        <AnimatePresence>
-          {searchOpen && (
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.2 }}
-              className="pb-3"
-            >
-              <SearchBar />
-            </motion.div>
-          )}
-        </AnimatePresence>
       </div>
 
       {/* Mobile menu */}
