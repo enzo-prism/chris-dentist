@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import HeroSection from "@/components/sections/HeroSection";
 import FeaturesSection from "@/components/sections/FeaturesSection";
@@ -44,6 +44,15 @@ const Home = () => {
   const shouldUseApiData = apiCount >= fallbackCount && apiCount > 0;
   const testimonialsData = shouldUseApiData ? testimonials! : fallbackTestimonials;
   const testimonialsToShow = testimonialsData.slice(0, 4);
+  const [activeTestimonial, setActiveTestimonial] = useState(0);
+
+  const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
+    const container = event.currentTarget;
+    const cardWidth = container.firstElementChild?.clientWidth ?? 1;
+    const scrollLeft = container.scrollLeft;
+    const index = Math.round(scrollLeft / cardWidth);
+    setActiveTestimonial(Math.min(Math.max(index, 0), testimonialsToShow.length - 1));
+  };
 
   return (
     <>
@@ -74,11 +83,39 @@ const Home = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6"
+            className="w-full"
           >
-            {testimonialsToShow.map((testimonial, index) => (
-              <TestimonialCard key={`${testimonial.id}-${index}`} testimonial={testimonial} index={index} />
-            ))}
+            <div
+              className="-mx-4 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-6 sm:hidden"
+              onScroll={handleScroll}
+            >
+              {testimonialsToShow.map((testimonial, index) => (
+                <div
+                  key={`${testimonial.id}-${index}`}
+                  className="snap-center shrink-0 basis-full px-4"
+                  style={{ minWidth: "0" }}
+                >
+                  <TestimonialCard testimonial={testimonial} index={index} />
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-4 flex items-center justify-center gap-2 sm:hidden">
+              {testimonialsToShow.map((_, index) => (
+                <span
+                  key={`dot-${index}`}
+                  className={`h-2.5 w-2.5 rounded-full transition-all ${
+                    activeTestimonial === index ? "bg-primary w-3" : "bg-slate-300"
+                  }`}
+                />
+              ))}
+            </div>
+
+            <div className="hidden grid-cols-2 gap-6 sm:grid xl:grid-cols-4">
+              {testimonialsToShow.map((testimonial, index) => (
+                <TestimonialCard key={`${testimonial.id}-${index}`} testimonial={testimonial} index={index} />
+              ))}
+            </div>
           </motion.div>
 
           <motion.div
