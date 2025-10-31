@@ -80,6 +80,21 @@ const Home = () => {
               <TestimonialCard key={`${testimonial.id}-${index}`} testimonial={testimonial} index={index} />
             ))}
           </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="mt-12 flex justify-center"
+          >
+            <Link href="/testimonials">
+              <Button className="bg-primary hover:bg-primary/90 text-white font-medium px-6 py-3 rounded-full inline-flex items-center gap-2 shadow-sm transition hover:shadow-md hover:scale-105">
+                Read more patient stories
+                <ArrowRight className="h-4 w-4" />
+              </Button>
+            </Link>
+          </motion.div>
         </div>
       </section>
 

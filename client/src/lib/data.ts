@@ -1,5 +1,5 @@
 export const officeInfo = {
-  name: "Dr. Christopher B. Wong, DDS",
+  name: "Christopher B. Wong, DDS",
   address: {
     line1: "409 Cambridge Ave",
     line2: "Palo Alto, CA 94306",

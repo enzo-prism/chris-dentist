@@ -171,12 +171,12 @@ const OfficeGallerySection = () => {
                 transition={{ duration: 0.4, delay: index * 0.05 }}
                 viewport={{ once: true, margin: "-50px" }}
               >
-                {/* Image container with fixed aspect ratio */}
-                <div className="aspect-[4/3] relative overflow-hidden">
+                {/* Image container sized to the photo */}
+                <div className="relative overflow-hidden">
                   <OptimizedImage
                     src={image.src}
                     alt={image.alt}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-105"
                     priority={index < 4}
                   />
                   
@@ -188,12 +188,6 @@ const OfficeGallerySection = () => {
                   </div>
                 </div>
                 
-                {/* Caption with cleaner styling */}
-                <div className="p-4">
-                  <h3 className="font-medium text-gray-900 text-sm group-hover:text-primary transition-colors">
-                    {image.alt.includes(' - ') ? image.alt.split(' - ')[1] : image.alt.split(' - Dr. Wong Office ')[1] || image.alt}
-                  </h3>
-                </div>
               </motion.div>
             ))}
           </motion.div>
@@ -251,20 +245,15 @@ const OfficeGallerySection = () => {
             >
               <OptimizedImage
                 src={images[selectedImage].src}
-                alt={images[selectedImage].alt}
+                alt=""
                 className="max-h-[70vh] w-full object-contain mx-auto rounded-lg"
                 priority
               />
-              <div className="text-center mt-5 px-4">
-                <h3 className="font-medium text-white text-lg mb-2">{images[selectedImage].alt}</h3>
-                <p className="text-sm text-gray-300">{images[selectedImage].description}</p>
-              </div>
-              
               {/* Mobile instruction with subtle styling */}
               <p className="text-gray-400 text-xs text-center mt-6 sm:hidden">
                 Swipe left or right to navigate
               </p>
-              
+
               {/* Image counter with minimal styling */}
               <div className="text-gray-400 text-xs text-center mt-4 md:mt-6">
                 {selectedImage + 1} / {images.length}

@@ -13,6 +13,8 @@ import { useState } from "react";
 import VideoModal from "@/components/common/VideoModal";
 import OptimizedImage from "@/components/seo/OptimizedImage";
 import { motion } from "framer-motion";
+import TestimonialQuote from "@/components/testimonials/TestimonialQuote";
+import { getTestimonialsByNames } from "@/lib/testimonials";
 
 const About = () => {
   // State for video modal
@@ -21,6 +23,11 @@ const About = () => {
   
   // Using the team members from shared data
   const { teamMembers: sharedTeamMembers } = data;
+  const spotlightTestimonials = getTestimonialsByNames([
+    "Anat Sipres",
+    "Loretta Guarino Reid",
+    "Marypat Power",
+  ]);
   
   // Create a full team with Dr. Wong at the top, using shorter bio for team display
   const teamMembers = [
@@ -56,7 +63,7 @@ const About = () => {
       <section className="py-12 sm:py-16 bg-gradient-to-b from-white to-[#F5F9FC]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 sm:mb-12">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-heading text-[#333333] mb-3 leading-tight">Dr. Christopher B. Wong, DDS</h2>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-heading text-[#333333] mb-3 leading-tight">Christopher B. Wong, DDS</h2>
             <div className="w-16 sm:w-24 h-1 bg-primary mx-auto"></div>
           </div>
           
@@ -147,6 +154,35 @@ const About = () => {
               </motion.div>
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Patient Stories */}
+      <section className="py-12 sm:py-16 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="text-center mb-10 sm:mb-12"
+          >
+            <span className="inline-flex items-center justify-center rounded-full bg-primary/10 px-4 py-1 text-xs font-semibold uppercase tracking-widest text-primary">
+              Patient voices
+            </span>
+            <h2 className="mt-4 text-3xl font-bold font-heading leading-tight text-[#1F2933] sm:text-4xl">
+              Experiences that guide our care
+            </h2>
+            <p className="mt-4 text-sm text-[#4B5563] sm:text-base">
+              Hear from patients who trust Dr. Wong and our hygiene team for compassionate, thoughtful dentistry.
+            </p>
+          </motion.div>
+
+          <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+            {spotlightTestimonials.map((testimonial) => (
+              <TestimonialQuote key={testimonial.name} testimonial={testimonial} />
+            ))}
+          </div>
         </div>
       </section>
 

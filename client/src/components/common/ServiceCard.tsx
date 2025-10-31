@@ -13,6 +13,24 @@ interface ServiceCardProps {
 }
 
 const ServiceCard = ({ service }: ServiceCardProps) => {
+  const getDetailPath = (slug: string): string => {
+    switch (slug) {
+      case "invisalign":
+        return "/invisalign";
+      case "emergency-dental":
+        return "/emergency-dental";
+      case "cosmetic-dentistry":
+        return "/dental-veneers";
+      case "dental-implants":
+        return "/dental-implants";
+      case "preventive-dentistry":
+      case "restorative-dentistry":
+      case "pediatric-dentistry":
+      default:
+        return `/services#${slug}`;
+    }
+  };
+
   // Custom CTA text based on service type
   const getCtaText = (serviceTitle: string): string => {
     switch(serviceTitle) {
@@ -34,43 +52,49 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
   };
 
   return (
-    <Card 
-      className="h-full w-full overflow-hidden bg-white rounded-2xl border border-gray-100/50 shadow-sm hover:shadow-lg transition-all duration-300 group flex flex-col" 
+    <Card
+      className="group flex h-full w-full flex-col overflow-hidden rounded-3xl border border-slate-100 bg-white shadow-sm transition-all duration-300 hover:shadow-lg"
       id={service.slug}
     >
-      {/* Minimalistic gradient container with consistent height */}
-      <div className={`relative h-48 sm:h-52 md:h-56 overflow-hidden ${getServiceGradient(service.title)} transition-all duration-300 group-hover:shadow-inner`}>
-        {/* Subtle texture overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-white/8 to-transparent"></div>
-        
-        {/* Featured badge */}
-        {service.featured && (
-          <Badge 
-            className="absolute top-4 left-4 bg-white/95 text-primary px-3 py-1 text-xs font-medium rounded-full shadow-sm border border-primary/10"
-          >
+      <div
+        className={`relative flex min-h-[140px] w-full items-start justify-between rounded-b-[48px] bg-slate-100 ${getServiceGradient(service.title)} px-6 py-5`}
+      >
+        {service.slug === "preventive-dentistry" && (
+          <Badge className="bg-white/90 text-primary shadow-sm">
             Popular
           </Badge>
         )}
       </div>
-      
-      <CardContent className="p-6 md:p-7 flex-grow flex flex-col">
-        <h3 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-primary transition-colors leading-tight">
-          {service.title}
-        </h3>
-        
-        {/* Description with consistent height and line clamp */}
-        <p className="text-sm md:text-base text-gray-600 leading-relaxed flex-grow line-clamp-3">
-          {service.description}
-        </p>
+
+      <CardContent className="flex flex-1 flex-col gap-4 p-6 md:p-7">
+        <div>
+          <h3 className="text-xl font-semibold leading-tight text-slate-900 transition-colors group-hover:text-primary">
+            {service.title}
+          </h3>
+          <p className="mt-3 text-sm text-slate-600 md:text-base">
+            {service.description}
+          </p>
+        </div>
       </CardContent>
-      
-      <CardFooter className="px-6 md:px-7 pb-6 md:pb-7 pt-0">
-        <Link href="/schedule#appointment" className="w-full">
-          <Button className="w-full bg-primary text-white hover:bg-primary/90 group transition-all hover:scale-[1.02] py-3 rounded-lg font-medium">
-            {getCtaText(service.title)}
-            <ArrowRight className="h-4 w-4 ml-2 transition-transform group-hover:translate-x-1" />
-          </Button>
-        </Link>
+
+      <CardFooter className="px-6 pb-6 pt-0 md:px-7 md:pb-7">
+        <div className="grid w-full gap-3">
+          <Link href={getDetailPath(service.slug)} className="w-full">
+            <Button
+              variant="outline"
+              className="w-full border-primary text-primary transition hover:bg-primary/5"
+            >
+              View Details
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </Link>
+          <Link href="/schedule#appointment" className="w-full">
+            <Button className="w-full bg-primary text-white transition hover:bg-primary/90">
+              {getCtaText(service.title)}
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </Link>
+        </div>
       </CardFooter>
     </Card>
   );

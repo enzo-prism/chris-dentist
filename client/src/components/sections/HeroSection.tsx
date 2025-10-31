@@ -99,23 +99,12 @@ const HeroSection = () => {
                     </svg>
                   ))}
                 </div>
-                <span className="group-hover:underline">Trusted by 316+ patients on Google</span>
+                <span className="group-hover:underline">316+ patient reviews on Google</span>
                 <ArrowRight className="h-3.5 w-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
               </button>
             </div>
             
-            {/* Scroll indicator - now at bottom of text column */}
-            <div className="hidden lg:flex justify-center mt-12 -ml-2">
-              <a 
-                href="#features" 
-                className="group flex flex-col items-center gap-2 text-sm text-gray-500 hover:text-primary transition-colors"
-              >
-                <span>Scroll to learn more</span>
-                <div className="p-2 rounded-full border border-gray-200 group-hover:border-primary/30 transition-colors">
-                  <ChevronDown className="h-4 w-4" />
-                </div>
-              </a>
-            </div>
+            {/* Scroll indicator removed */}
           </motion.div>
           
           {/* Right side: Image and features */}

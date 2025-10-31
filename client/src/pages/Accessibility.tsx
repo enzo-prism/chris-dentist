@@ -6,7 +6,7 @@ const Accessibility = () => {
   return (
     <>
       <MetaTags 
-        title="Accessibility Statement | Dr. Christopher B. Wong, DDS"
+        title="Accessibility Statement | Christopher B. Wong, DDS"
         description="Learn about Dr. Wong's commitment to web accessibility and providing equal access to dental care for all patients, along with efforts to improve our site."
       />
       <CanonicalUrl path="/accessibility" />

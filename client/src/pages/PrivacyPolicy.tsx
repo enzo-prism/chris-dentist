@@ -6,7 +6,7 @@ const PrivacyPolicy = () => {
   return (
     <>
       <MetaTags 
-        title="Privacy Policy | Dr. Christopher B. Wong, DDS"
+        title="Privacy Policy | Christopher B. Wong, DDS"
         description="Learn how Dr. Wong's dental practice protects your personal information and maintains patient privacy in accordance with HIPAA regulations."
       />
       <CanonicalUrl path="/privacy-policy" />

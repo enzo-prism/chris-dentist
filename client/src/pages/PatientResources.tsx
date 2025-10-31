@@ -11,7 +11,6 @@ import { drWongImages } from "@/lib/imageUrls";
 import { ogImages } from "@/lib/ogImages";
 import { pageTitles, pageDescriptions } from "@/lib/metaContent";
 import { officeInfo, faqItems, patientResources } from "@/lib/data";
-import OptimizedImage from "@/components/seo/OptimizedImage";
 
 const PatientResources = () => {
   const [activeTab, setActiveTab] = useState("forms");
@@ -271,47 +270,40 @@ const PatientResources = () => {
               </div>
 
               <div className="grid md:grid-cols-2 gap-8">
-                <div className="bg-white rounded-lg shadow-md overflow-hidden">
-                  <OptimizedImage
-                    src="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-                    alt="Dental consultation"
-                    className="w-full h-64 object-cover"
-                  />
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold font-heading text-[#333333] mb-4">During Your First Visit</h3>
-                    <ul className="space-y-3">
-                      <li className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-primary mt-1 mr-3" />
-                        <span>Comprehensive dental examination</span>
-                      </li>
-                      <li className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-primary mt-1 mr-3" />
-                        <span>Digital X-rays for accurate diagnostics</span>
-                      </li>
-                      <li className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-primary mt-1 mr-3" />
-                        <span>Oral cancer screening</span>
-                      </li>
-                      <li className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-primary mt-1 mr-3" />
-                        <span>Gum disease evaluation</span>
-                      </li>
-                      <li className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-primary mt-1 mr-3" />
-                        <span>Review of dental and medical history</span>
-                      </li>
-                      <li className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-primary mt-1 mr-3" />
-                        <span>Discussion of your dental concerns and goals</span>
-                      </li>
-                      <li className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-primary mt-1 mr-3" />
-                        <span>Development of a personalized treatment plan</span>
-                      </li>
-                    </ul>
-                  </div>
+                <div className="bg-white rounded-lg shadow-md p-6">
+                  <h3 className="text-xl font-bold font-heading text-[#333333] mb-4">During Your First Visit</h3>
+                  <ul className="space-y-3">
+                    <li className="flex items-start">
+                      <CheckCircle className="h-5 w-5 text-primary mt-1 mr-3" />
+                      <span>Comprehensive dental examination</span>
+                    </li>
+                    <li className="flex items-start">
+                      <CheckCircle className="h-5 w-5 text-primary mt-1 mr-3" />
+                      <span>Digital X-rays for accurate diagnostics</span>
+                    </li>
+                    <li className="flex items-start">
+                      <CheckCircle className="h-5 w-5 text-primary mt-1 mr-3" />
+                      <span>Oral cancer screening</span>
+                    </li>
+                    <li className="flex items-start">
+                      <CheckCircle className="h-5 w-5 text-primary mt-1 mr-3" />
+                      <span>Gum disease evaluation</span>
+                    </li>
+                    <li className="flex items-start">
+                      <CheckCircle className="h-5 w-5 text-primary mt-1 mr-3" />
+                      <span>Review of dental and medical history</span>
+                    </li>
+                    <li className="flex items-start">
+                      <CheckCircle className="h-5 w-5 text-primary mt-1 mr-3" />
+                      <span>Discussion of your dental concerns and goals</span>
+                    </li>
+                    <li className="flex items-start">
+                      <CheckCircle className="h-5 w-5 text-primary mt-1 mr-3" />
+                      <span>Development of a personalized treatment plan</span>
+                    </li>
+                  </ul>
                 </div>
-                
+
                 <div className="bg-white rounded-lg shadow-md p-6">
                   <h3 className="text-xl font-bold font-heading text-[#333333] mb-4">How to Prepare</h3>
                   <p className="text-[#333333] mb-6">To make your first visit as smooth as possible, please:</p>

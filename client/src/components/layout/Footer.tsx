@@ -116,7 +116,7 @@ const Footer = () => {
           
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex flex-col items-center md:items-start">
-              <p className="text-xs text-white/70">&copy; {currentYear} Dr. Christopher B. Wong, DDS. All rights reserved.</p>
+              <p className="text-xs text-white/70">&copy; {currentYear} Christopher B. Wong, DDS. All rights reserved.</p>
               <p className="text-xs text-white/50 mt-1">
                 Invisalign®, the Invisalign® logo, iTero™, and Vivera™ are trademarks of Align Technology, Inc. and are registered in the U.S. and other countries.
               </p>
@@ -229,7 +229,7 @@ const Footer = () => {
           <Separator className="bg-white/20 mb-6" />
           
           <div className="text-center">
-            <p className="text-xs text-white/70 mb-2">&copy; {currentYear} Dr. Christopher B. Wong, DDS. All rights reserved.</p>
+            <p className="text-xs text-white/70 mb-2">&copy; {currentYear} Christopher B. Wong, DDS. All rights reserved.</p>
             <p className="text-xs text-white/50 mb-2">
               Invisalign®, the Invisalign® logo, iTero™, and Vivera™ are trademarks of Align Technology, Inc. and are registered in the U.S. and other countries.
             </p>

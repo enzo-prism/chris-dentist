@@ -6,8 +6,16 @@ import StructuredData from "@/components/seo/StructuredData";
 import CanonicalUrl from "@/components/seo/CanonicalUrl";
 import { motion } from "framer-motion";
 import OptimizedImage from "@/components/seo/OptimizedImage";
+import TestimonialQuote from "@/components/testimonials/TestimonialQuote";
+import { getTestimonialsByNames } from "@/lib/testimonials";
 
 const Invisalign = () => {
+  const invisalignTestimonials = getTestimonialsByNames([
+    "Kevin Zhang",
+    "Ashley Chung",
+    "Abdel Fahmy",
+  ]);
+
   const invisalignBenefits = [
     {
       title: "Virtually Invisible",
@@ -230,6 +238,32 @@ const Invisalign = () => {
                   {benefit.description}
                 </p>
               </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Patient Confidence */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold font-heading text-[#1F2933]">
+              Clear aligners with real-life results
+            </h2>
+            <p className="mt-4 text-sm text-[#4B5563] sm:text-base">
+              Patients appreciate the modern technology, approachable team, and flexible care behind every Invisalign plan.
+            </p>
+          </motion.div>
+
+          <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+            {invisalignTestimonials.map((testimonial) => (
+              <TestimonialQuote key={testimonial.name} testimonial={testimonial} />
             ))}
           </div>
         </div>

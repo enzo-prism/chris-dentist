@@ -1,10 +1,12 @@
-import { Phone, Clock, AlertTriangle, CheckCircle, ArrowRight, Shield, Heart, Star } from "lucide-react";
+import { Phone, Clock, AlertTriangle, CheckCircle, ArrowRight, Shield, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import MetaTags from "@/components/common/MetaTags";
 import StructuredData from "@/components/seo/StructuredData";
 import CanonicalUrl from "@/components/seo/CanonicalUrl";
 import { motion } from "framer-motion";
+import TestimonialQuote from "@/components/testimonials/TestimonialQuote";
+import { getTestimonialsByNames } from "@/lib/testimonials";
 
 const EmergencyDental = () => {
   const emergencyTypes = [
@@ -69,28 +71,12 @@ const EmergencyDental = () => {
     }
   ];
 
-  const patientTestimonials = [
-    {
-      name: "Madison Ho",
-      text: "Dr. Wong is such a kind and wonderful doctor. I had a dental emergency on a Friday evening, and he graciously took the time to see me and provide excellent care.",
-      rating: 5
-    },
-    {
-      name: "Paul Pedersen", 
-      text: "Best dentist in town (Palo Alto). Quick, efficient, accurate, helpful, accommodating. Made time for me twice - both minor emergencies, and once on the 4th of July weekend! Outstanding service.",
-      rating: 5
-    },
-    {
-      name: "EEconomos (Evan)",
-      text: "Pleasant service. Willing to accommodate emergency needs. She will fit you into her schedule even if she has to come in on her day off.",
-      rating: 5
-    },
-    {
-      name: "Kim Chu",
-      text: "Dr. Hamamoto takes great care of your teeth and is always available (day and night!) should there be any issues with your teeth! Truly a 24/7 dentist!!",
-      rating: 5
-    }
-  ];
+  const emergencyTestimonials = getTestimonialsByNames([
+    "Madison Ho",
+    "Paul Pedersen",
+    "Bill Quarre",
+    "Andrew",
+  ]);
 
   const preventionTips = [
     "Wear a mouthguard during sports and physical activities",
@@ -290,23 +276,19 @@ const EmergencyDental = () => {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            {patientTestimonials.map((testimonial, index) => (
+          <div className="grid gap-6 md:grid-cols-2">
+            {emergencyTestimonials.map((testimonial, index) => (
               <motion.div
-                key={index}
+                key={testimonial.name}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-gray-50 rounded-lg p-6 border-l-4 border-orange-600"
               >
-                <div className="flex items-center mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
-                  ))}
-                </div>
-                <p className="text-[#333333] mb-4 italic">"{testimonial.text}"</p>
-                <p className="font-semibold text-[#333333]">- {testimonial.name}</p>
+                <TestimonialQuote
+                  testimonial={testimonial}
+                  className="border-none border-l-4 border-orange-600 bg-orange-50/70"
+                />
               </motion.div>
             ))}
           </div>

@@ -3,6 +3,8 @@ import { Helmet } from "react-helmet-async";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle, Heart, Shield, Clock, Smile, Users, Award } from "lucide-react";
+import TestimonialQuote from "@/components/testimonials/TestimonialQuote";
+import { getTestimonialsByNames } from "@/lib/testimonials";
 
 const benefits = [
   "Natural Look and Feel: Implants fuse with your jawbone, becoming a permanent part of your mouth",
@@ -96,6 +98,12 @@ const faqs = [
 ];
 
 const DentalImplants = () => {
+  const implantTestimonials = getTestimonialsByNames([
+    "Sarah L.",
+    "Paul Pedersen",
+    "Martha Debs",
+  ]);
+
   return (
     <>
       <Helmet>
@@ -122,7 +130,7 @@ const DentalImplants = () => {
               Dental implants offer a revolutionary way to restore not just the appearance of your smile, but its full function and health.
             </p>
             <p className="text-sm sm:text-base lg:text-lg text-blue-100 mb-6 sm:mb-8 max-w-3xl mx-auto leading-relaxed">
-              At the practice of Dr. Christopher B. Wong, DDS, we specialize in advanced implant dentistry, 
+              At the practice of Christopher B. Wong, DDS, we specialize in advanced implant dentistry, 
               providing durable, comfortable, and aesthetically pleasing tooth replacement options.
             </p>
             <Link href="/schedule">
@@ -307,6 +315,32 @@ const DentalImplants = () => {
                 <h4 className="text-lg sm:text-xl font-semibold text-[#333333] mb-3 leading-tight">{type.title}</h4>
                 <p className="text-[#333333] text-sm sm:text-base leading-relaxed">{type.description}</p>
               </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Patient Success Stories */}
+      <section className="py-12 sm:py-16 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-10 sm:mb-12"
+          >
+            <h3 className="text-2xl sm:text-3xl font-bold font-heading text-[#1F2933] leading-tight">
+              Restoring confidence with advanced implant care
+            </h3>
+            <p className="mt-4 text-sm text-[#4B5563] sm:text-base">
+              Patients trust Dr. Wong and our team for transparent guidance, same-day support, and beautiful, lasting results.
+            </p>
+          </motion.div>
+
+          <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+            {implantTestimonials.map((testimonial) => (
+              <TestimonialQuote key={testimonial.name} testimonial={testimonial} />
             ))}
           </div>
         </div>

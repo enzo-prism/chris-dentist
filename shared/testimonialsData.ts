@@ -353,11 +353,6 @@ export const testimonialSeedData: SeedTestimonial[] = [
     rating: 5,
     text: "As someone with dental anxiety, I can't express how comfortable Dr. Wong made me feel. His practice uses the latest technology, and the virtual consultation option was extremely convenient for my busy schedule.",
   },
-  {
-    name: "Jennifer R.",
-    rating: 5,
-    text: "Our entire family sees Dr. Wong, and we couldn't be happier. From my five-year-old's first visit to my husband's complex crown work, everyone receives personalized attention. The online patient portal makes managing appointments easy.",
-  },
 ];
 
 export const buildInsertTestimonial = (

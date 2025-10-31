@@ -70,10 +70,15 @@ const Header = () => {
               <Phone className="h-3 w-3 mr-1.5" />
               <span>(650) 326-6319</span>
             </a>
-            <div className="text-gray-500 flex items-center">
+            <a
+              href="https://maps.app.goo.gl/UCTqQ1fZsdMq7vma9"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-500 hover:text-primary transition-colors flex items-center"
+            >
               <MapPin className="h-3 w-3 mr-1.5" />
               <span>409 Cambridge Ave, Palo Alto, CA 94306</span>
-            </div>
+            </a>
           </div>
           <div className="hidden md:flex items-center">
             <a 

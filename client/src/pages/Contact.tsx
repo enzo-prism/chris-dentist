@@ -1,4 +1,4 @@
-import { MapPin, Phone, Clock } from "lucide-react";
+import { MapPin, Phone, Clock, ArrowRight } from "lucide-react";
 import AppointmentSection from "@/components/sections/AppointmentSection";
 import OfficeInformationSection from "@/components/sections/OfficeInformationSection";
 import MetaTags from "@/components/common/MetaTags";
@@ -6,6 +6,7 @@ import { drWongImages } from "@/lib/imageUrls";
 import { ogImages } from "@/lib/ogImages";
 import { pageTitles, pageDescriptions } from "@/lib/metaContent";
 import OptimizedImage from "@/components/seo/OptimizedImage";
+import { Button } from "@/components/ui/button";
 
 const Contact = () => {
   return (
@@ -53,7 +54,14 @@ const Contact = () => {
                 <MapPin className="h-6 w-6 text-primary mr-3 mt-1 flex-shrink-0" />
                 <div>
                   <h4 className="font-semibold mb-1">Office Address</h4>
-                  <p className="text-[#333333]">409 Cambridge Ave<br />Palo Alto, CA 94306</p>
+                  <a
+                    href="https://maps.app.goo.gl/UCTqQ1fZsdMq7vma9"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#333333] hover:text-primary transition-colors"
+                  >
+                    409 Cambridge Ave<br />Palo Alto, CA 94306
+                  </a>
                 </div>
               </div>
               
@@ -78,6 +86,18 @@ const Contact = () => {
                   </p>
                 </div>
               </div>
+
+              <a
+                href="https://maps.app.goo.gl/UCTqQ1fZsdMq7vma9"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex"
+              >
+                <Button className="inline-flex items-center gap-2 bg-primary text-white hover:bg-primary/90">
+                  Open in Google Maps
+                  <ArrowRight className="h-4 w-4" />
+                </Button>
+              </a>
               
 
             </div>

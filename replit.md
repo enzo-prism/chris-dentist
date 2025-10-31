@@ -2,7 +2,7 @@
 
 ## Overview
 
-This is a full-stack dental practice website built for Dr. Christopher B. Wong, DDS in Palo Alto. The application features a modern React frontend with a Node.js Express backend, utilizing PostgreSQL for data storage and Drizzle ORM for database operations. The site includes appointment scheduling, contact forms, service information, patient resources, and administrative features.
+This is a full-stack dental practice website built for Christopher B. Wong, DDS in Palo Alto. The application features a modern React frontend with a Node.js Express backend, utilizing PostgreSQL for data storage and Drizzle ORM for database operations. The site includes appointment scheduling, contact forms, service information, patient resources, and administrative features.
 
 ## System Architecture
 

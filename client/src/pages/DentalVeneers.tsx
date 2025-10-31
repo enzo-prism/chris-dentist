@@ -6,6 +6,8 @@ import StructuredData from "@/components/seo/StructuredData";
 import CanonicalUrl from "@/components/seo/CanonicalUrl";
 import { motion } from "framer-motion";
 import OptimizedImage from "@/components/seo/OptimizedImage";
+import TestimonialQuote from "@/components/testimonials/TestimonialQuote";
+import { getTestimonialsByNames } from "@/lib/testimonials";
 
 const DentalVeneers = () => {
   const veneerTypes = [
@@ -68,6 +70,12 @@ const DentalVeneers = () => {
     "Avoid biting on hard objects like ice",
     "Don't use teeth to open packages"
   ];
+
+  const veneerTestimonials = getTestimonialsByNames([
+    "Kat Vasilakos",
+    "Briana Rico",
+    "Sarah Chase",
+  ]);
 
   return (
     <>
@@ -230,6 +238,32 @@ const DentalVeneers = () => {
                   <p className="text-sm text-[#333333]">{veneer.idealFor}</p>
                 </div>
               </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Patient Transformations */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold font-heading text-[#1F2933]">
+              Veneer patients share their results
+            </h2>
+            <p className="mt-4 text-sm text-[#4B5563] sm:text-base">
+              Real stories from people who chose our team for conservative cosmetic dentistry.
+            </p>
+          </motion.div>
+
+          <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+            {veneerTestimonials.map((testimonial) => (
+              <TestimonialQuote key={testimonial.name} testimonial={testimonial} />
             ))}
           </div>
         </div>

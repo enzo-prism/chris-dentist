@@ -6,7 +6,7 @@ const HipaaNotice = () => {
   return (
     <>
       <MetaTags 
-        title="HIPAA Notice | Dr. Christopher B. Wong, DDS"
+        title="HIPAA Notice | Christopher B. Wong, DDS"
         description="Learn about HIPAA rights and how Dr. Wong's dental practice protects health information privacy with policies for security and patient confidentiality."
       />
       <CanonicalUrl path="/hipaa" />
