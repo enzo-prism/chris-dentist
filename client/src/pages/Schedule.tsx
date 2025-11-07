@@ -7,6 +7,7 @@ import { ogImages } from "@/lib/ogImages";
 import { pageTitles, pageDescriptions } from "@/lib/metaContent";
 import { useEffect } from "react";
 import OptimizedImage from "@/components/seo/OptimizedImage";
+import HolidayHoursNotice from "@/components/common/HolidayHoursNotice";
 
 const Schedule = () => {
   useEffect(() => {
@@ -40,6 +41,12 @@ const Schedule = () => {
             <h1 className="text-4xl md:text-5xl font-bold font-heading text-[#333333] mb-6">Schedule Your Appointment</h1>
             <p className="text-xl text-[#333333] max-w-3xl mx-auto">Book your visit with Dr. Wong's dental practice. We offer flexible scheduling to fit your busy lifestyle.</p>
           </div>
+        </div>
+      </section>
+
+      <section className="bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <HolidayHoursNotice variant="card" />
         </div>
       </section>
 

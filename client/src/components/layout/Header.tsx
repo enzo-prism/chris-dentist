@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaInstagram } from "react-icons/fa";
 import { officeInfo } from "@/lib/data";
+import HolidayHoursNotice from "@/components/common/HolidayHoursNotice";
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -53,6 +54,7 @@ const Header = () => {
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-sm">
+      <HolidayHoursNotice />
       {/* Top info bar */}
       <div className="border-b border-gray-100">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-8">

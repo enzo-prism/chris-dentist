@@ -23,6 +23,21 @@ export const officeInfo = {
   },
 };
 
+export const holidayHours = {
+  active: true,
+  title: "Thanksgiving holiday hours",
+  description: "We’re running a modified schedule Thanksgiving week. Please plan your visit accordingly.",
+  entries: [
+    { day: "Wednesday, November 26", hours: "8:00 AM – 1:00 PM" },
+    { day: "Thursday, November 27", hours: "Closed" },
+    { day: "Friday, November 28", hours: "Closed" },
+  ],
+  cta: {
+    label: "Plan your visit",
+    href: "/schedule#appointment",
+  },
+};
+
 export const doctorInfo = {
   name: "Dr. Christopher B. Wong",
   title: "DDS",
