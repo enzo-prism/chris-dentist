@@ -11,6 +11,12 @@ import { drWongImages } from "@/lib/imageUrls";
 import { ogImages } from "@/lib/ogImages";
 import { pageTitles, pageDescriptions } from "@/lib/metaContent";
 import { officeInfo, faqItems, patientResources } from "@/lib/data";
+import StructuredData from "@/components/seo/StructuredData";
+import {
+  buildBreadcrumbSchema,
+  buildFAQSchema,
+  type StructuredDataNode,
+} from "@/lib/structuredData";
 
 const PatientResources = () => {
   const [activeTab, setActiveTab] = useState("forms");
@@ -42,6 +48,20 @@ const PatientResources = () => {
     }
   ];
 
+  const patientResourcesFAQ = buildFAQSchema(faqs, "/patient-resources");
+  const patientResourcesBreadcrumbs = buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Patient Resources", path: "/patient-resources" },
+  ]);
+
+  const structuredDataNodes: StructuredDataNode[] = [];
+  if (patientResourcesFAQ) {
+    structuredDataNodes.push(patientResourcesFAQ);
+  }
+  if (patientResourcesBreadcrumbs) {
+    structuredDataNodes.push(patientResourcesBreadcrumbs);
+  }
+
   return (
     <>
       <MetaTags 
@@ -49,6 +69,9 @@ const PatientResources = () => {
         description={pageDescriptions.patientResources}
         image={ogImages.patientResources}
       />
+      {structuredDataNodes.length > 0 && (
+        <StructuredData data={structuredDataNodes} />
+      )}
       {/* Hero Section */}
       <section className="bg-[#F5F9FC] py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

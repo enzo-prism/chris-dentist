@@ -10,6 +10,14 @@ import TestimonialCard from "@/components/common/TestimonialCard";
 import type { Testimonial } from "@shared/schema";
 import { useMemo } from "react";
 import { buildInsertTestimonial, testimonialSeedData } from "@shared/testimonialsData";
+import StructuredData from "@/components/seo/StructuredData";
+import {
+  buildAggregateRatingFromTestimonials,
+  buildBreadcrumbSchema,
+  buildReviewSchemas,
+  getBaseUrl,
+  type StructuredDataNode,
+} from "@/lib/structuredData";
 
 const Testimonials = () => {
   const { data: testimonials, isLoading: isLoadingTestimonials } = useQuery<Testimonial[]>({
@@ -32,6 +40,37 @@ const Testimonials = () => {
   const spotlightReview =
     reviews.find((review) => review.text.length > 180) ?? reviews[0];
   const showSkeleton = isLoadingTestimonials && apiCount === 0;
+
+  const testimonialsBreadcrumb = buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Testimonials", path: "/testimonials" },
+  ]);
+  const testimonialsAggregate = buildAggregateRatingFromTestimonials(reviews);
+  const testimonialReviewSchemas = buildReviewSchemas(reviews, 12);
+  const structuredDataNodes: StructuredDataNode[] = [];
+
+  if (testimonialsBreadcrumb) {
+    structuredDataNodes.push(testimonialsBreadcrumb);
+  }
+
+  if (testimonialsAggregate) {
+    structuredDataNodes.push({
+      "@context": "https://schema.org",
+      "@type": "AggregateRating",
+      "@id": `${getBaseUrl()}/#testimonials-rating`,
+      ratingValue: testimonialsAggregate.ratingValue.toFixed(1),
+      reviewCount: testimonialsAggregate.reviewCount,
+      bestRating: 5,
+      worstRating: 1,
+      itemReviewed: {
+        "@id": `${getBaseUrl()}/#organization`,
+      },
+    });
+  }
+
+  if (testimonialReviewSchemas.length) {
+    structuredDataNodes.push(...testimonialReviewSchemas);
+  }
   
   return (
     <>
@@ -40,6 +79,9 @@ const Testimonials = () => {
         description={pageDescriptions.testimonials}
         image={ogImages.testimonials}
       />
+      {structuredDataNodes.length > 0 && (
+        <StructuredData data={structuredDataNodes} />
+      )}
       
       {/* Hero Section */}
       <section className="bg-gradient-to-b from-[#F5F9FC] via-white to-white py-16 md:py-24">

@@ -5,6 +5,14 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle, Heart, Shield, Clock, Smile, Users, Award } from "lucide-react";
 import TestimonialQuote from "@/components/testimonials/TestimonialQuote";
 import { getTestimonialsByNames } from "@/lib/testimonials";
+import StructuredData from "@/components/seo/StructuredData";
+import {
+  buildBreadcrumbSchema,
+  buildFAQSchema,
+  buildHowToSchema,
+  buildReviewSchemas,
+  buildServiceSchema,
+} from "@/lib/structuredData";
 
 const benefits = [
   "Natural Look and Feel: Implants fuse with your jawbone, becoming a permanent part of your mouth",
@@ -104,6 +112,50 @@ const DentalImplants = () => {
     "Martha Debs",
   ]);
 
+  const implantServiceSchema = buildServiceSchema({
+    name: "Dental Implants",
+    description:
+      "Comprehensive dental implant planning, placement, and restoration for single or multiple missing teeth.",
+    slug: "/dental-implants",
+  });
+
+  const implantHowToSchema = buildHowToSchema({
+    name: "Dental implant treatment process",
+    description:
+      "Overview of the steps patients complete when receiving dental implants at our Palo Alto office.",
+    steps: procedureSteps.map((step) => ({
+      title: step.title,
+      description: step.description,
+    })),
+    pagePath: "/dental-implants",
+  });
+
+  const implantFaqSchema = buildFAQSchema(faqs, "/dental-implants");
+  const implantBreadcrumbs = buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Services", path: "/services" },
+    { name: "Dental Implants", path: "/dental-implants" },
+  ]);
+
+  const implantReviewSchemas = buildReviewSchemas(implantTestimonials, 4);
+  const dentalImplantSchemas = [implantServiceSchema];
+
+  if (implantHowToSchema) {
+    dentalImplantSchemas.push(implantHowToSchema);
+  }
+
+  if (implantFaqSchema) {
+    dentalImplantSchemas.push(implantFaqSchema);
+  }
+
+  if (implantBreadcrumbs) {
+    dentalImplantSchemas.push(implantBreadcrumbs);
+  }
+
+  if (implantReviewSchemas.length) {
+    dentalImplantSchemas.push(...implantReviewSchemas);
+  }
+
   return (
     <>
       <Helmet>
@@ -113,6 +165,7 @@ const DentalImplants = () => {
         <meta property="og:description" content="Palo Alto dental implants by Dr. Christopher B. Wong. Learn about implant benefits, procedure and cost, find out if you're a candidate, and book a consultation." />
         <link rel="canonical" href="/dental-implants" />
       </Helmet>
+      <StructuredData data={dentalImplantSchemas} />
 
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary to-blue-700 text-white py-12 sm:py-16 lg:py-20">

@@ -18,6 +18,13 @@ import { ogImages } from "@/lib/ogImages";
 import { pageTitles, pageDescriptions } from "@/lib/metaContent";
 import { drWongImages } from "@/lib/imageUrls";
 import { buildInsertTestimonial, testimonialSeedData } from "@shared/testimonialsData";
+import {
+  buildAggregateRatingFromTestimonials,
+  buildItemListSchema,
+  buildOrganizationSchema,
+  buildPersonSchema,
+  buildReviewSchemas,
+} from "@/lib/structuredData";
 
 const Home = () => {
 
@@ -54,6 +61,25 @@ const Home = () => {
     setActiveTestimonial(Math.min(Math.max(index, 0), testimonialsToShow.length - 1));
   };
 
+  const aggregateRating = buildAggregateRatingFromTestimonials(testimonialsData);
+  const schemaNodes = [
+    buildOrganizationSchema({
+      services: services ?? [],
+      aggregateRating: aggregateRating ?? undefined,
+    }),
+    buildPersonSchema(),
+  ];
+
+  const serviceListSchema =
+    services && services.length ? buildItemListSchema(services) : null;
+  if (serviceListSchema) {
+    schemaNodes.push(serviceListSchema);
+  }
+
+  if (testimonialsData.length) {
+    schemaNodes.push(...buildReviewSchemas(testimonialsData, 6));
+  }
+
   return (
     <>
       <MetaTags 
@@ -61,7 +87,7 @@ const Home = () => {
         description={pageDescriptions.home}
         image={ogImages.home}
       />
-      <StructuredData type="organization" />
+      <StructuredData data={schemaNodes} />
       <CanonicalUrl path="/" />
       <HeroSection />
 

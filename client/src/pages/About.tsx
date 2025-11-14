@@ -15,6 +15,11 @@ import OptimizedImage from "@/components/seo/OptimizedImage";
 import { motion } from "framer-motion";
 import TestimonialQuote from "@/components/testimonials/TestimonialQuote";
 import { getTestimonialsByNames } from "@/lib/testimonials";
+import {
+  buildBreadcrumbSchema,
+  buildOrganizationSchema,
+  buildPersonSchema,
+} from "@/lib/structuredData";
 
 const About = () => {
   // State for video modal
@@ -40,6 +45,20 @@ const About = () => {
     ...sharedTeamMembers
   ];
 
+  const aboutSchema = [
+    buildOrganizationSchema(),
+    buildPersonSchema(),
+  ];
+
+  const aboutBreadcrumbs = buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "About", path: "/about" },
+  ]);
+
+  if (aboutBreadcrumbs) {
+    aboutSchema.push(aboutBreadcrumbs);
+  }
+
   return (
     <>
       <MetaTags 
@@ -47,7 +66,7 @@ const About = () => {
         description={pageDescriptions.about}
         image={ogImages.about}
       />
-      <StructuredData type="dentist" />
+      <StructuredData data={aboutSchema} />
       <CanonicalUrl path="/about" />
       {/* Hero Section - Mobile First */}
       <section className="bg-[#F5F9FC] py-12 sm:py-16 md:py-24">

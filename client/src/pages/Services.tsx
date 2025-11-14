@@ -9,11 +9,38 @@ import { ogImages } from "@/lib/ogImages";
 import { pageTitles, pageDescriptions } from "@/lib/metaContent";
 import { Service } from "@shared/schema";
 import OptimizedImage from "@/components/seo/OptimizedImage";
+import StructuredData from "@/components/seo/StructuredData";
+import {
+  buildBreadcrumbSchema,
+  buildItemListSchema,
+  buildOrganizationSchema,
+} from "@/lib/structuredData";
 
 const Services = () => {
   const { data: services, isLoading } = useQuery<Service[]>({
     queryKey: ["/api/services"],
   });
+
+  const servicesSchemas = [
+    buildOrganizationSchema({
+      services: services ?? [],
+    }),
+  ];
+
+  const itemListSchema =
+    services && services.length ? buildItemListSchema(services) : null;
+  if (itemListSchema) {
+    servicesSchemas.push(itemListSchema);
+  }
+
+  const serviceBreadcrumbs = buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Services", path: "/services" },
+  ]);
+
+  if (serviceBreadcrumbs) {
+    servicesSchemas.push(serviceBreadcrumbs);
+  }
 
   return (
     <>
@@ -22,6 +49,7 @@ const Services = () => {
         description={pageDescriptions.services}
         image={ogImages.services}
       />
+      <StructuredData data={servicesSchemas} />
       {/* Services List */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

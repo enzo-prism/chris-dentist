@@ -7,6 +7,12 @@ import CanonicalUrl from "@/components/seo/CanonicalUrl";
 import { motion } from "framer-motion";
 import TestimonialQuote from "@/components/testimonials/TestimonialQuote";
 import { getTestimonialsByNames } from "@/lib/testimonials";
+import {
+  buildBreadcrumbSchema,
+  buildHowToSchema,
+  buildReviewSchemas,
+  buildServiceSchema,
+} from "@/lib/structuredData";
 
 const EmergencyDental = () => {
   const emergencyTypes = [
@@ -87,6 +93,45 @@ const EmergencyDental = () => {
     "Know your dentist's emergency contact information"
   ];
 
+  const emergencyServiceSchema = buildServiceSchema({
+    name: "Emergency Dental Care",
+    description:
+      "24/7 emergency dental services for urgent dental problems including toothaches, broken teeth, and trauma.",
+    slug: "/emergency-dental",
+  });
+
+  const emergencyHowTo = buildHowToSchema({
+    name: "What to do during a dental emergency",
+    description:
+      "Immediate steps Palo Alto patients should take when experiencing a dental emergency before arriving at our office.",
+    steps: emergencySteps.map((step) => ({
+      title: step.title,
+      description: step.description,
+    })),
+    pagePath: "/emergency-dental",
+  });
+
+  const emergencyBreadcrumbs = buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Services", path: "/services" },
+    { name: "Emergency Dental", path: "/emergency-dental" },
+  ]);
+
+  const emergencyReviews = buildReviewSchemas(emergencyTestimonials, 4);
+  const emergencySchemas = [emergencyServiceSchema];
+
+  if (emergencyHowTo) {
+    emergencySchemas.push(emergencyHowTo);
+  }
+
+  if (emergencyBreadcrumbs) {
+    emergencySchemas.push(emergencyBreadcrumbs);
+  }
+
+  if (emergencyReviews.length) {
+    emergencySchemas.push(...emergencyReviews);
+  }
+
   return (
     <>
       <MetaTags 
@@ -94,14 +139,7 @@ const EmergencyDental = () => {
         description="24/7 emergency dental care in Palo Alto. Dr. Wong provides immediate treatment for dental emergencies including toothaches, broken teeth, and trauma."
         image="/favicon/apple-touch-icon.png"
       />
-      <StructuredData 
-        type="service" 
-        serviceData={{
-          name: "Emergency Dental Care",
-          description: "24/7 emergency dental services for urgent dental problems including toothaches, trauma, and infections",
-          slug: "emergency-dental"
-        }}
-      />
+      <StructuredData data={emergencySchemas} />
       <CanonicalUrl />
 
       {/* Hero Section */}

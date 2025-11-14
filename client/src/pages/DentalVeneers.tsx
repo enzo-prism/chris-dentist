@@ -8,6 +8,11 @@ import { motion } from "framer-motion";
 import OptimizedImage from "@/components/seo/OptimizedImage";
 import TestimonialQuote from "@/components/testimonials/TestimonialQuote";
 import { getTestimonialsByNames } from "@/lib/testimonials";
+import {
+  buildBreadcrumbSchema,
+  buildReviewSchemas,
+  buildServiceSchema,
+} from "@/lib/structuredData";
 
 const DentalVeneers = () => {
   const veneerTypes = [
@@ -77,6 +82,30 @@ const DentalVeneers = () => {
     "Sarah Chase",
   ]);
 
+  const veneerServiceSchema = buildServiceSchema({
+    name: "Dental Veneers",
+    description:
+      "Custom dental veneers including porcelain, composite, and minimal-prep options to transform your smile.",
+    slug: "/dental-veneers",
+  });
+
+  const veneerBreadcrumbs = buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Services", path: "/services" },
+    { name: "Dental Veneers", path: "/dental-veneers" },
+  ]);
+
+  const veneerReviews = buildReviewSchemas(veneerTestimonials, 3);
+  const veneerSchemas = [veneerServiceSchema];
+
+  if (veneerBreadcrumbs) {
+    veneerSchemas.push(veneerBreadcrumbs);
+  }
+
+  if (veneerReviews.length) {
+    veneerSchemas.push(...veneerReviews);
+  }
+
   return (
     <>
       <MetaTags 
@@ -84,14 +113,7 @@ const DentalVeneers = () => {
         description="Transform your smile with dental veneers in Palo Alto. Dr. Wong offers porcelain, composite, and no-prep options for beautiful results."
         image="/favicon/apple-touch-icon.png"
       />
-      <StructuredData 
-        type="service" 
-        serviceData={{
-          name: "Dental Veneers",
-          description: "Custom dental veneers including porcelain, composite, and no-prep options to transform your smile",
-          slug: "dental-veneers"
-        }}
-      />
+      <StructuredData data={veneerSchemas} />
       <CanonicalUrl />
 
       {/* Hero Section */}

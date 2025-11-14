@@ -8,6 +8,12 @@ import { motion } from "framer-motion";
 import OptimizedImage from "@/components/seo/OptimizedImage";
 import TestimonialQuote from "@/components/testimonials/TestimonialQuote";
 import { getTestimonialsByNames } from "@/lib/testimonials";
+import {
+  buildBreadcrumbSchema,
+  buildHowToSchema,
+  buildReviewSchemas,
+  buildServiceSchema,
+} from "@/lib/structuredData";
 
 const Invisalign = () => {
   const invisalignTestimonials = getTestimonialsByNames([
@@ -103,6 +109,44 @@ const Invisalign = () => {
     }
   ];
 
+  const serviceSchema = buildServiceSchema({
+    name: "Invisalign Clear Aligners",
+    description:
+      "Invisible orthodontic treatment using custom clear aligners to straighten teeth discreetly for teens and adults.",
+    slug: "/invisalign",
+  });
+
+  const invisalignHowTo = buildHowToSchema({
+    name: "Invisalign Treatment Journey",
+    description: "Step-by-step guide for Invisalign treatment with Dr. Wong in Palo Alto.",
+    steps: treatmentProcess.map((step) => ({
+      title: step.title,
+      description: `${step.description}${step.duration ? ` (${step.duration})` : ""}`,
+    })),
+    pagePath: "/invisalign",
+  });
+
+  const invisalignBreadcrumbs = buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Services", path: "/services" },
+    { name: "Invisalign", path: "/invisalign" },
+  ]);
+
+  const invisalignReviews = buildReviewSchemas(invisalignTestimonials, 3);
+  const pageSchemas = [serviceSchema];
+
+  if (invisalignHowTo) {
+    pageSchemas.push(invisalignHowTo);
+  }
+
+  if (invisalignBreadcrumbs) {
+    pageSchemas.push(invisalignBreadcrumbs);
+  }
+
+  if (invisalignReviews.length) {
+    pageSchemas.push(...invisalignReviews);
+  }
+
   return (
     <>
       <MetaTags 
@@ -110,14 +154,7 @@ const Invisalign = () => {
         description="Transform your smile discreetly with Invisalign® treatment in Palo Alto. Dr. Wong offers invisible orthodontic treatment for teens and adults."
         image="/favicon/apple-touch-icon.png"
       />
-      <StructuredData 
-        type="service" 
-        serviceData={{
-          name: "Invisalign Clear Aligners",
-          description: "Invisible orthodontic treatment using custom clear aligners to straighten teeth discreetly",
-          slug: "invisalign"
-        }}
-      />
+      <StructuredData data={pageSchemas} />
       <CanonicalUrl />
 
       {/* Hero Section */}

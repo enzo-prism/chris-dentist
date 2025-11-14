@@ -8,8 +8,27 @@ import { pageTitles, pageDescriptions } from "@/lib/metaContent";
 import OptimizedImage from "@/components/seo/OptimizedImage";
 import { Button } from "@/components/ui/button";
 import HolidayHoursNotice from "@/components/common/HolidayHoursNotice";
+import StructuredData from "@/components/seo/StructuredData";
+import {
+  buildBreadcrumbSchema,
+  buildOrganizationSchema,
+  type StructuredDataNode,
+} from "@/lib/structuredData";
 
 const Contact = () => {
+  const contactOrganization: StructuredDataNode = {
+    ...buildOrganizationSchema(),
+    hasMap: "https://maps.app.goo.gl/UCTqQ1fZsdMq7vma9",
+  };
+  const contactBreadcrumbs = buildBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Contact", path: "/contact" },
+  ]);
+  const contactSchemas: StructuredDataNode[] = [contactOrganization];
+  if (contactBreadcrumbs) {
+    contactSchemas.push(contactBreadcrumbs);
+  }
+
   return (
     <>
       <MetaTags 
@@ -17,6 +36,7 @@ const Contact = () => {
         description={pageDescriptions.contact}
         image={ogImages.contact}
       />
+      <StructuredData data={contactSchemas} />
       {/* Hero Section */}
       <section className="bg-[#F5F9FC] py-12 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
