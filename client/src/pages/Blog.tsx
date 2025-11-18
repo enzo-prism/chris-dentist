@@ -139,7 +139,7 @@ const Blog = () => {
                   <h3 className="text-2xl md:text-3xl font-bold font-heading text-[#333333] mb-4">{featuredPost.title}</h3>
                   <p className="text-[#333333] mb-6">{featuredDescription}</p>
                   <div className="mt-auto">
-                    <Link href={`/blog#${featuredPost.slug}`}>
+                    <Link href={`/blog/${featuredPost.slug}`}>
                       <Button className="bg-primary text-white font-semibold hover:bg-blue-700 inline-flex items-center">
                         Read Full Article
                         <ArrowRight className="h-4 w-4 ml-2" />

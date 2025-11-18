@@ -1,8 +1,10 @@
+import "dotenv/config";
 import express, { type Request, Response, NextFunction } from "express";
 import compression from "compression";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import path from "path";
+import type { ListenOptions } from "net";
 
 const app = express();
 
@@ -87,14 +89,61 @@ app.use((req, res, next) => {
   // this serves both the API and the client.
   // It is the only port that is not firewalled.
   const port = Number(process.env.PORT) || 5000;
-  const reusePort = process.env.REUSE_PORT_ENABLED !== "false";
-  const listenOptions = {
+  const host = process.env.HOST || "0.0.0.0";
+  const reusePortEnabled = process.env.REUSE_PORT_ENABLED === "true";
+
+  const baseListenOptions: ListenOptions = {
     port,
-    host: "0.0.0.0",
-    ...(reusePort ? { reusePort: true as const } : {}),
+    host,
   };
 
-  server.listen(listenOptions, () => {
-    log(`serving on port ${port}`);
-  });
+  const listenOptions: ListenOptions = reusePortEnabled
+    ? { ...baseListenOptions, reusePort: true }
+    : baseListenOptions;
+
+  async function startServer(options: ListenOptions) {
+    await new Promise<void>((resolve, reject) => {
+      const onError = (err: NodeJS.ErrnoException) => {
+        server.off("listening", onListening);
+        reject(err);
+      };
+
+      const onListening = () => {
+        server.off("error", onError);
+        resolve();
+      };
+
+      server.once("error", onError);
+      server.once("listening", onListening);
+      server.listen(options);
+    });
+  }
+
+  const allowFallback =
+    app.get("env") === "development" &&
+    process.env.ALLOW_LOCAL_PORT_FALLBACK !== "false";
+  const fallbackPort = Number(process.env.DEV_FALLBACK_PORT) || 5050;
+
+  try {
+    await startServer(listenOptions);
+    log(`serving on http://${host}:${listenOptions.port}`);
+  } catch (error) {
+    const err = error as NodeJS.ErrnoException;
+    if (
+      err.code === "EADDRINUSE" &&
+      allowFallback &&
+      fallbackPort !== port
+    ) {
+      log(
+        `port ${port} is already in use locally, retrying on ${fallbackPort}`,
+      );
+      const fallbackOptions: ListenOptions = reusePortEnabled
+        ? { ...baseListenOptions, port: fallbackPort, reusePort: true }
+        : { ...baseListenOptions, port: fallbackPort };
+      await startServer(fallbackOptions);
+      log(`serving on http://${host}:${fallbackOptions.port}`);
+    } else {
+      throw error;
+    }
+  }
 })();

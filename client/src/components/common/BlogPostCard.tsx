@@ -68,7 +68,7 @@ const BlogPostCard = ({ post }: BlogPostCardProps) => {
         </p>
 
         {/* Read more link */}
-        <Link href={`/blog#${post.slug}`}>
+        <Link href={`/blog/${post.slug}`}>
           <div className="inline-flex items-center text-sm font-medium text-primary hover:text-primary/80 transition-colors cursor-pointer group/link">
             <span>Read article</span>
             <ArrowRight className="h-3.5 w-3.5 ml-1 transition-transform group-hover/link:translate-x-0.5" />

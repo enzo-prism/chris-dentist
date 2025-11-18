@@ -102,7 +102,7 @@ const SearchForm = () => {
                       <ul>
                         {searchResults.blogPosts.map((post) => (
                           <li key={post.id}>
-                            <Link href={`/blog#${post.slug}`}>
+                            <Link href={`/blog/${post.slug}`}>
                               <a 
                                 className="block px-4 py-2 hover:bg-gray-100 text-sm"
                                 onClick={() => setShowResults(false)}

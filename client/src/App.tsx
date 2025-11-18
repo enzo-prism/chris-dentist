@@ -33,6 +33,7 @@ import EmergencyDental from "@/pages/EmergencyDental";
 import AnalyticsMinimal from "@/pages/AnalyticsMinimal";
 import GATestPage from "@/pages/GATestPage";
 import Blog from "@/pages/Blog";
+import BlogPost from "@/pages/BlogPost";
 
 function ScrollToTop() {
   const [location] = useLocation();
@@ -70,6 +71,7 @@ function Router() {
           <Route path="/emergency-dental" component={EmergencyDental} />
           <Route path="/analytics" component={AnalyticsMinimal} />
           <Route path="/ga-test" component={GATestPage} />
+          <Route path="/blog/:slug" component={BlogPost} />
           <Route component={NotFound} />
         </Switch>
       </main>

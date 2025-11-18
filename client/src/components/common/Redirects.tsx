@@ -11,10 +11,10 @@ const Redirects = () => {
   useEffect(() => {
     // More targeted redirect logic
     if (location.startsWith('/post/')) {
-      // Blog post URLs should go to blog page with anchor
+      // Blog post URLs should go to blog detail page
       const blogSlug = location.replace('/post/', '');
-      console.log(`Redirecting from ${location} to /blog#${blogSlug}`);
-      setLocation(`/blog#${blogSlug}`);
+      console.log(`Redirecting from ${location} to /blog/${blogSlug}`);
+      setLocation(`/blog/${blogSlug}`);
       return;
     }
     
