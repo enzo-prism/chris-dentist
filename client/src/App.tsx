@@ -32,6 +32,7 @@ import Invisalign from "@/pages/Invisalign";
 import EmergencyDental from "@/pages/EmergencyDental";
 import AnalyticsMinimal from "@/pages/AnalyticsMinimal";
 import GATestPage from "@/pages/GATestPage";
+import Blog from "@/pages/Blog";
 
 function ScrollToTop() {
   const [location] = useLocation();
@@ -57,6 +58,7 @@ function Router() {
           <Route path="/testimonials" component={Testimonials} />
           <Route path="/contact" component={Contact} />
           <Route path="/schedule" component={Schedule} />
+          <Route path="/blog" component={Blog} />
           <Route path="/thank-you" component={ThankYou} />
           <Route path="/privacy-policy" component={PrivacyPolicy} />
           <Route path="/terms" component={TermsOfService} />

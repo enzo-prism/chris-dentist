@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMemo, useState } from "react";
 import { ArrowRight, Tag, Clock, Calendar, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -6,47 +6,92 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Link } from "wouter";
 import BlogPostCard from "@/components/common/BlogPostCard";
 import MetaTags from "@/components/common/MetaTags";
-import { drWongImages } from "@/lib/imageUrls";
 import { ogImages } from "@/lib/ogImages";
 import { pageTitles, pageDescriptions } from "@/lib/metaContent";
-import { BlogPost } from "@shared/schema";
-import { useState } from "react";
 import OptimizedImage from "@/components/seo/OptimizedImage";
+import { normalizeBlogCategory, useBlogPosts } from "@/hooks/useBlogPosts";
 
 const Blog = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
 
-  const { data: blogPosts, isLoading } = useQuery<BlogPost[]>({
-    queryKey: ["/api/blog-posts"],
-  });
+  const { posts, featuredPost, categories, isLoading, isError, error } = useBlogPosts();
 
-  // Filter blog posts based on search query and selected category
-  const filteredPosts = blogPosts?.filter(post => {
-    const matchesSearch = searchQuery === "" || 
-      post.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-      post.content.toLowerCase().includes(searchQuery.toLowerCase());
-    
-    const matchesCategory = selectedCategory === "all" || true; // In a real app, posts would have categories
+  const normalizedSearch = searchQuery.trim().toLowerCase();
 
-    return matchesSearch && matchesCategory;
-  });
+  const filteredPosts = useMemo(() => {
+    return posts.filter((post) => {
+      const matchesSearch =
+        normalizedSearch === "" ||
+        post.title.toLowerCase().includes(normalizedSearch) ||
+        post.content.toLowerCase().includes(normalizedSearch);
+
+      const matchesCategory =
+        selectedCategory === "all" ||
+        normalizeBlogCategory(post.category) === selectedCategory;
+
+      return matchesSearch && matchesCategory;
+    });
+  }, [normalizedSearch, posts, selectedCategory]);
+
+  const popularPosts = filteredPosts.slice(0, 4);
+
+  const featuredDescription = useMemo(() => {
+    if (!featuredPost) {
+      return "";
+    }
+
+    const text = featuredPost.content.trim();
+    const limit = 360;
+    return text.length > limit ? `${text.slice(0, limit)}...` : text;
+  }, [featuredPost]);
+
+  const categoryFilters = useMemo(() => {
+    const base = [{ id: "all", name: "All Posts", count: posts.length }];
+
+    if (!categories.length) {
+      return base;
+    }
+
+    return [
+      ...base,
+      ...categories.map((category) => ({
+        id: category.id,
+        name: category.label,
+        count: category.count,
+      })),
+    ];
+  }, [categories, posts.length]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    // Search is already handled by the filter above
   };
 
-  const categories = [
-    { id: "all", name: "All Posts" },
-    { id: "oral-health", name: "Oral Health" },
-    { id: "dental-procedures", name: "Dental Procedures" },
-    { id: "pediatric", name: "Children's Dentistry" },
-    { id: "cosmetic", name: "Cosmetic Dentistry" }
-  ];
+  const hasError = isError && !isLoading;
+  const errorMessage =
+    error instanceof Error
+      ? error.message
+      : "We couldn’t load the articles. Please try again.";
 
-  // Featured blog post (in a real app, this could be marked as featured in the database)
-  const featuredPost = blogPosts?.[0];
+  const renderError = (
+    <div className="text-center py-12 bg-white rounded-lg shadow-md">
+      <Search className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+      <h3 className="text-xl font-bold font-heading text-[#333333] mb-2">
+        Unable to load articles
+      </h3>
+      <p className="text-[#333333]">{errorMessage}</p>
+    </div>
+  );
+
+  const renderEmpty = (
+    <div className="text-center py-12 bg-white rounded-lg shadow-md">
+      <Search className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+      <h3 className="text-xl font-bold font-heading text-[#333333] mb-2">
+        No Articles Found
+      </h3>
+      <p className="text-[#333333]">Try adjusting your search or category selection.</p>
+    </div>
+  );
 
   return (
     <>
@@ -66,7 +111,7 @@ const Blog = () => {
       </section>
 
       {/* Featured Post */}
-      {!isLoading && featuredPost && (
+      {!isLoading && !hasError && featuredPost && (
         <section className="py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
@@ -89,10 +134,10 @@ const Blog = () => {
                     <span>{featuredPost.date}</span>
                     <span className="mx-2">•</span>
                     <Tag className="h-4 w-4 mr-2" />
-                    <span>Oral Health</span>
+                    <span>{featuredPost.category || "Dental Health"}</span>
                   </div>
                   <h3 className="text-2xl md:text-3xl font-bold font-heading text-[#333333] mb-4">{featuredPost.title}</h3>
-                  <p className="text-[#333333] mb-6">{featuredPost.content}</p>
+                  <p className="text-[#333333] mb-6">{featuredDescription}</p>
                   <div className="mt-auto">
                     <Link href={`/blog#${featuredPost.slug}`}>
                       <Button className="bg-primary text-white font-semibold hover:bg-blue-700 inline-flex items-center">
@@ -133,7 +178,7 @@ const Blog = () => {
               <div className="bg-white rounded-lg shadow-md p-6">
                 <h3 className="text-xl font-bold font-heading text-[#333333] mb-4">Categories</h3>
                 <ul className="space-y-2">
-                  {categories.map((category) => (
+                  {categoryFilters.map((category) => (
                     <li key={category.id}>
                       <button
                         onClick={() => setSelectedCategory(category.id)}
@@ -146,7 +191,12 @@ const Blog = () => {
                         <ArrowRight className={`h-4 w-4 mr-2 ${
                           selectedCategory === category.id ? 'text-white' : 'text-primary'
                         }`} />
-                        {category.name}
+                        <span className="flex-1">{category.name}</span>
+                        <span className={`text-xs ${
+                          selectedCategory === category.id ? 'text-white/80' : 'text-gray-400'
+                        }`}>
+                          {category.count}
+                        </span>
                       </button>
                     </li>
                   ))}
@@ -165,7 +215,9 @@ const Blog = () => {
                 </TabsList>
                 
                 <TabsContent value="recent">
-                  {isLoading ? (
+                  {hasError ? (
+                    renderError
+                  ) : isLoading ? (
                     <div className="grid md:grid-cols-2 gap-8">
                       {[...Array(4)].map((_, index) => (
                         <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden animate-pulse">
@@ -179,27 +231,21 @@ const Blog = () => {
                         </div>
                       ))}
                     </div>
+                  ) : filteredPosts.length ? (
+                    <div className="grid md:grid-cols-2 gap-8">
+                      {filteredPosts.map((post) => (
+                        <BlogPostCard key={post.id} post={post} />
+                      ))}
+                    </div>
                   ) : (
-                    <>
-                      {filteredPosts?.length ? (
-                        <div className="grid md:grid-cols-2 gap-8">
-                          {filteredPosts.map((post) => (
-                            <BlogPostCard key={post.id} post={post} />
-                          ))}
-                        </div>
-                      ) : (
-                        <div className="text-center py-12 bg-white rounded-lg shadow-md">
-                          <Search className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                          <h3 className="text-xl font-bold font-heading text-[#333333] mb-2">No Articles Found</h3>
-                          <p className="text-[#333333]">Try adjusting your search or category selection.</p>
-                        </div>
-                      )}
-                    </>
+                    renderEmpty
                   )}
                 </TabsContent>
                 
                 <TabsContent value="popular">
-                  {isLoading ? (
+                  {hasError ? (
+                    renderError
+                  ) : isLoading ? (
                     <div className="grid md:grid-cols-2 gap-8">
                       {[...Array(4)].map((_, index) => (
                         <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden animate-pulse">
@@ -213,13 +259,14 @@ const Blog = () => {
                         </div>
                       ))}
                     </div>
-                  ) : (
+                  ) : popularPosts.length ? (
                     <div className="grid md:grid-cols-2 gap-8">
-                      {/* In a real app, you might have a way to track popular posts */}
-                      {filteredPosts?.slice(0, 4).map((post) => (
+                      {popularPosts.map((post) => (
                         <BlogPostCard key={post.id} post={post} />
                       ))}
                     </div>
+                  ) : (
+                    renderEmpty
                   )}
                 </TabsContent>
               </Tabs>
