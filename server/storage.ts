@@ -41,6 +41,7 @@ export interface IStorage {
   getBlogPosts(): Promise<BlogPost[]>;
   getBlogPost(id: number): Promise<BlogPost | undefined>;
   getBlogPostBySlug(slug: string): Promise<BlogPost | undefined>;
+  getBlogPostsByServiceSlug(slug: string): Promise<BlogPost[]>;
   createBlogPost(post: InsertBlogPost): Promise<BlogPost>;
 
   // Testimonial methods
@@ -71,6 +72,10 @@ export class MemStorage implements IStorage {
   private serviceCurrentId: number;
   private blogPostCurrentId: number;
   private testimonialCurrentId: number;
+
+  private normalizeServiceSlug(slug?: string | null): string {
+    return slug?.trim().toLowerCase() ?? "";
+  }
 
   constructor() {
     this.users = new Map();
@@ -224,13 +229,40 @@ export class MemStorage implements IStorage {
       (post) => post.slug === slug,
     );
   }
+  async getBlogPostsByServiceSlug(slug: string): Promise<BlogPost[]> {
+    const normalized = this.normalizeServiceSlug(slug);
+    if (!normalized) {
+      return [];
+    }
+
+    return Array.from(this.blogPosts.values()).filter((post) => {
+      if (!post.relatedServices || !post.relatedServices.length) {
+        return false;
+      }
+
+      return post.relatedServices.some(
+        (serviceSlug) => this.normalizeServiceSlug(serviceSlug) === normalized,
+      );
+    });
+  }
 
   async createBlogPost(postData: InsertBlogPost): Promise<BlogPost> {
     const id = this.blogPostCurrentId++;
     // Ensure optional fields are populated with defaults if undefined
     const category = postData.category === undefined ? null : postData.category;
     const readTime = postData.readTime === undefined ? null : postData.readTime;
-    const post: BlogPost = { ...postData, id, category, readTime };
+    const relatedServices = Array.isArray(postData.relatedServices)
+      ? postData.relatedServices
+          .map((slug) => this.normalizeServiceSlug(slug))
+          .filter((slug) => slug.length > 0)
+      : [];
+    const post: BlogPost = {
+      ...postData,
+      id,
+      category,
+      readTime,
+      relatedServices,
+    };
     this.blogPosts.set(id, post);
     return post;
   }
@@ -365,7 +397,100 @@ If you are curious whether Invisalign is right for you, the next step is a perso
         date: "January 15, 2025",
         slug: "invisalign-palo-alto",
         category: "Invisalign",
-        readTime: 9
+        readTime: 9,
+        relatedServices: ["invisalign"],
+      },
+      {
+        title: "Dental Veneers in Palo Alto, CA: A Natural-Looking Way to Transform Your Smile",
+        content: `If you're unhappy with chips, discoloration, uneven edges, or small gaps in your teeth, you don't necessarily need braces or extensive dental work to love your smile again. Dental veneers offer a conservative, highly aesthetic way to reshape and brighten teeth, often in just a few visits.
+
+At Christopher B. Wong, DDS in Palo Alto, Dr. Wong provides customized veneers designed to look like your teeth—just better. This guide walks through how veneers work, who they're for, what to expect, and how to decide whether they're the right choice for you.
+
+Quick Answer: What Are Dental Veneers?
+Dental veneers are thin, custom-made shells that bond to the front of your teeth to improve their color, shape, and overall appearance. Most veneers are made from porcelain or composite resin and are carefully designed to blend seamlessly with the rest of your smile.
+
+Veneers can help with:
+- Stubborn discoloration that whitening can't fix
+- Chips, cracks, or worn edges
+- Small gaps between teeth
+- Teeth that look short, uneven, or misshapen
+- Mild misalignment or crowding (in select cases)
+
+Why Patients in Palo Alto Choose Veneers
+People often ask, "Why veneers instead of whitening or bonding?" Here's what sets veneers apart.
+
+1. Big Cosmetic Change With a Conservative Approach
+Veneers are a minimally invasive way to change what you see in the mirror. In many cases, only a small amount of enamel is reshaped from the front of the tooth to make room for the veneer. Compared with full crowns, this preserves more of your natural tooth structure.
+
+2. Natural, Long-Lasting Results
+High-quality porcelain veneers are translucent, highly stain-resistant, and designed to last many years with good care.
+
+3. Customized to Your Face, Not a "Template Smile"
+Dr. Wong carefully considers your face shape, lip line, skin and tooth tone, existing bite, and personal goals. The goal is a smile that looks like you—just more confident and balanced.
+
+Types of Dental Veneers
+- Porcelain veneers: thin ceramic shells that deliver the best aesthetics, excellent stain resistance, and durability.
+- Composite veneers: tooth-colored resin that can often be done in a single visit and is easier to repair, though it may stain sooner.
+
+During your consultation, Dr. Wong will walk you through which option makes the most sense for your teeth, your goals, and your budget.
+
+Are You a Good Candidate for Veneers?
+Veneers work best when teeth and gums are healthy, cosmetic concerns are limited to discoloration, chips, gaps, or uneven edges, and your bite is relatively stable. You may not be a candidate if you have active decay or gum disease, minimal remaining tooth structure, significant crowding that needs orthodontics, or if you're hoping for a reversible treatment.
+
+What to Expect: The Veneer Process With Dr. Wong
+1. Consultation and smile planning: exam, photos, and discussion of your goals plus timeline and investment.
+2. Tooth preparation and temporaries: a small amount of enamel is reshaped, impressions are taken, and temporary veneers protect your teeth while the lab fabricates the final restorations.
+3. Try-in and final bonding: you preview the veneers, adjustments are made, and the custom shells are bonded and polished so you leave with your final smile.
+
+How Long Do Veneers Last?
+With good oral hygiene and regular dental visits, porcelain veneers commonly last 10-15 years or more. Composite veneers may have a shorter lifespan and require more frequent touch-ups or replacement. Brushing, flossing, avoiding hard foods, managing grinding, and consistent cleanings all influence longevity.
+
+Caring for Your Veneers: Do's and Don'ts
+Do brush twice daily with a soft toothbrush, floss every day, keep dental visits, and wear a nightguard if you clench. Avoid chewing ice or pens, using teeth as tools, and overdoing highly staining foods or drinks without rinsing.
+
+Are Veneers Safe? Understanding Risks and Limitations
+Enamel removal is permanent, temporary sensitivity is possible, and veneers can chip or require replacement over time. Dr. Wong's conservative approach ensures you understand when veneers are appropriate versus when whitening, bonding, crowns, or Invisalign would be better for long-term health.
+
+Veneers vs. Other Cosmetic Options
+- Whitening: great for color changes but not shape.
+- Bonding: useful for small chips or spots, though it can stain faster.
+- Orthodontics (like Invisalign): ideal for bite or alignment issues but does not change color or shape.
+Often, Dr. Wong combines treatments—such as Invisalign followed by a few veneers—to deliver the best overall result.
+
+FAQs About Dental Veneers
+Do veneers damage my teeth?
+Veneers require conservative enamel reshaping. When done carefully, they preserve as much healthy tooth structure as possible.
+
+Do veneers look fake?
+High-quality veneers are customized for shape, shade, and translucency so they mimic natural teeth.
+
+Are veneers covered by insurance?
+Most dental insurance plans consider veneers cosmetic, but patients often rely on FSA or HSA funds. Our team can review benefits and outline expected fees.
+
+Can I get veneers on just one or two teeth?
+Yes. Many patients veneer a few "key" teeth to improve symmetry or close gaps while leaving other teeth as they are.
+
+Thinking About Dental Veneers in Palo Alto?
+If you're considering veneers—or you're just curious whether they're right for you—the best next step is a personalized consultation.
+
+At Christopher B. Wong, DDS you receive:
+- An honest conversation about what you want to change
+- A thorough evaluation of your teeth and gums
+- Clear explanations of all your options—not just veneers
+- A treatment plan that respects both your goals and long-term oral health
+
+Christopher B. Wong, DDS
+409 Cambridge Ave
+Palo Alto, CA 94306
+(650) 326-6319
+
+Ready to explore dental veneers? Visit chriswongdds.com to request an appointment online.`,
+        image: "https://res.cloudinary.com/dhqpqfw6w/image/upload/v1763577353/Gemini_Generated_Image_ta4fp4ta4fp4ta4f_xlkjgw.webp",
+        date: "February 10, 2025",
+        slug: "dental-veneers-palo-alto",
+        category: "Cosmetic Dentistry",
+        readTime: 12,
+        relatedServices: ["dental-veneers", "cosmetic-dentistry"],
       }
     ];
 

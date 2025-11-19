@@ -14,6 +14,7 @@ import {
   buildReviewSchemas,
   buildServiceSchema,
 } from "@/lib/structuredData";
+import RelatedServicePosts from "@/components/blog/RelatedServicePosts";
 
 const Invisalign = () => {
   const invisalignTestimonials = getTestimonialsByNames([
@@ -501,6 +502,8 @@ const Invisalign = () => {
           </div>
         </div>
       </section>
+
+      <RelatedServicePosts serviceSlug="invisalign" serviceName="Invisalign Treatment" />
 
       {/* Call to Action */}
       <section className="py-16 bg-primary text-white">

@@ -13,6 +13,7 @@ import {
   buildReviewSchemas,
   buildServiceSchema,
 } from "@/lib/structuredData";
+import RelatedServicePosts from "@/components/blog/RelatedServicePosts";
 
 const EmergencyDental = () => {
   const emergencyTypes = [
@@ -414,6 +415,8 @@ const EmergencyDental = () => {
           </div>
         </div>
       </section>
+
+      <RelatedServicePosts serviceSlug="emergency-dental" serviceName="Emergency Dental Care" />
 
       {/* Final CTA */}
       <section className="py-16 bg-white">

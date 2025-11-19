@@ -13,6 +13,7 @@ import {
   buildReviewSchemas,
   buildServiceSchema,
 } from "@/lib/structuredData";
+import RelatedServicePosts from "@/components/blog/RelatedServicePosts";
 
 const benefits = [
   "Natural Look and Feel: Implants fuse with your jawbone, becoming a permanent part of your mouth",
@@ -567,6 +568,8 @@ const DentalImplants = () => {
           </div>
         </div>
       </section>
+
+      <RelatedServicePosts serviceSlug="dental-implants" serviceName="Dental Implants" />
 
       {/* CTA Section */}
       <section className="py-12 sm:py-16 bg-primary text-white">

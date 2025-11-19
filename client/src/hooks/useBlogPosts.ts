@@ -68,3 +68,18 @@ export function useBlogPosts() {
 }
 
 export type UseBlogPostsReturn = ReturnType<typeof useBlogPosts>;
+
+export function useRelatedBlogPosts(serviceSlug: string | undefined) {
+  const normalizedSlug = useMemo(
+    () => serviceSlug?.trim().toLowerCase() ?? "",
+    [serviceSlug],
+  );
+
+  return useQuery<BlogPost[]>({
+    queryKey: [
+      normalizedSlug
+        ? `/api/blog-posts?service=${encodeURIComponent(normalizedSlug)}`
+        : "/api/blog-posts",
+    ],
+  });
+}

@@ -179,7 +179,11 @@ Disallow: /`);
 
   app.get("/api/blog-posts", async (req: Request, res: Response) => {
     try {
-      const blogPosts = await storage.getBlogPosts();
+      const serviceFilter =
+        typeof req.query.service === "string" ? req.query.service : undefined;
+      const blogPosts = serviceFilter
+        ? await storage.getBlogPostsByServiceSlug(serviceFilter)
+        : await storage.getBlogPosts();
       res.status(200).json(blogPosts);
     } catch (error) {
       console.error("Error fetching blog posts:", error);

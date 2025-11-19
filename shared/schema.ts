@@ -1,4 +1,5 @@
 import { pgTable, text, serial, integer, boolean, timestamp, jsonb } from "drizzle-orm/pg-core";
+import { sql } from "drizzle-orm";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -85,6 +86,7 @@ export const blogPosts = pgTable("blog_posts", {
   slug: text("slug").notNull().unique(),
   category: text("category"),
   readTime: integer("read_time"),
+  relatedServices: jsonb("related_services").$type<string[]>().notNull().default(sql`'[]'::jsonb`),
 });
 
 export const insertBlogPostSchema = createInsertSchema(blogPosts).omit({
