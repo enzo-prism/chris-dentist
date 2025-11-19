@@ -281,11 +281,13 @@ const About = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
-                <OptimizedImage
-                  src={member.image}
-                  alt={member.name}
-                  className="w-full h-48 sm:h-56 object-cover"
-                />
+                <div className="relative aspect-square bg-gray-100">
+                  <OptimizedImage
+                    src={member.image}
+                    alt={member.name}
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                </div>
                 <div className="p-5 sm:p-6">
                   <h3 className="text-lg sm:text-xl font-bold font-heading text-[#333333] mb-1">{member.name}</h3>
                   <p className="text-[#00AA90] font-semibold mb-3 text-sm sm:text-base">{member.role}</p>

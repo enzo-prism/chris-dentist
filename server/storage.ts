@@ -346,7 +346,7 @@ export class MemStorage implements IStorage {
       {
         title: "Emergency Dental Care",
         description: "24/7 emergency dental services for urgent dental problems including severe toothaches, trauma, broken teeth, and infections.",
-        image: "https://i.imgur.com/t6yAG3i.jpg",
+        image: "https://res.cloudinary.com/dhqpqfw6w/image/upload/v1763585455/Gemini_Generated_Image_3fvkl73fvkl73fvk_sbv4kj.webp",
         slug: "emergency-dental",
         featured: true
       }
@@ -359,6 +359,130 @@ export class MemStorage implements IStorage {
 
   private initializeBlogPosts() {
     const blogPostsList: InsertBlogPost[] = [
+      {
+        title: "Emergency Dental Care in Palo Alto, CA: What to Do When You Need a Dentist Right Now",
+        content: `Dental emergencies never happen at a convenient time. A cracked tooth during lunch, a sudden toothache that keeps you up at night, or a knocked-out tooth after a weekend bike ride all require fast, reliable care.
+
+If you are in Palo Alto, Stanford, Menlo Park, or surrounding areas, Dr. Christopher B. Wong offers prompt, compassionate emergency dental treatment to relieve pain and protect your long-term oral health. This guide walks through common dental emergencies, what to do immediately, and when to call our office.
+
+What Counts as a Dental Emergency?
+
+A dental issue becomes an emergency when it involves:
+
+- Severe or persistent pain
+
+- Active infection or swelling
+
+- Excessive bleeding
+
+- Broken or dislodged teeth
+
+- Damage that affects ability to bite, chew, or speak
+
+If you are unsure whether your situation is urgent, call our office. A quick conversation can prevent hours or days of unnecessary discomfort.
+
+Common Dental Emergencies We Treat
+
+1) Toothache or severe pain
+Throbbing, sharp, or persistent pain often signals an infection, nerve irritation, or decay that has progressed deeper than the surface. Do not wait; pain rarely goes away on its own.
+
+2) Broken, cracked, or chipped teeth
+Sports injuries, accidents, or biting something hard can damage a tooth. Even small cracks can worsen if untreated.
+
+3) Knocked-out tooth
+A knocked-out tooth is one of the most time-sensitive dental emergencies. Getting care within 30-60 minutes greatly improves the chance of saving the tooth.
+
+4) Swelling or abscess
+A dental abscess is an infection that can spread quickly. Symptoms include swelling, fever, or a bad taste in the mouth. This requires immediate treatment.
+
+5) Lost filling or crown
+If something feels suddenly off when you bite, a filling or crown may have fallen out. Exposed tooth structure can cause pain and further damage.
+
+6) Soft-tissue injuries
+Bleeding in the lips, gums, cheeks, or tongue may need professional care, especially if it does not stop after 10-15 minutes.
+
+What to Do Before You Arrive
+
+For a knocked-out tooth:
+
+- Pick it up by the crown, not the root.
+
+- Gently rinse without scrubbing.
+
+- Try to place it back in the socket, or keep it in milk or saliva.
+
+- Call us immediately.
+
+If you are experiencing swelling:
+
+- Use a cold compress.
+
+- Avoid heat because it can worsen infection.
+
+If a crown or filling comes out:
+
+- Keep the restoration if possible.
+
+- Avoid chewing on that side.
+
+If you are in pain:
+
+- Over-the-counter pain relievers like ibuprofen can help.
+
+- Avoid aspirin directly on the gums because it can burn the tissue.
+
+Why Choose Dr. Christopher B. Wong for Emergency Dental Care?
+
+- Fast, same-day emergency appointments whenever possible
+
+- Advanced diagnostic technology for precise, efficient treatment
+
+- Comfort-focused approach to ease anxiety and relieve pain quickly
+
+- Solutions for many situations, from conservative repairs to full restorations
+
+- Local expertise trusted by families throughout Palo Alto
+
+Our goal is simple: restore your comfort, protect your health, and get you back to normal quickly.
+
+Emergency Dentistry That Fits Your Life
+
+Life moves fast in the Bay Area. Dental issues should not slow you down. Whether you are a student, working professional, or parent on the go, we provide timely, effective care when you need it most.
+
+When to Call Us Immediately
+
+You should call our office right away if you experience:
+
+- Severe tooth pain
+
+- Swelling in the face or jaw
+
+- A knocked-out or broken tooth
+
+- Bleeding that will not stop
+
+- Signs of infection (fever, redness, throbbing pain)
+
+If you are unsure whether it is an emergency, call us and our team can guide you.
+
+Schedule an Emergency Dental Appointment
+
+If you are dealing with a dental emergency in Palo Alto, do not wait. Prompt treatment can make all the difference in saving a tooth, preventing infections, and relieving pain.
+
+Call our office now: (650) 326-6319
+
+Visit us: 409 Cambridge Ave, Palo Alto, CA 94306
+
+Book online: www.chriswongdds.com/schedule
+
+We are here to help quickly, safely, and with compassion.`,
+        image: "https://res.cloudinary.com/dhqpqfw6w/image/upload/v1763585455/Gemini_Generated_Image_3fvkl73fvkl73fvk_sbv4kj.webp",
+        date: "March 5, 2025",
+        slug: "emergency-dental-care-palo-alto",
+        category: "Emergency Dental",
+        readTime: 7,
+        relatedServices: ["emergency-dental"],
+      },
       {
         title: "Invisalign in Palo Alto, CA: A Clear, Comfortable Way to Straighten Your Smile",
         content: `If you've been thinking about straightening your teeth but do not love the idea of metal braces, Invisalign clear aligners can be a smart, discreet option. For many adults and teens in Palo Alto, Invisalign offers a flexible way to improve their smile while keeping life, work, and school running normally. This guide walks through how Invisalign works, who it is best for, treatment timelines, costs in California, and what to expect when you start Invisalign with a Palo Alto dentist.
