@@ -4,7 +4,6 @@ import { Link } from "wouter";
 import MetaTags from "@/components/common/MetaTags";
 import { ogImages } from "@/lib/ogImages";
 import { pageTitles, pageDescriptions } from "@/lib/metaContent";
-import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import TestimonialCard from "@/components/common/TestimonialCard";
 import type { Testimonial } from "@shared/schema";
@@ -71,10 +70,10 @@ const Testimonials = () => {
   if (testimonialReviewSchemas.length) {
     structuredDataNodes.push(...testimonialReviewSchemas);
   }
-  
+
   return (
     <>
-      <MetaTags 
+      <MetaTags
         title={pageTitles.testimonials}
         description={pageDescriptions.testimonials}
         image={ogImages.testimonials}
@@ -86,31 +85,16 @@ const Testimonials = () => {
       {/* Hero Section */}
       <section className="bg-gradient-to-b from-[#F5F9FC] via-white to-white py-16 md:py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
-          <motion.span
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-semibold tracking-wide uppercase"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-          >
+          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-semibold tracking-wide uppercase">
             <Sparkles className="h-4 w-4" />
             Loved by patients
-          </motion.span>
-          <motion.h1
-            className="text-4xl md:text-5xl font-bold font-heading text-[#1F2933] leading-tight"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.1 }}
-          >
+          </span>
+          <h1 className="text-4xl md:text-5xl font-bold font-heading text-[#1F2933] leading-tight">
             A community of smiles that keeps coming back
-          </motion.h1>
-          <motion.p
-            className="text-lg md:text-xl text-[#4B5563] leading-relaxed max-w-3xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.2 }}
-          >
+          </h1>
+          <p className="text-lg md:text-xl text-[#4B5563] leading-relaxed max-w-3xl mx-auto">
             From emergency visits to decades-long relationships, patients across the Peninsula share how Dr. Wong, Dr. Hamamoto, and the entire team combine gentle care with modern dentistry.
-          </motion.p>
+          </p>
         </div>
       </section>
 
@@ -171,29 +155,22 @@ const Testimonials = () => {
                     </div>
                   </div>
                 </div>
-              ))}
-            </div>
-          ) : (
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6"
-            >
-              {reviews.map((testimonial, index) => (
-                <TestimonialCard key={`${testimonial.id}-${index}`} testimonial={testimonial} index={index} />
-              ))}
-            </motion.div>
-          )}
-          
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="grid gap-6 md:grid-cols-2 xl:grid-cols-4 mt-16"
-          >
+            ))}
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
+            {reviews.map((testimonial, index) => (
+              <TestimonialCard
+                key={`${testimonial.id}-${index}`}
+                testimonial={testimonial}
+                index={index}
+                disableAnimation
+              />
+            ))}
+          </div>
+        )}
+
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4 mt-16">
             {[
               {
                 value: `${totalReviews}+`,
@@ -225,19 +202,13 @@ const Testimonials = () => {
                 <p className="text-sm text-[#4B5563]">{stat.description}</p>
               </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Share Your Experience */}
       <section className="py-16 bg-gradient-to-b from-white to-[#F5F9FC]">
-        <motion.div 
-          className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-        >
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-2xl sm:text-3xl font-bold font-heading text-[#333333] mb-4">
             Share Your Experience
           </h2>
@@ -257,7 +228,7 @@ const Testimonials = () => {
               </Button>
             </Link>
           </div>
-        </motion.div>
+        </div>
       </section>
     </>
   );
