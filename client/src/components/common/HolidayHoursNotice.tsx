@@ -1,4 +1,5 @@
-import { AlertTriangle, ArrowRight } from "lucide-react";
+import { useEffect, useState } from "react";
+import { AlertTriangle, ArrowRight, X } from "lucide-react";
 import { holidayHours } from "@/lib/data";
 import { cn } from "@/lib/utils";
 
@@ -13,6 +14,23 @@ const HolidayHoursNotice = ({
   className,
   containerClassName,
 }: HolidayHoursNoticeProps) => {
+  const [isDismissed, setIsDismissed] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const storedValue = window.localStorage.getItem("holidayHoursDismissed");
+    if (storedValue === "true") {
+      setIsDismissed(true);
+    }
+  }, []);
+
+  const handleDismiss = () => {
+    setIsDismissed(true);
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem("holidayHoursDismissed", "true");
+    }
+  };
+
   if (!holidayHours?.active) {
     return null;
   }
@@ -55,6 +73,10 @@ const HolidayHoursNotice = ({
     );
   }
 
+  if (isDismissed) {
+    return null;
+  }
+
   return (
     <div className={cn("bg-amber-50/95 border-b border-amber-100 text-amber-900", className)}>
       <div
@@ -63,29 +85,40 @@ const HolidayHoursNotice = ({
           containerClassName
         )}
       >
-        <div className="flex items-center gap-2 font-semibold">
-          <AlertTriangle className="h-4 w-4" aria-hidden="true" />
-          <span>{holidayHours.title}</span>
+        <div className="flex flex-col gap-2 md:flex-row md:items-center md:gap-6 flex-1">
+          <div className="flex items-center gap-2 font-semibold">
+            <AlertTriangle className="h-4 w-4" aria-hidden="true" />
+            <span>{holidayHours.title}</span>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-amber-900/90">
+            {holidayHours.entries.map((entry) => (
+              <span key={entry.day} className="flex gap-1 font-medium">
+                <span>{entry.day}:</span>
+                <span className="font-normal">{entry.hours}</span>
+              </span>
+            ))}
+          </div>
+
+          {holidayHours.cta && (
+            <a
+              href={holidayHours.cta.href}
+              className="font-semibold text-primary hover:underline inline-flex items-center gap-1"
+            >
+              {holidayHours.cta.label}
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </a>
+          )}
         </div>
 
-        <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-amber-900/90">
-          {holidayHours.entries.map((entry) => (
-            <span key={entry.day} className="flex gap-1 font-medium">
-              <span>{entry.day}:</span>
-              <span className="font-normal">{entry.hours}</span>
-            </span>
-          ))}
-        </div>
-
-        {holidayHours.cta && (
-          <a
-            href={holidayHours.cta.href}
-            className="font-semibold text-primary hover:underline inline-flex items-center gap-1"
-          >
-            {holidayHours.cta.label}
-            <ArrowRight className="h-4 w-4" aria-hidden="true" />
-          </a>
-        )}
+        <button
+          type="button"
+          onClick={handleDismiss}
+          className="self-start rounded-full p-1 text-amber-900/70 hover:text-amber-900 hover:bg-amber-100 transition"
+          aria-label="Dismiss holiday hours notice"
+        >
+          <X className="h-4 w-4" aria-hidden="true" />
+        </button>
       </div>
     </div>
   );
