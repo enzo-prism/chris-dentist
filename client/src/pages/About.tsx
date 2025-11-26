@@ -135,7 +135,7 @@ const About = () => {
                   >
                     Dr. Michelle Fong
                   </a>{" "}
-                  (also a dentist), and our dental family joined them at the wedding—enjoy a few favorite moments from the day.
+                  (also a dentist), and our dental family joined them at the wedding—enjoy a few favorite moments.
                 </p>
               </div>
               <div className="relative">
