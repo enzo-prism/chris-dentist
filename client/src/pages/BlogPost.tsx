@@ -7,6 +7,7 @@ import { ogImages } from "@/lib/ogImages";
 import OptimizedImage from "@/components/seo/OptimizedImage";
 import { ArrowLeft, Calendar, Clock, Tag } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 interface Params {
   slug: string;
@@ -25,6 +26,93 @@ const BlogPost = ({ params }: RouteComponentProps<Params>) => {
   const pageDescription = post?.content
     ? `${post.content.slice(0, 160)}${post.content.length > 160 ? "…" : ""}`
     : pageDescriptions.blog;
+
+  const parsedContent = useMemo(() => {
+    if (!post?.content) return [];
+    const lines = post.content
+      .split("\n")
+      .map((line) => line.trim())
+      .filter(Boolean);
+
+    const blocks: React.ReactNode[] = [];
+    let bulletList: string[] | null = null;
+    let orderedList: string[] | null = null;
+
+    const flushLists = () => {
+      if (bulletList) {
+        blocks.push(
+          <ul
+            key={`ul-${blocks.length}`}
+            className="list-disc pl-6 space-y-2 text-gray-700 leading-relaxed"
+          >
+            {bulletList.map((item, idx) => (
+              <li key={idx}>{item}</li>
+            ))}
+          </ul>,
+        );
+      }
+      if (orderedList) {
+        blocks.push(
+          <ol
+            key={`ol-${blocks.length}`}
+            className="list-decimal pl-6 space-y-2 text-gray-700 leading-relaxed"
+          >
+            {orderedList.map((item, idx) => (
+              <li key={idx}>{item}</li>
+            ))}
+          </ol>,
+        );
+      }
+      bulletList = null;
+      orderedList = null;
+    };
+
+    const isHeading = (line: string) => {
+      const wordCount = line.split(/\s+/).length;
+      return /[:?]$/.test(line) || wordCount <= 7;
+    };
+
+    lines.forEach((line) => {
+      if (/^-\s+/.test(line)) {
+        orderedList = null;
+        bulletList = bulletList ?? [];
+        bulletList.push(line.replace(/^-\s+/, ""));
+        return;
+      }
+
+      if (/^\d+\)\s+/.test(line)) {
+        bulletList = null;
+        orderedList = orderedList ?? [];
+        orderedList.push(line.replace(/^\d+\)\s+/, ""));
+        return;
+      }
+
+      flushLists();
+
+      if (isHeading(line)) {
+        blocks.push(
+          <h2
+            key={`h2-${blocks.length}`}
+            className="text-2xl sm:text-3xl font-heading font-semibold text-[#1F2933] pt-6"
+          >
+            {line.replace(/[:?]$/, "")}
+          </h2>,
+        );
+      } else {
+        blocks.push(
+          <p
+            key={`p-${blocks.length}`}
+            className="text-base sm:text-lg text-gray-700 leading-relaxed"
+          >
+            {line}
+          </p>,
+        );
+      }
+    });
+
+    flushLists();
+    return blocks;
+  }, [post?.content]);
 
   if (isLoading) {
     return (
@@ -83,9 +171,12 @@ const BlogPost = ({ params }: RouteComponentProps<Params>) => {
               </>
             ) : null}
           </div>
-          <h1 className="text-4xl font-heading font-bold text-[#333333] mb-8">{post.title}</h1>
+          <h1 className="text-4xl font-heading font-bold text-[#333333] mb-4 sm:mb-6">{post.title}</h1>
+          <p className="text-lg text-gray-600 max-w-3xl mb-8">
+            Practical, patient-friendly guidance from Dr. Wong and team—built to help you act quickly and confidently.
+          </p>
           {post.image ? (
-            <div className="mb-10 rounded-2xl overflow-hidden">
+            <div className="mb-10 rounded-2xl overflow-hidden shadow-lg border border-white/70">
               <OptimizedImage
                 src={post.image}
                 alt={post.title}
@@ -93,10 +184,13 @@ const BlogPost = ({ params }: RouteComponentProps<Params>) => {
               />
             </div>
           ) : null}
-          <article className="prose prose-lg max-w-none">
-            {post.content.split(/\n\n+/).map((paragraph, index) => (
-              <p key={index}>{paragraph}</p>
-            ))}
+          <article
+            className={cn(
+              "bg-white rounded-3xl shadow-xl border border-[#E5E7EB]/80",
+              "p-6 sm:p-8 space-y-4 sm:space-y-6 leading-relaxed text-gray-700",
+            )}
+          >
+            <div className="space-y-4 sm:space-y-5">{parsedContent}</div>
           </article>
         </div>
       </section>
