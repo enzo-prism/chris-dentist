@@ -1,4 +1,4 @@
-import { CheckCircle, Award, UserCheck, Shield, Play } from "lucide-react";
+import { CheckCircle, Award, UserCheck, Shield, Play, Sparkles, X, ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import OfficeGallerySection from "@/components/sections/OfficeGallerySection";
@@ -12,8 +12,15 @@ import CanonicalUrl from "@/components/seo/CanonicalUrl";
 import { useState } from "react";
 import VideoModal from "@/components/common/VideoModal";
 import OptimizedImage from "@/components/seo/OptimizedImage";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import TestimonialQuote from "@/components/testimonials/TestimonialQuote";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 import { getTestimonialsByNames } from "@/lib/testimonials";
 import {
   buildBreadcrumbSchema,
@@ -21,9 +28,24 @@ import {
   buildPersonSchema,
 } from "@/lib/structuredData";
 
+const weddingCarouselImages = [
+  { src: "https://res.cloudinary.com/dhqpqfw6w/image/upload/v1764193096/IMG_8193_wcxrms.webp", alt: "Dr. Wong and Dr. Michelle celebrating with the team" },
+  { src: "https://res.cloudinary.com/dhqpqfw6w/image/upload/v1764193096/Michelle_Chris-preview28_zkbzo6.webp", alt: "Wedding ceremony moment with Dr. Wong and Dr. Michelle" },
+  { src: "https://res.cloudinary.com/dhqpqfw6w/image/upload/v1764193096/IMG_8294_dbsehz.webp", alt: "Dr. Wong greeting guests at the reception" },
+  { src: "https://res.cloudinary.com/dhqpqfw6w/image/upload/v1764193096/IMG_8197_rrgv98.webp", alt: "Dr. Wong and Dr. Michelle posing together" },
+  { src: "https://res.cloudinary.com/dhqpqfw6w/image/upload/v1764193096/IMG_8224_s4xuoa.webp", alt: "Team members celebrating with the newlyweds" },
+  { src: "https://res.cloudinary.com/dhqpqfw6w/image/upload/v1764193097/IMG_8199_jkkdtm.webp", alt: "Candid laugh with friends at the wedding" },
+  { src: "https://res.cloudinary.com/dhqpqfw6w/image/upload/v1764193096/Michelle_Chris-preview62_actrrw.webp", alt: "Dr. Wong and Dr. Michelle enjoying the reception" },
+  { src: "https://res.cloudinary.com/dhqpqfw6w/image/upload/v1764193098/IMG_8195_hddelf.webp", alt: "Wedding party cheering together" },
+  { src: "https://res.cloudinary.com/dhqpqfw6w/image/upload/v1764193098/Michelle_Chris-preview85_whoc8v.webp", alt: "Dance floor celebration with friends and family" },
+  { src: "https://res.cloudinary.com/dhqpqfw6w/image/upload/v1764193098/Michelle_Chris-preview54_dg6hwz.webp", alt: "Dr. Wong and Dr. Michelle sharing a moment at sunset" },
+  { src: "https://res.cloudinary.com/dhqpqfw6w/image/upload/v1764193098/Michelle_Chris-preview73_orakjs.webp", alt: "Group photo with the dental practice team at the wedding" },
+];
+
 const About = () => {
   // State for video modal
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
+  const [weddingModalIndex, setWeddingModalIndex] = useState<number | null>(null);
   const interviewVideoUrl = "https://youtu.be/HrksJeYb02Q";
   
   // Using the team members from shared data
@@ -58,6 +80,18 @@ const About = () => {
   if (aboutBreadcrumbs) {
     aboutSchema.push(aboutBreadcrumbs);
   }
+  
+  const openWeddingModal = (index: number) => setWeddingModalIndex(index);
+  const closeWeddingModal = () => setWeddingModalIndex(null);
+  const goToWeddingImage = (direction: "next" | "prev") => {
+    if (weddingModalIndex === null) return;
+    const total = weddingCarouselImages.length;
+    const nextIndex =
+      direction === "next"
+        ? (weddingModalIndex + 1) % total
+        : (weddingModalIndex - 1 + total) % total;
+    setWeddingModalIndex(nextIndex);
+  };
 
   return (
     <>
@@ -77,6 +111,141 @@ const About = () => {
           </div>
         </div>
       </section>
+
+      {/* Wedding Celebration Carousel */}
+      <section className="py-10 sm:py-14 md:py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="rounded-3xl bg-gradient-to-r from-[#FCE7F3] via-white to-[#E0F2FE] border border-white shadow-[0_24px_70px_-32px_rgba(15,23,42,0.28)] overflow-hidden">
+            <div className="grid lg:grid-cols-[1.05fr_1.2fr] gap-6 sm:gap-8 items-center p-6 sm:p-8 lg:p-10">
+              <div className="space-y-4 sm:space-y-5 max-w-xl">
+                <div className="inline-flex items-center gap-2 rounded-full bg-white/80 px-4 py-2 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-primary shadow-sm">
+                  <Sparkles className="h-4 w-4" />
+                  <span>Team celebration</span>
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold font-heading text-[#1F2933] leading-tight">
+                  Congratulations Dr. Wong & Dr. Michelle 💍
+                </h2>
+                <p className="text-sm sm:text-base text-[#374151] leading-relaxed">
+                  Dr. Wong married{" "}
+                  <a
+                    href="https://www.instagram.com/dr.michellefong/"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-primary font-semibold underline decoration-primary/50 underline-offset-4 hover:decoration-primary"
+                  >
+                    Dr. Michelle Fong
+                  </a>{" "}
+                  (also a dentist), and our dental family joined them at the wedding—enjoy a few favorite moments from the day.
+                </p>
+              </div>
+              <div className="relative">
+                <div className="rounded-2xl bg-white/85 backdrop-blur-sm border border-white/70 shadow-lg">
+                  <Carousel opts={{ align: "center", loop: true, dragFree: true }}>
+                    <CarouselContent className="md:-ml-2">
+                      {weddingCarouselImages.map((image, index) => (
+                        <CarouselItem
+                          key={image.src}
+                          className="basis-full sm:basis-5/6 md:basis-3/4 lg:basis-2/3 xl:basis-1/2 flex justify-center"
+                        >
+                          <button
+                            type="button"
+                            onClick={() => openWeddingModal(index)}
+                            className="p-3 sm:p-4 h-full w-full text-left group"
+                          >
+                            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-white via-white to-white/60 border border-white/60 shadow-md h-full max-w-3xl mx-auto">
+                              <OptimizedImage
+                                src={image.src}
+                                alt={image.alt}
+                                className="w-full h-full"
+                                fit="cover"
+                                useIntrinsicAspect
+                                objectPosition="50% 45%"
+                                style={{ maxHeight: 520 }}
+                                priority={index < 2}
+                              />
+                              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/30 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                                <div className="w-full px-4 pb-3 text-white/90 text-xs sm:text-sm">Tap to view larger</div>
+                              </div>
+                            </div>
+                          </button>
+                        </CarouselItem>
+                      ))}
+                    </CarouselContent>
+                    <CarouselPrevious className="hidden sm:flex bg-white/90 text-primary border-primary/30 shadow-md -left-3 sm:-left-4" />
+                    <CarouselNext className="hidden sm:flex bg-white/90 text-primary border-primary/30 shadow-md -right-3 sm:-right-4" />
+                  </Carousel>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <AnimatePresence>
+        {weddingModalIndex !== null && (
+          <motion.div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 sm:p-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            onClick={(event) => {
+              if (event.target === event.currentTarget) closeWeddingModal();
+            }}
+          >
+            <button
+              type="button"
+              onClick={closeWeddingModal}
+              className="absolute top-3 right-3 sm:top-4 sm:right-4 text-white/80 hover:text-white transition-colors p-2 z-30"
+              aria-label="Close wedding gallery"
+            >
+              <X className="h-6 w-6" />
+            </button>
+
+            <div className="absolute inset-y-0 left-2 sm:left-6 flex items-center z-20 pointer-events-none">
+              <button
+                type="button"
+                onClick={() => goToWeddingImage("prev")}
+                className="bg-white/10 hover:bg-white/20 text-white/90 rounded-full p-3 shadow-md transition-colors pointer-events-auto"
+                aria-label="Previous wedding photo"
+              >
+                <ArrowLeft className="h-5 w-5" />
+              </button>
+            </div>
+            <div className="absolute inset-y-0 right-2 sm:right-6 flex items-center z-20 pointer-events-none">
+              <button
+                type="button"
+                onClick={() => goToWeddingImage("next")}
+                className="bg-white/10 hover:bg-white/20 text-white/90 rounded-full p-3 shadow-md transition-colors pointer-events-auto"
+                aria-label="Next wedding photo"
+              >
+                <ArrowRight className="h-5 w-5" />
+              </button>
+            </div>
+
+            <motion.div
+              className="relative max-w-5xl w-full z-10"
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
+            >
+              <div className="overflow-hidden rounded-2xl bg-black/60 border border-white/10 shadow-2xl flex justify-center">
+                <OptimizedImage
+                  src={weddingCarouselImages[weddingModalIndex].src}
+                  alt={weddingCarouselImages[weddingModalIndex].alt}
+                  className="w-full h-full"
+                  fit="cover"
+                  useIntrinsicAspect
+                  objectPosition="50% 45%"
+                  style={{ maxHeight: "80vh", maxWidth: "92vw" }}
+                  priority
+                />
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Doctor Profile - Mobile First */}
       <section className="py-12 sm:py-16 bg-gradient-to-b from-white to-[#F5F9FC]">
