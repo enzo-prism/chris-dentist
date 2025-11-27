@@ -117,7 +117,7 @@ const About = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="rounded-3xl bg-gradient-to-r from-[#FCE7F3] via-white to-[#E0F2FE] border border-white shadow-[0_24px_70px_-32px_rgba(15,23,42,0.28)] overflow-hidden">
             <div className="grid lg:grid-cols-[1.05fr_1.2fr] gap-6 sm:gap-8 items-center p-6 sm:p-8 lg:p-10">
-              <div className="space-y-4 sm:space-y-5 max-w-xl">
+              <div className="space-y-4 sm:space-y-5 w-full max-w-xl text-pretty">
                 <div className="inline-flex items-center gap-2 rounded-full bg-white/80 px-4 py-2 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-primary shadow-sm">
                   <Sparkles className="h-4 w-4" />
                   <span>Team celebration</span>
