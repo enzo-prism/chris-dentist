@@ -138,21 +138,24 @@ const About = () => {
                   (also a dentist), and our dental family joined them at the wedding—enjoy a few favorite moments.
                 </p>
               </div>
-              <div className="relative">
-                <div className="rounded-2xl bg-white/85 backdrop-blur-sm border border-white/70 shadow-lg">
-                  <Carousel opts={{ align: "center", loop: true, dragFree: true }}>
-                    <CarouselContent className="-ml-1 sm:-ml-2 md:-ml-3 lg:-ml-4">
+              <div className="relative w-full">
+                <div className="rounded-2xl bg-white/85 backdrop-blur-sm border border-white/70 shadow-lg w-full overflow-hidden">
+                  <Carousel
+                    opts={{ align: "start", loop: true, dragFree: true, containScroll: "trimSnaps" }}
+                    className="w-full"
+                  >
+                    <CarouselContent className="ml-0 gap-3 sm:gap-4 px-1 sm:px-2">
                       {weddingCarouselImages.map((image, index) => (
                         <CarouselItem
                           key={image.src}
-                          className="basis-full sm:basis-5/6 md:basis-3/4 lg:basis-2/3 xl:basis-1/2 flex justify-center pl-2 sm:pl-3 lg:pl-4"
+                          className="basis-full sm:basis-5/6 md:basis-3/4 lg:basis-2/3 xl:basis-1/2 flex justify-center pl-0"
                         >
                           <button
                             type="button"
                             onClick={() => openWeddingModal(index)}
                             className="h-full w-full text-left group box-border"
                           >
-                            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-white via-white to-white/60 border border-white/60 shadow-md h-full max-w-3xl mx-auto p-3 sm:p-4">
+                            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-white via-white to-white/60 border border-white/60 shadow-md h-full max-w-3xl w-full mx-auto p-3 sm:p-4">
                               <OptimizedImage
                                 src={image.src}
                                 alt={image.alt}
