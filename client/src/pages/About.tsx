@@ -113,7 +113,7 @@ const About = () => {
       </section>
 
       {/* Wedding Celebration Carousel */}
-      <section className="py-10 sm:py-14 md:py-16 bg-white">
+      <section className="py-10 sm:py-14 md:py-16 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="rounded-3xl bg-gradient-to-r from-[#FCE7F3] via-white to-[#E0F2FE] border border-white shadow-[0_24px_70px_-32px_rgba(15,23,42,0.28)] overflow-hidden">
             <div className="grid lg:grid-cols-[1.05fr_1.2fr] gap-6 sm:gap-8 items-center p-6 sm:p-8 lg:p-10">
@@ -141,18 +141,18 @@ const About = () => {
               <div className="relative">
                 <div className="rounded-2xl bg-white/85 backdrop-blur-sm border border-white/70 shadow-lg">
                   <Carousel opts={{ align: "center", loop: true, dragFree: true }}>
-                    <CarouselContent className="md:-ml-2">
+                    <CarouselContent className="-ml-1 sm:-ml-2 md:-ml-3 lg:-ml-4">
                       {weddingCarouselImages.map((image, index) => (
                         <CarouselItem
                           key={image.src}
-                          className="basis-full sm:basis-5/6 md:basis-3/4 lg:basis-2/3 xl:basis-1/2 flex justify-center"
+                          className="basis-full sm:basis-5/6 md:basis-3/4 lg:basis-2/3 xl:basis-1/2 flex justify-center pl-2 sm:pl-3 lg:pl-4"
                         >
                           <button
                             type="button"
                             onClick={() => openWeddingModal(index)}
-                            className="p-3 sm:p-4 h-full w-full text-left group"
+                            className="h-full w-full text-left group box-border"
                           >
-                            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-white via-white to-white/60 border border-white/60 shadow-md h-full max-w-3xl mx-auto">
+                            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-white via-white to-white/60 border border-white/60 shadow-md h-full max-w-3xl mx-auto p-3 sm:p-4">
                               <OptimizedImage
                                 src={image.src}
                                 alt={image.alt}
