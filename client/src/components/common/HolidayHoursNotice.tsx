@@ -15,19 +15,22 @@ const HolidayHoursNotice = ({
   containerClassName,
 }: HolidayHoursNoticeProps) => {
   const [isDismissed, setIsDismissed] = useState(false);
+  const dismissalKey = holidayHours?.id
+    ? `holidayHoursDismissed-${holidayHours.id}`
+    : "holidayHoursDismissed";
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const storedValue = window.localStorage.getItem("holidayHoursDismissed");
+    const storedValue = window.localStorage.getItem(dismissalKey);
     if (storedValue === "true") {
       setIsDismissed(true);
     }
-  }, []);
+  }, [dismissalKey]);
 
   const handleDismiss = () => {
     setIsDismissed(true);
     if (typeof window !== "undefined") {
-      window.localStorage.setItem("holidayHoursDismissed", "true");
+      window.localStorage.setItem(dismissalKey, "true");
     }
   };
 
@@ -49,11 +52,14 @@ const HolidayHoursNotice = ({
         </div>
         <p className="text-amber-900/90 mb-4">{holidayHours.description}</p>
 
-        <ul className="space-y-2">
+        <ul className="space-y-3">
           {holidayHours.entries.map((entry) => (
-            <li key={entry.day} className="flex items-center justify-between gap-4">
-              <span className="font-medium">{entry.day}</span>
-              <span className="text-amber-900">{entry.hours}</span>
+            <li
+              key={entry.day}
+              className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between rounded-lg border border-amber-100/80 bg-white/70 px-3 py-2 shadow-[0_1px_0_rgba(217,119,6,0.1)]"
+            >
+              <span className="font-semibold text-amber-900">{entry.day}</span>
+              <span className="text-amber-900/90 sm:text-right">{entry.hours}</span>
             </li>
           ))}
         </ul>

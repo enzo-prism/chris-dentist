@@ -25,15 +25,16 @@ export const officeInfo = {
 
 export const holidayHours = {
   active: true,
-  title: "Thanksgiving holiday hours",
-  description: "We’re running a modified schedule Thanksgiving week. Please plan your visit accordingly.",
+  id: "winter-break-2025-2026",
+  title: "Winter holiday hours",
+  description: "We’ll be closed after Friday, December 19 and will reopen on Monday, January 5, 2026 at 8:00 AM.",
   entries: [
-    { day: "Wednesday, November 26", hours: "8:00 AM – 1:00 PM" },
-    { day: "Thursday, November 27", hours: "Closed" },
-    { day: "Friday, November 28", hours: "Closed" },
+    { day: "Friday, December 19", hours: "8:00 AM – 1:00 PM" },
+    { day: "December 20 – January 4", hours: "Closed for the holidays" },
+    { day: "Monday, January 5, 2026", hours: "Reopening at 8:00 AM" },
   ],
   cta: {
-    label: "Plan your visit",
+    label: "Plan your January visit",
     href: "/schedule#appointment",
   },
 };
