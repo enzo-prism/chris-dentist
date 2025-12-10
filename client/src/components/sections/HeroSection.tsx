@@ -73,7 +73,7 @@ const HeroSection = () => {
               Trusted by the community for long-term oral health and confident smiles—now with holiday-friendly scheduling.
             </p>
 
-            <div className="flex items-center gap-3 mb-6 text-sm text-white/80">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mb-6 text-sm text-white/80">
               <span className="inline-flex items-center gap-1 rounded-full bg-white/10 px-3 py-1">
                 🎁 Closed Dec 20 – Jan 4
               </span>
