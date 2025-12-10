@@ -92,7 +92,7 @@ const Header = () => {
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16 relative">
           {/* Logo */}
           <div className="flex-shrink-0 lg:w-1/4">
-            <Link href="/">
+            <Link href="/" className="no-underline">
               <div className="flex items-center cursor-pointer rounded-md bg-white/10 px-2 py-1 shadow-sm ring-1 ring-white/10">
                 <img 
                   src="/logo.png" 
@@ -111,7 +111,7 @@ const Header = () => {
                 <li key={link.href} className="mx-3 relative group">
                   {link.submenu ? (
                     <div className="relative">
-                      <Link href={link.href}>
+                      <Link href={link.href} className="no-underline text-white">
                         <div className={`px-2 py-2 relative text-center group/item ${isActive(link.href) || link.submenu.some(sub => isActive(sub.href)) ? 'text-[#f2d785]' : 'text-white'}`}>
                           <span className="text-sm font-medium cursor-pointer hover:text-[#f2d785] transition-colors flex items-center gap-1">
                             {link.label}
@@ -128,7 +128,7 @@ const Header = () => {
                       <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-56 bg-[#0f2f27] text-white rounded-xl shadow-xl border border-white/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 backdrop-blur">
                         <div className="py-2">
                           {link.submenu.map((subLink, index) => (
-                            <Link key={subLink.href} href={subLink.href}>
+                            <Link key={subLink.href} href={subLink.href} className="no-underline">
                               <div className={`px-4 py-3 cursor-pointer transition-colors ${isActive(subLink.href) ? 'text-[#f2d785] bg-white/5' : 'text-white hover:bg-white/5'}`}>
                                 <span className="text-sm font-medium">{subLink.label}</span>
                               </div>
