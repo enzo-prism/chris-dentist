@@ -504,9 +504,9 @@ const PatientStories = () => {
                 Start your plan
               </Button>
             </Link>
-            <Link href="/testimonials">
+            <Link href="/services">
               <Button variant="outline" className="border-white text-white hover:bg-white/10">
-                Read testimonials
+                View services
               </Button>
             </Link>
           </div>
