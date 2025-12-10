@@ -40,7 +40,7 @@ const caseStudies: CaseStudy[] = [
   {
     id: "invisalign-whitening-bonding-66yo",
     title: "Never too late for a new smile",
-    subtitle: "66-year-old patient | Alignment, whitening, and bonding",
+    subtitle: "👩‍🦳 66-year-old patient | Alignment, whitening, and bonding",
     patientSummary:
       "She wanted a confident smile for everyday moments and photos.",
     timeline: "Roughly 12 months with Invisalign®, 1 in-office Zoom! Whitening session, followed by precise bonding to close lower black triangles.",
@@ -67,9 +67,9 @@ const caseStudies: CaseStudy[] = [
     heroImage:
       "https://res.cloudinary.com/dhqpqfw6w/image/upload/v1765382510/IMG_8356_bjxk7p.webp",
     metrics: [
-      { label: "Treatment span", value: "~12 months", description: "Clear aligners at a steady pace" },
-      { label: "Finishing touch", value: "1 visit", description: "Zoom! Whitening in-office" },
-      { label: "Detailing", value: "Composite bonding", description: "Closed lower black triangles" },
+      { label: "⏱️ Treatment span", value: "~12 months", description: "Clear aligners at a steady pace" },
+      { label: "✨ Finishing touch", value: "1 visit", description: "Zoom! Whitening in-office" },
+      { label: "🧩 Detailing", value: "Composite bonding", description: "Closed lower black triangles" },
     ],
     images: [
       {
@@ -224,7 +224,7 @@ const PatientStories = () => {
                 <div className="p-8 md:p-10">
                   <div className="flex flex-wrap items-center gap-3 mb-4">
                     <Badge variant="secondary" className="bg-primary/10 text-primary">
-                      Featured case
+                      ✨ Featured case
                     </Badge>
                     <span className="text-sm text-slate-500">{study.subtitle}</span>
                   </div>
@@ -234,7 +234,7 @@ const PatientStories = () => {
                   <p className="text-slate-700 leading-relaxed mb-4">{study.patientSummary}</p>
                   <div className="text-sm text-slate-600 bg-slate-50 border border-slate-100 rounded-xl p-4 mb-6">
                     <strong className="text-slate-800">Plan: </strong>
-                    {study.timeline}
+                    🗓️ {study.timeline}
                   </div>
 
                   <div className="grid sm:grid-cols-3 gap-4 mb-6">
@@ -250,7 +250,7 @@ const PatientStories = () => {
                   </div>
 
                   <div className="space-y-3 mb-6">
-                    <p className="text-sm font-semibold text-slate-800">What bothered the patient</p>
+                    <p className="text-sm font-semibold text-slate-800">🙋‍♀️ What bothered the patient</p>
                     <ul className="list-disc list-inside text-slate-700 space-y-1">
                       {study.challenges.map((item) => (
                         <li key={item}>{item}</li>
@@ -259,7 +259,7 @@ const PatientStories = () => {
                   </div>
 
                   <div className="space-y-3 mb-6">
-                    <p className="text-sm font-semibold text-slate-800">How we treated it</p>
+                    <p className="text-sm font-semibold text-slate-800">🛠️ How we treated it</p>
                     <ul className="list-disc list-inside text-slate-700 space-y-1">
                       {study.treatments.map((item) => (
                         <li key={item}>{item}</li>
@@ -268,7 +268,7 @@ const PatientStories = () => {
                   </div>
 
                   <div className="space-y-3 mb-6">
-                    <p className="text-sm font-semibold text-slate-800">Outcome</p>
+                    <p className="text-sm font-semibold text-slate-800">🎉 Outcome</p>
                     <ul className="list-disc list-inside text-slate-700 space-y-1">
                       {study.outcomes.map((item) => (
                         <li key={item}>{item}</li>
