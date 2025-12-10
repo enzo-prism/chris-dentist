@@ -58,7 +58,7 @@ const Header = () => {
       {/* Top info bar */}
       <div className="border-b border-white/10 bg-[#0f2f27] text-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-9">
-          <div className="hidden md:flex items-center space-x-4 text-sm text-gray-500">
+          <div className="hidden md:flex items-center space-x-4 text-sm text-white/80">
             <a href="tel:+16503266319" className="text-white/80 hover:text-[#f2d785] flex items-center transition-colors">
               <Phone className="h-3 w-3 mr-1.5" />
               <span>(650) 326-6319</span>
@@ -89,11 +89,11 @@ const Header = () => {
       
       {/* Main navigation */}
       <div className="backdrop-blur supports-[backdrop-filter]:bg-[#0f2f27]/90 bg-[#0f2f27]/95 border-b border-white/10 shadow-md">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16 relative">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16 relative">
           {/* Logo */}
           <div className="flex-shrink-0 lg:w-1/4">
             <Link href="/">
-              <div className="flex items-center cursor-pointer">
+              <div className="flex items-center cursor-pointer rounded-md bg-white/10 px-2 py-1 shadow-sm ring-1 ring-white/10">
                 <img 
                   src="/logo.png" 
                   alt="Dr. Christopher B. Wong DDS" 
