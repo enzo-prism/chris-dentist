@@ -19,8 +19,8 @@ const Header = () => {
   useEffect(() => {
     const updateHeaderHeight = () => {
       const holidayHeight = holidayWrapperRef.current?.offsetHeight || 0;
-      // Base height: TopBar (40px) + NavBar (72px) = 112px
-      const baseHeight = 112; 
+      // Base height: TopBar (40px) + NavBar (approx 96px max) = 136px safe buffer
+      const baseHeight = 136; 
       const totalHeight = baseHeight + holidayHeight;
       document.documentElement.style.setProperty('--header-height', `${totalHeight}px`);
     };
@@ -153,10 +153,10 @@ const Header = () => {
                   />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-lg font-serif tracking-wide text-white group-hover:text-[#f2d785] transition-colors">
+                  <span className="text-sm sm:text-lg font-serif tracking-wide text-white group-hover:text-[#f2d785] transition-colors">
                     Christopher B. Wong, DDS
                   </span>
-                  <span className="text-[10px] uppercase tracking-[0.2em] text-white/50 group-hover:text-white/70 transition-colors">
+                  <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.2em] text-white/50 group-hover:text-white/70 transition-colors">
                     Cosmetic & Family Dentistry
                   </span>
                 </div>

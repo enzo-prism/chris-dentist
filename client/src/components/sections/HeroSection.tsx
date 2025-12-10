@@ -38,8 +38,8 @@ const HeroSection = () => {
     <section 
       className="bg-gradient-to-b from-[#0f2f27] via-[#123129] to-white pb-16 md:pb-20 overflow-hidden relative"
       style={{
-        marginTop: 'calc(var(--header-height, 112px) * -1)',
-        paddingTop: 'var(--header-height, 112px)'
+        marginTop: 'calc(var(--header-height, 136px) * -1)',
+        paddingTop: 'var(--header-height, 136px)'
       }}
     >
       {/* Festive background accents */}
