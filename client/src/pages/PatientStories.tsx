@@ -60,6 +60,8 @@ type CaseStudy = {
   metrics: { label: string; value: string; description?: string }[];
 };
 
+const CHECK_ICON_CLASS = "h-4 w-4 text-primary shrink-0 mt-0.5";
+
 const optimizeImageSrc = (url: string, width = 900) => {
   if (!url.startsWith("http")) return url;
   if (!url.includes("res.cloudinary.com")) return url;
@@ -329,7 +331,7 @@ const CaseStory = ({ study, index, onShare, copiedId }: CaseStoryProps) => {
                   <ul className="space-y-2 text-slate-700">
                     {study.treatments.map((item) => (
                       <li key={item} className="flex gap-2">
-                        <CheckCircle2 className="h-4 w-4 text-primary mt-0.5" aria-hidden="true" />
+                        <CheckCircle2 className={CHECK_ICON_CLASS} aria-hidden="true" />
                         <span>{item}</span>
                       </li>
                     ))}
@@ -345,7 +347,7 @@ const CaseStory = ({ study, index, onShare, copiedId }: CaseStoryProps) => {
                   <ul className="space-y-2 text-slate-700">
                     {study.outcomes.map((item) => (
                       <li key={item} className="flex gap-2">
-                        <CheckCircle2 className="h-4 w-4 text-primary mt-0.5" aria-hidden="true" />
+                        <CheckCircle2 className={CHECK_ICON_CLASS} aria-hidden="true" />
                         <span>{item}</span>
                       </li>
                     ))}
@@ -399,7 +401,7 @@ const CaseStory = ({ study, index, onShare, copiedId }: CaseStoryProps) => {
                 <ul className="space-y-2 text-slate-700">
                   {study.treatments.map((item) => (
                     <li key={item} className="flex gap-2">
-                      <CheckCircle2 className="h-4 w-4 text-primary mt-0.5" aria-hidden="true" />
+                      <CheckCircle2 className={CHECK_ICON_CLASS} aria-hidden="true" />
                       <span>{item}</span>
                     </li>
                   ))}
@@ -413,14 +415,14 @@ const CaseStory = ({ study, index, onShare, copiedId }: CaseStoryProps) => {
                 Outcome
               </p>
               <ul className="space-y-2 text-slate-700">
-                {study.outcomes.map((item) => (
-                  <li key={item} className="flex gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-primary mt-0.5" aria-hidden="true" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+              {study.outcomes.map((item) => (
+                <li key={item} className="flex gap-2">
+                  <CheckCircle2 className={CHECK_ICON_CLASS} aria-hidden="true" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
 
             <div className="space-y-2">
               <p className="text-sm font-semibold text-slate-800">Services involved</p>
