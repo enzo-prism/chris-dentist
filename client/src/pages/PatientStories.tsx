@@ -62,9 +62,8 @@ const caseStudies: CaseStudy[] = [
       "Closed black triangles for a fuller, more youthful look",
     ],
     services: ["Invisalign®", "Zoom! Whitening", "Cosmetic Bonding"],
-    quote:
-      "I never thought I could get this result in my 60s without doing something extreme. The aligners and a little bonding made all the difference.",
-    quoteAttribution: "Patient, age 66",
+    quote: "",
+    quoteAttribution: "",
     heroImage:
       "https://res.cloudinary.com/dhqpqfw6w/image/upload/v1765382510/IMG_8356_bjxk7p.webp",
     metrics: [
@@ -285,10 +284,14 @@ const PatientStories = () => {
                     ))}
                   </div>
 
-                  <div className="bg-primary/5 border border-primary/10 rounded-2xl p-5 mb-8">
-                    <p className="text-primary font-semibold leading-relaxed">“{study.quote}”</p>
-                    <p className="text-sm text-primary/80 mt-2">{study.quoteAttribution}</p>
-                  </div>
+                  {study.quote && (
+                    <div className="bg-primary/5 border border-primary/10 rounded-2xl p-5 mb-8">
+                      <p className="text-primary font-semibold leading-relaxed">“{study.quote}”</p>
+                      {study.quoteAttribution && (
+                        <p className="text-sm text-primary/80 mt-2">{study.quoteAttribution}</p>
+                      )}
+                    </div>
+                  )}
 
                   <div className="flex flex-col sm:flex-row gap-3">
                     <Link href="/schedule#appointment">
