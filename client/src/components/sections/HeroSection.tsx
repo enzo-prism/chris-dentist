@@ -149,24 +149,27 @@ const HeroSection = () => {
             </div>
             
             {/* Features grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {features.map((feature, index) => (
-                <motion.div 
-                  key={index}
-                  className="flex items-start gap-4"
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: 0.3 + (index * 0.1), ease: "easeOut" }}
-                >
-                  <div className="mt-0.5 bg-primary/10 rounded-full p-1.5 text-primary">
-                    <CheckCircle className="h-4 w-4" />
-                  </div>
-                  <div>
-                    <p className="text-gray-900 font-medium">{feature.title}</p>
-                    <p className="text-sm text-gray-500 mt-1">{feature.description}</p>
-                  </div>
-                </motion.div>
-              ))}
+            <div className="space-y-4">
+              <p className="text-sm font-semibold text-white/70">Why patients choose us</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {features.map((feature, index) => (
+                  <motion.div 
+                    key={index}
+                    className="flex items-start gap-3 rounded-2xl border border-white/10 bg-white/8 p-4 backdrop-blur shadow-sm"
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: 0.3 + (index * 0.1), ease: "easeOut" }}
+                  >
+                    <div className="mt-0.5 bg-[#f2d785]/20 rounded-full p-1.5 text-[#f2d785] shrink-0">
+                      <CheckCircle className="h-4 w-4" />
+                    </div>
+                    <div>
+                      <p className="text-white font-semibold">{feature.title}</p>
+                      <p className="text-sm text-white/75 mt-1 leading-snug">{feature.description}</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </motion.div>
         </div>
