@@ -44,7 +44,6 @@ const Header = () => {
         { href: "/services", label: "All Services" }
       ]
     },
-    { href: "/patient-resources", label: "Patient Resources" },
     { href: "/testimonials", label: "Testimonials" },
     { href: "/contact", label: "Contact" }
   ];
