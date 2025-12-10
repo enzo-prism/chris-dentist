@@ -162,7 +162,7 @@ const Header = () => {
               <Button
                 className="bg-primary hover:bg-primary/90 text-white rounded-md hidden sm:flex px-4 h-9"
               >
-                <span>Book Appointment</span>
+                <span>🎁 Book Appointment</span>
               </Button>
             </Link>
 
@@ -234,7 +234,7 @@ const Header = () => {
                     onClick={closeMenus}
                   >
                     <Calendar className="h-4 w-4 mr-2" />
-                    <span>Book Appointment</span>
+                    <span>🎁 Book Appointment</span>
                   </Button>
                 </Link>
                 
