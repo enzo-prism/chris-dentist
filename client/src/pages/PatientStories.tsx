@@ -42,7 +42,7 @@ const caseStudies: CaseStudy[] = [
     title: "Never too late for a new smile",
     subtitle: "66-year-old patient | Alignment, whitening, and bonding",
     patientSummary:
-      "After years of feeling self-conscious about crowding and dark spaces, she wanted a confident smile for everyday moments and photos.",
+      "She wanted a confident smile for everyday moments and photos.",
     timeline: "Roughly 12 months with Invisalign®, 1 in-office Zoom! Whitening session, followed by precise bonding to close lower black triangles.",
     summary:
       "A thoughtful sequence of orthodontics, whitening, and minimally invasive bonding created a brighter, fuller smile without aggressive drilling or veneers.",
