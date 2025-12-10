@@ -5,8 +5,22 @@ import StructuredData from "@/components/seo/StructuredData";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  type CarouselApi,
+} from "@/components/ui/carousel";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { officeInfo } from "@/lib/data";
 import { ogImages } from "@/lib/ogImages";
 import { pageDescriptions, pageTitles } from "@/lib/metaContent";
@@ -125,6 +139,328 @@ const caseStudies: CaseStudy[] = [
     ],
   },
 ];
+
+type CaseStoryProps = {
+  study: CaseStudy;
+  index: number;
+  onShare: (id: string) => void;
+  copiedId: string | null;
+};
+
+const CaseStory = ({ study, index, onShare, copiedId }: CaseStoryProps) => {
+  const [galleryApi, setGalleryApi] = useState<CarouselApi | null>(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    if (!galleryApi) return;
+    const handleSelect = () => setCurrentSlide(galleryApi.selectedScrollSnap());
+    handleSelect();
+    galleryApi.on("select", handleSelect);
+    return () => {
+      galleryApi.off("select", handleSelect);
+    };
+  }, [galleryApi]);
+
+  return (
+    <article
+      id={study.id}
+      className="rounded-3xl border border-slate-100 bg-white shadow-sm overflow-hidden"
+    >
+      <div className="grid lg:grid-cols-[1.05fr_1fr] gap-0">
+        {/* Visual column first on mobile */}
+        <div className="order-1 lg:order-2 bg-slate-50 p-5 sm:p-6 md:p-8 space-y-4">
+          <div className="relative rounded-2xl overflow-hidden border border-slate-100 shadow-sm">
+            <AspectRatio ratio={4 / 3}>
+              <img
+                src={optimizeImageSrc(study.heroImage, 1200)}
+                alt={`${study.title} hero`}
+                className="w-full h-full object-cover"
+                loading="lazy"
+                decoding="async"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </AspectRatio>
+            <div className="absolute inset-x-4 top-4 flex items-center justify-between gap-2">
+              <div className="flex flex-wrap items-center gap-2">
+                <Badge variant="secondary" className="bg-primary/90 text-white shadow">
+                  ✨ Featured case
+                </Badge>
+                <span className="text-[11px] font-semibold text-white/90 bg-slate-900/60 px-2 py-1 rounded-full">
+                  Case {String(index + 1).padStart(2, "0")} • {study.subtitle}
+                </span>
+              </div>
+              <button
+                type="button"
+                onClick={() => onShare(study.id)}
+                className="inline-flex items-center gap-1 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-primary shadow-sm ring-1 ring-primary/20 transition hover:bg-white"
+                aria-label={`Copy link to ${study.title}`}
+              >
+                <Link2 className="h-3.5 w-3.5" aria-hidden="true" />
+                {copiedId === study.id ? "Copied" : "Share"}
+              </button>
+            </div>
+          </div>
+          <p className="text-sm text-slate-600">
+            Progress photos from the case — aligner tracking, shade improvement, and bonding detailing.
+          </p>
+
+          {/* Mobile gallery */}
+          <div className="block lg:hidden">
+            <Carousel
+              setApi={setGalleryApi}
+              opts={{ align: "start", loop: false, dragFree: true }}
+              className="w-full"
+            >
+              <CarouselContent className="-ml-3">
+                {study.images.map((image, idx) => (
+                  <CarouselItem key={`${image.src}-${idx}`} className="pl-3 basis-4/5 sm:basis-1/2">
+                    <div className="rounded-xl overflow-hidden border border-slate-100 bg-white shadow-sm">
+                      <AspectRatio ratio={4 / 3}>
+                        <img
+                          src={optimizeImageSrc(image.src, 720)}
+                          alt={image.alt}
+                          className="w-full h-full object-cover"
+                          loading="lazy"
+                          decoding="async"
+                          sizes="(max-width: 640px) 80vw, 320px"
+                        />
+                      </AspectRatio>
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <div className="flex items-center justify-between pt-3">
+                <span className="text-xs text-slate-500">Swipe through results</span>
+                <div className="flex items-center gap-2">
+                  <CarouselPrevious className="!static !translate-x-0 !translate-y-0 h-9 w-9 border-slate-200 bg-white/90 text-slate-700 hover:bg-white" />
+                  <CarouselNext className="!static !translate-x-0 !translate-y-0 h-9 w-9 border-slate-200 bg-white/90 text-slate-700 hover:bg-white" />
+                </div>
+              </div>
+              <div className="text-right text-xs text-slate-500">{currentSlide + 1} / {study.images.length}</div>
+            </Carousel>
+          </div>
+
+          {/* Desktop gallery */}
+          <div className="hidden lg:grid grid-cols-2 gap-3">
+            {study.images.map((image, idx) => (
+              <div
+                key={`${image.src}-${idx}`}
+                className={cn(
+                  "overflow-hidden rounded-xl border border-slate-100 bg-white shadow-sm",
+                  "transition transform hover:-translate-y-1 hover:shadow-md"
+                )}
+              >
+                <AspectRatio ratio={4 / 3}>
+                  <img
+                    src={optimizeImageSrc(image.src, 900)}
+                    alt={image.alt}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                    decoding="async"
+                    sizes="(max-width: 1200px) 50vw, 400px"
+                  />
+                </AspectRatio>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Textual column */}
+        <div className="order-2 lg:order-1 p-5 sm:p-6 md:p-10 space-y-6">
+          <div className="space-y-2">
+            <p className="text-xs uppercase tracking-[0.2em] text-primary/70">
+              Case {String(index + 1).padStart(2, "0")}
+            </p>
+            <h2 className="text-3xl md:text-4xl font-bold font-heading text-slate-900 leading-snug">
+              {study.title}
+            </h2>
+            <p className="text-sm text-slate-600">{study.subtitle}</p>
+            <p className="text-base text-slate-700 leading-relaxed">{study.patientSummary}</p>
+            <p className="text-base text-slate-700 leading-relaxed">{study.summary}</p>
+          </div>
+
+          <div className="bg-slate-50 border border-slate-100 rounded-2xl p-4 flex items-start gap-3">
+            <span aria-hidden="true">🗓️</span>
+            <div>
+              <p className="text-slate-800 font-semibold">Plan</p>
+              <p className="text-slate-700 text-sm md:text-base leading-relaxed">{study.timeline}</p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+            {study.metrics.map((metric) => (
+              <div
+                key={metric.label}
+                className="rounded-xl border border-slate-100 bg-slate-50 p-4 shadow-[0_1px_2px_rgba(15,23,42,0.05)]"
+              >
+                <p className="text-[11px] uppercase tracking-wide text-slate-500 mb-1">{metric.label}</p>
+                <p className="text-lg font-semibold text-slate-900">{metric.value}</p>
+                {metric.description && (
+                  <p className="text-xs text-slate-500 mt-1 leading-snug">{metric.description}</p>
+                )}
+              </div>
+            ))}
+          </div>
+
+          {/* Mobile: collapse details for fast scanning */}
+          <div className="md:hidden space-y-3">
+            <Accordion type="multiple" defaultValue={["challenges", "treatments", "outcome"]} className="space-y-2">
+              <AccordionItem value="challenges" className="border border-slate-200 rounded-2xl px-3 bg-white">
+                <AccordionTrigger className="py-3 text-base font-semibold text-slate-800">
+                  What bothered the patient
+                </AccordionTrigger>
+                <AccordionContent className="px-1">
+                  <ul className="space-y-2 text-slate-700">
+                    {study.challenges.map((item) => (
+                      <li key={item} className="flex gap-2">
+                        <span aria-hidden="true">•</span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="treatments" className="border border-slate-200 rounded-2xl px-3 bg-white">
+                <AccordionTrigger className="py-3 text-base font-semibold text-slate-800">
+                  How we treated it
+                </AccordionTrigger>
+                <AccordionContent className="px-1">
+                  <ul className="space-y-2 text-slate-700">
+                    {study.treatments.map((item) => (
+                      <li key={item} className="flex gap-2">
+                        <CheckCircle2 className="h-4 w-4 text-primary mt-0.5" aria-hidden="true" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="outcome" className="border border-slate-200 rounded-2xl px-3 bg-white">
+                <AccordionTrigger className="py-3 text-base font-semibold text-slate-800">
+                  Outcome
+                </AccordionTrigger>
+                <AccordionContent className="px-1">
+                  <ul className="space-y-2 text-slate-700">
+                    {study.outcomes.map((item) => (
+                      <li key={item} className="flex gap-2">
+                        <CheckCircle2 className="h-4 w-4 text-primary mt-0.5" aria-hidden="true" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="services" className="border border-slate-200 rounded-2xl px-3 bg-white">
+                <AccordionTrigger className="py-3 text-base font-semibold text-slate-800">
+                  Services involved
+                </AccordionTrigger>
+                <AccordionContent className="px-1">
+                  <div className="flex flex-wrap gap-2 pt-1">
+                    {study.services.map((service) => (
+                      <Badge
+                        key={service}
+                        variant="outline"
+                        className="border-primary/30 text-primary whitespace-nowrap"
+                      >
+                        {service}
+                      </Badge>
+                    ))}
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          </div>
+
+          {/* Desktop detail grid */}
+          <div className="hidden md:flex flex-col gap-4">
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className="bg-slate-50 border border-slate-100 rounded-2xl p-4 space-y-2">
+                <p className="text-sm font-semibold text-slate-800 flex items-center gap-2">
+                  <AlertCircle className="h-4 w-4 text-primary" aria-hidden="true" />
+                  What bothered the patient
+                </p>
+                <ul className="space-y-2 text-slate-700">
+                  {study.challenges.map((item) => (
+                    <li key={item} className="flex gap-2">
+                      <span aria-hidden="true">•</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="bg-slate-50 border border-slate-100 rounded-2xl p-4 space-y-2">
+                <p className="text-sm font-semibold text-slate-800 flex items-center gap-2">
+                  <ShieldCheck className="h-4 w-4 text-primary" aria-hidden="true" />
+                  How we treated it
+                </p>
+                <ul className="space-y-2 text-slate-700">
+                  {study.treatments.map((item) => (
+                    <li key={item} className="flex gap-2">
+                      <CheckCircle2 className="h-4 w-4 text-primary mt-0.5" aria-hidden="true" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <div className="bg-primary/5 border border-primary/10 rounded-2xl p-4 space-y-2">
+              <p className="text-sm font-semibold text-slate-800 flex items-center gap-2">
+                <Sparkles className="h-4 w-4 text-primary" aria-hidden="true" />
+                Outcome
+              </p>
+              <ul className="space-y-2 text-slate-700">
+                {study.outcomes.map((item) => (
+                  <li key={item} className="flex gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-primary mt-0.5" aria-hidden="true" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="space-y-2">
+              <p className="text-sm font-semibold text-slate-800">Services involved</p>
+              <div className="flex flex-wrap gap-2">
+                {study.services.map((service) => (
+                  <Badge key={service} variant="outline" className="border-primary/30 text-primary">
+                    {service}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-3 pt-2">
+            <Link href="/schedule#appointment">
+              <Button className="bg-primary text-white hover:bg-primary/90 w-full sm:w-auto">
+                Start your plan
+                <ArrowRight className="h-4 w-4 ml-2" />
+              </Button>
+            </Link>
+            <Link href="/contact">
+              <Button
+                variant="outline"
+                className="border-primary text-primary hover:bg-primary/10 w-full sm:w-auto"
+              >
+                Talk with our team
+              </Button>
+            </Link>
+          </div>
+
+          <div className="text-sm text-primary/70">
+            <a href="#top" className="underline underline-offset-4">
+              Back to top
+            </a>
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+};
 
 const PatientStories = () => {
   const [showStickyCTA, setShowStickyCTA] = useState(false);
@@ -266,228 +602,13 @@ const PatientStories = () => {
       <section className="pb-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           {caseStudies.map((study, index) => (
-            <article
+            <CaseStory
               key={study.id}
-              id={study.id}
-              className="rounded-3xl border border-slate-100 bg-white shadow-sm overflow-hidden"
-            >
-              <div className="grid lg:grid-cols-[1.2fr_1fr] gap-0">
-                <div className="p-6 sm:p-8 md:p-10 space-y-5">
-                  <div className="flex flex-wrap items-center gap-3">
-                    <Badge variant="secondary" className="bg-primary/10 text-primary">
-                      ✨ Featured case
-                    </Badge>
-                    <span className="text-sm text-slate-500">
-                      Case {String(index + 1).padStart(2, "0")} • {study.subtitle}
-                    </span>
-                    <button
-                      type="button"
-                      onClick={() => handleCopyLink(study.id)}
-                      className="text-primary text-sm inline-flex items-center gap-1 underline underline-offset-4"
-                      aria-label={`Copy link to ${study.title}`}
-                    >
-                      <Link2 className="h-4 w-4" aria-hidden="true" />
-                      {copiedCaseId === study.id ? "Copied!" : "Share"}
-                    </button>
-                  </div>
-                  <h2 className="text-3xl font-bold font-heading text-slate-900 leading-snug">
-                    {study.title}
-                  </h2>
-                  <p className="text-slate-700 leading-relaxed">{study.patientSummary}</p>
-                  <div className="text-sm text-slate-700 bg-slate-50 border border-slate-100 rounded-xl p-4 flex items-start gap-3">
-                    <span aria-hidden="true">🗓️</span>
-                    <div>
-                      <p className="text-slate-800 font-semibold">Plan</p>
-                      <p>{study.timeline}</p>
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <p className="text-sm font-semibold text-slate-800">Snapshot metrics</p>
-                    <ScrollArea className="sm:hidden">
-                      <div className="flex gap-3 pb-2 snap-x snap-mandatory">
-                        {study.metrics.map((metric) => (
-                          <div
-                            key={metric.label}
-                            className="min-w-[190px] snap-center rounded-xl border border-slate-100 bg-slate-50 p-4"
-                          >
-                            <p className="text-xs uppercase tracking-wide text-slate-500 mb-1">{metric.label}</p>
-                            <p className="text-lg font-semibold text-slate-900">{metric.value}</p>
-                            {metric.description && (
-                              <p className="text-xs text-slate-500 mt-1">{metric.description}</p>
-                            )}
-                          </div>
-                        ))}
-                      </div>
-                      <ScrollBar orientation="horizontal" />
-                    </ScrollArea>
-                    <div className="hidden sm:grid sm:grid-cols-3 gap-4">
-                      {study.metrics.map((metric) => (
-                        <div key={metric.label} className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-                          <p className="text-xs uppercase tracking-wide text-slate-500 mb-1">{metric.label}</p>
-                          <p className="text-lg font-semibold text-slate-900">{metric.value}</p>
-                          {metric.description && (
-                            <p className="text-xs text-slate-500 mt-1">{metric.description}</p>
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div className="bg-slate-50 border border-slate-100 rounded-2xl p-4 space-y-2">
-                      <p className="text-sm font-semibold text-slate-800 flex items-center gap-2">
-                        <AlertCircle className="h-4 w-4 text-primary" aria-hidden="true" />
-                        What bothered the patient
-                      </p>
-                      <ul className="space-y-2 text-slate-700">
-                        {study.challenges.map((item) => (
-                          <li key={item} className="flex gap-2">
-                            <span aria-hidden="true">•</span>
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div className="bg-slate-50 border border-slate-100 rounded-2xl p-4 space-y-2">
-                      <p className="text-sm font-semibold text-slate-800 flex items-center gap-2">
-                        <ShieldCheck className="h-4 w-4 text-primary" aria-hidden="true" />
-                        How we treated it
-                      </p>
-                      <ul className="space-y-2 text-slate-700">
-                        {study.treatments.map((item) => (
-                          <li key={item} className="flex gap-2">
-                            <CheckCircle2 className="h-4 w-4 text-primary mt-0.5" aria-hidden="true" />
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-
-                  <div className="bg-primary/5 border border-primary/10 rounded-2xl p-4 space-y-2">
-                    <p className="text-sm font-semibold text-slate-800 flex items-center gap-2">
-                      <Sparkles className="h-4 w-4 text-primary" aria-hidden="true" />
-                      Outcome
-                    </p>
-                    <ul className="space-y-2 text-slate-700">
-                      {study.outcomes.map((item) => (
-                        <li key={item} className="flex gap-2">
-                          <CheckCircle2 className="h-4 w-4 text-primary mt-0.5" aria-hidden="true" />
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div className="space-y-2">
-                    <p className="text-sm font-semibold text-slate-800">Services involved</p>
-                    <ScrollArea className="sm:hidden">
-                      <div className="flex gap-2 pb-2">
-                        {study.services.map((service) => (
-                          <Badge
-                            key={service}
-                            variant="outline"
-                            className="border-primary/30 text-primary whitespace-nowrap"
-                          >
-                            {service}
-                          </Badge>
-                        ))}
-                      </div>
-                      <ScrollBar orientation="horizontal" />
-                    </ScrollArea>
-                    <div className="hidden sm:flex flex-wrap gap-2">
-                      {study.services.map((service) => (
-                        <Badge key={service} variant="outline" className="border-primary/30 text-primary">
-                          {service}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col sm:flex-row gap-3 pt-2">
-                    <Link href="/schedule#appointment">
-                      <Button className="bg-primary text-white hover:bg-primary/90 w-full sm:w-auto">
-                        Start your plan
-                        <ArrowRight className="h-4 w-4 ml-2" />
-                      </Button>
-                    </Link>
-                    <Link href="/contact">
-                      <Button
-                        variant="outline"
-                        className="border-primary text-primary hover:bg-primary/10 w-full sm:w-auto"
-                      >
-                        Talk with our team
-                      </Button>
-                    </Link>
-                  </div>
-
-                  <div className="text-sm text-primary/70 mt-2">
-                    <a href="#top" className="underline underline-offset-4">
-                      Back to top
-                    </a>
-                  </div>
-                </div>
-
-                <div className="bg-slate-50 p-6 md:p-8 space-y-4">
-                  <div className="rounded-2xl overflow-hidden border border-slate-100 shadow-sm">
-                    <img
-                      src={optimizeImageSrc(study.heroImage, 1200)}
-                      alt={`${study.title} hero`}
-                      className="w-full h-full object-cover"
-                      loading="lazy"
-                      decoding="async"
-                      sizes="(max-width: 1024px) 100vw, 50vw"
-                    />
-                  </div>
-                  <p className="text-sm text-slate-600">
-                    Progress photos from the case — aligner tracking, shade improvement, and bonding detailing.
-                  </p>
-                  <div className="sm:hidden">
-                    <ScrollArea>
-                      <div className="flex gap-3 pb-3 snap-x snap-mandatory">
-                        {study.images.map((image, idx) => (
-                          <div
-                            key={`${image.src}-${idx}`}
-                            className="snap-center min-w-[240px] rounded-xl overflow-hidden border border-slate-100 bg-white shadow-sm"
-                          >
-                            <img
-                              src={optimizeImageSrc(image.src, 640)}
-                              alt={image.alt}
-                              className="w-full h-full object-cover"
-                              loading="lazy"
-                              decoding="async"
-                              sizes="(max-width: 640px) 80vw, 320px"
-                            />
-                          </div>
-                        ))}
-                      </div>
-                      <ScrollBar orientation="horizontal" />
-                    </ScrollArea>
-                  </div>
-                  <div className="hidden sm:grid grid-cols-2 gap-3">
-                    {study.images.map((image, idx) => (
-                      <div
-                        key={`${image.src}-${idx}`}
-                        className={cn(
-                          "overflow-hidden rounded-xl border border-slate-100 bg-white shadow-sm",
-                          "transition transform hover:-translate-y-1 hover:shadow-md"
-                        )}
-                      >
-                        <img
-                          src={optimizeImageSrc(image.src, 900)}
-                          alt={image.alt}
-                          className="w-full h-full object-cover"
-                          loading="lazy"
-                          decoding="async"
-                          sizes="(max-width: 1200px) 50vw, 400px"
-                        />
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </article>
+              study={study}
+              index={index}
+              onShare={handleCopyLink}
+              copiedId={copiedCaseId}
+            />
           ))}
         </div>
       </section>
