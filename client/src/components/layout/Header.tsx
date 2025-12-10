@@ -13,6 +13,7 @@ const Header = () => {
   const [location] = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
+  const [expandedMenus, setExpandedMenus] = useState<string[]>([]);
   const holidayWrapperRef = useRef<HTMLDivElement>(null);
 
   // Calculate and set header height
@@ -60,6 +61,14 @@ const Header = () => {
 
   const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
   const closeMenus = () => setMobileMenuOpen(false);
+  
+  const toggleSubmenu = (label: string) => {
+    setExpandedMenus(prev => 
+      prev.includes(label) 
+        ? prev.filter(item => item !== label)
+        : [...prev, label]
+    );
+  };
 
   const isActive = (path: string) => location === path;
   const isParentActive = (children: any[]) => children.some(child => isActive(child.href));
@@ -266,8 +275,11 @@ const Header = () => {
             {/* Background Pattern */}
             <div className="absolute inset-0 opacity-5 bg-[url('/bg-pattern.png')] bg-cover" />
             
-            <div className="flex flex-col h-full pt-24 px-6 pb-8 overflow-y-auto">
-              <nav className="flex-1 space-y-2">
+            <div 
+              className="flex flex-col h-full px-6 pb-8 overflow-y-auto scrollbar-hide"
+              style={{ paddingTop: 'var(--header-height)' }}
+            >
+              <nav className="flex-1 space-y-1">
                 {navLinks.map((link, idx) => (
                   <motion.div
                     key={link.label}
@@ -280,33 +292,62 @@ const Header = () => {
                         <div 
                           onClick={closeMenus}
                           className={cn(
-                            "text-2xl font-serif font-medium py-3 border-b border-white/5 transition-colors flex items-center justify-between",
+                            "text-xl sm:text-2xl font-serif font-medium py-4 border-b border-white/5 transition-colors flex items-center justify-between group",
                             isActive(link.href) ? "text-[#f2d785]" : "text-white/80"
                           )}
                         >
-                          {link.label}
+                          <span className="group-active:scale-95 transition-transform">{link.label}</span>
+                          <ArrowRight className={cn(
+                            "h-5 w-5 opacity-0 -translate-x-2 transition-all",
+                            isActive(link.href) ? "opacity-100 translate-x-0" : "group-active:opacity-100 group-active:translate-x-0"
+                          )} />
                         </div>
                       </Link>
                     ) : (
-                      <div className="space-y-2 py-2">
-                        <div className="text-sm uppercase tracking-widest text-[#f2d785]/60 font-semibold mb-2 mt-4">
-                          {link.label}
-                        </div>
-                        <div className="pl-4 space-y-1 border-l border-white/10 ml-1">
-                          {link.submenu.map((subLink) => (
-                            <Link key={subLink.href} href={subLink.href}>
-                              <div
-                                onClick={closeMenus}
-                                className={cn(
-                                  "py-2.5 text-lg font-medium transition-colors block",
-                                  isActive(subLink.href) ? "text-[#f2d785]" : "text-white/70 hover:text-white"
-                                )}
-                              >
-                                {subLink.label}
+                      <div className="border-b border-white/5">
+                        <button
+                          onClick={() => toggleSubmenu(link.label)}
+                          className={cn(
+                            "w-full text-xl sm:text-2xl font-serif font-medium py-4 transition-colors flex items-center justify-between group",
+                            isActive(link.href) || isParentActive(link.submenu) ? "text-[#f2d785]" : "text-white/80"
+                          )}
+                        >
+                          <span className="group-active:scale-95 transition-transform">{link.label}</span>
+                          <ChevronDown 
+                            className={cn(
+                              "h-5 w-5 transition-transform duration-300",
+                              expandedMenus.includes(link.label) ? "rotate-180 text-[#f2d785]" : "text-white/50"
+                            )} 
+                          />
+                        </button>
+                        
+                        <AnimatePresence>
+                          {expandedMenus.includes(link.label) && (
+                            <motion.div
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: "auto", opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              transition={{ duration: 0.3, ease: "easeInOut" }}
+                              className="overflow-hidden"
+                            >
+                              <div className="pl-4 pb-4 space-y-1 border-l-2 border-[#f2d785]/20 ml-1 mb-2">
+                                {link.submenu.map((subLink) => (
+                                  <Link key={subLink.href} href={subLink.href}>
+                                    <div
+                                      onClick={closeMenus}
+                                      className={cn(
+                                        "py-3 px-2 text-base sm:text-lg font-medium transition-colors block rounded-md active:bg-white/5",
+                                        isActive(subLink.href) ? "text-[#f2d785]" : "text-white/70"
+                                      )}
+                                    >
+                                      {subLink.label}
+                                    </div>
+                                  </Link>
+                                ))}
                               </div>
-                            </Link>
-                          ))}
-                        </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
                       </div>
                     )}
                   </motion.div>
@@ -320,17 +361,17 @@ const Header = () => {
                 className="mt-8 space-y-4"
               >
                 <Link href="/schedule#appointment">
-                  <Button className="w-full bg-[#f2d785] text-[#0f2f27] hover:bg-[#fff0c0] font-bold text-lg h-12 rounded-xl">
+                  <Button className="w-full bg-[#f2d785] text-[#0f2f27] hover:bg-[#fff0c0] font-bold text-lg h-14 rounded-xl shadow-lg active:scale-[0.98] transition-all">
                     Book Appointment Now
                   </Button>
                 </Link>
                 
-                <div className="grid grid-cols-2 gap-4 mt-6 pt-6 border-t border-white/10">
-                  <a href="tel:+16503266319" className="flex flex-col items-center justify-center p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors text-white">
+                <div className="grid grid-cols-2 gap-4 pt-2">
+                  <a href="tel:+16503266319" className="flex flex-col items-center justify-center p-4 rounded-xl bg-white/5 active:bg-white/10 transition-colors text-white border border-white/5">
                     <Phone className="h-6 w-6 mb-2 text-[#f2d785]" />
                     <span className="text-sm font-medium">Call Us</span>
                   </a>
-                  <a href="https://maps.app.goo.gl/UCTqQ1fZsdMq7vma9" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center justify-center p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors text-white">
+                  <a href="https://maps.app.goo.gl/UCTqQ1fZsdMq7vma9" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center justify-center p-4 rounded-xl bg-white/5 active:bg-white/10 transition-colors text-white border border-white/5">
                     <MapPin className="h-6 w-6 mb-2 text-[#f2d785]" />
                     <span className="text-sm font-medium">Directions</span>
                   </a>
