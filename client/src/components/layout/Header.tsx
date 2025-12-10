@@ -276,7 +276,7 @@ const Header = () => {
             className="fixed inset-0 z-40 lg:hidden bg-[#0f2f27]"
           >
             {/* Background Pattern */}
-            <div className="absolute inset-0 opacity-5 bg-[url('/bg-pattern.png')] bg-cover" />
+            <div className="absolute inset-0 opacity-5 bg-[url('/bg-pattern.png')] bg-cover pointer-events-none" />
             
             <div 
               className="flex flex-col h-full px-6 pb-8 overflow-y-auto scrollbar-hide"
@@ -389,4 +389,3 @@ const Header = () => {
 };
 
 export default Header;
-
