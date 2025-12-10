@@ -53,13 +53,13 @@ const Header = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-white shadow-sm">
+    <header className="sticky top-0 z-50">
       <HolidayHoursNotice />
       {/* Top info bar */}
-      <div className="border-b border-gray-100">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-8">
+      <div className="border-b border-white/10 bg-[#0f2f27] text-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-9">
           <div className="hidden md:flex items-center space-x-4 text-sm text-gray-500">
-            <a href="tel:+16503266319" className="text-gray-500 hover:text-primary flex items-center">
+            <a href="tel:+16503266319" className="text-white/80 hover:text-[#f2d785] flex items-center transition-colors">
               <Phone className="h-3 w-3 mr-1.5" />
               <span>(650) 326-6319</span>
             </a>
@@ -67,7 +67,7 @@ const Header = () => {
               href="https://maps.app.goo.gl/UCTqQ1fZsdMq7vma9"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-500 hover:text-primary transition-colors flex items-center"
+              className="text-white/80 hover:text-[#f2d785] transition-colors flex items-center"
             >
               <MapPin className="h-3 w-3 mr-1.5" />
               <span>409 Cambridge Ave, Palo Alto, CA 94306</span>
@@ -78,7 +78,7 @@ const Header = () => {
               href={officeInfo.socialMedia.instagram} 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-gray-500 hover:text-primary transition-colors" 
+              className="text-white/80 hover:text-[#f2d785] transition-colors" 
               aria-label="Instagram"
             >
               <FaInstagram className="h-3.5 w-3.5" />
@@ -88,8 +88,8 @@ const Header = () => {
       </div>
       
       {/* Main navigation */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16 relative">
+      <div className="backdrop-blur supports-[backdrop-filter]:bg-[#0f2f27]/90 bg-[#0f2f27]/95 border-b border-white/10 shadow-md">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16 relative">
           {/* Logo */}
           <div className="flex-shrink-0 lg:w-1/4">
             <Link href="/">
@@ -99,7 +99,7 @@ const Header = () => {
                   alt="Dr. Christopher B. Wong DDS" 
                   className="h-10 w-auto"
                 />
-                <span className="ml-3 text-gray-900 font-medium text-xl">Dr. Wong</span>
+                <span className="ml-3 text-white font-medium text-xl">Dr. Wong</span>
               </div>
             </Link>
           </div>
@@ -112,24 +112,24 @@ const Header = () => {
                   {link.submenu ? (
                     <div className="relative">
                       <Link href={link.href}>
-                        <div className={`px-2 py-2 relative text-center group/item ${isActive(link.href) || link.submenu.some(sub => isActive(sub.href)) ? 'text-primary' : 'text-gray-700'}`}>
-                          <span className="text-sm font-medium cursor-pointer hover:text-primary transition-colors flex items-center">
+                        <div className={`px-2 py-2 relative text-center group/item ${isActive(link.href) || link.submenu.some(sub => isActive(sub.href)) ? 'text-[#f2d785]' : 'text-white'}`}>
+                          <span className="text-sm font-medium cursor-pointer hover:text-[#f2d785] transition-colors flex items-center gap-1">
                             {link.label}
-                            <ChevronDown className="h-3 w-3 ml-1 group-hover:rotate-180 transition-transform duration-200" />
+                            <ChevronDown className="h-3 w-3 group-hover:rotate-180 transition-transform duration-200" />
                           </span>
                           {(isActive(link.href) || link.submenu.some(sub => isActive(sub.href))) && (
-                            <span className="absolute bottom-0 left-0 right-0 mx-auto w-full h-0.5 bg-primary"></span>
+                            <span className="absolute bottom-0 left-0 right-0 mx-auto w-full h-0.5 bg-[#f2d785] rounded-full"></span>
                           )}
-                          <span className="absolute bottom-0 left-0 right-0 mx-auto w-0 h-0.5 bg-primary group-hover/item:w-full transition-all duration-300 ease-in-out"></span>
+                          <span className="absolute bottom-0 left-0 right-0 mx-auto w-0 h-0.5 bg-[#f2d785] group-hover/item:w-full transition-all duration-300 ease-in-out rounded-full"></span>
                         </div>
                       </Link>
                       
                       {/* Dropdown menu */}
-                      <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-1 w-56 bg-white rounded-lg shadow-lg border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                      <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-56 bg-[#0f2f27] text-white rounded-xl shadow-xl border border-white/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 backdrop-blur">
                         <div className="py-2">
                           {link.submenu.map((subLink, index) => (
                             <Link key={subLink.href} href={subLink.href}>
-                              <div className={`px-4 py-3 hover:bg-gray-50 transition-colors cursor-pointer ${isActive(subLink.href) ? 'text-primary bg-primary/5' : 'text-gray-700'}`}>
+                              <div className={`px-4 py-3 cursor-pointer transition-colors ${isActive(subLink.href) ? 'text-[#f2d785] bg-white/5' : 'text-white hover:bg-white/5'}`}>
                                 <span className="text-sm font-medium">{subLink.label}</span>
                               </div>
                             </Link>
@@ -160,7 +160,7 @@ const Header = () => {
             {/* Appointment button */}
             <Link href="/schedule#appointment">
               <Button
-                className="bg-primary hover:bg-primary/90 text-white rounded-md hidden sm:flex px-4 h-9"
+                className="bg-[#f2d785] hover:bg-[#f6e2a4] text-[#0f2f27] rounded-full hidden sm:flex px-4 h-10 font-semibold shadow-sm"
               >
                 <span>🎁 Book Appointment</span>
               </Button>
@@ -239,12 +239,12 @@ const Header = () => {
                 </Link>
                 
                 {/* Social media links */}
-                <div className="flex justify-center mt-4 pt-4 border-t border-gray-100">
+                <div className="flex justify-center mt-4 pt-4 border-t border-white/10">
                   <a 
                     href={officeInfo.socialMedia.instagram}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center text-gray-500 hover:text-primary px-3 py-2"
+                    className="flex items-center text-white/80 hover:text-[#f2d785] px-3 py-2 transition-colors"
                     onClick={closeMenus}
                     aria-label="Follow us on Instagram"
                   >
