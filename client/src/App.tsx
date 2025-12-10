@@ -51,7 +51,7 @@ function Router() {
     <>
       <ScrollToTop />
       <Header />
-      <main>
+      <main style={{ paddingTop: 'var(--header-height, 112px)' }}>
         <Switch>
           <Route path="/" component={Home} />
           <Route path="/about" component={About} />

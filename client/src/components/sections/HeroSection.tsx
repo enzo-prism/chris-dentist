@@ -35,7 +35,13 @@ const HeroSection = () => {
   ];
 
   return (
-    <section className="bg-gradient-to-b from-[#0f2f27] via-[#123129] to-white pt-20 pb-16 md:pt-28 md:pb-20 overflow-hidden relative">
+    <section 
+      className="bg-gradient-to-b from-[#0f2f27] via-[#123129] to-white pb-16 md:pb-20 overflow-hidden relative"
+      style={{
+        marginTop: 'calc(var(--header-height, 112px) * -1)',
+        paddingTop: 'var(--header-height, 112px)'
+      }}
+    >
       {/* Festive background accents */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,#1a4a3f_0%,transparent_40%),radial-gradient(circle_at_top_right,#1a4a3f_0%,transparent_40%)] opacity-70"></div>
