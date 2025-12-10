@@ -1,4 +1,4 @@
-import { ArrowRight, Calendar, CheckCircle, ChevronDown, AlertCircle } from "lucide-react";
+import { ArrowRight, Calendar, CheckCircle, Snowflake, Gift } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { drWongImages } from "@/lib/imageUrls";
@@ -35,14 +35,15 @@ const HeroSection = () => {
   ];
 
   return (
-    <section className="bg-white pt-20 pb-16 md:pt-28 md:pb-20 overflow-hidden relative">
-      {/* Subtle animated background */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-primary/3 to-blue-100/5 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-gradient-to-tr from-teal-50/8 to-primary/4 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-transparent via-primary/2 to-transparent rounded-full blur-3xl animate-spin" style={{ animationDuration: '30s' }}></div>
+    <section className="bg-gradient-to-b from-[#0f2f27] via-[#123129] to-white pt-20 pb-16 md:pt-28 md:pb-20 overflow-hidden relative">
+      {/* Festive background accents */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,#1a4a3f_0%,transparent_40%),radial-gradient(circle_at_top_right,#1a4a3f_0%,transparent_40%)] opacity-70"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(2px_2px_at_20%_30%,rgba(242,215,133,0.18),transparent),radial-gradient(2px_2px_at_70%_60%,rgba(242,215,133,0.2),transparent),radial-gradient(1.5px_1.5px_at_40%_80%,rgba(255,255,255,0.18),transparent)]"></div>
+        <div className="absolute -top-48 -right-32 w-80 h-80 bg-gradient-to-br from-[#f2d785]/25 to-transparent rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-48 -left-32 w-96 h-96 bg-gradient-to-tr from-[#d83b52]/15 to-transparent rounded-full blur-3xl"></div>
       </div>
-      
+
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         {/* Hero layout */}
@@ -54,28 +55,41 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-gray-900 leading-tight mb-6">
+            <div className="inline-flex items-center gap-2 rounded-full bg-white/10 text-[#f2d785] px-4 py-2 text-sm font-semibold mb-4 backdrop-blur">
+              <Snowflake className="h-4 w-4" aria-hidden="true" />
+              Warm smiles for the holidays
+            </div>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-white leading-tight mb-4">
               Palo Alto Dentist – Dr. Christopher B. Wong
             </h1>
             
-            <p className="text-lg text-gray-600 leading-relaxed mb-8 max-w-md">
-              Trusted by the community for long-term oral health and confident smiles.
+            <p className="text-lg text-white/80 leading-relaxed mb-6 max-w-md">
+              Trusted by the community for long-term oral health and confident smiles—now with holiday-friendly scheduling.
             </p>
+
+            <div className="flex items-center gap-3 mb-6 text-sm text-white/80">
+              <span className="inline-flex items-center gap-1 rounded-full bg-white/10 px-3 py-1">
+                🎁 Closed Dec 20 – Jan 4
+              </span>
+              <span className="inline-flex items-center gap-1 rounded-full bg-[#f2d785]/20 text-[#f2d785] px-3 py-1">
+                ✨ Reopens Jan 5, 8:00 AM
+              </span>
+            </div>
             
             {/* CTA Buttons with updated styling */}
             <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-3 sm:space-y-0 mb-8">
               <Link href="/schedule#appointment">
-                <Button className="bg-primary hover:bg-primary/90 text-white font-medium flex items-center justify-center gap-2 px-5 py-6 h-auto rounded-full shadow-sm transition-all">
+                <Button className="bg-[#f2d785] hover:bg-[#f6e2a4] text-[#0f2f27] font-medium flex items-center justify-center gap-2 px-5 py-6 h-auto rounded-full shadow-sm transition-all">
                   <Calendar className="h-4 w-4" />
-                  <span>Book Appointment</span>
+                  <span>Start your plan</span>
                 </Button>
               </Link>
-              <Link href="/services">
+              <Link href="/testimonials">
                 <Button 
                   variant="outline" 
-                  className="border-gray-200 text-gray-700 hover:text-primary hover:border-primary/30 bg-transparent font-medium flex items-center justify-center gap-2 px-5 py-6 h-auto rounded-full transition-all"
+                  className="border-white/30 text-white hover:text-[#f2d785] hover:border-[#f2d785]/50 bg-white/5 font-medium flex items-center justify-center gap-2 px-5 py-6 h-auto rounded-full transition-all backdrop-blur"
                 >
-                  <span>Explore Services</span>
+                  <span>Read testimonials</span>
                   <ArrowRight className="h-4 w-4" />
                 </Button>
               </Link>
@@ -94,12 +108,12 @@ const HeroSection = () => {
               >
                 <div className="flex items-center gap-1">
                   {[...Array(5)].map((_, i) => (
-                    <svg key={i} className="w-3.5 h-3.5 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                    <svg key={i} className="w-3.5 h-3.5 text-[#f2d785] fill-current" viewBox="0 0 20 20">
                       <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                     </svg>
                   ))}
                 </div>
-                <span className="group-hover:underline">316+ patient reviews on Google</span>
+                <span className="group-hover:underline text-white">316+ patient reviews on Google</span>
                 <ArrowRight className="h-3.5 w-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
               </button>
             </div>
@@ -115,7 +129,7 @@ const HeroSection = () => {
             transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
           >
             {/* Main image with styling */}
-            <div className="relative rounded-2xl overflow-hidden shadow-sm mb-12">
+            <div className="relative rounded-2xl overflow-hidden shadow-lg ring-1 ring-white/10 mb-12">
               <OptimizedImage
                 src={drWongImages.heroImage || drWongImages.drWongOffice2}
                 alt="Dr. Wong's Modern Dental Office"
@@ -124,9 +138,13 @@ const HeroSection = () => {
               />
               
               {/* Status badge */}
-              <div className="absolute bottom-5 left-5 bg-white px-4 py-2 rounded-full shadow-sm text-sm font-medium text-gray-900 flex items-center">
-                <span className="w-2 h-2 bg-green-500 rounded-full mr-2.5 animate-pulse"></span>
-                <span>Now accepting new patients</span>
+              <div className="absolute bottom-5 left-5 bg-white/95 px-4 py-2 rounded-full shadow-sm text-sm font-medium text-gray-900 flex items-center gap-2">
+                <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                <span>Holiday-friendly scheduling</span>
+              </div>
+              <div className="absolute top-4 right-4 bg-[#f2d785]/90 text-[#0f2f27] px-3 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1 shadow-sm">
+                <Gift className="h-4 w-4" aria-hidden="true" />
+                Plan ahead
               </div>
             </div>
             
