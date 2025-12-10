@@ -93,16 +93,16 @@ const Header = () => {
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 flex flex-col">
-      <div ref={holidayWrapperRef}>
+    <header className="fixed top-0 left-0 right-0 z-[100] flex flex-col isolation-auto">
+      <div ref={holidayWrapperRef} className="relative z-[101]">
         <HolidayHoursNotice />
       </div>
       
       {/* Top Bar - Contact & Info */}
       <motion.div 
         className={cn(
-          "w-full bg-[#0a1f1a] text-white/80 transition-all duration-300 overflow-hidden",
-          scrolled ? "h-0 opacity-0" : "h-10 opacity-100 border-b border-white/5"
+          "w-full bg-[#0a1f1a] text-white/80 transition-all duration-300 overflow-hidden relative z-[101]",
+          scrolled ? "h-0 opacity-0 pointer-events-none" : "h-10 opacity-100 border-b border-white/5"
         )}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex justify-between items-center text-xs sm:text-sm font-medium">
@@ -142,7 +142,7 @@ const Header = () => {
       {/* Main Navigation Bar */}
       <div 
         className={cn(
-          "w-full transition-all duration-300 border-b border-white/5",
+          "w-full transition-all duration-300 border-b border-white/5 relative z-[101]",
           scrolled 
             ? "bg-[#0f2f27]/95 backdrop-blur-md shadow-lg py-2" 
             : "bg-[#0f2f27] py-4"
@@ -152,7 +152,7 @@ const Header = () => {
           <div className="flex justify-between items-center">
             
             {/* Logo */}
-            <Link href="/" className="group relative z-50">
+            <Link href="/" className="group relative z-[102]">
               <div className="flex items-center gap-3">
                 <div className="relative overflow-hidden rounded-lg bg-white/5 p-1 ring-1 ring-white/10 transition-all group-hover:bg-white/10">
                   <img 
@@ -173,7 +173,7 @@ const Header = () => {
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center gap-8 relative z-50">
+            <nav className="hidden lg:flex items-center gap-8 relative z-[102]">
               {navLinks.map((link) => (
                 <div 
                   key={link.label}
@@ -183,7 +183,7 @@ const Header = () => {
                 >
                   <Link href={link.href}>
                     <span className={cn(
-                      "flex items-center gap-1.5 py-2 text-sm font-medium tracking-wide transition-colors cursor-pointer relative z-50",
+                      "flex items-center gap-1.5 py-2 text-sm font-medium tracking-wide transition-colors cursor-pointer relative z-[102]",
                       isActive(link.href) || (link.submenu && isParentActive(link.submenu))
                         ? "text-[#f2d785]" 
                         : "text-white/90 hover:text-[#f2d785]"
@@ -199,7 +199,7 @@ const Header = () => {
                   {(isActive(link.href) || (link.submenu && isParentActive(link.submenu))) && (
                     <motion.div 
                       layoutId="activeNav"
-                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#f2d785] z-40"
+                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#f2d785] z-[101]"
                       initial={false}
                       transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
@@ -213,13 +213,16 @@ const Header = () => {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 10, scale: 0.95 }}
                         transition={{ duration: 0.2 }}
-                        className="absolute top-full left-1/2 -translate-x-1/2 pt-4 w-64 z-50"
+                        className="absolute top-full left-1/2 -translate-x-1/2 pt-4 w-64 z-[103]"
                       >
-                        <div className="bg-[#0f2f27] border border-white/10 rounded-xl shadow-2xl overflow-hidden p-2 relative z-50">
+                        {/* Transparent bridge to prevent mouseleave when moving to dropdown */}
+                        <div className="absolute top-0 left-0 w-full h-4 bg-transparent -mt-4" />
+                        
+                        <div className="bg-[#0f2f27] border border-white/10 rounded-xl shadow-2xl overflow-hidden p-2 relative z-[103]">
                           {link.submenu.map((subItem) => (
                             <Link key={subItem.href} href={subItem.href}>
                               <div className={cn(
-                                "flex items-center justify-between px-4 py-3 rounded-lg group/item transition-colors cursor-pointer relative z-50",
+                                "flex items-center justify-between px-4 py-3 rounded-lg group/item transition-colors cursor-pointer relative z-[104]",
                                 isActive(subItem.href) 
                                   ? "bg-white/10 text-[#f2d785]" 
                                   : "hover:bg-white/5 text-white/90 hover:text-white"
