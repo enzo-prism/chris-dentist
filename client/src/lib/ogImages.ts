@@ -20,6 +20,9 @@ export const ogImages = {
   // Testimonials with team photo
   testimonials: drWongImages.teamPhoto,
   
+  // Patient stories
+  patientStories: "https://res.cloudinary.com/dhqpqfw6w/image/upload/v1765382510/IMG_8356_bjxk7p.webp",
+  
   // Blog page with lab image
   blog: drWongImages.drWongLab1,
   

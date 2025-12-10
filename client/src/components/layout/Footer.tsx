@@ -16,6 +16,7 @@ const Footer = () => {
     { href: "/about", label: "About Dr. Wong" },
     { href: "/services", label: "Services" },
     { href: "/patient-resources", label: "Patient Resources" },
+    { href: "/patient-stories", label: "Patient Stories" },
     { href: "/blog", label: "Blog" },
     { href: "/contact", label: "Contact" }
   ];

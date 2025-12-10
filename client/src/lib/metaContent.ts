@@ -19,6 +19,7 @@ export const pageTitles = {
   
   // Testimonials
   testimonials: `Patient Reviews | Palo Alto Dentist Dr. Christopher Wong`,
+  patientStories: `Patient Stories & Transformations | Dr. Christopher Wong DDS`,
   
   // Blog page
   blog: `Dental Health Blog | Dr. Christopher Wong DDS, Palo Alto`,
@@ -64,6 +65,8 @@ export const pageDescriptions = {
   
   // Testimonials
   testimonials: `Read patient reviews for Dr. Christopher Wong, trusted Palo Alto dentist. Real testimonials from satisfied patients in Palo Alto and surrounding areas.`,
+  
+  patientStories: `Real patient case studies showing Invisalign, whitening, and bonding transformations by Palo Alto dentist Dr. Christopher Wong.`,
   
   // Blog page
   blog: `Dental health tips and news from Dr. Wong's Palo Alto dental practice. Stay informed about oral health and dental technology advances.`,

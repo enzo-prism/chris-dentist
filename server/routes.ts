@@ -99,6 +99,7 @@ Disallow: /`);
         { url: '/emergency-dental', priority: '1.0', changefreq: 'monthly' },
         { url: '/patient-resources', priority: '0.7', changefreq: 'monthly' },
         { url: '/testimonials', priority: '0.6', changefreq: 'monthly' },
+        { url: '/patient-stories', priority: '0.7', changefreq: 'monthly' },
         { url: '/blog', priority: '0.8', changefreq: 'weekly' },
         { url: '/contact', priority: '0.7', changefreq: 'monthly' },
         { url: '/schedule', priority: '0.9', changefreq: 'weekly' },
