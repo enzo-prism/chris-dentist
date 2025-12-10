@@ -501,12 +501,12 @@ const PatientStories = () => {
           <div className="flex justify-center gap-3 flex-wrap">
             <Link href="/schedule#appointment">
               <Button className="bg-white text-primary hover:bg-white/90">
-                Book a visit
+                Start your plan
               </Button>
             </Link>
-            <Link href="/services">
+            <Link href="/testimonials">
               <Button variant="outline" className="border-white text-white hover:bg-white/10">
-                Explore services
+                Read testimonials
               </Button>
             </Link>
           </div>
