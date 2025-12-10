@@ -84,12 +84,12 @@ const HeroSection = () => {
                   <span>Start your plan</span>
                 </Button>
               </Link>
-              <Link href="/testimonials">
+              <Link href="/patient-stories">
                 <Button 
                   variant="outline" 
                   className="border-white/30 text-white hover:text-[#f2d785] hover:border-[#f2d785]/50 bg-white/5 font-medium flex items-center justify-center gap-2 px-5 py-6 h-auto rounded-full transition-all backdrop-blur"
                 >
-                  <span>Read testimonials</span>
+                  <span>Patient stories</span>
                   <ArrowRight className="h-4 w-4" />
                 </Button>
               </Link>
