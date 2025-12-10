@@ -10,7 +10,7 @@ import { ogImages } from "@/lib/ogImages";
 import { pageDescriptions, pageTitles } from "@/lib/metaContent";
 import { absoluteUrl } from "@/lib/structuredData";
 import { cn } from "@/lib/utils";
-import { ArrowRight, Sparkles, Timer, Tooth } from "lucide-react";
+import { ArrowRight, ShieldCheck, Sparkles, Timer } from "lucide-react";
 import { Link } from "wouter";
 
 type CaseImage = {
@@ -191,7 +191,7 @@ const PatientStories = () => {
           <Card className="border-slate-100 shadow-sm">
             <CardHeader className="flex flex-row items-center gap-3 pb-3">
               <div className="h-10 w-10 rounded-full bg-primary/10 text-primary flex items-center justify-center">
-                <Tooth className="h-5 w-5" />
+                <ShieldCheck className="h-5 w-5" />
               </div>
               <CardTitle className="text-base font-semibold text-slate-800">Conservative dentistry</CardTitle>
             </CardHeader>
