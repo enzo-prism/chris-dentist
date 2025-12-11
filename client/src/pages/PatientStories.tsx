@@ -59,6 +59,19 @@ type CaseStudy = {
   metrics: { label: string; value: string; description?: string }[];
 };
 
+const serviceLinks: Record<string, string> = {
+  "Invisalign®": "/invisalign",
+  "Invisalign": "/invisalign",
+  "Zoom! Whitening": "/zoom-whitening",
+  "ZOOM! Whitening": "/zoom-whitening",
+  "Cosmetic Bonding": "/services#cosmetic-dentistry",
+  "Dental Veneers": "/dental-veneers",
+  "Dental Implants": "/dental-implants",
+  "Emergency Care": "/emergency-dental",
+  "Preventive Dentistry": "/services#preventive-dentistry",
+  "Restorative Dentistry": "/services#restorative-dentistry",
+};
+
 const CHECK_ICON_CLASS = "h-4 w-4 text-primary shrink-0 mt-0.5";
 
 const optimizeImageSrc = (url: string, width = 900) => {
@@ -277,8 +290,25 @@ const CaseStory = ({ study, index, onShare, copiedId }: CaseStoryProps) => {
             </h2>
             <p className="text-sm text-slate-600">{study.subtitle}</p>
             <p className="text-base text-slate-700 leading-relaxed">{study.patientSummary}</p>
-            <p className="text-base text-slate-700 leading-relaxed">{study.summary}</p>
-          </div>
+         <p className="text-base text-slate-700 leading-relaxed">{study.summary}</p>
+          {study.services.length ? (
+            <div className="flex flex-wrap gap-2 pt-2">
+              {study.services.map((service) => {
+                const href = serviceLinks[service] || "/services";
+                return (
+                  <Link key={service} href={href}>
+                    <Badge
+                      variant="secondary"
+                      className="bg-primary/10 text-primary border-primary/20 hover:bg-primary/15 transition"
+                    >
+                      {service}
+                    </Badge>
+                  </Link>
+                );
+              })}
+            </div>
+          ) : null}
+        </div>
 
           <div className="bg-slate-50 border border-slate-100 rounded-2xl p-4 flex items-start gap-3">
             <span aria-hidden="true">🗓️</span>
