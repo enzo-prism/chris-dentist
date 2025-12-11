@@ -10,11 +10,9 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import StructuredData from "@/components/seo/StructuredData";
 import { absoluteUrl } from "@/lib/structuredData";
-import StructuredData from "@/components/seo/StructuredData";
-import { absoluteUrl } from "@/lib/structuredData";
 
 interface Params {
-  slug: string;
+  slug?: string;
 }
 
 const BlogPost = ({ params }: RouteComponentProps<Params>) => {
@@ -59,36 +57,6 @@ const BlogPost = ({ params }: RouteComponentProps<Params>) => {
         url: pageUrl,
       }
     : null;
-  const pageUrl = absoluteUrl(`/blog/${slug}`);
-  const blogSchema = post
-    ? {
-        "@context": "https://schema.org",
-        "@type": "BlogPosting",
-        headline: post.title,
-        description: pageDescription,
-        image: post.image,
-        datePublished: post.date,
-        dateModified: post.date,
-        author: {
-          "@type": "Person",
-          name: "Dr. Christopher B. Wong",
-        },
-        publisher: {
-          "@type": "Organization",
-          name: "Christopher B. Wong, DDS",
-          logo: {
-            "@type": "ImageObject",
-            url: absoluteUrl("/favicon/apple-touch-icon.png"),
-          },
-        },
-        mainEntityOfPage: {
-          "@type": "WebPage",
-          "@id": pageUrl,
-        },
-        url: pageUrl,
-      }
-    : null;
-
   const parsedContent = useMemo(() => {
     if (!post?.content) return [];
     const lines = post.content
