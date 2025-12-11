@@ -281,12 +281,12 @@ const ZoomWhitening = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link href="/schedule#appointment">
-              <Button className="bg-white text-primary hover:bg-white/90 px-6 py-3">
+              <Button className="bg-[#f2d785] text-[#0f2f27] hover:bg-[#f6e2a4] px-6 py-3 font-semibold shadow-sm">
                 Schedule now
               </Button>
             </Link>
             <Link href="/services">
-              <Button variant="outline" className="border-white/60 text-white hover:text-[#f2d785]">
+              <Button className="bg-white/10 text-white border border-white/70 hover:bg-white/20 px-6 py-3 font-semibold">
                 Explore other services
               </Button>
             </Link>
