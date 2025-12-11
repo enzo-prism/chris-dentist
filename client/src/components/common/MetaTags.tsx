@@ -37,8 +37,10 @@ export default function MetaTags({
     return urlObj.toString() || defaultUrl;
   })();
   
-  // Ensure the image URL is absolute
-  const fullImageUrl = image.startsWith('http') ? image : `${window.location.origin}${image}`;
+  // Ensure the image URL is absolute (SSR-safe fallback)
+  const defaultOrigin = "https://www.chriswongdds.com";
+  const origin = typeof window === "undefined" ? defaultOrigin : window.location.origin;
+  const fullImageUrl = image.startsWith('http') ? image : `${origin}${image}`;
   
   return (
     <Helmet>

@@ -8,8 +8,57 @@ const __dirname = dirname(__filename);
 import { type Server } from "http";
 import viteConfig from "../vite.config";
 import { nanoid } from "nanoid";
+import {
+  buildExcerpt,
+  getMetaForPath,
+  type MetaDefinition,
+} from "@shared/metaContent";
+import { storage } from "./storage";
 
 const viteLogger = createLogger();
+
+const BLOG_PREFIX = "/blog/";
+
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function normalizePathname(url: string): string {
+  const pathname = url.split(/[?#]/)[0] || "/";
+  if (pathname.length > 1 && pathname.endsWith("/")) {
+    return pathname.slice(0, -1);
+  }
+  return pathname;
+}
+
+async function resolveMetaForUrl(url: string): Promise<MetaDefinition> {
+  const pathname = normalizePathname(url);
+
+  if (pathname.startsWith(BLOG_PREFIX) && pathname !== "/blog") {
+    const slug = pathname.slice(BLOG_PREFIX.length);
+    if (slug) {
+      const post = await storage.getBlogPostBySlug(slug);
+      if (post) {
+        return {
+          title: `${post.title} | Dr. Christopher Wong DDS`,
+          description: buildExcerpt(post.content),
+        };
+      }
+    }
+  }
+
+  return getMetaForPath(pathname);
+}
+
+function injectMeta(template: string, meta: MetaDefinition): string {
+  return template
+    .replace(/__META_TITLE__/g, escapeHtml(meta.title))
+    .replace(/__META_DESCRIPTION__/g, escapeHtml(meta.description));
+}
 
 export function log(message: string, source = "express") {
   const formattedTime = new Date().toLocaleTimeString("en-US", {
@@ -61,6 +110,8 @@ export async function setupVite(app: Express, server: Server) {
         `src="/src/main.tsx"`,
         `src="/src/main.tsx?v=${nanoid()}"`,
       );
+      const meta = await resolveMetaForUrl(url);
+      template = injectMeta(template, meta);
       const page = await vite.transformIndexHtml(url, template);
       res.status(200).set({ "Content-Type": "text/html" }).end(page);
     } catch (e) {
@@ -82,7 +133,15 @@ export function serveStatic(app: Express) {
   app.use(express.static(distPath, { maxAge: "1y", immutable: true }));
 
   // fall through to index.html if the file doesn't exist
-  app.use("*", (_req, res) => {
-    res.sendFile(path.resolve(distPath, "index.html"));
+  const indexHtmlPath = path.resolve(distPath, "index.html");
+  app.use("*", async (req, res, next) => {
+    try {
+      let template = await fs.promises.readFile(indexHtmlPath, "utf-8");
+      const meta = await resolveMetaForUrl(req.originalUrl);
+      template = injectMeta(template, meta);
+      res.status(200).set({ "Content-Type": "text/html" }).send(template);
+    } catch (error) {
+      next(error);
+    }
   });
 }
