@@ -105,7 +105,6 @@ Disallow: /`);
         { url: '/blog', priority: '0.8', changefreq: 'weekly' },
         { url: '/contact', priority: '0.7', changefreq: 'monthly' },
         { url: '/schedule', priority: '0.9', changefreq: 'weekly' },
-        { url: '/thank-you', priority: '0.3', changefreq: 'monthly' },
         { url: '/privacy-policy', priority: '0.4', changefreq: 'yearly' },
         { url: '/terms', priority: '0.4', changefreq: 'yearly' },
         { url: '/hipaa', priority: '0.4', changefreq: 'yearly' },
@@ -122,10 +121,19 @@ Disallow: /`);
         xml += '  </url>\n';
       });
       
-      // Add service pages using anchor links since they're on the services page
+      // Prefer dedicated service URLs when they exist, otherwise use services anchors
+      const serviceUrlMap: Record<string, string> = {
+        "dental-veneers": "/dental-veneers",
+        "dental-implants": "/dental-implants",
+        "invisalign": "/invisalign",
+        "emergency-dental": "/emergency-dental",
+        "zoom-whitening": "/zoom-whitening",
+      };
+
       services.forEach(service => {
+        const mappedUrl = serviceUrlMap[service.slug] || `/services#${service.slug}`;
         xml += '  <url>\n';
-        xml += `    <loc>${baseUrl}/services#${service.slug}</loc>\n`;
+        xml += `    <loc>${baseUrl}${mappedUrl}</loc>\n`;
         xml += `    <lastmod>${today}</lastmod>\n`;
         xml += `    <changefreq>monthly</changefreq>\n`;
         xml += `    <priority>0.7</priority>\n`;
