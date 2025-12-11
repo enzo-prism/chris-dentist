@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import MetaTags from "@/components/common/MetaTags";
-import CanonicalUrl from "@/components/seo/CanonicalUrl";
 import StructuredData from "@/components/seo/StructuredData";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -522,7 +521,6 @@ const PatientStories = () => {
         description={pageDescriptions.patientStories}
         image={ogImages.patientStories}
       />
-      <CanonicalUrl path="/patient-stories" />
       <StructuredData data={structuredData} />
 
       <section id="top" className="bg-gradient-to-b from-[#F5F9FC] via-white to-[#F5F9FC] py-12 md:py-20">

@@ -12,6 +12,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { trackGAEvent } from "@/lib/analytics";
+import { officeInfo } from "@/lib/data";
 
 const ContactForm = () => {
   const { toast } = useToast();
@@ -95,7 +96,7 @@ const ContactForm = () => {
             <FormItem>
               <FormLabel className="text-[#333333] font-semibold">Phone Number</FormLabel>
               <FormControl>
-                <Input placeholder="(650) 555-5678" {...field} />
+                <Input placeholder={officeInfo.phone} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

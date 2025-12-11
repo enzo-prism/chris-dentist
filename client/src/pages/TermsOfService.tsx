@@ -1,5 +1,4 @@
 import MetaTags from "@/components/common/MetaTags";
-import CanonicalUrl from "@/components/seo/CanonicalUrl";
 import { officeInfo } from "@/lib/data";
 
 const TermsOfService = () => {
@@ -9,7 +8,6 @@ const TermsOfService = () => {
         title="Terms of Service | Christopher B. Wong, DDS"
         description="Read the terms and conditions for using Dr. Wong's dental practice website and the guidelines for receiving dental services in our Palo Alto office."
       />
-      <CanonicalUrl path="/terms" />
       
       <div className="min-h-screen bg-white">
         {/* Hero Section */}

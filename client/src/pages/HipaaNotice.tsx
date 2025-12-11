@@ -1,5 +1,4 @@
 import MetaTags from "@/components/common/MetaTags";
-import CanonicalUrl from "@/components/seo/CanonicalUrl";
 import { officeInfo } from "@/lib/data";
 
 const HipaaNotice = () => {
@@ -9,7 +8,6 @@ const HipaaNotice = () => {
         title="HIPAA Notice | Christopher B. Wong, DDS"
         description="Learn about HIPAA rights and how Dr. Wong's dental practice protects health information privacy with policies for security and patient confidentiality."
       />
-      <CanonicalUrl path="/hipaa" />
       
       <div className="min-h-screen bg-white">
         {/* Hero Section */}

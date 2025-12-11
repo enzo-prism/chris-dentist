@@ -1,5 +1,4 @@
 import MetaTags from "@/components/common/MetaTags";
-import CanonicalUrl from "@/components/seo/CanonicalUrl";
 import { officeInfo } from "@/lib/data";
 
 const Accessibility = () => {
@@ -9,7 +8,6 @@ const Accessibility = () => {
         title="Accessibility Statement | Christopher B. Wong, DDS"
         description="Learn about Dr. Wong's commitment to web accessibility and providing equal access to dental care for all patients, along with efforts to improve our site."
       />
-      <CanonicalUrl path="/accessibility" />
       
       <div className="min-h-screen bg-white">
         {/* Hero Section */}

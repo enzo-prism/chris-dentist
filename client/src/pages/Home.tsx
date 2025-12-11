@@ -8,7 +8,6 @@ import TestimonialCard from "@/components/common/TestimonialCard";
 import TypeFormEmbed from "@/components/forms/TypeFormEmbed";
 import MetaTags from "@/components/common/MetaTags";
 import StructuredData from "@/components/seo/StructuredData";
-import CanonicalUrl from "@/components/seo/CanonicalUrl";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle, Phone } from "lucide-react";
 import { Link } from "wouter";
@@ -88,7 +87,6 @@ const Home = () => {
         image={ogImages.home}
       />
       <StructuredData data={schemaNodes} />
-      <CanonicalUrl path="/" />
       <HeroSection />
 
       {/* Patient Testimonials Spotlight */}
@@ -249,9 +247,9 @@ const Home = () => {
                     <div>Closed</div>
                   </div>
                 </div>
-                <a href="tel:+16505551234" className="flex items-center text-xl font-bold hover:text-blue-200 transition-colors">
+                <a href="tel:+16503266319" className="flex items-center text-xl font-bold hover:text-blue-200 transition-colors">
                   <Phone className="h-6 w-6 mr-2" />
-                  (650) 555-1234
+                  (650) 326-6319
                 </a>
               </div>
               

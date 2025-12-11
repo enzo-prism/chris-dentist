@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import MetaTags from "@/components/common/MetaTags";
 import StructuredData from "@/components/seo/StructuredData";
-import CanonicalUrl from "@/components/seo/CanonicalUrl";
 import { motion } from "framer-motion";
 import OptimizedImage from "@/components/seo/OptimizedImage";
 import TestimonialQuote from "@/components/testimonials/TestimonialQuote";
@@ -115,7 +114,6 @@ const DentalVeneers = () => {
         image="/favicon/apple-touch-icon.png"
       />
       <StructuredData data={veneerSchemas} />
-      <CanonicalUrl />
 
       {/* Hero Section */}
       <section className="bg-gradient-to-b from-[#F5F9FC] to-white py-16 md:py-24">

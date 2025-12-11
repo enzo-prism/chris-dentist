@@ -13,6 +13,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { trackGAEvent } from "@/lib/analytics";
+import { officeInfo } from "@/lib/data";
 
 const AppointmentForm = () => {
   const { toast } = useToast();
@@ -133,15 +134,15 @@ const AppointmentForm = () => {
           <FormField
             control={form.control}
             name="phone"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-[#333333] font-semibold">Phone Number</FormLabel>
-                <FormControl>
-                  <Input placeholder="(650) 555-5678" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="text-[#333333] font-semibold">Phone Number</FormLabel>
+              <FormControl>
+                <Input placeholder={officeInfo.phone} {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
           />
           <FormField
             control={form.control}

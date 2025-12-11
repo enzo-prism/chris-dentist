@@ -1,8 +1,49 @@
 User-agent: *
 Allow: /
+Crawl-delay: 1
 
 # Sitemap location
 Sitemap: https://www.chriswongdds.com/sitemap.xml
 
 # Preferred host to prevent duplicate content
 Host: www.chriswongdds.com
+
+# Disallow sensitive or duplicate areas
+Disallow: /admin/
+Disallow: /api/
+Disallow: /private/
+Disallow: /*?*
+
+# Explicitly allow public pages
+Allow: /about
+Allow: /services
+Allow: /patient-resources
+Allow: /testimonials
+Allow: /patient-stories
+Allow: /blog
+Allow: /contact
+Allow: /schedule
+Allow: /dental-veneers
+Allow: /dental-implants
+Allow: /invisalign
+Allow: /emergency-dental
+Allow: /privacy-policy
+Allow: /terms
+Allow: /hipaa
+Allow: /accessibility
+
+User-agent: Googlebot
+Crawl-delay: 1
+
+User-agent: Bingbot
+Crawl-delay: 2
+
+# Block problematic bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /

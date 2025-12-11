@@ -18,15 +18,21 @@ export default function MetaTags({
 }: MetaTagsProps) {
   // Normalize URL to always use the www version for consistency
   const normalizedUrl = url || (() => {
-    const currentUrl = window.location.href;
-    const urlObj = new URL(currentUrl);
-    
+    const defaultUrl = "https://www.chriswongdds.com";
+    if (typeof window === "undefined") return defaultUrl;
+
+    const urlObj = new URL(window.location.href);
+
     // Force www subdomain for canonical consistency
-    if (!urlObj.hostname.startsWith('www.') && urlObj.hostname === 'chriswongdds.com') {
-      urlObj.hostname = 'www.chriswongdds.com';
+    if (!urlObj.hostname.startsWith("www.") && urlObj.hostname === "chriswongdds.com") {
+      urlObj.hostname = "www.chriswongdds.com";
     }
-    
-    return urlObj.toString();
+
+    // Clean query strings and fragments for canonical URLs
+    urlObj.search = "";
+    urlObj.hash = "";
+
+    return urlObj.toString() || defaultUrl;
   })();
   
   // Ensure the image URL is absolute
@@ -41,7 +47,7 @@ export default function MetaTags({
       
       {/* SEO and duplicate content prevention */}
       <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-      <link rel="canonical" href={normalizedUrl} />
+      {normalizedUrl && <link rel="canonical" href={normalizedUrl} />}
       
       {/* Open Graph / Facebook */}
       <meta property="og:type" content={type} />

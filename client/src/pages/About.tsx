@@ -8,7 +8,6 @@ import { pageTitles, pageDescriptions } from "@/lib/metaContent";
 import * as data from "@/lib/data";
 import MetaTags from "@/components/common/MetaTags";
 import StructuredData from "@/components/seo/StructuredData";
-import CanonicalUrl from "@/components/seo/CanonicalUrl";
 import { useState } from "react";
 import VideoModal from "@/components/common/VideoModal";
 import OptimizedImage from "@/components/seo/OptimizedImage";
@@ -101,7 +100,6 @@ const About = () => {
         image={ogImages.about}
       />
       <StructuredData data={aboutSchema} />
-      <CanonicalUrl path="/about" />
       {/* Hero Section - Mobile First */}
       <section className="bg-[#F5F9FC] py-12 sm:py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

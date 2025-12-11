@@ -9,6 +9,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { officeInfo } from "@/lib/data";
 
 const patientFormSchema = z.object({
   fullName: z.string().min(2, { message: "Name must be at least 2 characters" }),
@@ -92,16 +93,16 @@ const PatientForm = () => {
           <FormField
             control={form.control}
             name="phone"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-[#333333] font-semibold">Phone Number</FormLabel>
-                <FormControl>
-                  <Input placeholder="(650) 555-5678" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="text-[#333333] font-semibold">Phone Number</FormLabel>
+              <FormControl>
+                <Input placeholder={officeInfo.phone} {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         </div>
 
         <div className="grid md:grid-cols-2 gap-4">
