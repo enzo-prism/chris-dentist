@@ -39,6 +39,9 @@ export const pageTitles = {
   // ZOOM Whitening page
   zoomWhitening: `ZOOM Teeth Whitening Palo Alto | Fast In-Office Whitening | Dr. Wong`,
   
+  // Dental implants
+  dentalImplants: `Dental Implants in Palo Alto | Implant Dentist Dr. Christopher Wong`,
+  
   // Analytics page
   analytics: `Analytics Dashboard | Practice Performance Metrics | Dr. Wong`,
   
@@ -88,6 +91,9 @@ export const pageDescriptions = {
   
   // ZOOM Whitening page
   zoomWhitening: `Get a brighter smile fast with ZOOM! teeth whitening in Palo Alto. Dr. Wong offers same-day in-office whitening with minimal sensitivity.`,
+  
+  // Dental implants page
+  dentalImplants: `Replace missing teeth with dental implants in Palo Alto. Dr. Wong offers implant planning, placement partners, and natural-looking restorations.`,
   
   // Analytics page
   analytics: `Secure analytics dashboard showing practice performance metrics, marketing ROI, and patient engagement data for Dr. Wong's dental practice.`,

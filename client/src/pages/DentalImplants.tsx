@@ -1,11 +1,12 @@
 import { motion } from "framer-motion";
-import { Helmet } from "react-helmet-async";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle, Heart, Shield, Clock, Smile, Users, Award } from "lucide-react";
 import TestimonialQuote from "@/components/testimonials/TestimonialQuote";
 import { getTestimonialsByNames } from "@/lib/testimonials";
 import StructuredData from "@/components/seo/StructuredData";
+import MetaTags from "@/components/common/MetaTags";
+import { pageDescriptions, pageTitles } from "@/lib/metaContent";
 import {
   buildBreadcrumbSchema,
   buildFAQSchema,
@@ -159,13 +160,11 @@ const DentalImplants = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Dental Implants Palo Alto | Complete Guide with Dr. Wong</title>
-        <meta name="description" content="Palo Alto dental implants by Dr. Christopher B. Wong. Learn about implant benefits, procedure and cost, find out if you're a candidate, and book a consultation." />
-        <meta property="og:title" content="Dental Implants Palo Alto | Complete Guide with Dr. Wong" />
-        <meta property="og:description" content="Palo Alto dental implants by Dr. Christopher B. Wong. Learn about implant benefits, procedure and cost, find out if you're a candidate, and book a consultation." />
-        <link rel="canonical" href="/dental-implants" />
-      </Helmet>
+      <MetaTags 
+        title={pageTitles.dentalImplants}
+        description={pageDescriptions.dentalImplants}
+        image="/favicon/apple-touch-icon.png"
+      />
       <StructuredData data={dentalImplantSchemas} />
 
       {/* Hero Section */}

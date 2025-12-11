@@ -221,6 +221,7 @@ export default function Analytics() {
       <MetaTags 
         title={`Analytics Dashboard | ${availableMonths.find(m => m.value === selectedMonth)?.label}`}
         description="Practice performance analytics and insights"
+        robots="noindex, nofollow, noarchive"
       />
       
       <div className="min-h-screen bg-gray-50">

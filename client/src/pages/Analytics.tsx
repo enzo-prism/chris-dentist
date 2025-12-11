@@ -130,6 +130,7 @@ export default function Analytics() {
       <MetaTags 
         title="Analytics Dashboard | Practice Performance Metrics"
         description="Comprehensive analytics dashboard showing marketing performance and practice metrics"
+        robots="noindex, nofollow, noarchive"
       />
       
       <motion.div 

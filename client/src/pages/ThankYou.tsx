@@ -11,6 +11,7 @@ const ThankYou = () => {
         title="Thank You - Appointment Scheduled | Dr. Christopher B. Wong DDS"
         description="Thank you for scheduling your appointment with Dr. Wong's dental practice in Palo Alto. We look forward to providing exceptional care at your upcoming visit."
         image={ogImages.contact}
+        robots="noindex, nofollow, noarchive"
       />
       
       <div className="min-h-screen bg-white flex items-center justify-center px-4">

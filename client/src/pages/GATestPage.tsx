@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { trackGAEvent } from "@/lib/analytics";
 import { useState } from "react";
+import MetaTags from "@/components/common/MetaTags";
 
 export default function GATestPage() {
   const [eventsSent, setEventsSent] = useState<string[]>([]);
@@ -13,7 +14,13 @@ export default function GATestPage() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-12 max-w-4xl">
+    <>
+      <MetaTags
+        title="Google Analytics Test Page"
+        description="Internal testing page for Google Analytics events."
+        robots="noindex, nofollow, noarchive"
+      />
+      <div className="container mx-auto px-4 py-12 max-w-4xl">
       <Card>
         <CardHeader>
           <CardTitle>Google Analytics Test Page</CardTitle>
@@ -91,6 +98,7 @@ export default function GATestPage() {
           </div>
         </CardContent>
       </Card>
-    </div>
+      </div>
+    </>
   );
 }

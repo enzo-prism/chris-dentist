@@ -181,6 +181,7 @@ export default function Analytics() {
       <MetaTags 
         title="Analytics Dashboard | July 2025 Performance"
         description="Comprehensive analytics dashboard showing marketing performance and practice metrics"
+        robots="noindex, nofollow, noarchive"
       />
       
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">

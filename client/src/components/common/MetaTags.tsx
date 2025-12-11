@@ -7,6 +7,7 @@ interface MetaTagsProps {
   image?: string;
   url?: string;
   type?: string;
+  robots?: string;
 }
 
 export default function MetaTags({
@@ -14,7 +15,8 @@ export default function MetaTags({
   description = "Dr. Christopher B. Wong, trusted Palo Alto dentist offering comprehensive dental care. Schedule your appointment today for exceptional dental services.",
   image = drWongImages.drWongPortrait1,
   url,
-  type = "website"
+  type = "website",
+  robots = "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1",
 }: MetaTagsProps) {
   // Normalize URL to always use the www version for consistency
   const normalizedUrl = url || (() => {
@@ -46,7 +48,7 @@ export default function MetaTags({
       <meta name="description" content={description} />
       
       {/* SEO and duplicate content prevention */}
-      <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+      <meta name="robots" content={robots} />
       {normalizedUrl && <link rel="canonical" href={normalizedUrl} />}
       
       {/* Open Graph / Facebook */}
