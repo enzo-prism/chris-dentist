@@ -183,11 +183,11 @@ const DentalVeneers = () => {
               viewport={{ once: true }}
               className="relative"
             >
-              <OptimizedImage
-                src="/images/veneers.jpg"
-                alt="Beautiful smile transformation with dental veneers"
-                className="w-full h-96 object-cover rounded-lg shadow-lg"
-              />
+	              <OptimizedImage
+	                src="/images/veneers.jpg"
+	                alt="Beautiful smile transformation with dental veneers"
+	                className="w-full h-56 sm:h-72 md:h-96 object-cover rounded-lg shadow-lg"
+	              />
               <div className="absolute inset-0 bg-primary/10 rounded-lg"></div>
             </motion.div>
           </div>
@@ -300,11 +300,11 @@ const DentalVeneers = () => {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <OptimizedImage
-                src="/images/couple.jpg"
-                alt="Happy couple with beautiful smiles after veneer treatment"
-                className="w-full h-96 object-cover rounded-lg shadow-lg"
-              />
+	              <OptimizedImage
+	                src="/images/couple.jpg"
+	                alt="Happy couple with beautiful smiles after veneer treatment"
+	                className="w-full h-56 sm:h-72 md:h-96 object-cover rounded-lg shadow-lg"
+	              />
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: 20 }}

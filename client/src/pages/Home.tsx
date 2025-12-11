@@ -256,10 +256,10 @@ const Home = () => {
               <div className="md:w-1/2 p-8 md:p-12">
                 <h3 className="text-xl font-bold font-heading text-[#333333] mb-4">Book Your Visit</h3>
                 <p className="text-[#333333] mb-6">Fill out the form below to schedule your appointment. We'll get back to you promptly to confirm your visit.</p>
-                <TypeFormEmbed 
-                  formId="01JPZ57W1F3352Q1X0XK6P9SNV" 
-                  className="min-h-[400px] w-full" 
-                />
+	                <TypeFormEmbed 
+	                  formId="01JPZ57W1F3352Q1X0XK6P9SNV" 
+	                  className="min-h-[320px] sm:min-h-[400px] w-full" 
+	                />
               </div>
             </div>
           </div>

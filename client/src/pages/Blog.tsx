@@ -182,7 +182,7 @@ const Blog = () => {
                     <li key={category.id}>
                       <button
                         onClick={() => setSelectedCategory(category.id)}
-                        className={`flex items-center w-full text-left py-2 px-3 rounded-md hover:bg-[#F5F9FC] transition-colors ${
+                        className={`flex items-center w-full min-w-0 text-left py-2 px-3 rounded-md hover:bg-[#F5F9FC] transition-colors ${
                           selectedCategory === category.id 
                             ? 'bg-primary text-white hover:bg-primary' 
                             : 'text-[#333333]'
@@ -191,7 +191,7 @@ const Blog = () => {
                         <ArrowRight className={`h-4 w-4 mr-2 ${
                           selectedCategory === category.id ? 'text-white' : 'text-primary'
                         }`} />
-                        <span className="flex-1">{category.name}</span>
+                        <span className="flex-1 min-w-0 break-words">{category.name}</span>
                         <span className={`text-xs ${
                           selectedCategory === category.id ? 'text-white/80' : 'text-gray-400'
                         }`}>

@@ -391,11 +391,11 @@ const CaseStory = ({ study, index, onShare, copiedId }: CaseStoryProps) => {
                 <AccordionContent className="px-1">
                   <div className="flex flex-wrap gap-2 pt-1">
                     {study.services.map((service) => (
-                      <Badge
-                        key={service}
-                        variant="outline"
-                        className="border-primary/30 text-primary whitespace-nowrap"
-                      >
+	                      <Badge
+	                        key={service}
+	                        variant="outline"
+	                        className="border-primary/30 text-primary sm:whitespace-nowrap"
+	                      >
                         {service}
                       </Badge>
                     ))}

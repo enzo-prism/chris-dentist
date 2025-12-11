@@ -115,7 +115,7 @@ const AppointmentSection = () => {
                 {/* TypeForm embedded form */}
                 <TypeFormEmbed 
                   formId="01JPZ57W1F3352Q1X0XK6P9SNV" 
-                  className="min-h-[400px] sm:min-h-[450px] w-full shadow-md rounded-lg" 
+                  className="min-h-[320px] sm:min-h-[400px] md:min-h-[450px] w-full shadow-md rounded-lg" 
                 />
                 
                 <p className="text-xs text-gray-500 mt-4 text-center">

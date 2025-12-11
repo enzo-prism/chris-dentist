@@ -208,19 +208,19 @@ const BlogPost = ({ params }: RouteComponentProps<Params>) => {
           </p>
           {post.image ? (
             <div className="mb-10 rounded-2xl overflow-hidden shadow-lg border border-white/70">
-              <OptimizedImage
-                src={post.image}
-                alt={post.title}
-                className="w-full h-[420px] object-cover"
-              />
+                <OptimizedImage
+                  src={post.image}
+                  alt={post.title}
+                  className="w-full h-56 sm:h-72 md:h-[420px] object-cover"
+                />
             </div>
           ) : null}
           <article
-            className={cn(
-              "bg-white rounded-3xl shadow-xl border border-[#E5E7EB]/80",
-              "p-6 sm:p-8 space-y-4 sm:space-y-6 leading-relaxed text-gray-700",
-            )}
-          >
+	            className={cn(
+	              "bg-white rounded-3xl shadow-xl border border-[#E5E7EB]/80",
+	              "p-6 sm:p-8 space-y-4 sm:space-y-6 leading-relaxed text-gray-700 break-words",
+	            )}
+	          >
             <div className="space-y-4 sm:space-y-5">{parsedContent}</div>
           </article>
         </div>

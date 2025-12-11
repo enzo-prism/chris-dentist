@@ -372,12 +372,12 @@ export default function Analytics() {
                 onClick={() => setSidebarOpen(false)}
                 className="lg:hidden fixed inset-0 bg-black z-40"
               />
-              <motion.aside
-                initial={{ x: -300 }}
-                animate={{ x: 0 }}
-                exit={{ x: -300 }}
-                className="lg:hidden fixed left-0 top-0 h-full w-72 bg-white z-50 shadow-xl"
-              >
+	              <motion.aside
+	                initial={{ x: -300 }}
+	                animate={{ x: 0 }}
+	                exit={{ x: -300 }}
+	                className="lg:hidden fixed left-0 top-0 h-full w-64 sm:w-72 max-w-[85vw] bg-white z-50 shadow-xl"
+	              >
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-6">
                     <h2 className="text-lg font-semibold">Navigation</h2>

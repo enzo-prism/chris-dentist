@@ -224,11 +224,11 @@ const Invisalign = () => {
               viewport={{ once: true }}
               className="relative"
             >
-              <OptimizedImage
-                src="/images/invisalign-treatment.jpg"
-                alt="Invisalign clear aligners treatment at Dr. Christopher B. Wong's Palo Alto practice"
-                className="w-full h-96 object-cover rounded-lg shadow-lg"
-              />
+	              <OptimizedImage
+	                src="/images/invisalign-treatment.jpg"
+	                alt="Invisalign clear aligners treatment at Dr. Christopher B. Wong's Palo Alto practice"
+	                className="w-full h-56 sm:h-72 md:h-96 object-cover rounded-lg shadow-lg"
+	              />
               <div className="absolute inset-0 bg-primary/10 rounded-lg"></div>
             </motion.div>
           </div>
@@ -350,13 +350,13 @@ const Invisalign = () => {
                   </div>
                   <p className="text-[#333333]">{step.description}</p>
                 </div>
-                <div className="w-full md:w-80 h-64 rounded-lg overflow-hidden shadow-lg">
-                  <OptimizedImage
-                    src={`/images/invisalign-step-${step.step}.png`}
-                    alt={`Invisalign treatment step ${step.step}: ${step.title}`}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
+	                <div className="w-full md:w-64 lg:w-72 xl:w-80 aspect-[4/3] rounded-lg overflow-hidden shadow-lg">
+	                  <OptimizedImage
+	                    src={`/images/invisalign-step-${step.step}.png`}
+	                    alt={`Invisalign treatment step ${step.step}: ${step.title}`}
+	                    className="w-full h-full object-cover"
+	                  />
+	                </div>
               </motion.div>
             ))}
           </div>
@@ -424,11 +424,11 @@ const Invisalign = () => {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <OptimizedImage
-                src="/images/dr-wong-polaroids.png"
-                alt="Dr. Christopher Wong in his dental practice - professional polaroid photos"
-                className="w-full h-96 object-cover rounded-lg shadow-lg"
-              />
+	              <OptimizedImage
+	                src="/images/dr-wong-polaroids.png"
+	                alt="Dr. Christopher Wong in his dental practice - professional polaroid photos"
+	                className="w-full h-56 sm:h-72 md:h-96 object-cover rounded-lg shadow-lg"
+	              />
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: 20 }}

@@ -88,7 +88,7 @@ const PatientResources = () => {
           <Tabs defaultValue="forms" onValueChange={setActiveTab} className="w-full">
             {/* Mobile Tab Navigation */}
             <div className="block md:hidden mb-8">
-              <div className="grid grid-cols-2 gap-3 max-w-sm mx-auto">
+	              <div className="grid grid-cols-1 min-[420px]:grid-cols-2 gap-3 max-w-sm mx-auto">
                 <button
                   onClick={() => setActiveTab("forms")}
                   className={`flex flex-col items-center justify-center p-4 rounded-lg border-2 transition-all ${
@@ -141,36 +141,36 @@ const PatientResources = () => {
 
             {/* Desktop Tab Navigation */}
             <div className="hidden md:flex justify-center mb-10">
-              <TabsList className="bg-blue-50 p-1.5 rounded-full shadow-sm border border-blue-100">
-                <TabsTrigger 
-                  value="forms" 
-                  className="rounded-full px-6 py-3 text-base font-medium transition-all data-[state=active]:bg-white data-[state=active]:text-primary data-[state=active]:shadow-sm"
-                >
-                  <FileText className="h-5 w-5 mr-2" />
-                  Forms
-                </TabsTrigger>
-                <TabsTrigger 
-                  value="insurance" 
-                  className="rounded-full px-6 py-3 text-base font-medium transition-all data-[state=active]:bg-white data-[state=active]:text-primary data-[state=active]:shadow-sm"
-                >
-                  <CreditCard className="h-5 w-5 mr-2" />
-                  Insurance
-                </TabsTrigger>
-                <TabsTrigger 
-                  value="faq" 
-                  className="rounded-full px-6 py-3 text-base font-medium transition-all data-[state=active]:bg-white data-[state=active]:text-primary data-[state=active]:shadow-sm"
-                >
-                  <HelpCircle className="h-5 w-5 mr-2" />
-                  FAQs
-                </TabsTrigger>
-                <TabsTrigger 
-                  value="first-visit" 
-                  className="rounded-full px-6 py-3 text-base font-medium transition-all data-[state=active]:bg-white data-[state=active]:text-primary data-[state=active]:shadow-sm"
-                >
-                  <Calendar className="h-5 w-5 mr-2" />
-                  First Visit
-                </TabsTrigger>
-              </TabsList>
+	              <TabsList className="bg-blue-50 p-1.5 rounded-3xl shadow-sm border border-blue-100 h-auto flex flex-wrap justify-center gap-1">
+	                <TabsTrigger 
+	                  value="forms" 
+	                  className="rounded-full px-4 py-2 text-sm md:px-6 md:py-3 md:text-base font-medium transition-all data-[state=active]:bg-white data-[state=active]:text-primary data-[state=active]:shadow-sm"
+	                >
+	                  <FileText className="h-5 w-5 mr-2" />
+	                  Forms
+	                </TabsTrigger>
+	                <TabsTrigger 
+	                  value="insurance" 
+	                  className="rounded-full px-4 py-2 text-sm md:px-6 md:py-3 md:text-base font-medium transition-all data-[state=active]:bg-white data-[state=active]:text-primary data-[state=active]:shadow-sm"
+	                >
+	                  <CreditCard className="h-5 w-5 mr-2" />
+	                  Insurance
+	                </TabsTrigger>
+	                <TabsTrigger 
+	                  value="faq" 
+	                  className="rounded-full px-4 py-2 text-sm md:px-6 md:py-3 md:text-base font-medium transition-all data-[state=active]:bg-white data-[state=active]:text-primary data-[state=active]:shadow-sm"
+	                >
+	                  <HelpCircle className="h-5 w-5 mr-2" />
+	                  FAQs
+	                </TabsTrigger>
+	                <TabsTrigger 
+	                  value="first-visit" 
+	                  className="rounded-full px-4 py-2 text-sm md:px-6 md:py-3 md:text-base font-medium transition-all data-[state=active]:bg-white data-[state=active]:text-primary data-[state=active]:shadow-sm"
+	                >
+	                  <Calendar className="h-5 w-5 mr-2" />
+	                  First Visit
+	                </TabsTrigger>
+	              </TabsList>
             </div>
 
             {/* Forms Tab */}
