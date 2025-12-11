@@ -14,29 +14,91 @@ const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
   const [expandedMenus, setExpandedMenus] = useState<string[]>([]);
-  const holidayWrapperRef = useRef<HTMLDivElement>(null);
+  const [desktopCollapsed, setDesktopCollapsed] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
+  const navRowRef = useRef<HTMLDivElement>(null);
+  const desktopClusterRef = useRef<HTMLDivElement>(null);
+  const requiredRowWidthRef = useRef<number>(0);
+  const baselineHeaderHeightRef = useRef<number>(0);
 
-  // Calculate and set header height
+  // Calculate and set header height based on actual rendered size.
+  // Keep a stable minimum height when the top bar collapses on scroll.
   useEffect(() => {
+    const headerEl = headerRef.current;
+    if (!headerEl) return;
+
     const updateHeaderHeight = () => {
-      const holidayHeight = holidayWrapperRef.current?.offsetHeight || 0;
-      // Base height: TopBar (40px) + NavBar (approx 96px max) = 136px safe buffer
-      const baseHeight = 136; 
-      const totalHeight = baseHeight + holidayHeight;
-      document.documentElement.style.setProperty('--header-height', `${totalHeight}px`);
+      const measuredHeight = headerEl.offsetHeight;
+      if (!scrolled) {
+        baselineHeaderHeightRef.current = measuredHeight;
+      }
+      const effectiveHeight = scrolled
+        ? Math.max(measuredHeight, baselineHeaderHeightRef.current)
+        : measuredHeight;
+      document.documentElement.style.setProperty("--header-height", `${effectiveHeight}px`);
     };
 
-    // Initial calculation
     updateHeaderHeight();
 
-    // Observe changes
-    const observer = new ResizeObserver(updateHeaderHeight);
-    if (holidayWrapperRef.current) {
-      observer.observe(holidayWrapperRef.current);
+    const observer = new ResizeObserver(() => {
+      requestAnimationFrame(updateHeaderHeight);
+    });
+    observer.observe(headerEl);
+
+    window.addEventListener("resize", updateHeaderHeight);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", updateHeaderHeight);
+    };
+  }, [scrolled]);
+
+  // Collapse desktop nav into hamburger if it overflows available width.
+  useEffect(() => {
+    const rowEl = navRowRef.current;
+    const clusterEl = desktopClusterRef.current;
+    if (!rowEl) return;
+
+    const updateCollapse = () => {
+      const isLgUp = window.matchMedia("(min-width: 1024px)").matches;
+      if (!isLgUp) {
+        requiredRowWidthRef.current = 0;
+        if (desktopCollapsed) setDesktopCollapsed(false);
+        return;
+      }
+
+      if (!desktopCollapsed) {
+        requiredRowWidthRef.current = rowEl.scrollWidth;
+      }
+
+      const requiredWidth = requiredRowWidthRef.current || rowEl.scrollWidth;
+      const availableWidth = rowEl.clientWidth;
+      const nextCollapsed = requiredWidth > availableWidth + 8;
+
+      if (isLgUp && !nextCollapsed && mobileMenuOpen) {
+        setMobileMenuOpen(false);
+      }
+
+      if (nextCollapsed !== desktopCollapsed) {
+        setDesktopCollapsed(nextCollapsed);
+      }
+    };
+
+    const resizeObserver = new ResizeObserver(() => {
+      requestAnimationFrame(updateCollapse);
+    });
+    resizeObserver.observe(rowEl);
+    if (clusterEl) {
+      resizeObserver.observe(clusterEl);
     }
 
-    return () => observer.disconnect();
-  }, []);
+    window.addEventListener("resize", updateCollapse);
+    requestAnimationFrame(updateCollapse);
+
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener("resize", updateCollapse);
+    };
+  }, [desktopCollapsed, mobileMenuOpen]);
 
   // Handle scroll effect for sticky header
   useEffect(() => {
@@ -94,8 +156,8 @@ const Header = () => {
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-[100] flex flex-col isolation-auto">
-      <div ref={holidayWrapperRef} className="relative z-[101]">
+    <header ref={headerRef} className="fixed top-0 left-0 right-0 z-[100] flex flex-col isolation-auto">
+      <div className="relative z-[101]">
         <HolidayHoursNotice />
       </div>
       
@@ -148,134 +210,155 @@ const Header = () => {
             ? "bg-[#0f2f27]/95 backdrop-blur-md shadow-lg py-2" 
             : "bg-[#0f2f27] py-4"
         )}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center">
-            
-            {/* Logo */}
-            <Link href="/" className="group relative z-[102]">
-              <div className="flex items-center gap-3">
-                <div className="relative overflow-hidden rounded-lg bg-white/5 p-1 ring-1 ring-white/10 transition-all group-hover:bg-white/10">
-                  <img 
-                    src="/logo.png" 
-                    alt="Dr. Wong Logo" 
-                    className="h-10 w-auto object-contain"
-                  />
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-sm sm:text-lg font-serif tracking-wide text-white group-hover:text-[#f2d785] transition-colors">
-                    Christopher B. Wong, DDS
-                  </span>
-                  <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.2em] text-white/50 group-hover:text-white/70 transition-colors">
-                    Cosmetic & Family Dentistry
-                  </span>
-                </div>
-              </div>
-            </Link>
+	      >
+	        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+	          <div ref={navRowRef} className="flex justify-between items-center gap-4">
+	            
+	            {/* Logo */}
+			            <Link
+			              href="/"
+			              className={cn(
+			                "group relative z-[102] min-w-0 shrink",
+			                !desktopCollapsed && "lg:shrink-0"
+			              )}
+			            >
+	              <div className="flex items-center gap-3 min-w-0">
+	                <div className="relative overflow-hidden rounded-lg bg-white/5 p-1 ring-1 ring-white/10 transition-all group-hover:bg-white/10">
+	                  <img 
+	                    src="/logo.png" 
+	                    alt="Dr. Wong Logo" 
+	                    className="h-9 sm:h-10 lg:h-9 xl:h-10 w-auto object-contain"
+	                  />
+	                </div>
+	                <div className="flex flex-col min-w-0">
+	                  <span className="text-sm sm:text-lg lg:text-base xl:text-lg font-serif tracking-wide text-white group-hover:text-[#f2d785] transition-colors truncate">
+	                    Christopher B. Wong, DDS
+	                  </span>
+	                  <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.2em] text-white/50 group-hover:text-white/70 transition-colors lg:hidden xl:block truncate">
+	                    Cosmetic & Family Dentistry
+	                  </span>
+	                </div>
+	              </div>
+	            </Link>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center gap-8 relative z-[102]">
-              {navLinks.map((link) => (
-                <div 
-                  key={link.label}
-                  className="relative group"
-                  onMouseEnter={() => setHoveredLink(link.label)}
-                  onMouseLeave={() => setHoveredLink(null)}
-                >
-                  <Link href={link.href}>
-                    <span className={cn(
-                      "flex items-center gap-1.5 py-2 text-sm font-medium tracking-wide transition-colors cursor-pointer relative z-[102]",
-                      isActive(link.href) || (link.submenu && isParentActive(link.submenu))
-                        ? "text-[#f2d785]" 
-                        : "text-white/90 hover:text-[#f2d785]"
-                    )}>
-                      {link.label}
-                      {link.submenu && (
-                        <ChevronDown className="h-3 w-3 transition-transform duration-300 group-hover:-rotate-180" />
-                      )}
-                    </span>
-                  </Link>
+	            {/* Desktop Navigation + CTA */}
+	            <div
+	              ref={desktopClusterRef}
+	              className={cn(
+	                "hidden lg:flex items-center gap-4 xl:gap-6 flex-shrink-0",
+	                desktopCollapsed && "lg:hidden"
+	              )}
+	            >
+	              <nav className="flex items-center gap-4 xl:gap-6 2xl:gap-8 relative z-[102]">
+	                {navLinks.map((link) => (
+	                  <div 
+	                    key={link.label}
+	                    className="relative group"
+	                    onMouseEnter={() => setHoveredLink(link.label)}
+	                    onMouseLeave={() => setHoveredLink(null)}
+	                  >
+	                    <Link href={link.href}>
+	                      <span className={cn(
+	                        "flex items-center gap-1.5 py-2 text-xs xl:text-sm font-medium tracking-wide transition-colors cursor-pointer relative z-[102] whitespace-nowrap",
+	                        isActive(link.href) || (link.submenu && isParentActive(link.submenu))
+	                          ? "text-[#f2d785]" 
+	                          : "text-white/90 hover:text-[#f2d785]"
+	                      )}>
+	                        {link.label}
+	                        {link.submenu && (
+	                          <ChevronDown className="h-3 w-3 transition-transform duration-300 group-hover:-rotate-180" />
+	                        )}
+	                      </span>
+	                    </Link>
 
-                  {/* Animated Underline */}
-                  {(isActive(link.href) || (link.submenu && isParentActive(link.submenu))) && (
-                    <motion.div 
-                      layoutId="activeNav"
-                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#f2d785] z-[101]"
-                      initial={false}
-                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                    />
-                  )}
+	                    {/* Animated Underline */}
+	                    {(isActive(link.href) || (link.submenu && isParentActive(link.submenu))) && (
+	                      <motion.div 
+	                        layoutId="activeNav"
+	                        className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#f2d785] z-[101]"
+	                        initial={false}
+	                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
+	                      />
+	                    )}
 
-                  {/* Dropdown Menu */}
-                  <AnimatePresence>
-                    {link.submenu && hoveredLink === link.label && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 15, scale: 0.95 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                        transition={{ duration: 0.2 }}
-                        className="absolute top-full left-1/2 -translate-x-1/2 pt-4 w-64 z-[103]"
-                      >
-                        {/* Transparent bridge to prevent mouseleave when moving to dropdown */}
-                        <div className="absolute top-0 left-0 w-full h-4 bg-transparent -mt-4" />
-                        
-                        <div className="bg-[#0f2f27] border border-white/10 rounded-xl shadow-2xl overflow-hidden p-2 relative z-[103]">
-                          {link.submenu.map((subItem) => (
-                            <Link key={subItem.href} href={subItem.href}>
-                              <div className={cn(
-                                "flex items-center justify-between px-4 py-3 rounded-lg group/item transition-colors cursor-pointer relative z-[104]",
-                                isActive(subItem.href) 
-                                  ? "bg-white/10 text-[#f2d785]" 
-                                  : "hover:bg-white/5 text-white/90 hover:text-white"
-                              )}>
-                                <span className="text-sm font-medium">{subItem.label}</span>
-                                <ArrowRight className={cn(
-                                  "h-3 w-3 opacity-0 -translate-x-2 transition-all",
-                                  isActive(subItem.href) ? "opacity-100 translate-x-0" : "group-hover/item:opacity-100 group-hover/item:translate-x-0"
-                                )} />
-                              </div>
-                            </Link>
-                          ))}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              ))}
-            </nav>
+	                    {/* Dropdown Menu */}
+	                    <AnimatePresence>
+	                      {link.submenu && hoveredLink === link.label && (
+	                        <motion.div
+	                          initial={{ opacity: 0, y: 15, scale: 0.95 }}
+	                          animate={{ opacity: 1, y: 0, scale: 1 }}
+	                          exit={{ opacity: 0, y: 10, scale: 0.95 }}
+	                          transition={{ duration: 0.2 }}
+	                          className="absolute top-full left-1/2 -translate-x-1/2 pt-4 w-64 z-[103]"
+	                        >
+	                          {/* Transparent bridge to prevent mouseleave when moving to dropdown */}
+	                          <div className="absolute top-0 left-0 w-full h-4 bg-transparent -mt-4" />
+	                          
+	                          <div className="bg-[#0f2f27] border border-white/10 rounded-xl shadow-2xl overflow-hidden p-2 relative z-[103]">
+	                            {link.submenu.map((subItem) => (
+	                              <Link key={subItem.href} href={subItem.href}>
+	                                <div className={cn(
+	                                  "flex items-center justify-between px-4 py-3 rounded-lg group/item transition-colors cursor-pointer relative z-[104]",
+	                                  isActive(subItem.href) 
+	                                    ? "bg-white/10 text-[#f2d785]" 
+	                                    : "hover:bg-white/5 text-white/90 hover:text-white"
+	                                )}>
+	                                  <span className="text-sm font-medium">{subItem.label}</span>
+	                                  <ArrowRight className={cn(
+	                                    "h-3 w-3 opacity-0 -translate-x-2 transition-all",
+	                                    isActive(subItem.href) ? "opacity-100 translate-x-0" : "group-hover/item:opacity-100 group-hover/item:translate-x-0"
+	                                  )} />
+	                                </div>
+	                              </Link>
+	                            ))}
+	                          </div>
+	                        </motion.div>
+	                      )}
+	                    </AnimatePresence>
+	                  </div>
+	                ))}
+	              </nav>
 
-            {/* CTA Button */}
-            <div className="hidden lg:block">
-              <Link href="/schedule#appointment">
-                <Button 
-                  className="bg-[#f2d785] text-[#0f2f27] hover:bg-[#fff0c0] hover:scale-105 transition-all duration-300 font-semibold rounded-full px-6 shadow-[0_0_15px_rgba(242,215,133,0.3)] hover:shadow-[0_0_25px_rgba(242,215,133,0.5)]"
-                >
-                  Book Appointment
-                </Button>
-              </Link>
-            </div>
+	              <Link href="/schedule#appointment">
+	                <Button 
+	                  aria-label="Book Appointment"
+	                  className="bg-[#f2d785] text-[#0f2f27] hover:bg-[#fff0c0] hover:scale-105 transition-all duration-300 font-semibold rounded-full px-3 xl:px-6 text-xs xl:text-sm shadow-[0_0_15px_rgba(242,215,133,0.3)] hover:shadow-[0_0_25px_rgba(242,215,133,0.5)] whitespace-nowrap"
+	                >
+	                  Book <span className="hidden xl:inline">Appointment</span>
+	                </Button>
+	              </Link>
+	            </div>
 
-            {/* Mobile Menu Toggle */}
-            <button
-              onClick={toggleMobileMenu}
-              className="lg:hidden relative z-50 p-2 text-white hover:text-[#f2d785] transition-colors"
-              aria-label="Toggle menu"
-            >
-              {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </button>
-          </div>
-        </div>
+	            {/* Mobile Menu Toggle */}
+	            <button
+	              onClick={toggleMobileMenu}
+	              className={cn(
+	                "relative z-50 p-2 text-white hover:text-[#f2d785] transition-colors",
+	                !desktopCollapsed && "lg:hidden"
+	              )}
+	              aria-label="Toggle menu"
+	              aria-expanded={mobileMenuOpen}
+	              aria-controls="mobile-nav"
+	            >
+	              {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+	            </button>
+	          </div>
+	        </div>
       </div>
 
       {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40 lg:hidden bg-[#0f2f27]"
-          >
+	          <motion.div
+	            initial={{ opacity: 0 }}
+	            animate={{ opacity: 1 }}
+	            exit={{ opacity: 0 }}
+	            id="mobile-nav"
+	            className={cn(
+	              "fixed inset-0 z-40 bg-[#0f2f27]",
+	              !desktopCollapsed && "lg:hidden"
+	            )}
+	          >
             {/* Background Pattern */}
             <div className="absolute inset-0 opacity-5 bg-[url('/bg-pattern.png')] bg-cover pointer-events-none" />
             
