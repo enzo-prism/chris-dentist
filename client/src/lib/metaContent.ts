@@ -36,6 +36,9 @@ export const pageTitles = {
   // Emergency dental page
   emergencyDental: `Emergency Dental Care Palo Alto | 24/7 Dental Emergency | Dr. Wong`,
   
+  // ZOOM Whitening page
+  zoomWhitening: `ZOOM Teeth Whitening Palo Alto | Fast In-Office Whitening | Dr. Wong`,
+  
   // Analytics page
   analytics: `Analytics Dashboard | Practice Performance Metrics | Dr. Wong`,
   
@@ -82,6 +85,9 @@ export const pageDescriptions = {
   
   // Emergency dental page
   emergencyDental: `24/7 emergency dental care in Palo Alto. Dr. Wong provides immediate treatment for dental emergencies including toothaches, broken teeth, and trauma.`,
+  
+  // ZOOM Whitening page
+  zoomWhitening: `Get a brighter smile fast with ZOOM! teeth whitening in Palo Alto. Dr. Wong offers same-day in-office whitening with minimal sensitivity.`,
   
   // Analytics page
   analytics: `Secure analytics dashboard showing practice performance metrics, marketing ROI, and patient engagement data for Dr. Wong's dental practice.`,

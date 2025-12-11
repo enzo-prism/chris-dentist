@@ -23,6 +23,7 @@ Allow: /patient-stories
 Allow: /blog
 Allow: /contact
 Allow: /schedule
+Allow: /zoom-whitening
 Allow: /dental-veneers
 Allow: /dental-implants
 Allow: /invisalign

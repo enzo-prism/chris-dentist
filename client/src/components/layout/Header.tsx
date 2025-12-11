@@ -76,17 +76,18 @@ const Header = () => {
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/about", label: "About" },
-    { 
-      href: "/services", 
-      label: "Services",
-      submenu: [
-        { href: "/invisalign", label: "Invisalign" },
-        { href: "/dental-veneers", label: "Dental Veneers" },
-        { href: "/dental-implants", label: "Dental Implants" },
-        { href: "/emergency-dental", label: "Emergency Care" },
-        { href: "/services", label: "View All Services" }
-      ]
-    },
+        { 
+          href: "/services", 
+          label: "Services",
+          submenu: [
+            { href: "/invisalign", label: "Invisalign" },
+            { href: "/dental-veneers", label: "Dental Veneers" },
+            { href: "/zoom-whitening", label: "ZOOM Whitening" },
+            { href: "/dental-implants", label: "Dental Implants" },
+            { href: "/emergency-dental", label: "Emergency Care" },
+            { href: "/services", label: "View All Services" }
+          ]
+        },
     { href: "/patient-stories", label: "Patient Stories" },
     { href: "/testimonials", label: "Testimonials" },
     { href: "/contact", label: "Contact" }

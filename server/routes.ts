@@ -31,6 +31,7 @@ Allow: /testimonials
 Allow: /blog
 Allow: /contact
 Allow: /schedule
+Allow: /zoom-whitening
 Allow: /dental-veneers
 Allow: /dental-implants
 Allow: /privacy-policy
@@ -95,6 +96,7 @@ Disallow: /`);
         { url: '/services', priority: '0.9', changefreq: 'weekly' },
         { url: '/dental-veneers', priority: '0.9', changefreq: 'monthly' },
         { url: '/dental-implants', priority: '0.9', changefreq: 'monthly' },
+        { url: '/zoom-whitening', priority: '0.9', changefreq: 'monthly' },
         { url: '/invisalign', priority: '0.9', changefreq: 'monthly' },
         { url: '/emergency-dental', priority: '1.0', changefreq: 'monthly' },
         { url: '/patient-resources', priority: '0.7', changefreq: 'monthly' },

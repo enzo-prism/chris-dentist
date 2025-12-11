@@ -344,6 +344,13 @@ export class MemStorage implements IStorage {
         featured: true
       },
       {
+        title: "ZOOM! Teeth Whitening",
+        description: "In-office ZOOM! whitening that lifts deep stains and brightens your smile in one visit with minimal sensitivity.",
+        image: "https://i.imgur.com/qK5nPtS.png",
+        slug: "zoom-whitening",
+        featured: true
+      },
+      {
         title: "Emergency Dental Care",
         description: "24/7 emergency dental services for urgent dental problems including severe toothaches, trauma, broken teeth, and infections.",
         image: "https://res.cloudinary.com/dhqpqfw6w/image/upload/v1763585455/Gemini_Generated_Image_3fvkl73fvkl73fvk_sbv4kj.webp",

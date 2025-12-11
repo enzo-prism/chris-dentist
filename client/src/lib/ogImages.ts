@@ -26,6 +26,9 @@ export const ogImages = {
   // Blog page with lab image
   blog: drWongImages.drWongLab1,
   
+  // ZOOM Whitening page
+  zoomWhitening: drWongImages.drWongLab1,
+  
   // Contact page with reception desk
   contact: drWongImages.drWongReception,
   

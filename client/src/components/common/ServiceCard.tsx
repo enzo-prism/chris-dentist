@@ -23,6 +23,8 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
         return "/dental-veneers";
       case "dental-implants":
         return "/dental-implants";
+      case "zoom-whitening":
+        return "/zoom-whitening";
       case "preventive-dentistry":
       case "restorative-dentistry":
       case "pediatric-dentistry":
