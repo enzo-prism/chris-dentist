@@ -9,6 +9,7 @@ import { pageTitles, pageDescriptions } from "@/lib/metaContent";
 import { Service } from "@shared/schema";
 import OptimizedImage from "@/components/seo/OptimizedImage";
 import StructuredData from "@/components/seo/StructuredData";
+import PageBreadcrumbs from "@/components/common/PageBreadcrumbs";
 import {
   buildBreadcrumbSchema,
   buildItemListSchema,
@@ -32,10 +33,11 @@ const Services = () => {
     servicesSchemas.push(itemListSchema);
   }
 
-  const serviceBreadcrumbs = buildBreadcrumbSchema([
+  const breadcrumbItems = [
     { name: "Home", path: "/" },
     { name: "Services", path: "/services" },
-  ]);
+  ];
+  const serviceBreadcrumbs = buildBreadcrumbSchema(breadcrumbItems);
 
   if (serviceBreadcrumbs) {
     servicesSchemas.push(serviceBreadcrumbs);
@@ -48,6 +50,7 @@ const Services = () => {
         description={pageDescriptions.services}
       />
       <StructuredData data={servicesSchemas} />
+      <PageBreadcrumbs items={breadcrumbItems} />
       {/* Services List */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

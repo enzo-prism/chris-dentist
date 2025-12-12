@@ -9,6 +9,9 @@ import MetaTags from "@/components/common/MetaTags";
 import { pageTitles, pageDescriptions } from "@/lib/metaContent";
 import OptimizedImage from "@/components/seo/OptimizedImage";
 import { normalizeBlogCategory, useBlogPosts } from "@/hooks/useBlogPosts";
+import StructuredData from "@/components/seo/StructuredData";
+import PageBreadcrumbs from "@/components/common/PageBreadcrumbs";
+import { buildBreadcrumbSchema } from "@/lib/structuredData";
 
 const Blog = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -92,12 +95,20 @@ const Blog = () => {
     </div>
   );
 
+  const breadcrumbItems = [
+    { name: "Home", path: "/" },
+    { name: "Blog", path: "/blog" },
+  ];
+  const breadcrumbSchema = buildBreadcrumbSchema(breadcrumbItems);
+
   return (
     <>
       <MetaTags 
         title={pageTitles.blog}
         description={pageDescriptions.blog}
       />
+      {breadcrumbSchema && <StructuredData data={breadcrumbSchema} />}
+      <PageBreadcrumbs items={breadcrumbItems} />
       {/* Hero Section */}
       <section className="bg-[#F5F9FC] py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

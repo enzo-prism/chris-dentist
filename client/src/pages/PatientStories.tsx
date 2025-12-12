@@ -22,7 +22,11 @@ import {
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { officeInfo } from "@/lib/data";
 import { pageDescriptions, pageTitles } from "@/lib/metaContent";
-import { absoluteUrl } from "@/lib/structuredData";
+import {
+  absoluteUrl,
+  buildBreadcrumbSchema,
+  type StructuredDataNode,
+} from "@/lib/structuredData";
 import { cn } from "@/lib/utils";
 import {
   AlertCircle,
@@ -34,6 +38,7 @@ import {
   Timer,
 } from "lucide-react";
 import { Link } from "wouter";
+import PageBreadcrumbs from "@/components/common/PageBreadcrumbs";
 
 type CaseImage = {
   src: string;
@@ -496,7 +501,13 @@ const PatientStories = () => {
   const [showStickyCTA, setShowStickyCTA] = useState(false);
   const [copiedCaseId, setCopiedCaseId] = useState<string | null>(null);
 
-  const structuredData = caseStudies.map((study) => ({
+  const breadcrumbItems = [
+    { name: "Home", path: "/" },
+    { name: "Patient Stories", path: "/patient-stories" },
+  ];
+  const breadcrumbSchema = buildBreadcrumbSchema(breadcrumbItems);
+
+  const structuredData: StructuredDataNode[] = caseStudies.map((study) => ({
     "@context": "https://schema.org",
     "@type": "MedicalProcedure",
     name: study.title,
@@ -512,14 +523,18 @@ const PatientStories = () => {
       address: {
         "@type": "PostalAddress",
         streetAddress: officeInfo.address.line1,
-        addressLocality: "Palo Alto",
-        addressRegion: "CA",
-        postalCode: "94306",
-        addressCountry: "US",
+        addressLocality: officeInfo.address.city,
+        addressRegion: officeInfo.address.region,
+        postalCode: officeInfo.address.postalCode,
+        addressCountry: officeInfo.address.country,
       },
     },
     url: absoluteUrl(`/patient-stories#${study.id}`),
   }));
+
+  if (breadcrumbSchema) {
+    structuredData.unshift(breadcrumbSchema);
+  }
 
   useEffect(() => {
     const onScroll = () => {
@@ -550,6 +565,7 @@ const PatientStories = () => {
         description={pageDescriptions.patientStories}
       />
       <StructuredData data={structuredData} />
+      <PageBreadcrumbs items={breadcrumbItems} />
 
       <section id="top" className="bg-gradient-to-b from-[#F5F9FC] via-white to-[#F5F9FC] py-12 md:py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">

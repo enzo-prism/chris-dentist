@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import OptimizedImage from "@/components/seo/OptimizedImage";
 import TestimonialQuote from "@/components/testimonials/TestimonialQuote";
 import { getTestimonialsByNames } from "@/lib/testimonials";
+import PageBreadcrumbs from "@/components/common/PageBreadcrumbs";
 import {
   buildBreadcrumbSchema,
   buildHowToSchema,
@@ -126,11 +127,12 @@ const Invisalign = () => {
     pagePath: "/invisalign",
   });
 
-  const invisalignBreadcrumbs = buildBreadcrumbSchema([
+  const breadcrumbItems = [
     { name: "Home", path: "/" },
     { name: "Services", path: "/services" },
     { name: "Invisalign", path: "/invisalign" },
-  ]);
+  ];
+  const invisalignBreadcrumbs = buildBreadcrumbSchema(breadcrumbItems);
 
   const pageSchemas = [serviceSchema];
 
@@ -149,6 +151,7 @@ const Invisalign = () => {
         description={pageDescriptions.invisalign}
       />
       <StructuredData data={pageSchemas} />
+      <PageBreadcrumbs items={breadcrumbItems} />
 
       {/* Hero Section */}
       <section className="bg-gradient-to-b from-[#F5F9FC] to-white py-16 md:py-24">

@@ -14,6 +14,7 @@ import {
 import RelatedServicePosts from "@/components/blog/RelatedServicePosts";
 import { pageDescriptions, pageTitles } from "@/lib/metaContent";
 import { officeInfo } from "@/lib/data";
+import PageBreadcrumbs from "@/components/common/PageBreadcrumbs";
 
 const EmergencyDental = () => {
   const emergencyTypes = [
@@ -112,11 +113,12 @@ const EmergencyDental = () => {
     pagePath: "/emergency-dental",
   });
 
-  const emergencyBreadcrumbs = buildBreadcrumbSchema([
+  const breadcrumbItems = [
     { name: "Home", path: "/" },
     { name: "Services", path: "/services" },
     { name: "Emergency Dental", path: "/emergency-dental" },
-  ]);
+  ];
+  const emergencyBreadcrumbs = buildBreadcrumbSchema(breadcrumbItems);
 
   const emergencySchemas = [emergencyServiceSchema];
 
@@ -135,6 +137,7 @@ const EmergencyDental = () => {
         description={pageDescriptions.emergencyDental}
       />
       <StructuredData data={emergencySchemas} />
+      <PageBreadcrumbs items={breadcrumbItems} />
 
       {/* Hero Section */}
       <section className="bg-gradient-to-b from-orange-50 to-white py-16 md:py-24">

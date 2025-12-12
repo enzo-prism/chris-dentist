@@ -9,6 +9,7 @@ import { buildBreadcrumbSchema, buildHowToSchema, buildServiceSchema } from "@/l
 import { getTestimonialsByNames } from "@/lib/testimonials";
 import { motion } from "framer-motion";
 import { drWongImages } from "@/lib/imageUrls";
+import PageBreadcrumbs from "@/components/common/PageBreadcrumbs";
 
 const ZoomWhitening = () => {
   const whiteningPerks = [
@@ -60,11 +61,12 @@ const ZoomWhitening = () => {
     pagePath: "/zoom-whitening",
   });
 
-  const breadcrumbSchema = buildBreadcrumbSchema([
+  const breadcrumbItems = [
     { name: "Home", path: "/" },
     { name: "Services", path: "/services" },
     { name: "ZOOM Whitening", path: "/zoom-whitening" },
-  ]);
+  ];
+  const breadcrumbSchema = buildBreadcrumbSchema(breadcrumbItems);
 
   const schemaNodes = [serviceSchema];
 
@@ -77,6 +79,7 @@ const ZoomWhitening = () => {
         description={pageDescriptions.zoomWhitening}
       />
       <StructuredData data={schemaNodes} />
+      <PageBreadcrumbs items={breadcrumbItems} />
 
       {/* Hero */}
       <section className="bg-gradient-to-b from-[#0f2f27] via-[#123129] to-white pt-28 pb-16 md:pb-24">

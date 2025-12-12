@@ -9,7 +9,12 @@ import { ArrowLeft, Calendar, Clock, Tag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import StructuredData from "@/components/seo/StructuredData";
-import { absoluteUrl } from "@/lib/structuredData";
+import PageBreadcrumbs from "@/components/common/PageBreadcrumbs";
+import {
+  absoluteUrl,
+  buildBreadcrumbSchema,
+  type StructuredDataNode,
+} from "@/lib/structuredData";
 
 interface Params {
   slug?: string;
@@ -58,6 +63,23 @@ const BlogPost = ({ params }: RouteComponentProps<Params>) => {
         url: pageUrl,
       }
     : null;
+
+  const breadcrumbItems = [
+    { name: "Home", path: "/" },
+    { name: "Blog", path: "/blog" },
+    {
+      name: post?.title ?? "Article",
+      path: `/blog/${slug}`,
+    },
+  ];
+  const breadcrumbSchema = buildBreadcrumbSchema(breadcrumbItems);
+  const structuredDataNodes: StructuredDataNode[] = [];
+  if (breadcrumbSchema) {
+    structuredDataNodes.push(breadcrumbSchema);
+  }
+  if (blogSchema) {
+    structuredDataNodes.push(blogSchema);
+  }
   const parsedContent = useMemo(() => {
     if (!post?.content) return [];
     const lines = post.content
@@ -179,7 +201,10 @@ const BlogPost = ({ params }: RouteComponentProps<Params>) => {
         description={pageDescription}
         image={post.image || blogOgImage}
       />
-      {blogSchema && <StructuredData data={blogSchema} />}
+      {structuredDataNodes.length > 0 && (
+        <StructuredData data={structuredDataNodes} />
+      )}
+      <PageBreadcrumbs items={breadcrumbItems} />
       <section className="bg-[#F5F9FC] py-12">
         <div className="max-w-5xl mx-auto px-4">
           <Button

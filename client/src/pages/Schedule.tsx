@@ -8,6 +8,9 @@ import { useEffect } from "react";
 import OptimizedImage from "@/components/seo/OptimizedImage";
 import HolidayHoursNotice from "@/components/common/HolidayHoursNotice";
 import { officeInfo } from "@/lib/data";
+import StructuredData from "@/components/seo/StructuredData";
+import PageBreadcrumbs from "@/components/common/PageBreadcrumbs";
+import { buildBreadcrumbSchema, type StructuredDataNode } from "@/lib/structuredData";
 
 const Schedule = () => {
   useEffect(() => {
@@ -27,12 +30,21 @@ const Schedule = () => {
     };
   }, []);
 
+  const breadcrumbItems = [
+    { name: "Home", path: "/" },
+    { name: "Schedule", path: "/schedule" },
+  ];
+  const breadcrumbSchema: StructuredDataNode | null =
+    buildBreadcrumbSchema(breadcrumbItems);
+
   return (
     <>
       <MetaTags 
         title={pageTitles.schedule}
         description={pageDescriptions.schedule}
       />
+      {breadcrumbSchema && <StructuredData data={breadcrumbSchema} />}
+      <PageBreadcrumbs items={breadcrumbItems} />
       {/* Hero Section */}
       <section className="bg-[#F5F9FC] py-12 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

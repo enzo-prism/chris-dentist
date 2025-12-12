@@ -7,6 +7,7 @@ import { pageTitles, pageDescriptions } from "@/lib/metaContent";
 import * as data from "@/lib/data";
 import MetaTags from "@/components/common/MetaTags";
 import StructuredData from "@/components/seo/StructuredData";
+import PageBreadcrumbs from "@/components/common/PageBreadcrumbs";
 import { useState } from "react";
 import VideoModal from "@/components/common/VideoModal";
 import OptimizedImage from "@/components/seo/OptimizedImage";
@@ -70,10 +71,11 @@ const About = () => {
     buildPersonSchema(),
   ];
 
-  const aboutBreadcrumbs = buildBreadcrumbSchema([
+  const breadcrumbItems = [
     { name: "Home", path: "/" },
     { name: "About", path: "/about" },
-  ]);
+  ];
+  const aboutBreadcrumbs = buildBreadcrumbSchema(breadcrumbItems);
 
   if (aboutBreadcrumbs) {
     aboutSchema.push(aboutBreadcrumbs);
@@ -98,6 +100,7 @@ const About = () => {
         description={pageDescriptions.about}
       />
       <StructuredData data={aboutSchema} />
+      <PageBreadcrumbs items={breadcrumbItems} />
       {/* Hero Section - Mobile First */}
       <section className="bg-[#F5F9FC] py-12 sm:py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

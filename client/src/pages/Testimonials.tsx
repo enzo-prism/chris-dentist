@@ -9,6 +9,7 @@ import type { Testimonial } from "@shared/schema";
 import { useMemo } from "react";
 import { buildInsertTestimonial, testimonialSeedData } from "@shared/testimonialsData";
 import StructuredData from "@/components/seo/StructuredData";
+import PageBreadcrumbs from "@/components/common/PageBreadcrumbs";
 import {
   buildBreadcrumbSchema,
   type StructuredDataNode,
@@ -36,10 +37,11 @@ const Testimonials = () => {
     reviews.find((review) => review.text.length > 180) ?? reviews[0];
   const showSkeleton = isLoadingTestimonials && apiCount === 0;
 
-  const testimonialsBreadcrumb = buildBreadcrumbSchema([
+  const breadcrumbItems = [
     { name: "Home", path: "/" },
     { name: "Testimonials", path: "/testimonials" },
-  ]);
+  ];
+  const testimonialsBreadcrumb = buildBreadcrumbSchema(breadcrumbItems);
   const structuredDataNodes: StructuredDataNode[] = [];
 
   if (testimonialsBreadcrumb) {
@@ -56,6 +58,7 @@ const Testimonials = () => {
       {structuredDataNodes.length > 0 && (
         <StructuredData data={structuredDataNodes} />
       )}
+      <PageBreadcrumbs items={breadcrumbItems} />
       
       {/* Hero Section */}
       <section className="bg-gradient-to-b from-[#F5F9FC] via-white to-white py-16 md:py-24">

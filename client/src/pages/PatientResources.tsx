@@ -11,6 +11,7 @@ import { drWongImages } from "@/lib/imageUrls";
 import { pageTitles, pageDescriptions } from "@/lib/metaContent";
 import { officeInfo, faqItems, patientResources } from "@/lib/data";
 import StructuredData from "@/components/seo/StructuredData";
+import PageBreadcrumbs from "@/components/common/PageBreadcrumbs";
 import {
   buildBreadcrumbSchema,
   buildFAQSchema,
@@ -48,10 +49,12 @@ const PatientResources = () => {
   ];
 
   const patientResourcesFAQ = buildFAQSchema(faqs, "/patient-resources");
-  const patientResourcesBreadcrumbs = buildBreadcrumbSchema([
+  const breadcrumbItems = [
     { name: "Home", path: "/" },
     { name: "Patient Resources", path: "/patient-resources" },
-  ]);
+  ];
+  const patientResourcesBreadcrumbs =
+    buildBreadcrumbSchema(breadcrumbItems);
 
   const structuredDataNodes: StructuredDataNode[] = [];
   if (patientResourcesFAQ) {
@@ -70,6 +73,7 @@ const PatientResources = () => {
       {structuredDataNodes.length > 0 && (
         <StructuredData data={structuredDataNodes} />
       )}
+      <PageBreadcrumbs items={breadcrumbItems} />
       {/* Hero Section */}
       <section className="bg-[#F5F9FC] py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

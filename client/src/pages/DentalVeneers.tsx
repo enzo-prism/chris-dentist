@@ -13,6 +13,7 @@ import {
 } from "@/lib/structuredData";
 import RelatedServicePosts from "@/components/blog/RelatedServicePosts";
 import { getSeoForPath } from "@/lib/seo";
+import PageBreadcrumbs from "@/components/common/PageBreadcrumbs";
 
 const DentalVeneers = () => {
   const veneerSeo = getSeoForPath("/dental-veneers");
@@ -90,11 +91,12 @@ const DentalVeneers = () => {
     slug: "/dental-veneers",
   });
 
-  const veneerBreadcrumbs = buildBreadcrumbSchema([
+  const breadcrumbItems = [
     { name: "Home", path: "/" },
     { name: "Services", path: "/services" },
     { name: "Dental Veneers", path: "/dental-veneers" },
-  ]);
+  ];
+  const veneerBreadcrumbs = buildBreadcrumbSchema(breadcrumbItems);
 
   const veneerSchemas = [veneerServiceSchema];
 
@@ -109,6 +111,7 @@ const DentalVeneers = () => {
         description={veneerSeo.description}
       />
       <StructuredData data={veneerSchemas} />
+      <PageBreadcrumbs items={breadcrumbItems} />
 
       {/* Hero Section */}
       <section className="bg-gradient-to-b from-[#F5F9FC] to-white py-16 md:py-24">

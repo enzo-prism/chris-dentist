@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import HolidayHoursNotice from "@/components/common/HolidayHoursNotice";
 import StructuredData from "@/components/seo/StructuredData";
 import { officeInfo } from "@/lib/data";
+import PageBreadcrumbs from "@/components/common/PageBreadcrumbs";
 import {
   buildBreadcrumbSchema,
   buildOrganizationSchema,
@@ -20,10 +21,11 @@ const Contact = () => {
     ...buildOrganizationSchema(),
     hasMap: officeInfo.mapUrl,
   };
-  const contactBreadcrumbs = buildBreadcrumbSchema([
+  const breadcrumbItems = [
     { name: "Home", path: "/" },
     { name: "Contact", path: "/contact" },
-  ]);
+  ];
+  const contactBreadcrumbs = buildBreadcrumbSchema(breadcrumbItems);
   const contactSchemas: StructuredDataNode[] = [contactOrganization];
   if (contactBreadcrumbs) {
     contactSchemas.push(contactBreadcrumbs);
@@ -36,6 +38,7 @@ const Contact = () => {
         description={pageDescriptions.contact}
       />
       <StructuredData data={contactSchemas} />
+      <PageBreadcrumbs items={breadcrumbItems} />
       {/* Hero Section */}
       <section className="bg-[#F5F9FC] py-12 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

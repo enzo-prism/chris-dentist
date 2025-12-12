@@ -13,6 +13,7 @@ import {
   buildHowToSchema,
   buildServiceSchema,
 } from "@/lib/structuredData";
+import PageBreadcrumbs from "@/components/common/PageBreadcrumbs";
 import RelatedServicePosts from "@/components/blog/RelatedServicePosts";
 
 const benefits = [
@@ -132,11 +133,12 @@ const DentalImplants = () => {
   });
 
   const implantFaqSchema = buildFAQSchema(faqs, "/dental-implants");
-  const implantBreadcrumbs = buildBreadcrumbSchema([
+  const breadcrumbItems = [
     { name: "Home", path: "/" },
     { name: "Services", path: "/services" },
     { name: "Dental Implants", path: "/dental-implants" },
-  ]);
+  ];
+  const implantBreadcrumbs = buildBreadcrumbSchema(breadcrumbItems);
 
   const dentalImplantSchemas = [implantServiceSchema];
 
@@ -159,6 +161,7 @@ const DentalImplants = () => {
         description={pageDescriptions.dentalImplants}
       />
       <StructuredData data={dentalImplantSchemas} />
+      <PageBreadcrumbs items={breadcrumbItems} />
 
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary to-blue-700 text-white py-12 sm:py-16 lg:py-20">
