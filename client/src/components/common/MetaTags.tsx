@@ -23,18 +23,25 @@ export default function MetaTags({
     const defaultUrl = "https://www.chriswongdds.com";
     if (typeof window === "undefined") return defaultUrl;
 
-    const urlObj = new URL(window.location.href);
+    try {
+      const urlObj = new URL(window.location.href);
 
-    // Force www subdomain for canonical consistency
-    if (!urlObj.hostname.startsWith("www.") && urlObj.hostname === "chriswongdds.com") {
-      urlObj.hostname = "www.chriswongdds.com";
+      // Force www subdomain for canonical consistency
+      if (
+        !urlObj.hostname.startsWith("www.") &&
+        urlObj.hostname === "chriswongdds.com"
+      ) {
+        urlObj.hostname = "www.chriswongdds.com";
+      }
+
+      // Clean query strings and fragments for canonical URLs
+      urlObj.search = "";
+      urlObj.hash = "";
+
+      return urlObj.toString() || defaultUrl;
+    } catch {
+      return defaultUrl;
     }
-
-    // Clean query strings and fragments for canonical URLs
-    urlObj.search = "";
-    urlObj.hash = "";
-
-    return urlObj.toString() || defaultUrl;
   })();
   
   // Ensure the image URL is absolute (SSR-safe fallback)

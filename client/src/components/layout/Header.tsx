@@ -40,14 +40,17 @@ const Header = () => {
 
     updateHeaderHeight();
 
-    const observer = new ResizeObserver(() => {
-      requestAnimationFrame(updateHeaderHeight);
-    });
-    observer.observe(headerEl);
+    let observer: ResizeObserver | null = null;
+    if (typeof ResizeObserver !== "undefined") {
+      observer = new ResizeObserver(() => {
+        requestAnimationFrame(updateHeaderHeight);
+      });
+      observer.observe(headerEl);
+    }
 
     window.addEventListener("resize", updateHeaderHeight);
     return () => {
-      observer.disconnect();
+      observer?.disconnect();
       window.removeEventListener("resize", updateHeaderHeight);
     };
   }, [scrolled]);
@@ -59,7 +62,10 @@ const Header = () => {
     if (!rowEl) return;
 
     const updateCollapse = () => {
-      const isLgUp = window.matchMedia("(min-width: 1024px)").matches;
+      const isLgUp =
+        typeof window.matchMedia === "function"
+          ? window.matchMedia("(min-width: 1024px)").matches
+          : window.innerWidth >= 1024;
       if (!isLgUp) {
         requiredRowWidthRef.current = 0;
         if (desktopCollapsed) setDesktopCollapsed(false);
@@ -83,19 +89,22 @@ const Header = () => {
       }
     };
 
-    const resizeObserver = new ResizeObserver(() => {
-      requestAnimationFrame(updateCollapse);
-    });
-    resizeObserver.observe(rowEl);
-    if (clusterEl) {
-      resizeObserver.observe(clusterEl);
+    let resizeObserver: ResizeObserver | null = null;
+    if (typeof ResizeObserver !== "undefined") {
+      resizeObserver = new ResizeObserver(() => {
+        requestAnimationFrame(updateCollapse);
+      });
+      resizeObserver.observe(rowEl);
+      if (clusterEl) {
+        resizeObserver.observe(clusterEl);
+      }
     }
 
     window.addEventListener("resize", updateCollapse);
     requestAnimationFrame(updateCollapse);
 
     return () => {
-      resizeObserver.disconnect();
+      resizeObserver?.disconnect();
       window.removeEventListener("resize", updateCollapse);
     };
   }, [desktopCollapsed, mobileMenuOpen]);

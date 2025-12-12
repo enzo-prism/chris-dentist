@@ -130,7 +130,33 @@ export function serveStatic(app: Express) {
     );
   }
 
-  app.use(express.static(distPath, { maxAge: "1y", immutable: true }));
+  const oneYearMs = 1000 * 60 * 60 * 24 * 365;
+  const oneYearSeconds = Math.floor(oneYearMs / 1000);
+
+  app.use(
+    express.static(distPath, {
+      index: false,
+      maxAge: oneYearMs,
+      setHeaders(res, filePath) {
+        if (filePath.endsWith(".html")) {
+          res.setHeader(
+            "Cache-Control",
+            "no-store, no-cache, must-revalidate, max-age=0",
+          );
+          res.setHeader("Pragma", "no-cache");
+          res.setHeader("Expires", "0");
+          return;
+        }
+
+        if (filePath.includes(`${path.sep}assets${path.sep}`)) {
+          res.setHeader(
+            "Cache-Control",
+            `public, max-age=${oneYearSeconds}, immutable`,
+          );
+        }
+      },
+    }),
+  );
 
   // fall through to index.html if the file doesn't exist
   const indexHtmlPath = path.resolve(distPath, "index.html");
@@ -139,7 +165,15 @@ export function serveStatic(app: Express) {
       let template = await fs.promises.readFile(indexHtmlPath, "utf-8");
       const meta = await resolveMetaForUrl(req.originalUrl);
       template = injectMeta(template, meta);
-      res.status(200).set({ "Content-Type": "text/html" }).send(template);
+      res
+        .status(200)
+        .set({
+          "Content-Type": "text/html",
+          "Cache-Control": "no-store, no-cache, must-revalidate, max-age=0",
+          Pragma: "no-cache",
+          Expires: "0",
+        })
+        .send(template);
     } catch (error) {
       next(error);
     }

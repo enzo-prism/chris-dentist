@@ -31,3 +31,7 @@ pnpm run dev
 - **`reusePort` errors**: leave `REUSE_PORT_ENABLED=false` (default) on macOS/Windows.
 - **Port already in use**: adjust `PORT` in `.env` and restart.
 - **Domain redirects**: the client enforces `www` redirects in production, but `pnpm run dev` will respect whatever host/port you configure via `.env`.
+
+## 6. Production caching notes
+- Files in `dist/public/assets` are content-hashed and served with a 1-year immutable cache.
+- `index.html` and SPA HTML fallbacks are served with `no-store/no-cache` so browsers always fetch the latest HTML after deploys. Keep this split if you adjust caching middleware, otherwise stale HTML can reference deleted asset hashes and render a blank page.
