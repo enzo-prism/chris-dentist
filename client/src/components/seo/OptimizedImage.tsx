@@ -3,6 +3,8 @@ import { useState, type CSSProperties, type SyntheticEvent } from 'react';
 interface OptimizedImageProps {
   src: string;
   alt: string;
+  srcSet?: string;
+  sizes?: string;
   className?: string;
   width?: number;
   height?: number;
@@ -12,11 +14,14 @@ interface OptimizedImageProps {
   style?: CSSProperties;
   useIntrinsicAspect?: boolean;
   objectPosition?: string;
+  fetchPriority?: "high" | "low" | "auto";
 }
 
 const OptimizedImage = ({ 
   src, 
   alt, 
+  srcSet,
+  sizes,
   className = '', 
   width, 
   height, 
@@ -25,7 +30,8 @@ const OptimizedImage = ({
   fit = "cover",
   style,
   useIntrinsicAspect = false,
-  objectPosition = "center"
+  objectPosition = "center",
+  fetchPriority
 }: OptimizedImageProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
@@ -78,10 +84,13 @@ const OptimizedImage = ({
       <img
         src={src}
         alt={alt}
+        srcSet={srcSet}
+        sizes={sizes}
         width={width}
         height={height}
         loading={priority ? 'eager' : 'lazy'}
         decoding={priority ? 'sync' : 'async'}
+        {...(fetchPriority ? ({ fetchpriority: fetchPriority } as any) : {})}
         onLoad={handleLoad}
         onError={handleError}
         className={`w-full ${heightClass} ${objectClass} transition-opacity duration-300 ${

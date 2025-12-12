@@ -9,12 +9,12 @@ export const drWongImages = {
   drWongLab1: "https://i.imgur.com/qK5nPtS.png", // Bottom Left: Historical Photos
   drWongLab2: "https://i.imgur.com/bUkVVSo.png", // Bottom Center: Dental Operatory Equipment
   drWongLab3: "https://i.imgur.com/rIGaK9S.png", // Bottom Right: Reception Desk
-  drWongPortrait1: "/images/dr_wong_polaroids.png",
+  drWongPortrait1: "/images/dr_wong_polaroids.webp",
   drWongPortrait2: "https://i.imgur.com/iqBXT9y.png",
   drWongWaiting: "https://i.imgur.com/AC5lGu3.png", // Middle Right: Operatory Room
   drWongReception: "https://i.imgur.com/nGlhUdH.png", // Middle Center: Exterior Signage and Entryway
   drWongOffice: "/images/dr_wong_office.png", // Dr. Wong in his office
-  heroImage: "https://i.imgur.com/BeX3mhS.png",
+  heroImage: "/images/hero-office-960.webp",
   teamPhoto: "https://i.imgur.com/ypt5eZ7.png",
   officeEntrance: "https://i.imgur.com/wt7peyr.png",
   treatmentRoom: "https://i.imgur.com/hO02YQ0.png",

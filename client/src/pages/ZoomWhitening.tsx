@@ -166,7 +166,7 @@ const ZoomWhitening = () => {
                 <OptimizedImage
                   src={drWongImages.drWongOffice2}
                   alt="Patient smiling after professional teeth whitening"
-                  className="w-full h-full object-cover"
+                  className="w-full aspect-[4/3] object-cover"
                 />
               </div>
             </motion.div>

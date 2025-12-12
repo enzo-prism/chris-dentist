@@ -1,6 +1,12 @@
 import { Helmet } from "@/lib/helmet";
+import { normalizePathname } from "@/lib/seo";
+import { useLocation } from "wouter";
 
 const PreloadResources = () => {
+  const [location] = useLocation();
+  const normalizedLocation = normalizePathname(location || "/");
+  const isHome = normalizedLocation === "/";
+
   return (
     <Helmet>
       {/* Preload critical fonts */}
@@ -12,6 +18,16 @@ const PreloadResources = () => {
       
       {/* Preload critical images */}
       <link rel="preload" href="/favicon/apple-touch-icon.png" as="image" type="image/png" />
+      {isHome && (
+        <link
+          rel="preload"
+          as="image"
+          href="/images/hero-office-960.webp"
+          imagesrcset="/images/hero-office-640.webp 640w, /images/hero-office-960.webp 960w, /images/hero-office-1280.webp 1280w"
+          imagesizes="(max-width: 1024px) 100vw, 60vw"
+          type="image/webp"
+        />
+      )}
       
       {/* DNS prefetch for external domains */}
       <link rel="dns-prefetch" href="//fonts.googleapis.com" />

@@ -1,10 +1,8 @@
 import { ArrowRight, Calendar, CheckCircle, Snowflake, Gift } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { drWongImages } from "@/lib/imageUrls";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import OptimizedImage from "@/components/seo/OptimizedImage";
 
 const HeroSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -136,12 +134,30 @@ const HeroSection = () => {
           >
             {/* Main image with styling */}
             <div className="relative rounded-2xl overflow-hidden shadow-lg ring-1 ring-white/10 mb-12">
-              <OptimizedImage
-                src={drWongImages.heroImage || drWongImages.drWongOffice2}
-                alt="Dr. Wong's Modern Dental Office"
-                className="w-full h-auto object-cover rounded-2xl aspect-[4/3]"
-                priority
-              />
+              <picture>
+                <source
+                  type="image/avif"
+                  srcSet="/images/hero-office-640.avif 640w, /images/hero-office-960.avif 960w, /images/hero-office-1280.avif 1280w"
+                  sizes="(max-width: 1024px) 100vw, 60vw"
+                />
+                <source
+                  type="image/webp"
+                  srcSet="/images/hero-office-640.webp 640w, /images/hero-office-960.webp 960w, /images/hero-office-1280.webp 1280w"
+                  sizes="(max-width: 1024px) 100vw, 60vw"
+                />
+                <img
+                  src="/images/hero-office-960.webp"
+                  srcSet="/images/hero-office-640.webp 640w, /images/hero-office-960.webp 960w, /images/hero-office-1280.webp 1280w"
+                  sizes="(max-width: 1024px) 100vw, 60vw"
+                  width={960}
+                  height={720}
+                  loading="eager"
+                  decoding="async"
+                  fetchpriority="high"
+                  alt="Dr. Wong's modern Palo Alto dental office"
+                  className="w-full h-auto object-cover rounded-2xl aspect-[4/3]"
+                />
+              </picture>
               
               {/* Status badge */}
               <div className="absolute bottom-5 left-5 bg-white/95 px-4 py-2 rounded-full shadow-sm text-sm font-medium text-gray-900 flex items-center gap-2">

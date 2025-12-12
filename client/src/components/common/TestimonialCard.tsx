@@ -49,6 +49,8 @@ const TestimonialCard = ({ testimonial, index = 0, disableAnimation = false }: T
               src={image}
               alt={name}
               className="w-12 h-12 rounded-full object-cover mr-3 border border-white/60 shadow-sm"
+              loading="lazy"
+              decoding="async"
             />
           ) : (
             <div

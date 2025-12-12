@@ -134,7 +134,7 @@ const Blog = () => {
                   <OptimizedImage
                     src={featuredPost.image}
                     alt={featuredPost.title}
-                    className="w-full h-full object-cover"
+                    className="w-full aspect-[4/3] object-cover"
                   />
                 </div>
                 <div className="md:w-1/2 p-8 md:p-12 flex flex-col justify-center">

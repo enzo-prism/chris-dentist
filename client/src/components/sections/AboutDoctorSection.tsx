@@ -19,7 +19,7 @@ const AboutDoctorSection: React.FC = () => {
             <OptimizedImage
               src={drWongImages.drWongPortrait1}
               alt="Dr. Christopher B. Wong"
-              className="rounded-lg shadow-xl mx-auto"
+              className="w-full max-w-sm aspect-[4/5] object-cover rounded-lg shadow-xl mx-auto"
             />
             <div className="text-center mt-4">
               <h3 className="font-bold text-lg">Dr. Christopher B. Wong</h3>

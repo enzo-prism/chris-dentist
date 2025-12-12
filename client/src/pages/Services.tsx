@@ -107,7 +107,7 @@ const Services = () => {
               <OptimizedImage
                 src="https://imgur.com/hO02YQ0.jpg"
                 alt="Payment processing with mobile device"
-                className="rounded-lg shadow-xl"
+                className="w-full aspect-[4/3] object-cover rounded-lg shadow-xl"
               />
             </div>
           </div>

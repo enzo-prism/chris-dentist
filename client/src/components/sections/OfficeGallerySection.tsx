@@ -176,7 +176,7 @@ const OfficeGallerySection = () => {
                   <OptimizedImage
                     src={image.src}
                     alt={image.alt}
-                    className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-105"
+                    className="w-full aspect-[4/3] transition-transform duration-500 group-hover:scale-105"
                     priority={index < 4}
                   />
                   
@@ -245,7 +245,7 @@ const OfficeGallerySection = () => {
             >
               <OptimizedImage
                 src={images[selectedImage].src}
-                alt=""
+                alt={images[selectedImage].alt}
                 className="max-h-[70vh] w-full object-contain mx-auto rounded-lg"
                 priority
               />

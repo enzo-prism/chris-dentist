@@ -454,7 +454,7 @@ const Invisalign = () => {
               viewport={{ once: true }}
             >
 	              <OptimizedImage
-	                src="/images/dr-wong-polaroids.png"
+	                src="/images/dr-wong-polaroids.webp"
 	                alt="Dr. Christopher Wong in his dental practice - professional polaroid photos"
 	                className="w-full h-56 sm:h-72 md:h-96 object-cover rounded-lg shadow-lg"
 	              />
