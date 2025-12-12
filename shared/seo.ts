@@ -103,6 +103,56 @@ export const seoByPath: Record<string, SeoDefinition> = {
     canonicalPath: "/zoom-whitening",
     ogImage: "https://i.imgur.com/qK5nPtS.png",
   },
+  "/teeth-whitening-palo-alto": {
+    title: "Teeth Whitening in Palo Alto | Brighten Your Smile | Dr. Wong, DDS",
+    description:
+      "Professional teeth whitening in Palo Alto with Dr. Christopher B. Wong. In‑office and take‑home options for fast, safe results.",
+    canonicalPath: "/teeth-whitening-palo-alto",
+    ogImage: DEFAULT_OG_IMAGE,
+  },
+  "/dental-cleaning-palo-alto": {
+    title: "Dental Cleaning in Palo Alto | Preventive Care | Dr. Wong, DDS",
+    description:
+      "Gentle dental cleanings in Palo Alto to remove plaque, prevent cavities, and keep gums healthy. Family‑friendly care at Dr. Wong’s office.",
+    canonicalPath: "/dental-cleaning-palo-alto",
+    ogImage: DEFAULT_OG_IMAGE,
+  },
+  "/cavity-fillings-palo-alto": {
+    title:
+      "Cavity Fillings in Palo Alto | Tooth‑Colored Restorations | Dr. Wong, DDS",
+    description:
+      "Treat cavities early with tooth‑colored fillings in Palo Alto. Conservative composite restorations that look natural and restore strength.",
+    canonicalPath: "/cavity-fillings-palo-alto",
+    ogImage: DEFAULT_OG_IMAGE,
+  },
+  "/crowns-palo-alto": {
+    title: "Dental Crowns in Palo Alto | Natural‑Looking Protection | Dr. Wong, DDS",
+    description:
+      "Custom dental crowns in Palo Alto to repair large cavities or cracks. Durable, natural‑looking restorations designed for comfort.",
+    canonicalPath: "/crowns-palo-alto",
+    ogImage: DEFAULT_OG_IMAGE,
+  },
+  "/pediatric-dentist-palo-alto": {
+    title: "Pediatric Dentist in Palo Alto | Kids’ Dentistry | Dr. Wong, DDS",
+    description:
+      "Gentle pediatric dentistry in Palo Alto for infants, kids, and teens. Preventive cleanings, sealants, and family‑centered care.",
+    canonicalPath: "/pediatric-dentist-palo-alto",
+    ogImage: DEFAULT_OG_IMAGE,
+  },
+  "/dentist-menlo-park": {
+    title: "Menlo Park Dentist | Nearby Palo Alto Dental Care | Dr. Wong, DDS",
+    description:
+      "Looking for a Menlo Park dentist? Visit Dr. Christopher B. Wong in nearby Palo Alto for preventive, cosmetic, restorative, and emergency care.",
+    canonicalPath: "/dentist-menlo-park",
+    ogImage: DEFAULT_OG_IMAGE,
+  },
+  "/dentist-stanford": {
+    title: "Stanford Dentist | Convenient Palo Alto Dental Care | Dr. Wong, DDS",
+    description:
+      "Stanford students and families choose Dr. Wong in Palo Alto for cleanings, Invisalign, restorations, and same‑day emergency visits.",
+    canonicalPath: "/dentist-stanford",
+    ogImage: DEFAULT_OG_IMAGE,
+  },
   "/dental-implants": {
     title: "Dental Implants in Palo Alto | Implant Restoration | Dr. Wong, DDS",
     description:
@@ -193,4 +243,3 @@ export function buildExcerpt(text: string, limit = 160): string {
   if (normalized.length <= limit) return normalized;
   return `${normalized.slice(0, Math.max(limit - 1, 0))}…`;
 }
-
