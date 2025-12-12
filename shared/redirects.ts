@@ -28,6 +28,9 @@ const staticLegacyRedirects: Record<string, string> = {
 } as const;
 
 const serviceSlugRedirects: Record<string, string> = {
+  "preventive-dentistry": "/preventive-dentistry",
+  "restorative-dentistry": "/restorative-dentistry",
+  "pediatric-dentistry": "/pediatric-dentistry",
   "invisalign": "/invisalign",
   "zoom-whitening": "/zoom-whitening",
   "dental-implants": "/dental-implants",
@@ -72,4 +75,3 @@ export function getLegacyRedirectPath(pathname: string): string | null {
 export const legacyRedirects: RedirectTarget[] = Object.entries(staticLegacyRedirects).map(
   ([from, to]) => ({ from, to }),
 );
-

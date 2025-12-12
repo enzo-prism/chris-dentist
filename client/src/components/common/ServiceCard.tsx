@@ -26,8 +26,11 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
       case "zoom-whitening":
         return "/zoom-whitening";
       case "preventive-dentistry":
+        return "/preventive-dentistry";
       case "restorative-dentistry":
+        return "/restorative-dentistry";
       case "pediatric-dentistry":
+        return "/pediatric-dentistry";
       default:
         return `/services#${slug}`;
     }

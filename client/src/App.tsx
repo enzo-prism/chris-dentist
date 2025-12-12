@@ -32,6 +32,9 @@ import DentalImplants from "@/pages/DentalImplants";
 import Invisalign from "@/pages/Invisalign";
 import EmergencyDental from "@/pages/EmergencyDental";
 import ZoomWhitening from "@/pages/ZoomWhitening";
+import PreventiveDentistry from "@/pages/PreventiveDentistry";
+import RestorativeDentistry from "@/pages/RestorativeDentistry";
+import PediatricDentistry from "@/pages/PediatricDentistry";
 import TeethWhiteningPaloAlto from "@/pages/TeethWhiteningPaloAlto";
 import DentalCleaningPaloAlto from "@/pages/DentalCleaningPaloAlto";
 import CavityFillingsPaloAlto from "@/pages/CavityFillingsPaloAlto";
@@ -79,6 +82,9 @@ function Router() {
           <Route path="/dental-veneers" component={DentalVeneers} />
           <Route path="/dental-implants" component={DentalImplants} />
           <Route path="/zoom-whitening" component={ZoomWhitening} />
+          <Route path="/preventive-dentistry" component={PreventiveDentistry} />
+          <Route path="/restorative-dentistry" component={RestorativeDentistry} />
+          <Route path="/pediatric-dentistry" component={PediatricDentistry} />
           <Route path="/teeth-whitening-palo-alto" component={TeethWhiteningPaloAlto} />
           <Route path="/dental-cleaning-palo-alto" component={DentalCleaningPaloAlto} />
           <Route path="/cavity-fillings-palo-alto" component={CavityFillingsPaloAlto} />

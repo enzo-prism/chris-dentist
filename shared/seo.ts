@@ -40,6 +40,27 @@ export const seoByPath: Record<string, SeoDefinition> = {
     canonicalPath: "/services",
     ogImage: "https://i.imgur.com/hO02YQ0.png",
   },
+  "/preventive-dentistry": {
+    title: "Preventive Dentistry in Palo Alto | Exams & Cleanings | Dr. Wong, DDS",
+    description:
+      "Preventive dentistry in Palo Alto including exams, cleanings, screenings, and personalized care to avoid cavities and gum disease.",
+    canonicalPath: "/preventive-dentistry",
+    ogImage: DEFAULT_OG_IMAGE,
+  },
+  "/restorative-dentistry": {
+    title: "Restorative Dentistry in Palo Alto | Fillings, Crowns & Implants | Dr. Wong, DDS",
+    description:
+      "Restore damaged or missing teeth with restorative dentistry in Palo Alto. Dr. Wong offers fillings, crowns, bridges, and implant restorations.",
+    canonicalPath: "/restorative-dentistry",
+    ogImage: DEFAULT_OG_IMAGE,
+  },
+  "/pediatric-dentistry": {
+    title: "Pediatric Dentistry in Palo Alto | Kids’ Dental Care | Dr. Wong, DDS",
+    description:
+      "Gentle pediatric dentistry in Palo Alto for infants, kids, and teens. Preventive cleanings, sealants, and family‑friendly care.",
+    canonicalPath: "/pediatric-dentistry",
+    ogImage: DEFAULT_OG_IMAGE,
+  },
   "/patient-resources": {
     title: "Patient Resources | Palo Alto Dentist Dr. Christopher Wong",
     description:
