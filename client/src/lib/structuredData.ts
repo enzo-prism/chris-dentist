@@ -67,7 +67,7 @@ export const buildOrganizationSchema = (options?: {
     description:
       "Premier Palo Alto dentist Dr. Christopher Wong provides exceptional dental care across preventive, restorative, and cosmetic dentistry.",
     url: baseUrl,
-    telephone: officeInfo.phone,
+    telephone: officeInfo.phoneE164,
     email: officeInfo.email,
     image: `${baseUrl}/favicon/apple-touch-icon.png`,
     logo: `${baseUrl}/favicon/apple-touch-icon.png`,
@@ -75,41 +75,28 @@ export const buildOrganizationSchema = (options?: {
     currenciesAccepted: "USD",
     paymentAccepted: "Cash, Credit Card, Insurance",
     sameAs: [
-      "https://www.instagram.com/dr_wong_paloalto/",
+      officeInfo.socialMedia.instagram,
       "https://www.yelp.com/biz/christopher-b-wong-dds-palo-alto",
-      "https://maps.app.goo.gl/UCTqQ1fZsdMq7vma9",
+      officeInfo.mapUrl,
     ],
     address: {
       "@type": "PostalAddress",
       streetAddress: officeInfo.address.line1,
-      addressLocality: "Palo Alto",
-      addressRegion: "CA",
-      postalCode: "94306",
-      addressCountry: "US",
+      addressLocality: officeInfo.address.city,
+      addressRegion: officeInfo.address.region,
+      postalCode: officeInfo.address.postalCode,
+      addressCountry: officeInfo.address.country,
     },
     geo: {
       "@type": "GeoCoordinates",
       latitude: 37.4419,
       longitude: -122.143,
     },
-    openingHoursSpecification: [
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday"],
-        opens: "08:00",
-        closes: "17:00",
-      },
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: "Friday",
-        opens: "08:00",
-        closes: "14:00",
-      },
-    ],
+    openingHoursSpecification: officeInfo.openingHoursSpecification,
     contactPoint: [
       {
         "@type": "ContactPoint",
-        telephone: officeInfo.phone,
+        telephone: officeInfo.phoneE164,
         contactType: "Customer Service",
         areaServed: ["Palo Alto", "Menlo Park", "Mountain View"],
         availableLanguage: ["English"],

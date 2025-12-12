@@ -8,6 +8,7 @@ import OptimizedImage from "@/components/seo/OptimizedImage";
 import { Button } from "@/components/ui/button";
 import HolidayHoursNotice from "@/components/common/HolidayHoursNotice";
 import StructuredData from "@/components/seo/StructuredData";
+import { officeInfo } from "@/lib/data";
 import {
   buildBreadcrumbSchema,
   buildOrganizationSchema,
@@ -17,7 +18,7 @@ import {
 const Contact = () => {
   const contactOrganization: StructuredDataNode = {
     ...buildOrganizationSchema(),
-    hasMap: "https://maps.app.goo.gl/UCTqQ1fZsdMq7vma9",
+    hasMap: officeInfo.mapUrl,
   };
   const contactBreadcrumbs = buildBreadcrumbSchema([
     { name: "Home", path: "/" },
@@ -80,12 +81,14 @@ const Contact = () => {
                 <div>
                   <h4 className="font-semibold mb-1">Office Address</h4>
                   <a
-                    href="https://maps.app.goo.gl/UCTqQ1fZsdMq7vma9"
+                    href={officeInfo.mapUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-[#333333] hover:text-primary transition-colors"
                   >
-                    409 Cambridge Ave<br />Palo Alto, CA 94306
+                    {officeInfo.address.line1}
+                    <br />
+                    {officeInfo.address.line2}
                   </a>
                 </div>
               </div>
@@ -94,9 +97,13 @@ const Contact = () => {
                 <Clock className="h-6 w-6 text-primary mr-3 mt-1 flex-shrink-0" />
                 <div>
                   <h4 className="font-semibold mb-1">Office Hours</h4>
-                  <p className="text-[#333333]">Monday - Thursday: 8:00 AM - 5:00 PM<br />
-                  Friday: 8:00 AM - 2:00 PM<br />
-                  Saturday - Sunday: Closed</p>
+                  <p className="text-[#333333]">
+                    Monday - Thursday: {officeInfo.hours.monday}
+                    <br />
+                    Friday: {officeInfo.hours.friday}
+                    <br />
+                    Saturday - Sunday: {officeInfo.hours.saturday}
+                  </p>
                 </div>
               </div>
               
@@ -105,15 +112,18 @@ const Contact = () => {
                 <div>
                   <h4 className="font-semibold mb-1">Phone</h4>
                   <p className="text-[#333333]">
-                    <a href="tel:+16503266319" className="hover:text-primary transition-colors">
-                      (650) 326-6319
+                    <a
+                      href={`tel:${officeInfo.phoneE164}`}
+                      className="hover:text-primary transition-colors"
+                    >
+                      {officeInfo.phone}
                     </a>
                   </p>
                 </div>
               </div>
 
               <a
-                href="https://maps.app.goo.gl/UCTqQ1fZsdMq7vma9"
+                href={officeInfo.mapUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex"
@@ -201,7 +211,7 @@ const Contact = () => {
                 <p className="text-[#333333] mb-4">For patients without insurance, we offer flexible payment options and an in-house dental plan to make quality dental care accessible.</p>
                 <p className="flex items-center text-[#333333]">
                   <Phone className="h-5 w-5 text-primary mr-2" />
-                  Call us at: (650) 326-6319
+                  Call us at: {officeInfo.phone}
                 </p>
               </div>
             </div>

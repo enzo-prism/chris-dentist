@@ -1,7 +1,6 @@
 import { MapPin, Phone, Clock, ExternalLink } from "lucide-react";
 import { officeInfo } from "@/lib/data";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
 
 const OfficeInformationSection = () => {
   const fadeIn = {
@@ -31,10 +30,15 @@ const OfficeInformationSection = () => {
       content: (
         <>
           <p className="text-[#333333] text-sm sm:text-base mb-2">{officeInfo.address.line1}<br/>{officeInfo.address.line2}</p>
-          <Button variant="link" className="text-primary p-0 h-auto text-sm sm:text-base hover:underline">
+          <a
+            href={officeInfo.mapUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center text-primary text-sm sm:text-base hover:underline"
+          >
             Get Directions
             <ExternalLink className="ml-1 h-3 w-3 sm:h-4 sm:w-4" />
-          </Button>
+          </a>
         </>
       )
     },
@@ -43,7 +47,10 @@ const OfficeInformationSection = () => {
       title: "Phone",
       content: (
         <p className="text-[#333333] text-sm sm:text-base">
-          <a href={`tel:${officeInfo.phone}`} className="hover:text-primary transition-colors">
+          <a
+            href={`tel:${officeInfo.phoneE164}`}
+            className="hover:text-primary transition-colors"
+          >
             {officeInfo.phone}
           </a>
         </p>

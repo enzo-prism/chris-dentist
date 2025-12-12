@@ -99,7 +99,10 @@ const AppointmentSection = () => {
               
               {/* Contact options */}
               <div className="flex items-center">
-                <a href={`tel:${officeInfo.phone}`} className="flex items-center text-base sm:text-lg font-bold hover:text-blue-200 transition-colors">
+                <a
+                  href={`tel:${officeInfo.phoneE164}`}
+                  className="flex items-center text-base sm:text-lg font-bold hover:text-blue-200 transition-colors"
+                >
                   <Phone className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
                   <span>{officeInfo.phone}</span>
                 </a>

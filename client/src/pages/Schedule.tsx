@@ -7,6 +7,7 @@ import { pageTitles, pageDescriptions } from "@/lib/metaContent";
 import { useEffect } from "react";
 import OptimizedImage from "@/components/seo/OptimizedImage";
 import HolidayHoursNotice from "@/components/common/HolidayHoursNotice";
+import { officeInfo } from "@/lib/data";
 
 const Schedule = () => {
   useEffect(() => {
@@ -76,7 +77,11 @@ const Schedule = () => {
                 <MapPin className="h-6 w-6 text-primary mr-3 mt-1 flex-shrink-0" />
                 <div>
                   <h4 className="font-semibold mb-1">Office Address</h4>
-                  <p className="text-[#333333]">409 Cambridge Ave<br />Palo Alto, CA 94306</p>
+                  <p className="text-[#333333]">
+                    {officeInfo.address.line1}
+                    <br />
+                    {officeInfo.address.line2}
+                  </p>
                 </div>
               </div>
               
@@ -84,9 +89,13 @@ const Schedule = () => {
                 <Clock className="h-6 w-6 text-primary mr-3 mt-1 flex-shrink-0" />
                 <div>
                   <h4 className="font-semibold mb-1">Office Hours</h4>
-                  <p className="text-[#333333]">Monday - Thursday: 8:00 AM - 5:00 PM<br />
-                  Friday: 8:00 AM - 2:00 PM<br />
-                  Saturday - Sunday: Closed</p>
+                  <p className="text-[#333333]">
+                    Monday - Thursday: {officeInfo.hours.monday}
+                    <br />
+                    Friday: {officeInfo.hours.friday}
+                    <br />
+                    Saturday - Sunday: {officeInfo.hours.saturday}
+                  </p>
                 </div>
               </div>
               
@@ -95,8 +104,11 @@ const Schedule = () => {
                 <div>
                   <h4 className="font-semibold mb-1">Phone</h4>
                   <p className="text-[#333333]">
-                    <a href="tel:+16503266319" className="hover:text-primary transition-colors">
-                      (650) 326-6319
+                    <a
+                      href={`tel:${officeInfo.phoneE164}`}
+                      className="hover:text-primary transition-colors"
+                    >
+                      {officeInfo.phone}
                     </a>
                   </p>
                 </div>
@@ -107,8 +119,11 @@ const Schedule = () => {
                 <div>
                   <h4 className="font-semibold mb-1">Email</h4>
                   <p className="text-[#333333]">
-                    <a href="mailto:info@drwongdental.com" className="hover:text-primary transition-colors">
-                      info@drwongdental.com
+                    <a
+                      href={`mailto:${officeInfo.email}`}
+                      className="hover:text-primary transition-colors"
+                    >
+                      {officeInfo.email}
                     </a>
                   </p>
                 </div>
@@ -205,7 +220,7 @@ const Schedule = () => {
                 <p className="text-[#333333] mb-4">For patients without insurance, we offer flexible payment options and an in-house dental plan to make quality dental care accessible.</p>
                 <p className="flex items-center text-[#333333]">
                   <Phone className="h-5 w-5 text-primary mr-2" />
-                  Call us at: (650) 326-6319
+                  Call us at: {officeInfo.phone}
                 </p>
               </div>
             </div>

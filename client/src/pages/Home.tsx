@@ -17,6 +17,7 @@ import { pageTitles, pageDescriptions } from "@/lib/metaContent";
 import { drWongImages } from "@/lib/imageUrls";
 import { buildInsertTestimonial, testimonialSeedData } from "@shared/testimonialsData";
 import { buildHomepageJsonLd } from "@shared/structuredData";
+import { officeInfo } from "@/lib/data";
 
 const Home = () => {
 
@@ -215,16 +216,19 @@ const Home = () => {
                   <h3 className="font-bold mb-2">Office Hours</h3>
                   <div className="grid grid-cols-2 gap-2 text-sm">
                     <div>Monday - Thursday</div>
-                    <div>8:00 AM - 5:00 PM</div>
+                    <div>{officeInfo.hours.monday}</div>
                     <div>Friday</div>
-                    <div>8:00 AM - 2:00 PM</div>
+                    <div>{officeInfo.hours.friday}</div>
                     <div>Saturday - Sunday</div>
-                    <div>Closed</div>
+                    <div>{officeInfo.hours.saturday}</div>
                   </div>
                 </div>
-                <a href="tel:+16503266319" className="flex items-center text-xl font-bold hover:text-blue-200 transition-colors">
+                <a
+                  href={`tel:${officeInfo.phoneE164}`}
+                  className="flex items-center text-xl font-bold hover:text-blue-200 transition-colors"
+                >
                   <Phone className="h-6 w-6 mr-2" />
-                  (650) 326-6319
+                  {officeInfo.phone}
                 </a>
               </div>
               

@@ -179,24 +179,31 @@ const Header = () => {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex justify-between items-center text-xs sm:text-sm font-medium">
           <div className="flex items-center space-x-6">
-            <a href="tel:+16503266319" className="flex items-center hover:text-[#f2d785] transition-colors group">
+            <a
+              href={`tel:${officeInfo.phoneE164}`}
+              className="flex items-center hover:text-[#f2d785] transition-colors group"
+            >
               <Phone className="h-3.5 w-3.5 mr-2 text-[#f2d785] group-hover:scale-110 transition-transform" />
-              <span>(650) 326-6319</span>
+              <span>{officeInfo.phone}</span>
             </a>
             <div className="hidden sm:flex items-center text-white/60">
               <Clock className="h-3.5 w-3.5 mr-2" />
-              <span>Mon - Fri: 8am - 5pm</span>
+              <span>
+                Mon-Thu: {officeInfo.hours.monday} · Fri: {officeInfo.hours.friday}
+              </span>
             </div>
           </div>
           <div className="flex items-center space-x-6">
             <a
-              href="https://maps.app.goo.gl/UCTqQ1fZsdMq7vma9"
+              href={officeInfo.mapUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="hidden md:flex items-center hover:text-[#f2d785] transition-colors group"
             >
               <MapPin className="h-3.5 w-3.5 mr-2 text-[#f2d785] group-hover:scale-110 transition-transform" />
-              <span>409 Cambridge Ave, Palo Alto</span>
+              <span>
+                {officeInfo.address.line1}, {officeInfo.address.city}
+              </span>
             </a>
             <a 
               href={officeInfo.socialMedia.instagram} 
@@ -463,11 +470,19 @@ const Header = () => {
                 </Link>
                 
                 <div className="grid grid-cols-2 gap-4 pt-2">
-                  <a href="tel:+16503266319" className="flex flex-col items-center justify-center p-4 rounded-xl bg-white/5 active:bg-white/10 transition-colors text-white border border-white/5">
+                  <a
+                    href={`tel:${officeInfo.phoneE164}`}
+                    className="flex flex-col items-center justify-center p-4 rounded-xl bg-white/5 active:bg-white/10 transition-colors text-white border border-white/5"
+                  >
                     <Phone className="h-6 w-6 mb-2 text-[#f2d785]" />
                     <span className="text-sm font-medium">Call Us</span>
                   </a>
-                  <a href="https://maps.app.goo.gl/UCTqQ1fZsdMq7vma9" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center justify-center p-4 rounded-xl bg-white/5 active:bg-white/10 transition-colors text-white border border-white/5">
+                  <a
+                    href={officeInfo.mapUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex flex-col items-center justify-center p-4 rounded-xl bg-white/5 active:bg-white/10 transition-colors text-white border border-white/5"
+                  >
                     <MapPin className="h-6 w-6 mb-2 text-[#f2d785]" />
                     <span className="text-sm font-medium">Directions</span>
                   </a>

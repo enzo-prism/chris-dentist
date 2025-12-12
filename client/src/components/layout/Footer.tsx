@@ -54,14 +54,19 @@ const Footer = () => {
               <div className="space-y-4">
                 <p className="flex items-center text-sm text-white/90">
                   <Phone className="h-4 w-4 mr-3 flex-shrink-0 text-white/70" />
-                  <a href="tel:+16503266319" className="hover:text-white transition-colors">
-                    (650) 326-6319
+                  <a
+                    href={`tel:${officeInfo.phoneE164}`}
+                    className="hover:text-white transition-colors"
+                  >
+                    {officeInfo.phone}
                   </a>
                 </p>
 
                 <p className="flex items-start text-sm text-white/90">
                   <MapPin className="h-4 w-4 mr-3 mt-0.5 flex-shrink-0 text-white/70" />
-                  <span>409 Cambridge Ave, Palo Alto, CA 94306</span>
+                  <span>
+                    {officeInfo.address.line1}, {officeInfo.address.line2}
+                  </span>
                 </p>
                 <div className="flex space-x-3 mt-3">
                   {socialMedia.map((social, index) => (
@@ -175,14 +180,19 @@ const Footer = () => {
             <div className="space-y-3">
               <p className="flex items-center text-sm">
                 <Phone className="h-4 w-4 mr-3 flex-shrink-0 text-white/70" />
-                <a href="tel:+16503266319" className="hover:text-white transition-colors">
-                  (650) 326-6319
+                <a
+                  href={`tel:${officeInfo.phoneE164}`}
+                  className="hover:text-white transition-colors"
+                >
+                  {officeInfo.phone}
                 </a>
               </p>
 
               <p className="flex items-start text-sm">
                 <MapPin className="h-4 w-4 mr-3 mt-0.5 flex-shrink-0 text-white/70" />
-                <span>409 Cambridge Ave, Palo Alto, CA 94306</span>
+                <span>
+                  {officeInfo.address.line1}, {officeInfo.address.line2}
+                </span>
               </p>
             </div>
           </div>

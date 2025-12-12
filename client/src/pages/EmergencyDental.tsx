@@ -13,6 +13,7 @@ import {
 } from "@/lib/structuredData";
 import RelatedServicePosts from "@/components/blog/RelatedServicePosts";
 import { pageDescriptions, pageTitles } from "@/lib/metaContent";
+import { officeInfo } from "@/lib/data";
 
 const EmergencyDental = () => {
   const emergencyTypes = [
@@ -63,7 +64,7 @@ const EmergencyDental = () => {
     {
       step: "2", 
       title: "Contact Us Immediately",
-      description: "Call our emergency line at (650) 326-6319. Dr. Wong provides 24/7 emergency dental care for his patients."
+      description: `Call our emergency line at ${officeInfo.phone}. Dr. Wong provides 24/7 emergency dental care for his patients.`
     },
     {
       step: "3",
@@ -164,13 +165,16 @@ const EmergencyDental = () => {
                   <p className="text-blue-100">Available 24/7 for dental emergencies</p>
                 </div>
               </div>
-              <a href="tel:+16503266319" className="text-3xl font-bold hover:text-blue-100 transition-colors">
-                (650) 326-6319
+              <a
+                href={`tel:${officeInfo.phoneE164}`}
+                className="text-3xl font-bold hover:text-blue-100 transition-colors"
+              >
+                {officeInfo.phone}
               </a>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="tel:+16503266319">
+              <a href={`tel:${officeInfo.phoneE164}`}>
                 <Button className="bg-orange-600 hover:bg-orange-700 text-white font-medium px-8 py-3">
                   Call Emergency Line
                   <Phone className="ml-2 h-5 w-5" />
@@ -362,7 +366,7 @@ const EmergencyDental = () => {
               </div>
             </div>
 
-            <a href="tel:+16503266319">
+            <a href={`tel:${officeInfo.phoneE164}`}>
               <Button className="bg-white text-primary hover:bg-gray-100 font-medium px-8 py-3 text-lg">
                 Call Emergency Line Now
                 <Phone className="ml-2 h-5 w-5" />
@@ -427,7 +431,7 @@ const EmergencyDental = () => {
               immediately for prompt, professional emergency dental care in Palo Alto.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="tel:+16503266319">
+              <a href={`tel:${officeInfo.phoneE164}`}>
                 <Button className="bg-orange-600 hover:bg-orange-700 text-white font-medium px-8 py-3">
                   Call Emergency Line
                   <Phone className="ml-2 h-5 w-5" />
