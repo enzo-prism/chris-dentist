@@ -10,11 +10,41 @@ import { Service } from "@shared/schema";
 import OptimizedImage from "@/components/seo/OptimizedImage";
 import StructuredData from "@/components/seo/StructuredData";
 import PageBreadcrumbs from "@/components/common/PageBreadcrumbs";
+import FAQSection from "@/components/common/FAQSection";
 import {
   buildBreadcrumbSchema,
   buildItemListSchema,
   buildOrganizationSchema,
+  type FAQEntry,
 } from "@/lib/structuredData";
+
+const preventiveDentistryFaqs: FAQEntry[] = [
+  {
+    question: "How often should I schedule preventive visits?",
+    answer:
+      "Most patients benefit from exams and cleanings every six months. If you’re managing gum disease, wear down teeth from grinding, or have frequent cavities, we may recommend visits every 3–4 months for added protection.",
+  },
+  {
+    question: "What’s included in a preventive dentistry appointment?",
+    answer:
+      "A typical visit includes a professional cleaning, a detailed exam, gum health screening, and digital X‑rays when needed. We look for early signs of decay, infection, or bite issues so problems can be treated before they become painful.",
+  },
+  {
+    question: "Are dental X‑rays safe?",
+    answer:
+      "Yes. We use modern digital imaging, which reduces radiation exposure significantly compared to older film systems. We only take X‑rays at intervals that match your age, history, and risk level.",
+  },
+  {
+    question: "Can preventive care really stop cavities and gum disease?",
+    answer:
+      "Preventive care can’t eliminate risk entirely, but it greatly lowers it. Regular cleanings remove hardened tartar that brushing can’t, and exams catch problems early when treatment is simpler and more affordable.",
+  },
+  {
+    question: "What if I haven’t been to the dentist in a while?",
+    answer:
+      "You’re not alone. We’ll start with a comfortable, judgment‑free exam and a plan that prioritizes your needs. Even after a long gap, preventive care is the best first step to get back on track.",
+  },
+];
 
 const Services = () => {
   const { data: services, isLoading } = useQuery<Service[]>({
@@ -81,6 +111,13 @@ const Services = () => {
           )}
         </div>
       </section>
+
+      <FAQSection
+        title="Preventive dentistry FAQs"
+        subtitle="Quick answers about checkups, cleanings, and keeping your smile healthy."
+        items={preventiveDentistryFaqs}
+        className="bg-white py-16"
+      />
 
       {/* Insurance Section */}
       <section className="py-16 bg-[#F5F9FC]">

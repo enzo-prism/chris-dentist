@@ -8,16 +8,52 @@ import TestimonialQuote from "@/components/testimonials/TestimonialQuote";
 import { getTestimonialsByNames } from "@/lib/testimonials";
 import {
   buildBreadcrumbSchema,
+  buildFAQSchema,
   buildHowToSchema,
   buildServiceSchema,
+  type FAQEntry,
 } from "@/lib/structuredData";
 import RelatedServicePosts from "@/components/blog/RelatedServicePosts";
 import { pageDescriptions, pageTitles } from "@/lib/metaContent";
 import { officeInfo } from "@/lib/data";
 import PageBreadcrumbs from "@/components/common/PageBreadcrumbs";
+import FAQSection from "@/components/common/FAQSection";
 import RelatedServices, {
   type RelatedServiceLink,
 } from "@/components/common/RelatedServices";
+
+const emergencyFaqs: FAQEntry[] = [
+  {
+    question: "What counts as a dental emergency?",
+    answer:
+      "A dental emergency is any problem that causes significant pain, bleeding, swelling, or risk of losing a tooth. Examples include severe toothaches, a knocked‑out tooth, a broken tooth, facial swelling from infection, or trauma to the mouth. If you’re unsure, it’s always safer to call and ask.",
+  },
+  {
+    question: "Can you see me the same day?",
+    answer:
+      "We prioritize urgent cases and often can see patients the same day. The sooner you contact us, the more likely we can reserve a time to diagnose the issue and relieve pain quickly.",
+  },
+  {
+    question: "What should I do if I knock out a tooth?",
+    answer:
+      "Handle the tooth by the crown (not the root), gently rinse it if dirty, and keep it moist—either in milk or against your cheek. Time matters, so seek care right away. Prompt treatment can sometimes save the tooth.",
+  },
+  {
+    question: "Do you treat emergencies for new patients?",
+    answer:
+      "Yes. If you’re new to our practice and have a sudden dental problem, we’ll do our best to help you promptly. We’ll focus on getting you comfortable and explaining the next steps clearly.",
+  },
+  {
+    question: "How much does an emergency visit cost?",
+    answer:
+      "Emergency care varies depending on what we find and what treatment is needed. We’ll review your options and costs after the exam. Many PPO plans help cover emergency evaluations, and we can discuss payment options if needed.",
+  },
+  {
+    question: "Is it okay to wait if the pain comes and goes?",
+    answer:
+      "Intermittent pain can still signal a serious problem like deep decay or infection. Waiting can make treatment more complex. It’s best to be evaluated early, even if symptoms feel temporary.",
+  },
+];
 
 const EmergencyDental = () => {
   const emergencyTypes = [
@@ -122,6 +158,7 @@ const EmergencyDental = () => {
     { name: "Emergency Dental", path: "/emergency-dental" },
   ];
   const emergencyBreadcrumbs = buildBreadcrumbSchema(breadcrumbItems);
+  const emergencyFaqSchema = buildFAQSchema(emergencyFaqs, "/emergency-dental");
 
   const relatedServices: RelatedServiceLink[] = [
     {
@@ -158,6 +195,10 @@ const EmergencyDental = () => {
 
   if (emergencyBreadcrumbs) {
     emergencySchemas.push(emergencyBreadcrumbs);
+  }
+
+  if (emergencyFaqSchema) {
+    emergencySchemas.push(emergencyFaqSchema);
   }
 
   return (
@@ -444,6 +485,13 @@ const EmergencyDental = () => {
           </div>
         </div>
       </section>
+
+      <FAQSection
+        title="Emergency dental FAQs"
+        subtitle="Answers to common questions about urgent dental care."
+        items={emergencyFaqs}
+        className="bg-white"
+      />
 
       <RelatedServices
         items={relatedServices}

@@ -6,6 +6,7 @@ import TestimonialQuote from "@/components/testimonials/TestimonialQuote";
 import { getTestimonialsByNames } from "@/lib/testimonials";
 import StructuredData from "@/components/seo/StructuredData";
 import MetaTags from "@/components/common/MetaTags";
+import FAQSection from "@/components/common/FAQSection";
 import { pageDescriptions, pageTitles } from "@/lib/metaContent";
 import {
   buildBreadcrumbSchema,
@@ -564,38 +565,11 @@ const DentalImplants = () => {
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="py-16 bg-[#F5F9FC]">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl font-bold font-heading text-[#333333] mb-6">
-              Frequently Asked Questions About Dental Implants
-            </h2>
-          </motion.div>
-
-          <div className="space-y-6">
-            {faqs.map((faq, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="bg-white rounded-lg shadow-lg p-6"
-              >
-                <h3 className="text-lg font-semibold text-[#333333] mb-3">{faq.question}</h3>
-                <p className="text-[#333333]">{faq.answer}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <FAQSection
+        title="Frequently Asked Questions About Dental Implants"
+        items={faqs}
+        className="bg-[#F5F9FC] py-16"
+      />
 
       <RelatedServices
         items={relatedServices}

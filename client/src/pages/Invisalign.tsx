@@ -8,16 +8,52 @@ import OptimizedImage from "@/components/seo/OptimizedImage";
 import TestimonialQuote from "@/components/testimonials/TestimonialQuote";
 import { getTestimonialsByNames } from "@/lib/testimonials";
 import PageBreadcrumbs from "@/components/common/PageBreadcrumbs";
+import FAQSection from "@/components/common/FAQSection";
 import RelatedServices, {
   type RelatedServiceLink,
 } from "@/components/common/RelatedServices";
 import {
   buildBreadcrumbSchema,
+  buildFAQSchema,
   buildHowToSchema,
   buildServiceSchema,
+  type FAQEntry,
 } from "@/lib/structuredData";
 import RelatedServicePosts from "@/components/blog/RelatedServicePosts";
 import { pageDescriptions, pageTitles } from "@/lib/metaContent";
+
+const invisalignFaqs: FAQEntry[] = [
+  {
+    question: "How long does Invisalign treatment take?",
+    answer:
+      "Most Invisalign cases take about 12–18 months, but timing depends on the complexity of your bite and how consistently you wear your aligners. Some minor corrections can finish sooner, while more involved plans may take longer. We’ll review your estimated timeline after your digital scan.",
+  },
+  {
+    question: "How many hours per day do I need to wear aligners?",
+    answer:
+      "For the best results, aligners should be worn 20–22 hours per day. You’ll take them out to eat, drink anything besides water, and brush and floss, then place them right back in.",
+  },
+  {
+    question: "Does Invisalign hurt?",
+    answer:
+      "You may feel pressure or mild soreness for a day or two when you switch to a new set of aligners. That’s a sign your teeth are moving. Most patients find the discomfort manageable and far less irritating than braces.",
+  },
+  {
+    question: "Can I eat and drink normally with Invisalign?",
+    answer:
+      "Yes—one of the biggest benefits is that you remove aligners to eat. That means no food restrictions. We recommend brushing before reinserting aligners to keep trays clear and reduce the risk of cavities.",
+  },
+  {
+    question: "How much does Invisalign cost?",
+    answer:
+      "Cost varies based on the amount of tooth movement needed. During your consultation we’ll outline a clear fee estimate, expected phases, and payment options. Many PPO plans include orthodontic benefits that can apply to Invisalign.",
+  },
+  {
+    question: "What happens after Invisalign is finished?",
+    answer:
+      "Once your teeth are aligned, you’ll wear retainers to maintain the result. Retainers are typically worn full‑time for a short period and then at night long‑term. We’ll guide you on a schedule that keeps your smile stable.",
+  },
+];
 
 const Invisalign = () => {
   const invisalignTestimonials = getTestimonialsByNames([
@@ -136,6 +172,7 @@ const Invisalign = () => {
     { name: "Invisalign", path: "/invisalign" },
   ];
   const invisalignBreadcrumbs = buildBreadcrumbSchema(breadcrumbItems);
+  const invisalignFaqSchema = buildFAQSchema(invisalignFaqs, "/invisalign");
 
   const relatedServices: RelatedServiceLink[] = [
     {
@@ -174,6 +211,10 @@ const Invisalign = () => {
 
   if (invisalignBreadcrumbs) {
     pageSchemas.push(invisalignBreadcrumbs);
+  }
+
+  if (invisalignFaqSchema) {
+    pageSchemas.push(invisalignFaqSchema);
   }
 
   return (
@@ -529,6 +570,13 @@ const Invisalign = () => {
           </div>
         </div>
       </section>
+
+      <FAQSection
+        title="Invisalign FAQs"
+        subtitle="Clear answers to common questions about clear aligner treatment."
+        items={invisalignFaqs}
+        className="bg-[#F5F9FC]"
+      />
 
       <RelatedServices
         items={relatedServices}
