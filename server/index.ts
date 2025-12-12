@@ -5,25 +5,46 @@ import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import path from "path";
 import type { ListenOptions } from "net";
+import { getLegacyRedirectPath } from "@shared/redirects";
 
 const app = express();
 
-// Redirect non-www to www for SEO canonical consistency
+app.set("trust proxy", true);
+
+const CANONICAL_HOST = "www.chriswongdds.com";
+const CANONICAL_BASE = `https://${CANONICAL_HOST}`;
+
+// Enforce canonical host + protocol and handle legacy slug redirects.
 app.use((req: Request, res: Response, next: NextFunction) => {
-  const host = req.get('host');
-  
-  // Always redirect non-www to www for chriswongdds.com domain (removed production check)
-  if (host && host === 'chriswongdds.com') {
-    const redirectUrl = `https://www.${host}${req.originalUrl}`;
-    return res.redirect(301, redirectUrl);
+  const hostHeader = req.get("host") ?? "";
+  const hostname = hostHeader.split(":")[0];
+  const isProdDomain =
+    hostname === "chriswongdds.com" || hostname === CANONICAL_HOST;
+
+  if (!isProdDomain) {
+    return next();
   }
-  
-  // Also handle any other non-www variations
-  if (host && host.startsWith('chriswongdds.com') && !host.startsWith('www.')) {
-    const redirectUrl = `https://www.${host}${req.originalUrl}`;
-    return res.redirect(301, redirectUrl);
+
+  const legacyTarget = getLegacyRedirectPath(req.path);
+  const targetPath = legacyTarget ?? req.path;
+
+  const forwardedProto = req.headers["x-forwarded-proto"];
+  const proto =
+    typeof forwardedProto === "string"
+      ? forwardedProto.split(",")[0].trim()
+      : req.protocol;
+  const needsHttps = proto !== "https";
+  const needsWww = hostname !== CANONICAL_HOST;
+
+  if (legacyTarget || needsHttps || needsWww) {
+    const query = req.url.includes("?") ? req.url.slice(req.url.indexOf("?")) : "";
+    const [pathWithoutHash, hash] = targetPath.split("#");
+    const location = hash
+      ? `${CANONICAL_BASE}${pathWithoutHash}${query}#${hash}`
+      : `${CANONICAL_BASE}${targetPath}${query}`;
+    return res.redirect(301, location);
   }
-  
+
   next();
 });
 
