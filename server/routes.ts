@@ -2,6 +2,7 @@ import type { Express, Request, Response } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertAppointmentSchema, insertContactMessageSchema, insertNewsletterSubscriptionSchema } from "@shared/schema";
+import { seoByPath } from "@shared/seo";
 import { ZodError } from "zod";
 import { fromZodError } from "zod-validation-error";
 
@@ -11,42 +12,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
     res.header('Content-Type', 'text/plain');
     res.send(`User-agent: *
 Allow: /
-Crawl-delay: 1
-
-# Sitemap location
-Sitemap: ${process.env.BASE_URL || `${_req.protocol}://${_req.get('host')}`}/sitemap.xml
-
-# Disallow access to admin and private areas
 Disallow: /admin/
 Disallow: /api/
 Disallow: /private/
 Disallow: /*?*
 
-# Allow crawling of all public content
-Allow: /
-Allow: /about
-Allow: /services
-Allow: /patient-resources
-Allow: /testimonials
-Allow: /blog
-Allow: /contact
-Allow: /schedule
-Allow: /zoom-whitening
-Allow: /dental-veneers
-Allow: /dental-implants
-Allow: /privacy-policy
-Allow: /terms
-Allow: /hipaa
-Allow: /accessibility
+Sitemap: https://www.chriswongdds.com/sitemap.xml
 
-# Specific bot instructions
-User-agent: Googlebot
-Crawl-delay: 1
-
-User-agent: Bingbot
-Crawl-delay: 2
-
-# Block problematic bots
 User-agent: AhrefsBot
 Disallow: /
 
@@ -61,26 +33,18 @@ Disallow: /`);
   app.get("/sitemap.xml", async (req: Request, res: Response) => {
     try {
       // Get dynamic content for the sitemap
-      const [services, blogPosts] = await Promise.all([
-        storage.getServices(),
-        storage.getBlogPosts()
-      ]);
+      const blogPosts = await storage.getBlogPosts();
       
       // Set the content type
       res.header('Content-Type', 'application/xml');
       
-      // Get the base URL - always force HTTPS for production domains
+      // Get the base URL - always use canonical https://www for production
       const host = req.get('host') || 'www.chriswongdds.com';
-      let baseUrl = process.env.BASE_URL || 'https://www.chriswongdds.com';
-      
-      // Override to force HTTPS for production domains
-      if (host && host.includes('chriswongdds.com')) {
-        const normalizedHost = host.startsWith('www.') ? host : 'www.' + host;
-        baseUrl = `https://${normalizedHost}`;
-      } else if (!process.env.BASE_URL && !host.includes('chriswongdds.com')) {
-        // For local development only
-        baseUrl = `${req.protocol}://${host}`;
-      }
+      const canonicalBase = 'https://www.chriswongdds.com';
+      const baseUrl =
+        host && host.includes('chriswongdds.com')
+          ? canonicalBase
+          : (process.env.BASE_URL || `${req.protocol}://${host}`);
       
       // Current date in format YYYY-MM-DD
       const today = new Date().toISOString().split('T')[0];
@@ -89,65 +53,61 @@ Disallow: /`);
       let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
       xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
       
-      // Add static pages
-      const staticPages = [
-        { url: '/', priority: '1.0', changefreq: 'weekly' },
-        { url: '/about', priority: '0.8', changefreq: 'monthly' },
-        { url: '/services', priority: '0.9', changefreq: 'weekly' },
-        { url: '/dental-veneers', priority: '0.9', changefreq: 'monthly' },
-        { url: '/dental-implants', priority: '0.9', changefreq: 'monthly' },
-        { url: '/zoom-whitening', priority: '0.9', changefreq: 'monthly' },
-        { url: '/invisalign', priority: '0.9', changefreq: 'monthly' },
-        { url: '/emergency-dental', priority: '1.0', changefreq: 'monthly' },
-        { url: '/patient-resources', priority: '0.7', changefreq: 'monthly' },
-        { url: '/testimonials', priority: '0.6', changefreq: 'monthly' },
-        { url: '/patient-stories', priority: '0.7', changefreq: 'monthly' },
-        { url: '/blog', priority: '0.8', changefreq: 'weekly' },
-        { url: '/contact', priority: '0.7', changefreq: 'monthly' },
-        { url: '/schedule', priority: '0.9', changefreq: 'weekly' },
-        { url: '/privacy-policy', priority: '0.4', changefreq: 'yearly' },
-        { url: '/terms', priority: '0.4', changefreq: 'yearly' },
-        { url: '/hipaa', priority: '0.4', changefreq: 'yearly' },
-        { url: '/accessibility', priority: '0.4', changefreq: 'yearly' }
-      ];
-      
-      // Add static pages to the sitemap
-      staticPages.forEach(page => {
-        xml += '  <url>\n';
-        xml += `    <loc>${baseUrl}${page.url}</loc>\n`;
-        xml += `    <lastmod>${today}</lastmod>\n`;
-        xml += `    <changefreq>${page.changefreq}</changefreq>\n`;
-        xml += `    <priority>${page.priority}</priority>\n`;
-        xml += '  </url>\n';
-      });
-      
-      // Prefer dedicated service URLs when they exist, otherwise use services anchors
-      const serviceUrlMap: Record<string, string> = {
-        "dental-veneers": "/dental-veneers",
-        "dental-implants": "/dental-implants",
-        "invisalign": "/invisalign",
-        "emergency-dental": "/emergency-dental",
-        "zoom-whitening": "/zoom-whitening",
+      const noindexPaths = new Set<string>([
+        "/thank-you",
+        "/analytics",
+        "/ga-test",
+      ]);
+
+      const priorityByPath: Record<string, string> = {
+        "/": "1.0",
+        "/services": "0.9",
+        "/schedule": "0.9",
+        "/blog": "0.8",
+        "/about": "0.8",
+        "/invisalign": "0.9",
+        "/dental-veneers": "0.9",
+        "/dental-implants": "0.9",
+        "/emergency-dental": "1.0",
       };
 
-      services.forEach(service => {
-        const mappedUrl = serviceUrlMap[service.slug] || `/services#${service.slug}`;
+      const changefreqByPath: Record<string, string> = {
+        "/": "weekly",
+        "/services": "weekly",
+        "/schedule": "weekly",
+        "/blog": "weekly",
+      };
+
+      const included = new Set<string>();
+      const addUrl = (urlPath: string, priority: string, changefreq: string) => {
+        if (!urlPath.startsWith("/")) {
+          urlPath = `/${urlPath}`;
+        }
+        if (noindexPaths.has(urlPath) || included.has(urlPath)) return;
+        included.add(urlPath);
         xml += '  <url>\n';
-        xml += `    <loc>${baseUrl}${mappedUrl}</loc>\n`;
+        xml += `    <loc>${baseUrl}${urlPath}</loc>\n`;
         xml += `    <lastmod>${today}</lastmod>\n`;
-        xml += `    <changefreq>monthly</changefreq>\n`;
-        xml += `    <priority>0.7</priority>\n`;
+        xml += `    <changefreq>${changefreq}</changefreq>\n`;
+        xml += `    <priority>${priority}</priority>\n`;
         xml += '  </url>\n';
+      };
+
+      const staticPaths = Array.from(
+        new Set(
+          Object.values(seoByPath).map((entry) => entry.canonicalPath),
+        ),
+      ).filter((urlPath) => urlPath && !noindexPaths.has(urlPath));
+
+      staticPaths.forEach((urlPath) => {
+        const priority = priorityByPath[urlPath] ?? "0.7";
+        const changefreq = changefreqByPath[urlPath] ?? "monthly";
+        addUrl(urlPath, priority, changefreq);
       });
       
-      // Add blog post pages using anchor links since they're on the blog page
+      // Add blog post pages as canonical routes
       blogPosts.forEach(post => {
-        xml += '  <url>\n';
-        xml += `    <loc>${baseUrl}/blog#${post.slug}</loc>\n`;
-        xml += `    <lastmod>${today}</lastmod>\n`;
-        xml += `    <changefreq>monthly</changefreq>\n`;
-        xml += `    <priority>0.6</priority>\n`;
-        xml += '  </url>\n';
+        addUrl(`/blog/${post.slug}`, "0.6", "monthly");
       });
       
       // Close the XML

@@ -1,77 +1,82 @@
-import { Helmet } from 'react-helmet-async';
-import { drWongImages } from '@/lib/imageUrls';
+import { Helmet } from "@/lib/helmet";
+import { drWongImages } from "@/lib/imageUrls";
+import { getSeoForPath, normalizePathname } from "@/lib/seo";
+import { useLocation } from "wouter";
 
 interface MetaTagsProps {
   title?: string;
   description?: string;
   image?: string;
+  canonicalPath?: string;
   url?: string;
   type?: string;
   robots?: string;
 }
 
 export default function MetaTags({
-  title = "Palo Alto Dentist | Dr. Christopher Wong DDS | Premier Care",
-  description = "Dr. Christopher B. Wong, trusted Palo Alto dentist offering comprehensive dental care. Schedule your appointment today for exceptional dental services.",
-  image = drWongImages.drWongPortrait1,
+  title,
+  description,
+  image,
+  canonicalPath,
   url,
   type = "website",
   robots = "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1",
 }: MetaTagsProps) {
-  // Normalize URL to always use the www version for consistency
-  const normalizedUrl = url || (() => {
-    const defaultUrl = "https://www.chriswongdds.com";
-    if (typeof window === "undefined") return defaultUrl;
+  const [location] = useLocation();
+  const normalizedLocation = normalizePathname(location || "/");
+  const routeSeo = getSeoForPath(normalizedLocation);
 
-    try {
-      const urlObj = new URL(window.location.href);
+  const resolvedTitle =
+    title ?? routeSeo.title ?? "Palo Alto Dentist | Dr. Christopher Wong DDS";
+  const resolvedDescription =
+    description ??
+    routeSeo.description ??
+    "Trusted Palo Alto dentist offering family and cosmetic dental care.";
 
-      // Force www subdomain for canonical consistency
-      if (
-        !urlObj.hostname.startsWith("www.") &&
-        urlObj.hostname === "chriswongdds.com"
-      ) {
-        urlObj.hostname = "www.chriswongdds.com";
-      }
-
-      // Clean query strings and fragments for canonical URLs
-      urlObj.search = "";
-      urlObj.hash = "";
-
-      return urlObj.toString() || defaultUrl;
-    } catch {
-      return defaultUrl;
-    }
-  })();
-  
-  // Ensure the image URL is absolute (SSR-safe fallback)
+  const resolvedCanonicalPath =
+    canonicalPath ?? routeSeo.canonicalPath ?? normalizedLocation;
   const defaultOrigin = "https://www.chriswongdds.com";
-  const origin = typeof window === "undefined" ? defaultOrigin : window.location.origin;
-  const fullImageUrl = image.startsWith('http') ? image : `${origin}${image}`;
+  const canonicalUrl = resolvedCanonicalPath.startsWith("http")
+    ? resolvedCanonicalPath
+    : `${defaultOrigin}${resolvedCanonicalPath.startsWith("/") ? resolvedCanonicalPath : `/${resolvedCanonicalPath}`}`;
+
+  const normalizedUrl = url ?? canonicalUrl;
+
+  const resolvedImage =
+    image ?? routeSeo.ogImage ?? drWongImages.drWongPortrait1;
+  const fullImageUrl = resolvedImage.startsWith("http")
+    ? resolvedImage
+    : `${defaultOrigin}${resolvedImage.startsWith("/") ? resolvedImage : `/${resolvedImage}`}`;
+
+  const isServer = typeof window === "undefined";
   
   return (
     <Helmet>
-      {/* Primary Meta Tags */}
-      <title>{title}</title>
-      <meta name="title" content={title} />
-      <meta name="description" content={description} />
+      {/* Primary Meta Tags (client only; SSR uses template injection) */}
+      {!isServer && (
+        <>
+          <title>{resolvedTitle}</title>
+          <meta name="title" content={resolvedTitle} />
+          <meta name="description" content={resolvedDescription} />
+        </>
+      )}
       
       {/* SEO and duplicate content prevention */}
       <meta name="robots" content={robots} />
-      {normalizedUrl && <link rel="canonical" href={normalizedUrl} />}
+      {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
       
       {/* Open Graph / Facebook */}
       <meta property="og:type" content={type} />
       <meta property="og:url" content={normalizedUrl} />
-      <meta property="og:title" content={title} />
-      <meta property="og:description" content={description} />
+      <meta property="og:title" content={resolvedTitle} />
+      <meta property="og:description" content={resolvedDescription} />
       <meta property="og:image" content={fullImageUrl} />
       
       {/* Twitter */}
       <meta property="twitter:card" content="summary_large_image" />
       <meta property="twitter:url" content={normalizedUrl} />
-      <meta property="twitter:title" content={title} />
-      <meta property="twitter:description" content={description} />
+      <meta property="twitter:title" content={resolvedTitle} />
+      <meta property="twitter:description" content={resolvedDescription} />
       <meta property="twitter:image" content={fullImageUrl} />
     </Helmet>
   );

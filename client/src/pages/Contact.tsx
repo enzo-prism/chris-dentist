@@ -3,7 +3,6 @@ import AppointmentSection from "@/components/sections/AppointmentSection";
 import OfficeInformationSection from "@/components/sections/OfficeInformationSection";
 import MetaTags from "@/components/common/MetaTags";
 import { drWongImages } from "@/lib/imageUrls";
-import { ogImages } from "@/lib/ogImages";
 import { pageTitles, pageDescriptions } from "@/lib/metaContent";
 import OptimizedImage from "@/components/seo/OptimizedImage";
 import { Button } from "@/components/ui/button";
@@ -34,7 +33,6 @@ const Contact = () => {
       <MetaTags 
         title={pageTitles.contact}
         description={pageDescriptions.contact}
-        image={ogImages.contact}
       />
       <StructuredData data={contactSchemas} />
       {/* Hero Section */}

@@ -21,7 +21,6 @@ import {
 } from "@/components/ui/carousel";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { officeInfo } from "@/lib/data";
-import { ogImages } from "@/lib/ogImages";
 import { pageDescriptions, pageTitles } from "@/lib/metaContent";
 import { absoluteUrl } from "@/lib/structuredData";
 import { cn } from "@/lib/utils";
@@ -549,7 +548,6 @@ const PatientStories = () => {
       <MetaTags
         title={pageTitles.patientStories}
         description={pageDescriptions.patientStories}
-        image={ogImages.patientStories}
       />
       <StructuredData data={structuredData} />
 

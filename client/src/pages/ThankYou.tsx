@@ -1,7 +1,6 @@
 import { CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { ogImages } from "@/lib/ogImages";
 import MetaTags from "@/components/common/MetaTags";
 
 const ThankYou = () => {
@@ -10,7 +9,6 @@ const ThankYou = () => {
       <MetaTags 
         title="Thank You - Appointment Scheduled | Dr. Christopher B. Wong DDS"
         description="Thank you for scheduling your appointment with Dr. Wong's dental practice in Palo Alto. We look forward to providing exceptional care at your upcoming visit."
-        image={ogImages.contact}
         robots="noindex, nofollow, noarchive"
       />
       

@@ -10,10 +10,10 @@ import { getTestimonialsByNames } from "@/lib/testimonials";
 import {
   buildBreadcrumbSchema,
   buildHowToSchema,
-  buildReviewSchemas,
   buildServiceSchema,
 } from "@/lib/structuredData";
 import RelatedServicePosts from "@/components/blog/RelatedServicePosts";
+import { pageDescriptions, pageTitles } from "@/lib/metaContent";
 
 const Invisalign = () => {
   const invisalignTestimonials = getTestimonialsByNames([
@@ -132,7 +132,6 @@ const Invisalign = () => {
     { name: "Invisalign", path: "/invisalign" },
   ]);
 
-  const invisalignReviews = buildReviewSchemas(invisalignTestimonials, 3);
   const pageSchemas = [serviceSchema];
 
   if (invisalignHowTo) {
@@ -143,16 +142,11 @@ const Invisalign = () => {
     pageSchemas.push(invisalignBreadcrumbs);
   }
 
-  if (invisalignReviews.length) {
-    pageSchemas.push(...invisalignReviews);
-  }
-
   return (
     <>
       <MetaTags 
-        title="Invisalign® Treatment in Palo Alto | Clear Aligners | Dr. Christopher Wong"
-        description="Transform your smile discreetly with Invisalign® treatment in Palo Alto. Dr. Wong offers invisible orthodontic treatment for teens and adults."
-        image="/favicon/apple-touch-icon.png"
+        title={pageTitles.invisalign}
+        description={pageDescriptions.invisalign}
       />
       <StructuredData data={pageSchemas} />
 

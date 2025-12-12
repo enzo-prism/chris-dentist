@@ -1,4 +1,4 @@
-import { Helmet } from 'react-helmet-async';
+import { Helmet } from "@/lib/helmet";
 
 /**
  * This component adds a sitemap link to the document head

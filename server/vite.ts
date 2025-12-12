@@ -123,6 +123,7 @@ export async function setupVite(app: Express, server: Server) {
 
 export function serveStatic(app: Express) {
   const distPath = path.resolve(__dirname, "public");
+  const prerenderedPath = path.resolve(distPath, "prerendered");
 
   if (!fs.existsSync(distPath)) {
     throw new Error(
@@ -162,7 +163,22 @@ export function serveStatic(app: Express) {
   const indexHtmlPath = path.resolve(distPath, "index.html");
   app.use("*", async (req, res, next) => {
     try {
-      let template = await fs.promises.readFile(indexHtmlPath, "utf-8");
+      const pathname = normalizePathname(req.originalUrl);
+      const prerenderedFile =
+        pathname === "/"
+          ? "index.html"
+          : `${pathname.slice(1).replace(/\//g, "_")}.html`;
+      const prerenderedHtmlPath = path.resolve(
+        prerenderedPath,
+        prerenderedFile,
+      );
+
+      let template = await fs.promises.readFile(
+        fs.existsSync(prerenderedHtmlPath)
+          ? prerenderedHtmlPath
+          : indexHtmlPath,
+        "utf-8",
+      );
       const meta = await resolveMetaForUrl(req.originalUrl);
       template = injectMeta(template, meta);
       res

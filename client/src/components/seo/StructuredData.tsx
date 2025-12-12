@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import { Helmet } from "@/lib/helmet";
 import type { StructuredDataNode } from "@/lib/structuredData";
 
 interface StructuredDataProps {

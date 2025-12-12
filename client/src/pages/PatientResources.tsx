@@ -8,7 +8,6 @@ import { Link } from "wouter";
 import PatientForm from "@/components/forms/PatientForm";
 import MetaTags from "@/components/common/MetaTags";
 import { drWongImages } from "@/lib/imageUrls";
-import { ogImages } from "@/lib/ogImages";
 import { pageTitles, pageDescriptions } from "@/lib/metaContent";
 import { officeInfo, faqItems, patientResources } from "@/lib/data";
 import StructuredData from "@/components/seo/StructuredData";
@@ -67,7 +66,6 @@ const PatientResources = () => {
       <MetaTags 
         title={pageTitles.patientResources}
         description={pageDescriptions.patientResources}
-        image={ogImages.patientResources}
       />
       {structuredDataNodes.length > 0 && (
         <StructuredData data={structuredDataNodes} />

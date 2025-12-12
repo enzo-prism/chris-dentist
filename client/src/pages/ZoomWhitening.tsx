@@ -4,9 +4,8 @@ import { Link } from "wouter";
 import MetaTags from "@/components/common/MetaTags";
 import StructuredData from "@/components/seo/StructuredData";
 import OptimizedImage from "@/components/seo/OptimizedImage";
-import { ogImages } from "@/lib/ogImages";
 import { pageTitles, pageDescriptions } from "@/lib/metaContent";
-import { buildBreadcrumbSchema, buildHowToSchema, buildReviewSchemas, buildServiceSchema } from "@/lib/structuredData";
+import { buildBreadcrumbSchema, buildHowToSchema, buildServiceSchema } from "@/lib/structuredData";
 import { getTestimonialsByNames } from "@/lib/testimonials";
 import { motion } from "framer-motion";
 import { drWongImages } from "@/lib/imageUrls";
@@ -67,19 +66,15 @@ const ZoomWhitening = () => {
     { name: "ZOOM Whitening", path: "/zoom-whitening" },
   ]);
 
-  const reviewSchemas = buildReviewSchemas(whiteningTestimonials, 3);
   const schemaNodes = [serviceSchema];
 
   if (howToSchema) schemaNodes.push(howToSchema);
   if (breadcrumbSchema) schemaNodes.push(breadcrumbSchema);
-  if (reviewSchemas.length) schemaNodes.push(...reviewSchemas);
-
   return (
     <>
       <MetaTags 
         title={pageTitles.zoomWhitening}
         description={pageDescriptions.zoomWhitening}
-        image={ogImages.zoomWhitening}
       />
       <StructuredData data={schemaNodes} />
 

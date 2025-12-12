@@ -9,10 +9,10 @@ import { getTestimonialsByNames } from "@/lib/testimonials";
 import {
   buildBreadcrumbSchema,
   buildHowToSchema,
-  buildReviewSchemas,
   buildServiceSchema,
 } from "@/lib/structuredData";
 import RelatedServicePosts from "@/components/blog/RelatedServicePosts";
+import { pageDescriptions, pageTitles } from "@/lib/metaContent";
 
 const EmergencyDental = () => {
   const emergencyTypes = [
@@ -117,7 +117,6 @@ const EmergencyDental = () => {
     { name: "Emergency Dental", path: "/emergency-dental" },
   ]);
 
-  const emergencyReviews = buildReviewSchemas(emergencyTestimonials, 4);
   const emergencySchemas = [emergencyServiceSchema];
 
   if (emergencyHowTo) {
@@ -128,16 +127,11 @@ const EmergencyDental = () => {
     emergencySchemas.push(emergencyBreadcrumbs);
   }
 
-  if (emergencyReviews.length) {
-    emergencySchemas.push(...emergencyReviews);
-  }
-
   return (
     <>
       <MetaTags 
-        title="Emergency Dental Care Palo Alto | 24/7 Dental Emergency | Dr. Wong"
-        description="24/7 emergency dental care in Palo Alto. Dr. Wong provides immediate treatment for dental emergencies including toothaches, broken teeth, and trauma."
-        image="/favicon/apple-touch-icon.png"
+        title={pageTitles.emergencyDental}
+        description={pageDescriptions.emergencyDental}
       />
       <StructuredData data={emergencySchemas} />
 

@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import OfficeGallerySection from "@/components/sections/OfficeGallerySection";
 import { drWongImages } from "@/lib/imageUrls";
-import { ogImages } from "@/lib/ogImages";
 import { pageTitles, pageDescriptions } from "@/lib/metaContent";
 import * as data from "@/lib/data";
 import MetaTags from "@/components/common/MetaTags";
@@ -97,7 +96,6 @@ const About = () => {
       <MetaTags 
         title={pageTitles.about}
         description={pageDescriptions.about}
-        image={ogImages.about}
       />
       <StructuredData data={aboutSchema} />
       {/* Hero Section - Mobile First */}

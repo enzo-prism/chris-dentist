@@ -1,7 +1,8 @@
-import { Switch, Route, useLocation } from "wouter";
+import * as React from "react";
+import { Switch, Route, useLocation, Router as WouterRouter } from "wouter";
 import { queryClient } from "./lib/queryClient";
-import { QueryClientProvider } from "@tanstack/react-query";
-import { HelmetProvider } from 'react-helmet-async';
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { HelmetProvider } from "@/lib/helmet";
 import { Toaster } from "@/components/ui/toaster";
 import { useEffect } from "react";
 import NotFound from "@/pages/not-found";
@@ -84,22 +85,39 @@ function Router() {
   );
 }
 
-function App() {
+type AppShellProps = {
+  readonly ssrPath?: string;
+  readonly queryClientOverride?: QueryClient;
+  readonly helmetContext?: unknown;
+};
+
+export function AppShell({
+  ssrPath,
+  queryClientOverride,
+  helmetContext,
+}: AppShellProps) {
+  const client = queryClientOverride ?? queryClient;
   return (
-    <QueryClientProvider client={queryClient}>
-      <HelmetProvider>
-        <DomainRedirect />
-        <GoogleAnalytics />
-        <HotjarTracking />
-        <SitemapLink />
-        <Favicons />
-        <Redirects />
-        <PreloadResources />
-        <Router />
-        <Toaster />
+    <QueryClientProvider client={client}>
+      <HelmetProvider context={helmetContext}>
+        <WouterRouter ssrPath={ssrPath}>
+          <DomainRedirect />
+          <GoogleAnalytics />
+          <HotjarTracking />
+          <SitemapLink />
+          <Favicons />
+          <Redirects />
+          <PreloadResources />
+          <Router />
+          <Toaster />
+        </WouterRouter>
       </HelmetProvider>
     </QueryClientProvider>
   );
+}
+
+function App() {
+  return <AppShell />;
 }
 
 export default App;

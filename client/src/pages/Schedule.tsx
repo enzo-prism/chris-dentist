@@ -3,7 +3,6 @@ import AppointmentSection from "@/components/sections/AppointmentSection";
 import OfficeInformationSection from "@/components/sections/OfficeInformationSection";
 import MetaTags from "@/components/common/MetaTags";
 import { drWongImages } from "@/lib/imageUrls";
-import { ogImages } from "@/lib/ogImages";
 import { pageTitles, pageDescriptions } from "@/lib/metaContent";
 import { useEffect } from "react";
 import OptimizedImage from "@/components/seo/OptimizedImage";
@@ -32,7 +31,6 @@ const Schedule = () => {
       <MetaTags 
         title={pageTitles.schedule}
         description={pageDescriptions.schedule}
-        image={ogImages.schedule}
       />
       {/* Hero Section */}
       <section className="bg-[#F5F9FC] py-12 md:py-20">

@@ -9,12 +9,13 @@ import TestimonialQuote from "@/components/testimonials/TestimonialQuote";
 import { getTestimonialsByNames } from "@/lib/testimonials";
 import {
   buildBreadcrumbSchema,
-  buildReviewSchemas,
   buildServiceSchema,
 } from "@/lib/structuredData";
 import RelatedServicePosts from "@/components/blog/RelatedServicePosts";
+import { getSeoForPath } from "@/lib/seo";
 
 const DentalVeneers = () => {
+  const veneerSeo = getSeoForPath("/dental-veneers");
   const veneerTypes = [
     {
       title: "Porcelain Veneers",
@@ -95,23 +96,17 @@ const DentalVeneers = () => {
     { name: "Dental Veneers", path: "/dental-veneers" },
   ]);
 
-  const veneerReviews = buildReviewSchemas(veneerTestimonials, 3);
   const veneerSchemas = [veneerServiceSchema];
 
   if (veneerBreadcrumbs) {
     veneerSchemas.push(veneerBreadcrumbs);
   }
 
-  if (veneerReviews.length) {
-    veneerSchemas.push(...veneerReviews);
-  }
-
   return (
     <>
       <MetaTags 
-        title="Dental Veneers Palo Alto | Dr. Christopher Wong | Porcelain & Composite Veneers"
-        description="Transform your smile with dental veneers in Palo Alto. Dr. Wong offers porcelain, composite, and no-prep options for beautiful results."
-        image="/favicon/apple-touch-icon.png"
+        title={veneerSeo.title}
+        description={veneerSeo.description}
       />
       <StructuredData data={veneerSchemas} />
 

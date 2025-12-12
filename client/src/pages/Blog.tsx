@@ -6,7 +6,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Link } from "wouter";
 import BlogPostCard from "@/components/common/BlogPostCard";
 import MetaTags from "@/components/common/MetaTags";
-import { ogImages } from "@/lib/ogImages";
 import { pageTitles, pageDescriptions } from "@/lib/metaContent";
 import OptimizedImage from "@/components/seo/OptimizedImage";
 import { normalizeBlogCategory, useBlogPosts } from "@/hooks/useBlogPosts";
@@ -98,7 +97,6 @@ const Blog = () => {
       <MetaTags 
         title={pageTitles.blog}
         description={pageDescriptions.blog}
-        image={ogImages.blog}
       />
       {/* Hero Section */}
       <section className="bg-[#F5F9FC] py-16 md:py-24">

@@ -5,7 +5,6 @@ import { Link } from "wouter";
 import ServiceCard from "@/components/common/ServiceCard";
 import MetaTags from "@/components/common/MetaTags";
 import { drWongImages } from "@/lib/imageUrls";
-import { ogImages } from "@/lib/ogImages";
 import { pageTitles, pageDescriptions } from "@/lib/metaContent";
 import { Service } from "@shared/schema";
 import OptimizedImage from "@/components/seo/OptimizedImage";
@@ -47,7 +46,6 @@ const Services = () => {
       <MetaTags 
         title={pageTitles.services}
         description={pageDescriptions.services}
-        image={ogImages.services}
       />
       <StructuredData data={servicesSchemas} />
       {/* Services List */}

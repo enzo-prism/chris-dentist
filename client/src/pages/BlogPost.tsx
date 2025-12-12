@@ -3,7 +3,7 @@ import { RouteComponentProps, useLocation } from "wouter";
 import { useBlogPosts } from "@/hooks/useBlogPosts";
 import MetaTags from "@/components/common/MetaTags";
 import { pageDescriptions, pageTitles } from "@/lib/metaContent";
-import { ogImages } from "@/lib/ogImages";
+import { getSeoForPath } from "@/lib/seo";
 import OptimizedImage from "@/components/seo/OptimizedImage";
 import { ArrowLeft, Calendar, Clock, Tag } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -28,6 +28,7 @@ const BlogPost = ({ params }: RouteComponentProps<Params>) => {
   const pageDescription = post?.content
     ? `${post.content.slice(0, 160)}${post.content.length > 160 ? "…" : ""}`
     : pageDescriptions.blog;
+  const blogOgImage = getSeoForPath("/blog").ogImage;
   const pageUrl = absoluteUrl(`/blog/${slug}`);
   const blogSchema = post
     ? {
@@ -173,7 +174,11 @@ const BlogPost = ({ params }: RouteComponentProps<Params>) => {
 
   return (
     <>
-      <MetaTags title={pageTitle} description={pageDescription} image={post.image || ogImages.blog} />
+      <MetaTags
+        title={pageTitle}
+        description={pageDescription}
+        image={post.image || blogOgImage}
+      />
       {blogSchema && <StructuredData data={blogSchema} />}
       <section className="bg-[#F5F9FC] py-12">
         <div className="max-w-5xl mx-auto px-4">

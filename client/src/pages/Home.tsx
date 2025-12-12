@@ -13,17 +13,10 @@ import { ArrowRight, CheckCircle, Phone } from "lucide-react";
 import { Link } from "wouter";
 import { Service, Testimonial } from "@shared/schema";
 import { motion } from "framer-motion";
-import { ogImages } from "@/lib/ogImages";
 import { pageTitles, pageDescriptions } from "@/lib/metaContent";
 import { drWongImages } from "@/lib/imageUrls";
 import { buildInsertTestimonial, testimonialSeedData } from "@shared/testimonialsData";
-import {
-  buildAggregateRatingFromTestimonials,
-  buildItemListSchema,
-  buildOrganizationSchema,
-  buildPersonSchema,
-  buildReviewSchemas,
-} from "@/lib/structuredData";
+import { buildHomepageJsonLd } from "@shared/structuredData";
 
 const Home = () => {
 
@@ -60,31 +53,13 @@ const Home = () => {
     setActiveTestimonial(Math.min(Math.max(index, 0), testimonialsToShow.length - 1));
   };
 
-  const aggregateRating = buildAggregateRatingFromTestimonials(testimonialsData);
-  const schemaNodes = [
-    buildOrganizationSchema({
-      services: services ?? [],
-      aggregateRating: aggregateRating ?? undefined,
-    }),
-    buildPersonSchema(),
-  ];
-
-  const serviceListSchema =
-    services && services.length ? buildItemListSchema(services) : null;
-  if (serviceListSchema) {
-    schemaNodes.push(serviceListSchema);
-  }
-
-  if (testimonialsData.length) {
-    schemaNodes.push(...buildReviewSchemas(testimonialsData, 6));
-  }
+  const schemaNodes = buildHomepageJsonLd();
 
   return (
     <>
       <MetaTags 
         title={pageTitles.home}
         description={pageDescriptions.home}
-        image={ogImages.home}
       />
       <StructuredData data={schemaNodes} />
       <HeroSection />

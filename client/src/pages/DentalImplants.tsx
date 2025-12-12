@@ -11,7 +11,6 @@ import {
   buildBreadcrumbSchema,
   buildFAQSchema,
   buildHowToSchema,
-  buildReviewSchemas,
   buildServiceSchema,
 } from "@/lib/structuredData";
 import RelatedServicePosts from "@/components/blog/RelatedServicePosts";
@@ -139,7 +138,6 @@ const DentalImplants = () => {
     { name: "Dental Implants", path: "/dental-implants" },
   ]);
 
-  const implantReviewSchemas = buildReviewSchemas(implantTestimonials, 4);
   const dentalImplantSchemas = [implantServiceSchema];
 
   if (implantHowToSchema) {
@@ -154,16 +152,11 @@ const DentalImplants = () => {
     dentalImplantSchemas.push(implantBreadcrumbs);
   }
 
-  if (implantReviewSchemas.length) {
-    dentalImplantSchemas.push(...implantReviewSchemas);
-  }
-
   return (
     <>
       <MetaTags 
         title={pageTitles.dentalImplants}
         description={pageDescriptions.dentalImplants}
-        image="/favicon/apple-touch-icon.png"
       />
       <StructuredData data={dentalImplantSchemas} />
 
