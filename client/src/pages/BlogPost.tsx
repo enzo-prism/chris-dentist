@@ -10,6 +10,10 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import StructuredData from "@/components/seo/StructuredData";
 import PageBreadcrumbs from "@/components/common/PageBreadcrumbs";
+import AuthorBox from "@/components/blog/AuthorBox";
+import RelatedServices, {
+  type RelatedServiceLink,
+} from "@/components/common/RelatedServices";
 import {
   absoluteUrl,
   buildBreadcrumbSchema,
@@ -46,11 +50,12 @@ const BlogPost = ({ params }: RouteComponentProps<Params>) => {
         dateModified: post.date,
         author: {
           "@type": "Person",
-          name: "Dr. Christopher B. Wong",
+          name: "Dr. Christopher B. Wong, DDS",
         },
         publisher: {
           "@type": "Organization",
           name: "Christopher B. Wong, DDS",
+          "@id": "https://www.chriswongdds.com/#organization",
           logo: {
             "@type": "ImageObject",
             url: absoluteUrl("/favicon/apple-touch-icon.png"),
@@ -80,6 +85,92 @@ const BlogPost = ({ params }: RouteComponentProps<Params>) => {
   if (blogSchema) {
     structuredDataNodes.push(blogSchema);
   }
+
+  const relatedServices: RelatedServiceLink[] = (() => {
+    const slugLower = post?.slug.toLowerCase() ?? "";
+    const categoryLower = post?.category?.toLowerCase() ?? "";
+
+    if (slugLower.includes("invisalign") || categoryLower.includes("invisalign")) {
+      return [
+        {
+          href: "/invisalign",
+          anchorText: "Invisalign in Palo Alto",
+          description: "Clear aligners to straighten teeth discreetly.",
+        },
+        {
+          href: "/zoom-whitening",
+          anchorText: "ZOOM teeth whitening",
+          description: "Finish your new smile with brighter teeth.",
+        },
+        {
+          href: "/dental-veneers",
+          anchorText: "Cosmetic veneers in Palo Alto",
+          description: "Cover chips, gaps, and discoloration.",
+        },
+        {
+          href: "/services",
+          anchorText: "Other dental services in Palo Alto",
+        },
+      ];
+    }
+
+    if (slugLower.includes("emergency") || categoryLower.includes("emergency")) {
+      return [
+        {
+          href: "/emergency-dental",
+          anchorText: "Emergency dentist in Palo Alto",
+          description: "Same‑day care for toothaches and injuries.",
+        },
+        {
+          href: "/services#preventive-dentistry",
+          anchorText: "Preventive dentistry",
+          description: "Cleanings and exams to avoid future emergencies.",
+        },
+        {
+          href: "/dental-implants",
+          anchorText: "Dental implants",
+          description: "Replace teeth that can’t be saved.",
+        },
+        {
+          href: "/contact",
+          anchorText: "Contact our office",
+        },
+      ];
+    }
+
+    if (
+      slugLower.includes("veneers") ||
+      categoryLower.includes("cosmetic")
+    ) {
+      return [
+        {
+          href: "/dental-veneers",
+          anchorText: "Dental veneers in Palo Alto",
+          description: "Porcelain or composite veneers for a new smile.",
+        },
+        {
+          href: "/zoom-whitening",
+          anchorText: "Professional teeth whitening",
+          description: "Brighten your smile quickly in‑office.",
+        },
+        {
+          href: "/invisalign",
+          anchorText: "Invisalign clear aligners",
+          description: "Straighten teeth before cosmetic finishing.",
+        },
+        {
+          href: "/services",
+          anchorText: "Explore all services",
+        },
+      ];
+    }
+
+    return [
+      { href: "/services", anchorText: "Dental services in Palo Alto" },
+      { href: "/schedule", anchorText: "Schedule an appointment" },
+      { href: "/contact", anchorText: "Contact our office" },
+    ];
+  })();
   const parsedContent = useMemo(() => {
     if (!post?.content) return [];
     const lines = post.content
@@ -200,6 +291,8 @@ const BlogPost = ({ params }: RouteComponentProps<Params>) => {
         title={pageTitle}
         description={pageDescription}
         image={post.image || blogOgImage}
+        type="article"
+        url={pageUrl}
       />
       {structuredDataNodes.length > 0 && (
         <StructuredData data={structuredDataNodes} />
@@ -255,6 +348,13 @@ const BlogPost = ({ params }: RouteComponentProps<Params>) => {
           </article>
         </div>
       </section>
+      <AuthorBox />
+      <RelatedServices
+        items={relatedServices}
+        title="Related services in Palo Alto"
+        subtitle="Explore treatments that complement this topic."
+        className="bg-[#F5F9FC]"
+      />
     </>
   );
 };
