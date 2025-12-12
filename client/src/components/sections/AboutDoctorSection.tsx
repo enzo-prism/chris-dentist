@@ -35,8 +35,15 @@ const AboutDoctorSection: React.FC = () => {
               functional, and brilliant smiles.
             </p>
             <p className="text-gray-700 mb-6">
-              Dr. Wong practices ethical and non-invasive dentistry with special interests in Invisalign®, implant restoration, 
-              and restorative care. He focuses on prevention and early detection, helping patients retain their natural tooth 
+              Dr. Wong practices ethical and non-invasive dentistry with special interests in{" "}
+              <Link href="/invisalign" className="text-primary font-semibold hover:underline">
+                Invisalign in Palo Alto
+              </Link>
+              ,{" "}
+              <Link href="/dental-implants" className="text-primary font-semibold hover:underline">
+                dental implants
+              </Link>
+              , and restorative care. He focuses on prevention and early detection, helping patients retain their natural tooth
               structure while maintaining long-term oral health.
             </p>
             

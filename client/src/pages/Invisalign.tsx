@@ -8,6 +8,9 @@ import OptimizedImage from "@/components/seo/OptimizedImage";
 import TestimonialQuote from "@/components/testimonials/TestimonialQuote";
 import { getTestimonialsByNames } from "@/lib/testimonials";
 import PageBreadcrumbs from "@/components/common/PageBreadcrumbs";
+import RelatedServices, {
+  type RelatedServiceLink,
+} from "@/components/common/RelatedServices";
 import {
   buildBreadcrumbSchema,
   buildHowToSchema,
@@ -133,6 +136,35 @@ const Invisalign = () => {
     { name: "Invisalign", path: "/invisalign" },
   ];
   const invisalignBreadcrumbs = buildBreadcrumbSchema(breadcrumbItems);
+
+  const relatedServices: RelatedServiceLink[] = [
+    {
+      href: "/dental-implants",
+      anchorText: "Dental implants in Palo Alto",
+      description:
+        "Replace missing teeth with stable, natural-looking implant restorations.",
+    },
+    {
+      href: "/dental-veneers",
+      anchorText: "Cosmetic veneers in Palo Alto",
+      description:
+        "Brighten and reshape your smile with custom porcelain or composite veneers.",
+    },
+    {
+      href: "/zoom-whitening",
+      anchorText: "ZOOM teeth whitening in Palo Alto",
+      description: "Fast, in‑office whitening for noticeably brighter teeth.",
+    },
+    {
+      href: "/emergency-dental",
+      anchorText: "Emergency dentist in Palo Alto",
+      description: "Same‑day help for toothaches, broken teeth, and trauma.",
+    },
+    {
+      href: "/services",
+      anchorText: "All dental services",
+    },
+  ];
 
   const pageSchemas = [serviceSchema];
 
@@ -497,6 +529,12 @@ const Invisalign = () => {
           </div>
         </div>
       </section>
+
+      <RelatedServices
+        items={relatedServices}
+        title="More ways we can help"
+        subtitle="Explore other services offered by Dr. Wong in Palo Alto."
+      />
 
       <RelatedServicePosts serviceSlug="invisalign" serviceName="Invisalign Treatment" />
 

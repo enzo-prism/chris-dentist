@@ -14,6 +14,9 @@ import {
   buildServiceSchema,
 } from "@/lib/structuredData";
 import PageBreadcrumbs from "@/components/common/PageBreadcrumbs";
+import RelatedServices, {
+  type RelatedServiceLink,
+} from "@/components/common/RelatedServices";
 import RelatedServicePosts from "@/components/blog/RelatedServicePosts";
 
 const benefits = [
@@ -139,6 +142,36 @@ const DentalImplants = () => {
     { name: "Dental Implants", path: "/dental-implants" },
   ];
   const implantBreadcrumbs = buildBreadcrumbSchema(breadcrumbItems);
+
+  const relatedServices: RelatedServiceLink[] = [
+    {
+      href: "/invisalign",
+      anchorText: "Invisalign in Palo Alto",
+      description:
+        "Clear aligners to straighten teeth discreetly for teens and adults.",
+    },
+    {
+      href: "/dental-veneers",
+      anchorText: "Dental veneers in Palo Alto",
+      description:
+        "Cosmetic smile upgrades for chips, gaps, and discoloration.",
+    },
+    {
+      href: "/zoom-whitening",
+      anchorText: "Professional teeth whitening",
+      description: "Brighten your smile quickly with in‑office ZOOM whitening.",
+    },
+    {
+      href: "/emergency-dental",
+      anchorText: "Emergency dental care in Palo Alto",
+      description: "Fast treatment when you have sudden pain or damage.",
+    },
+    {
+      href: "/services#restorative-dentistry",
+      anchorText: "Restorative dentistry",
+      description: "Fillings, crowns, and bridges to restore function.",
+    },
+  ];
 
   const dentalImplantSchemas = [implantServiceSchema];
 
@@ -563,6 +596,12 @@ const DentalImplants = () => {
           </div>
         </div>
       </section>
+
+      <RelatedServices
+        items={relatedServices}
+        title="Related services"
+        subtitle="See other treatments we offer in Palo Alto."
+      />
 
       <RelatedServicePosts serviceSlug="dental-implants" serviceName="Dental Implants" />
 

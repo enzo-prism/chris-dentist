@@ -15,6 +15,9 @@ import RelatedServicePosts from "@/components/blog/RelatedServicePosts";
 import { pageDescriptions, pageTitles } from "@/lib/metaContent";
 import { officeInfo } from "@/lib/data";
 import PageBreadcrumbs from "@/components/common/PageBreadcrumbs";
+import RelatedServices, {
+  type RelatedServiceLink,
+} from "@/components/common/RelatedServices";
 
 const EmergencyDental = () => {
   const emergencyTypes = [
@@ -119,6 +122,33 @@ const EmergencyDental = () => {
     { name: "Emergency Dental", path: "/emergency-dental" },
   ];
   const emergencyBreadcrumbs = buildBreadcrumbSchema(breadcrumbItems);
+
+  const relatedServices: RelatedServiceLink[] = [
+    {
+      href: "/services#preventive-dentistry",
+      anchorText: "Preventive dentistry in Palo Alto",
+      description: "Routine exams and cleanings to avoid emergencies.",
+    },
+    {
+      href: "/dental-implants",
+      anchorText: "Dental implants",
+      description: "Long‑term solutions for missing or severely damaged teeth.",
+    },
+    {
+      href: "/invisalign",
+      anchorText: "Invisalign clear aligners",
+      description: "Straighten teeth after urgent issues are resolved.",
+    },
+    {
+      href: "/dental-veneers",
+      anchorText: "Dental veneers",
+      description: "Cosmetic repairs for chips, cracks, and discoloration.",
+    },
+    {
+      href: "/services",
+      anchorText: "See all services",
+    },
+  ];
 
   const emergencySchemas = [emergencyServiceSchema];
 
@@ -414,6 +444,12 @@ const EmergencyDental = () => {
           </div>
         </div>
       </section>
+
+      <RelatedServices
+        items={relatedServices}
+        title="Related services"
+        subtitle="After urgent care, explore these next steps."
+      />
 
       <RelatedServicePosts serviceSlug="emergency-dental" serviceName="Emergency Dental Care" />
 

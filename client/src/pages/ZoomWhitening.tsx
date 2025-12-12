@@ -10,6 +10,9 @@ import { getTestimonialsByNames } from "@/lib/testimonials";
 import { motion } from "framer-motion";
 import { drWongImages } from "@/lib/imageUrls";
 import PageBreadcrumbs from "@/components/common/PageBreadcrumbs";
+import RelatedServices, {
+  type RelatedServiceLink,
+} from "@/components/common/RelatedServices";
 
 const ZoomWhitening = () => {
   const whiteningPerks = [
@@ -67,6 +70,28 @@ const ZoomWhitening = () => {
     { name: "ZOOM Whitening", path: "/zoom-whitening" },
   ];
   const breadcrumbSchema = buildBreadcrumbSchema(breadcrumbItems);
+
+  const relatedServices: RelatedServiceLink[] = [
+    {
+      href: "/dental-veneers",
+      anchorText: "Dental veneers in Palo Alto",
+      description: "Cover deep discoloration or reshape teeth for a new smile.",
+    },
+    {
+      href: "/invisalign",
+      anchorText: "Invisalign in Palo Alto",
+      description: "Straighten teeth before finishing with whitening.",
+    },
+    {
+      href: "/dental-implants",
+      anchorText: "Dental implants",
+      description: "Restore missing teeth as part of a full smile plan.",
+    },
+    {
+      href: "/services",
+      anchorText: "Explore all services",
+    },
+  ];
 
   const schemaNodes = [serviceSchema];
 
@@ -267,6 +292,13 @@ const ZoomWhitening = () => {
           </div>
         </div>
       </section>
+
+      <RelatedServices
+        items={relatedServices}
+        title="Related services"
+        subtitle="Pair whitening with these popular treatments."
+        className="bg-[#F5F9FC]"
+      />
 
       {/* CTA */}
       <section className="py-16 bg-primary">

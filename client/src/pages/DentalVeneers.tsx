@@ -14,6 +14,9 @@ import {
 import RelatedServicePosts from "@/components/blog/RelatedServicePosts";
 import { getSeoForPath } from "@/lib/seo";
 import PageBreadcrumbs from "@/components/common/PageBreadcrumbs";
+import RelatedServices, {
+  type RelatedServiceLink,
+} from "@/components/common/RelatedServices";
 
 const DentalVeneers = () => {
   const veneerSeo = getSeoForPath("/dental-veneers");
@@ -97,6 +100,33 @@ const DentalVeneers = () => {
     { name: "Dental Veneers", path: "/dental-veneers" },
   ];
   const veneerBreadcrumbs = buildBreadcrumbSchema(breadcrumbItems);
+
+  const relatedServices: RelatedServiceLink[] = [
+    {
+      href: "/invisalign",
+      anchorText: "Invisalign in Palo Alto",
+      description: "Straighten teeth with clear aligners for a balanced smile.",
+    },
+    {
+      href: "/zoom-whitening",
+      anchorText: "ZOOM whitening in Palo Alto",
+      description: "Remove stains quickly with in‑office whitening.",
+    },
+    {
+      href: "/dental-implants",
+      anchorText: "Dental implants in Palo Alto",
+      description: "Replace missing teeth with durable implant restorations.",
+    },
+    {
+      href: "/emergency-dental",
+      anchorText: "Emergency dental care",
+      description: "Same‑day appointments when you need urgent help.",
+    },
+    {
+      href: "/services",
+      anchorText: "All cosmetic & family dentistry services",
+    },
+  ];
 
   const veneerSchemas = [veneerServiceSchema];
 
@@ -387,6 +417,12 @@ const DentalVeneers = () => {
           </div>
         </div>
       </section>
+
+      <RelatedServices
+        items={relatedServices}
+        title="Related services"
+        subtitle="Explore more options for your smile in Palo Alto."
+      />
 
       <RelatedServicePosts serviceSlug="dental-veneers" serviceName="Dental Veneers" />
 
