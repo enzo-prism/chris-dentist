@@ -18,12 +18,15 @@ const Footer = () => {
     { href: "/patient-resources", label: "Patient Resources" },
     { href: "/patient-stories", label: "Patient Stories" },
     { href: "/blog", label: "Blog" },
+    { href: "/dentist-menlo-park", label: "Menlo Park Families" },
     { href: "/contact", label: "Contact" }
   ];
 
   const services = [
     { href: "/services#preventive-dentistry", label: "Preventive Dentistry" },
+    { href: "/invisalign", label: "Invisalign®" },
     { href: "/services#cosmetic-dentistry", label: "Cosmetic Dentistry" },
+    { href: "/teeth-whitening-palo-alto", label: "Teeth Whitening" },
     { href: "/services#restorative-dentistry", label: "Restorative Dentistry" },
     { href: "/services#pediatric-dentistry", label: "Pediatric Dentistry" },
     { href: "/services#emergency-dental-care", label: "Emergency Dental Care" }

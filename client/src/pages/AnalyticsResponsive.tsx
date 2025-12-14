@@ -156,8 +156,11 @@ export default function Analytics() {
     }
   }, []);
   
-  // Get current month data
-  const data = monthsData[selectedMonth as keyof typeof monthsData];
+	  // Get current month data
+	  const data = monthsData[selectedMonth as keyof typeof monthsData];
+	  const inProgressData =
+	    "status" in data && data.status === "in_progress" ? data : null;
+	  const isInProgress = inProgressData !== null;
 
   const handleAuthenticate = () => {
     setIsAuthenticated(true);
@@ -174,13 +177,13 @@ export default function Analytics() {
     : [];
 
   // Prepare radar chart data for behavior metrics (handle in-progress data)
-  const behaviorRadarData = data.status === "in_progress" ? [] : [
-    { metric: 'Session Duration', value: parseInt(data.behavior.metrics.avgSessionDuration) * 20 },
-    { metric: 'Pages/Session', value: data.behavior.metrics.pagesPerSession * 25 },
-    { metric: 'Engagement', value: 100 - data.behavior.metrics.bounceRate },
-    { metric: 'Scroll Depth', value: data.behavior.metrics.avgScrollDepth },
-    { metric: 'Mobile Usage', value: data.executive.mobileShare }
-  ];
+	  const behaviorRadarData = isInProgress ? [] : [
+	    { metric: 'Session Duration', value: parseInt(data.behavior.metrics.avgSessionDuration) * 20 },
+	    { metric: 'Pages/Session', value: data.behavior.metrics.pagesPerSession * 25 },
+	    { metric: 'Engagement', value: 100 - data.behavior.metrics.bounceRate },
+	    { metric: 'Scroll Depth', value: data.behavior.metrics.avgScrollDepth },
+	    { metric: 'Mobile Usage', value: data.executive.mobileShare }
+	  ];
 
   // Navigation sections with icons
   const sections = [
@@ -303,7 +306,7 @@ export default function Analytics() {
             </nav>
 
             {/* Quick Stats Summary */}
-            {data.status !== "in_progress" && (
+            {!isInProgress && (
               <div className="mt-8 p-4 bg-gray-50 rounded-lg">
                 <h3 className="text-xs font-semibold text-gray-600 mb-3">QUICK STATS</h3>
                 <div className="space-y-2">
@@ -440,51 +443,51 @@ export default function Analytics() {
 
         {/* Main Content Area */}
         <main className="flex-1 lg:ml-64 pt-24 lg:pt-0">
-          <div className="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto">
-            {/* Coming Soon State for August */}
-            {data.status === "in_progress" && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="mb-6"
-              >
+	          <div className="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto">
+	            {/* Coming Soon State for August */}
+	            {inProgressData && (
+	              <motion.div
+	                initial={{ opacity: 0, y: 20 }}
+	                animate={{ opacity: 1, y: 0 }}
+	                className="mb-6"
+	              >
                 <Card className="bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-200">
                   <CardContent className="pt-6">
                     <div className="flex items-start gap-4">
                       <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
                         <Activity className="w-6 h-6 text-blue-600" />
-                      </div>
-                      <div className="flex-1">
-                        <h3 className="text-lg font-semibold mb-2">August Data Collection in Progress</h3>
-                        <p className="text-sm text-gray-700 mb-4">{data.message}</p>
-                        
-                        {/* Early Indicators */}
-                        {data.preview?.earlyIndicators && (
-                          <div className="mb-4">
-                            <h4 className="text-sm font-semibold mb-2">Early Indicators:</h4>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                              {data.preview.earlyIndicators.map((indicator, index) => (
-                                <div key={index} className="flex items-start gap-2">
-                                  <TrendingUp className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-                                  <span className="text-xs text-gray-600">{indicator}</span>
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                        )}
+	                      </div>
+	                      <div className="flex-1">
+	                        <h3 className="text-lg font-semibold mb-2">August Data Collection in Progress</h3>
+	                        <p className="text-sm text-gray-700 mb-4">{inProgressData.message}</p>
+	                        
+	                        {/* Early Indicators */}
+	                        {inProgressData.preview?.earlyIndicators && (
+	                          <div className="mb-4">
+	                            <h4 className="text-sm font-semibold mb-2">Early Indicators:</h4>
+	                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+	                              {inProgressData.preview.earlyIndicators.map((indicator, index) => (
+	                                <div key={index} className="flex items-start gap-2">
+	                                  <TrendingUp className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
+	                                  <span className="text-xs text-gray-600">{indicator}</span>
+	                                </div>
+	                              ))}
+	                            </div>
+	                          </div>
+	                        )}
 
-                        {/* Coming Soon Features */}
-                        {data.comingSoon?.features && (
-                          <div>
-                            <h4 className="text-sm font-semibold mb-2">Coming Soon:</h4>
-                            <div className="space-y-2">
-                              {data.comingSoon.features.map((feature, index) => (
-                                <div key={index} className="bg-white/50 rounded-lg p-3">
-                                  <div className="flex items-center justify-between mb-1">
-                                    <span className="text-sm font-medium">{feature.title}</span>
-                                    <Badge variant="outline" className="text-xs">{feature.expectedDate}</Badge>
-                                  </div>
-                                  <p className="text-xs text-gray-600">{feature.description}</p>
+	                        {/* Coming Soon Features */}
+	                        {inProgressData.comingSoon?.features && (
+	                          <div>
+	                            <h4 className="text-sm font-semibold mb-2">Coming Soon:</h4>
+	                            <div className="space-y-2">
+	                              {inProgressData.comingSoon.features.map((feature, index) => (
+	                                <div key={index} className="bg-white/50 rounded-lg p-3">
+	                                  <div className="flex items-center justify-between mb-1">
+	                                    <span className="text-sm font-medium">{feature.title}</span>
+	                                    <Badge variant="outline" className="text-xs">{feature.expectedDate}</Badge>
+	                                  </div>
+	                                  <p className="text-xs text-gray-600">{feature.description}</p>
                                 </div>
                               ))}
                             </div>
@@ -509,12 +512,12 @@ export default function Analytics() {
                   <p className="text-gray-600">{data.executive.summary}</p>
                 </div>
 
-                {/* Key Metrics Grid */}
-                {data.status !== "in_progress" ? (
-                  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 lg:gap-4">
-                    <MetricCard 
-                      label="New Users" 
-                      value={data.executive.newUsers.toLocaleString()}
+	                {/* Key Metrics Grid */}
+	                {!isInProgress ? (
+	                  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 lg:gap-4">
+	                    <MetricCard 
+	                      label="New Users" 
+	                      value={data.executive.newUsers.toLocaleString()}
                       trend="+12% from June"
                       icon={Users}
                       description="First-time visitors"
@@ -1049,53 +1052,53 @@ export default function Analytics() {
                 </div>
 
                 {/* Review Stats */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  <Card>
-                    <CardContent className="pt-6">
-                      <div className="text-center">
-                        <p className="text-sm text-gray-600 mb-2">July Reviews</p>
-                        <p className="text-4xl font-bold mb-3">{data.reputation.july.newReviewsCount}</p>
-                        <div className="flex justify-center gap-2">
-                          <Badge variant="outline">Google: {data.reputation.july.platformBreakdown.google}</Badge>
-                          <Badge variant="outline">Yelp: {data.reputation.july.platformBreakdown.yelp}</Badge>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
+	                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+	                  <Card>
+	                    <CardContent className="pt-6">
+	                      <div className="text-center">
+	                        <p className="text-sm text-gray-600 mb-2">July Reviews</p>
+	                        <p className="text-4xl font-bold mb-3">{julyAnalyticsData.reputation.july.newReviewsCount}</p>
+	                        <div className="flex justify-center gap-2">
+	                          <Badge variant="outline">Google: {julyAnalyticsData.reputation.july.platformBreakdown.google}</Badge>
+	                          <Badge variant="outline">Yelp: {julyAnalyticsData.reputation.july.platformBreakdown.yelp}</Badge>
+	                        </div>
+	                      </div>
+	                    </CardContent>
+	                  </Card>
 
                   <Card>
                     <CardContent className="pt-6">
                       <div className="text-center">
                         <p className="text-sm text-gray-600 mb-2">Average Rating</p>
-                        <div className="flex justify-center items-center gap-1 mb-2">
-                          {[...Array(5)].map((_, i) => (
-                            <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400" />
-                          ))}
-                        </div>
-                        <p className="text-2xl font-bold">{data.reputation.july.avgRatingNew.toFixed(1)}</p>
-                      </div>
-                    </CardContent>
-                  </Card>
+	                        <div className="flex justify-center items-center gap-1 mb-2">
+	                          {[...Array(5)].map((_, i) => (
+	                            <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400" />
+	                          ))}
+	                        </div>
+	                        <p className="text-2xl font-bold">{julyAnalyticsData.reputation.july.avgRatingNew.toFixed(1)}</p>
+	                      </div>
+	                    </CardContent>
+	                  </Card>
 
                   <Card className="bg-blue-50 border-blue-200">
                     <CardContent className="pt-6">
-                      <div className="text-center">
-                        <p className="text-sm text-gray-600 mb-2">August Preview</p>
-                        <p className="text-4xl font-bold mb-3">{data.reputation.previewAug.newReviewsCount}</p>
-                        <p className="text-xs text-gray-500">Already incoming</p>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
+	                      <div className="text-center">
+	                        <p className="text-sm text-gray-600 mb-2">August Preview</p>
+	                        <p className="text-4xl font-bold mb-3">{julyAnalyticsData.reputation.previewAug.newReviewsCount}</p>
+	                        <p className="text-xs text-gray-500">Already incoming</p>
+	                      </div>
+	                    </CardContent>
+	                  </Card>
+	                </div>
 
-                {/* Recent Reviews Grid */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                  {data.reputation.july.topQuotes.map((quote, index) => (
-                    <Card key={index} className="hover:shadow-lg transition-shadow">
-                      <CardContent className="pt-6">
-                        <div className="flex items-start gap-3">
-                          <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                            <Star className="w-5 h-5 text-primary" />
+	                {/* Recent Reviews Grid */}
+	                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+	                  {julyAnalyticsData.reputation.july.topQuotes.map((quote, index) => (
+	                    <Card key={index} className="hover:shadow-lg transition-shadow">
+	                      <CardContent className="pt-6">
+	                        <div className="flex items-start gap-3">
+	                          <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+	                            <Star className="w-5 h-5 text-primary" />
                           </div>
                           <div className="flex-1">
                             <p className="text-sm italic text-gray-700 mb-3">"{quote.excerpt}"</p>
@@ -1120,28 +1123,28 @@ export default function Analytics() {
                     <CardTitle>Common Review Themes</CardTitle>
                     <CardDescription>What patients appreciate most</CardDescription>
                   </CardHeader>
-                  <CardContent>
-                    <div className="flex flex-wrap gap-2">
-                      {data.reputation.july.themes.map((theme) => (
-                        <Badge key={theme} variant="secondary" className="py-2 px-4">
-                          {theme}
-                        </Badge>
-                      ))}
-                    </div>
+	                  <CardContent>
+	                    <div className="flex flex-wrap gap-2">
+	                      {julyAnalyticsData.reputation.july.themes.map((theme) => (
+	                        <Badge key={theme} variant="secondary" className="py-2 px-4">
+	                          {theme}
+	                        </Badge>
+	                      ))}
+	                    </div>
                   </CardContent>
                 </Card>
 
                 {/* Insight */}
-                <Card className="bg-blue-50 border-blue-200">
-                  <CardContent className="pt-6">
-                    <p className="text-sm text-blue-800 flex items-start">
-                      <TrendingUp className="w-5 h-5 mr-2 flex-shrink-0" />
-                      {data.reputation.insight}
-                    </p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            )}
+	                <Card className="bg-blue-50 border-blue-200">
+	                  <CardContent className="pt-6">
+	                    <p className="text-sm text-blue-800 flex items-start">
+	                      <TrendingUp className="w-5 h-5 mr-2 flex-shrink-0" />
+	                      {julyAnalyticsData.reputation.insight}
+	                    </p>
+	                  </CardContent>
+	                </Card>
+	              </motion.div>
+	            )}
 
             {/* Highlights Section */}
             {selectedSection === "highlights" && (
@@ -1155,13 +1158,13 @@ export default function Analytics() {
                   <p className="text-sm lg:text-base text-gray-600">Proof of work and value delivered this month</p>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                  {data.highlights.map((highlight, index) => (
-                    <motion.div
-                      key={index}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1 }}
+	                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+	                  {julyAnalyticsData.highlights.map((highlight, index) => (
+	                    <motion.div
+	                      key={index}
+	                      initial={{ opacity: 0, x: -20 }}
+	                      animate={{ opacity: 1, x: 0 }}
+	                      transition={{ delay: index * 0.1 }}
                     >
                       <Card className="h-full hover:shadow-lg transition-shadow">
                         <CardContent className="pt-6">
@@ -1213,32 +1216,32 @@ export default function Analytics() {
                   </CardHeader>
                   <CardContent>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div>
-                        <h4 className="text-sm font-semibold mb-3">Analytics Tools</h4>
-                        <div className="flex flex-wrap gap-2">
-                          {data.stack.analytics.map((tool) => (
-                            <Badge key={tool} variant="outline">
-                              {tool}
-                            </Badge>
-                          ))}
-                        </div>
-                      </div>
-                      <div>
-                        <h4 className="text-sm font-semibold mb-3">AI Models</h4>
-                        <div className="flex flex-wrap gap-2">
-                          {data.stack.aiModels.map((model) => (
-                            <Badge key={model} variant="outline">
-                              {model}
-                            </Badge>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                    <p className="text-xs text-gray-500 mt-4">{data.stack.notes}</p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            )}
+	                      <div>
+	                        <h4 className="text-sm font-semibold mb-3">Analytics Tools</h4>
+	                        <div className="flex flex-wrap gap-2">
+	                          {julyAnalyticsData.stack.analytics.map((tool) => (
+	                            <Badge key={tool} variant="outline">
+	                              {tool}
+	                            </Badge>
+	                          ))}
+	                        </div>
+	                      </div>
+	                      <div>
+	                        <h4 className="text-sm font-semibold mb-3">AI Models</h4>
+	                        <div className="flex flex-wrap gap-2">
+	                          {julyAnalyticsData.stack.aiModels.map((model) => (
+	                            <Badge key={model} variant="outline">
+	                              {model}
+	                            </Badge>
+	                          ))}
+	                        </div>
+	                      </div>
+	                    </div>
+	                    <p className="text-xs text-gray-500 mt-4">{julyAnalyticsData.stack.notes}</p>
+	                  </CardContent>
+	                </Card>
+	              </motion.div>
+	            )}
 
             {/* Targets Section */}
             {selectedSection === "targets" && (
@@ -1252,13 +1255,13 @@ export default function Analytics() {
                   <p className="text-sm lg:text-base text-gray-600">Priority actions to maintain growth momentum</p>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                  {data.targetsNextMonth.map((target) => (
-                    <motion.div
-                      key={target.priority}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: (target.priority - 1) * 0.1 }}
+	                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+	                  {julyAnalyticsData.targetsNextMonth.map((target) => (
+	                    <motion.div
+	                      key={target.priority}
+	                      initial={{ opacity: 0, x: -20 }}
+	                      animate={{ opacity: 1, x: 0 }}
+	                      transition={{ delay: (target.priority - 1) * 0.1 }}
                     >
                       <Card className="h-full hover:shadow-lg transition-all hover:scale-[1.02]">
                         <CardContent className="pt-6">

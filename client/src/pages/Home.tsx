@@ -7,6 +7,7 @@ import ServiceCard from "@/components/common/ServiceCard";
 import TestimonialCard from "@/components/common/TestimonialCard";
 import TypeFormEmbed from "@/components/forms/TypeFormEmbed";
 import MetaTags from "@/components/common/MetaTags";
+import FAQSection from "@/components/common/FAQSection";
 import StructuredData from "@/components/seo/StructuredData";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle, Phone } from "lucide-react";
@@ -14,10 +15,15 @@ import { Link } from "wouter";
 import { Service, Testimonial } from "@shared/schema";
 import { motion } from "framer-motion";
 import { pageTitles, pageDescriptions } from "@/lib/metaContent";
-import { drWongImages } from "@/lib/imageUrls";
 import { buildInsertTestimonial, testimonialSeedData } from "@shared/testimonialsData";
-import { buildHomepageJsonLd } from "@shared/structuredData";
 import { officeInfo } from "@/lib/data";
+import {
+  buildFAQSchema,
+  buildOrganizationSchema,
+  buildPersonSchema,
+  buildWebSiteSchema,
+  type FAQEntry,
+} from "@/lib/structuredData";
 
 const Home = () => {
 
@@ -51,19 +57,144 @@ const Home = () => {
     const cardWidth = container.firstElementChild?.clientWidth ?? 1;
     const scrollLeft = container.scrollLeft;
     const index = Math.round(scrollLeft / cardWidth);
-    setActiveTestimonial(Math.min(Math.max(index, 0), testimonialsToShow.length - 1));
-  };
+	    setActiveTestimonial(Math.min(Math.max(index, 0), testimonialsToShow.length - 1));
+	  };
 
-  const schemaNodes = buildHomepageJsonLd();
+    const homeFaqs: FAQEntry[] = [
+      {
+        question: "Where is your Palo Alto dental office located?",
+        answer: `Our office is located at ${officeInfo.address.line1}, ${officeInfo.address.line2}. Use the directions link on this page or call our team if you’d like parking tips before your visit.`,
+      },
+      {
+        question: "Are you accepting new patients?",
+        answer:
+          "Yes—new patients are welcome. We’ll start with a thorough exam and a clear conversation about your goals, concerns, and the next best steps.",
+      },
+      {
+        question: "What services do you offer?",
+        answer:
+          "We offer preventive checkups and cleanings, cosmetic dentistry, Invisalign, restorative care, and emergency dental visits. Explore our services page for details and common next steps.",
+      },
+      {
+        question: "Do you accept dental insurance?",
+        answer:
+          "We work with many PPO insurance plans. If you share your plan information, our team can help verify benefits and walk through expected costs before you commit to treatment.",
+      },
+      {
+        question: "What if I have a dental emergency?",
+        answer:
+          "If you have significant pain, swelling, or a broken tooth, call our office as soon as possible. We’ll help you understand what to do next and schedule urgent care when available.",
+      },
+      {
+        question: "How do I schedule an appointment?",
+        answer:
+          "You can request an appointment online or call our office. We’ll confirm a time and help you prepare for your first visit.",
+      },
+    ];
 
-  return (
-    <>
-      <MetaTags 
+    const schemaNodes = [
+      buildOrganizationSchema({ services: services ?? [] }),
+      buildPersonSchema(),
+      buildWebSiteSchema(),
+    ];
+    const faqSchema = buildFAQSchema(homeFaqs, "/");
+    if (faqSchema) {
+      schemaNodes.push(faqSchema);
+    }
+
+	  return (
+	    <>
+	      <MetaTags 
         title={pageTitles.home}
         description={pageDescriptions.home}
       />
       <StructuredData data={schemaNodes} />
       <HeroSection />
+
+      {/* Local relevance section */}
+      <section id="palo-alto-dentist" className="bg-white py-12 md:py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+            <div className="lg:col-span-7 space-y-5">
+              <h2 className="text-3xl md:text-4xl font-bold font-heading text-[#1F2933]">
+                Dentist in Palo Alto, CA
+              </h2>
+              <p className="text-lg text-slate-700 leading-relaxed">
+                If you’re looking for a dentist in Palo Alto, our team provides
+                modern, conservative dentistry focused on long‑term comfort and
+                oral health. We welcome patients from Palo Alto, Stanford,
+                Menlo Park, and nearby Peninsula neighborhoods.
+              </p>
+              <p className="text-lg text-slate-700 leading-relaxed">
+                From checkups and cleanings to Invisalign, cosmetic veneers, and
+                restorative care, we’ll explain what we see and help you choose
+                a plan that fits your goals and schedule.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3 pt-1">
+                <Link href="/schedule#appointment">
+                  <Button className="bg-primary text-white hover:bg-primary/90">
+                    Request an appointment
+                  </Button>
+                </Link>
+                <Link href="/services">
+                  <Button variant="outline" className="border-primary text-primary hover:bg-primary/5">
+                    Explore dental services
+                  </Button>
+                </Link>
+              </div>
+            </div>
+
+            <div className="lg:col-span-5">
+              <div className="rounded-2xl border border-slate-100 bg-[#F5F9FC] p-6 shadow-sm space-y-5">
+                <div>
+                  <h3 className="text-sm font-semibold tracking-wide text-slate-900 uppercase">
+                    Office location
+                  </h3>
+                  <p className="mt-2 text-slate-800 leading-relaxed">
+                    {officeInfo.address.line1}
+                    <br />
+                    {officeInfo.address.line2}
+                  </p>
+                  <a
+                    href={officeInfo.mapUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-2 inline-flex items-center text-primary font-semibold hover:underline"
+                  >
+                    Get directions
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </a>
+                </div>
+
+                <div>
+                  <h3 className="text-sm font-semibold tracking-wide text-slate-900 uppercase">
+                    Call
+                  </h3>
+                  <a
+                    href={`tel:${officeInfo.phoneE164}`}
+                    className="mt-2 inline-flex items-center text-slate-800 font-semibold hover:text-primary transition-colors"
+                  >
+                    {officeInfo.phone}
+                  </a>
+                </div>
+
+                <div>
+                  <h3 className="text-sm font-semibold tracking-wide text-slate-900 uppercase">
+                    Hours
+                  </h3>
+                  <p className="mt-2 text-slate-700 leading-relaxed text-sm">
+                    Mon–Thu: {officeInfo.hours.monday}
+                    <br />
+                    Fri: {officeInfo.hours.friday}
+                    <br />
+                    Sat–Sun: {officeInfo.hours.saturday}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Patient Testimonials Spotlight */}
       <section className="py-16 md:py-20 bg-gradient-to-b from-white via-[#F5F9FC] to-white">
@@ -141,8 +272,8 @@ const Home = () => {
       <AboutDoctorSection />
 
       {/* Services Section */}
-      <section id="services" className="py-16 md:py-20 bg-gradient-to-b from-white to-gray-50/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+	      <section id="services" className="py-16 md:py-20 bg-gradient-to-b from-white to-gray-50/30">
+	        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold font-heading text-gray-900 mb-6">
@@ -187,12 +318,19 @@ const Home = () => {
               </Button>
             </Link>
           </div>
-        </div>
-      </section>
+	        </div>
+	      </section>
 
-      {/* Appointment Section */}
-      <section id="appointment" className="py-16 bg-[#F5F9FC]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <FAQSection
+          title="Palo Alto dentist FAQs"
+          subtitle="Quick answers about visiting our office, insurance, and scheduling."
+          items={homeFaqs}
+          className="bg-white"
+        />
+
+	      {/* Appointment Section */}
+	      <section id="appointment" className="py-16 bg-[#F5F9FC]">
+	        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-white rounded-lg shadow-xl overflow-hidden">
             <div className="md:flex">
               <div className="md:w-1/2 bg-primary p-8 md:p-12 text-white">
@@ -260,29 +398,29 @@ const Home = () => {
             ))}
           </div>
           
-          {/* Local Dental Practice Info */}
-          <div className="mt-12 mb-10 bg-white rounded-lg shadow-lg overflow-hidden">
-            <div className="p-6 bg-primary text-white text-center">
-              <h3 className="text-xl font-bold mb-2">Your Trusted Palo Alto Dental Practice</h3>
-              <p className="text-blue-100">Serving Palo Alto, Menlo Park, Stanford, and surrounding communities</p>
-            </div>
-            <div className="p-6">
-              <div className="grid md:grid-cols-3 gap-6 text-center">
-                <div>
-                  <div className="text-2xl font-bold text-primary mb-2">15+ Years</div>
-                  <p className="text-gray-600">Serving Palo Alto Community</p>
-                </div>
-                <div>
-                  <div className="text-2xl font-bold text-primary mb-2">200+</div>
-                  <p className="text-gray-600">Five-Star Patient Reviews</p>
-                </div>
-                <div>
-                  <div className="text-2xl font-bold text-primary mb-2">Same Day</div>
-                  <p className="text-gray-600">Emergency Dental Care</p>
-                </div>
-              </div>
-            </div>
-          </div>
+	          {/* Local Dental Practice Info */}
+	          <div className="mt-12 mb-10 bg-white rounded-lg shadow-lg overflow-hidden">
+	            <div className="p-6 bg-primary text-white text-center">
+	              <h3 className="text-xl font-bold mb-2">Your Trusted Palo Alto Dental Practice</h3>
+	              <p className="text-blue-100">Serving Palo Alto, Menlo Park, Stanford, and surrounding communities</p>
+	            </div>
+	            <div className="p-6">
+	              <div className="grid md:grid-cols-3 gap-6 text-center">
+	                <div>
+	                  <div className="text-lg font-bold text-primary mb-2">Conservative care</div>
+	                  <p className="text-gray-600">Clear options, no pressure</p>
+	                </div>
+	                <div>
+	                  <div className="text-lg font-bold text-primary mb-2">Comprehensive dentistry</div>
+	                  <p className="text-gray-600">Preventive, cosmetic, restorative</p>
+	                </div>
+	                <div>
+	                  <div className="text-lg font-bold text-primary mb-2">Urgent visits</div>
+	                  <p className="text-gray-600">Call us for emergency care</p>
+	                </div>
+	              </div>
+	            </div>
+	          </div>
           
           <div className="text-center mt-8">
             <Link href="/testimonials">

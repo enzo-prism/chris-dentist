@@ -104,9 +104,9 @@ export const seoByPath: Record<string, SeoDefinition> = {
     ogImage: "https://i.imgur.com/AC5lGu3.png",
   },
   "/invisalign": {
-    title: "Invisalign in Palo Alto | Clear Aligners | Dr. Wong, DDS",
+    title: "Invisalign in Palo Alto, CA | Clear Aligners | Dr. Wong, DDS",
     description:
-      "Invisalign® treatment in Palo Alto with Dr. Christopher Wong. Discreet, comfortable orthodontic treatment for teens and adults. Virtually invisible braces.",
+      "Invisalign® clear aligners in Palo Alto, CA for teens and adults. Get a digital scan, a personalized plan, and flexible visits—schedule a consultation today.",
     canonicalPath: "/invisalign",
     ogImage: "https://i.imgur.com/hO02YQ0.png",
   },
@@ -118,16 +118,16 @@ export const seoByPath: Record<string, SeoDefinition> = {
     ogImage: "https://i.imgur.com/hO02YQ0.png",
   },
   "/zoom-whitening": {
-    title: "ZOOM Teeth Whitening Palo Alto | Fast In-Office Whitening | Dr. Wong",
+    title: "ZOOM Whitening in Palo Alto | In-Office Teeth Whitening | Dr. Wong, DDS",
     description:
-      "Get a brighter smile fast with ZOOM! teeth whitening in Palo Alto. Dr. Wong offers same-day in-office whitening with minimal sensitivity.",
+      "In‑office ZOOM! whitening in Palo Alto for a noticeably brighter smile. Professional isolation, shade planning, and sensitivity management—book a visit.",
     canonicalPath: "/zoom-whitening",
     ogImage: "https://i.imgur.com/qK5nPtS.png",
   },
   "/teeth-whitening-palo-alto": {
-    title: "Teeth Whitening in Palo Alto | Brighten Your Smile | Dr. Wong, DDS",
+    title: "Palo Alto Teeth Whitening | In-Office & Take-Home Options | Dr. Wong, DDS",
     description:
-      "Professional teeth whitening in Palo Alto with Dr. Christopher B. Wong. In‑office and take‑home options for fast, safe results.",
+      "Palo Alto teeth whitening with dentist‑supervised options: in‑office whitening and custom take‑home trays. Safe care with sensitivity planning—schedule a visit.",
     canonicalPath: "/teeth-whitening-palo-alto",
     ogImage: DEFAULT_OG_IMAGE,
   },
@@ -161,9 +161,9 @@ export const seoByPath: Record<string, SeoDefinition> = {
     ogImage: DEFAULT_OG_IMAGE,
   },
   "/dentist-menlo-park": {
-    title: "Menlo Park Dentist | Nearby Palo Alto Dental Care | Dr. Wong, DDS",
+    title: "Menlo Park Family Dentist | Nearby Palo Alto Care | Dr. Wong, DDS",
     description:
-      "Looking for a Menlo Park dentist? Visit Dr. Christopher B. Wong in nearby Palo Alto for preventive, cosmetic, restorative, and emergency care.",
+      "Family dentist near Menlo Park for kids, teens, adults, and seniors. Preventive checkups, cleanings, fillings, Invisalign, and emergency care—visit our nearby Palo Alto office.",
     canonicalPath: "/dentist-menlo-park",
     ogImage: DEFAULT_OG_IMAGE,
   },

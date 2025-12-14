@@ -95,6 +95,13 @@ const PediatricDentistPaloAlto = () => {
             reduce decay. We keep visits upbeat and age‑appropriate, with plenty of
             time for questions.
           </p>
+          <p className="text-lg text-slate-700 leading-relaxed">
+            Many families visit us from Menlo Park. If you’re searching for a{" "}
+            <Link href="/dentist-menlo-park" className="text-primary font-semibold hover:underline">
+              Menlo Park family dentist
+            </Link>
+            , our Palo Alto office is nearby and we’ll help you schedule kids’ and adult care with one consistent team.
+          </p>
 
           <div className="flex flex-col sm:flex-row gap-3">
             <Link href="/schedule#appointment">

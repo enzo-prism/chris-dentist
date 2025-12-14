@@ -10,7 +10,7 @@ const spacingClasses: Record<SpacingPreset, string> = {
 };
 
 export type PageSectionProps = React.HTMLAttributes<HTMLElement> & {
-  as?: keyof JSX.IntrinsicElements;
+  as?: keyof HTMLElementTagNameMap;
   spacing?: SpacingPreset;
 };
 

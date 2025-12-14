@@ -14,7 +14,7 @@ const HotjarTracking = () => {
   useEffect(() => {
     // Initialize Hotjar
     if (typeof window !== 'undefined') {
-      const hotjarWindow = window as HotjarWindow;
+      const hotjarWindow = window as unknown as HotjarWindow;
       
       // Define hj function (safely)
       hotjarWindow.hj = hotjarWindow.hj || function() { 

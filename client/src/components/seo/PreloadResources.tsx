@@ -18,16 +18,16 @@ const PreloadResources = () => {
       
       {/* Preload critical images */}
       <link rel="preload" href="/favicon/apple-touch-icon.png" as="image" type="image/png" />
-      {isHome && (
-        <link
-          rel="preload"
-          as="image"
-          href="/images/hero-office-960.webp"
-          imagesrcset="/images/hero-office-640.webp 640w, /images/hero-office-960.webp 960w, /images/hero-office-1280.webp 1280w"
-          imagesizes="(max-width: 1024px) 100vw, 60vw"
-          type="image/webp"
-        />
-      )}
+	      {isHome && (
+	        <link
+	          rel="preload"
+	          as="image"
+	          href="/images/hero-office-960.webp"
+	          imageSrcSet="/images/hero-office-640.webp 640w, /images/hero-office-960.webp 960w, /images/hero-office-1280.webp 1280w"
+	          imageSizes="(max-width: 1024px) 100vw, 60vw"
+	          type="image/webp"
+	        />
+	      )}
       
       {/* DNS prefetch for external domains */}
       <link rel="dns-prefetch" href="//fonts.googleapis.com" />

@@ -11,13 +11,30 @@ import { nanoid } from "nanoid";
 import {
   buildExcerpt,
   getMetaForPath,
+  pageDescriptions,
+  pageTitles,
   type MetaDefinition,
 } from "@shared/metaContent";
 import { storage } from "./storage";
+import { seoByPath } from "@shared/seo";
 
 const viteLogger = createLogger();
 
 const BLOG_PREFIX = "/blog/";
+const KNOWN_PATHS = new Set(Object.keys(seoByPath));
+
+async function isKnownPagePath(pathname: string): Promise<boolean> {
+  if (KNOWN_PATHS.has(pathname)) return true;
+
+  if (pathname.startsWith(BLOG_PREFIX) && pathname !== "/blog") {
+    const slug = pathname.slice(BLOG_PREFIX.length);
+    if (!slug) return false;
+    const post = await storage.getBlogPostBySlug(slug);
+    return Boolean(post);
+  }
+
+  return false;
+}
 
 function escapeHtml(value: string): string {
   return value
@@ -51,7 +68,14 @@ async function resolveMetaForUrl(url: string): Promise<MetaDefinition> {
     }
   }
 
-  return getMetaForPath(pathname);
+  if (KNOWN_PATHS.has(pathname)) {
+    return getMetaForPath(pathname);
+  }
+
+  return {
+    title: pageTitles.notFound,
+    description: pageDescriptions.notFound,
+  };
 }
 
 function injectMeta(template: string, meta: MetaDefinition): string {
@@ -75,7 +99,7 @@ export async function setupVite(app: Express, server: Server) {
   const serverOptions = {
     middlewareMode: true,
     hmr: { server },
-    allowedHosts: true,
+    allowedHosts: true as const,
   };
 
   const vite = await createViteServer({
@@ -97,6 +121,12 @@ export async function setupVite(app: Express, server: Server) {
     const url = req.originalUrl;
 
     try {
+      const pathname = normalizePathname(url);
+      const isKnown = await isKnownPagePath(pathname);
+      if (!isKnown && path.extname(pathname)) {
+        return res.status(404).end();
+      }
+
       const clientTemplate = path.resolve(
         __dirname,
         "..",
@@ -113,7 +143,10 @@ export async function setupVite(app: Express, server: Server) {
       const meta = await resolveMetaForUrl(url);
       template = injectMeta(template, meta);
       const page = await vite.transformIndexHtml(url, template);
-      res.status(200).set({ "Content-Type": "text/html" }).end(page);
+      res
+        .status(isKnown ? 200 : 404)
+        .set({ "Content-Type": "text/html" })
+        .end(page);
     } catch (e) {
       vite.ssrFixStacktrace(e as Error);
       next(e);
@@ -139,6 +172,19 @@ export function serveStatic(app: Express) {
       index: false,
       maxAge: oneYearMs,
       setHeaders(res, filePath) {
+        if (
+          filePath.endsWith(`${path.sep}robots.txt`) ||
+          filePath.endsWith(`${path.sep}sitemap.xml`)
+        ) {
+          res.setHeader(
+            "Cache-Control",
+            "no-store, no-cache, must-revalidate, max-age=0",
+          );
+          res.setHeader("Pragma", "no-cache");
+          res.setHeader("Expires", "0");
+          return;
+        }
+
         if (filePath.endsWith(".html")) {
           res.setHeader(
             "Cache-Control",
@@ -164,6 +210,11 @@ export function serveStatic(app: Express) {
   app.use("*", async (req, res, next) => {
     try {
       const pathname = normalizePathname(req.originalUrl);
+      const isKnown = await isKnownPagePath(pathname);
+      if (!isKnown && path.extname(pathname)) {
+        return res.status(404).end();
+      }
+
       const prerenderedFile =
         pathname === "/"
           ? "index.html"
@@ -182,7 +233,7 @@ export function serveStatic(app: Express) {
       const meta = await resolveMetaForUrl(req.originalUrl);
       template = injectMeta(template, meta);
       res
-        .status(200)
+        .status(isKnown ? 200 : 404)
         .set({
           "Content-Type": "text/html",
           "Cache-Control": "no-store, no-cache, must-revalidate, max-age=0",

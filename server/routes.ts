@@ -5,20 +5,92 @@ import { insertAppointmentSchema, insertContactMessageSchema, insertNewsletterSu
 import { seoByPath } from "@shared/seo";
 import { ZodError } from "zod";
 import { fromZodError } from "zod-validation-error";
+import fs from "fs";
+import path from "path";
+
+const SERVER_START_LASTMOD = new Date().toISOString().split("T")[0] ?? "";
+const PRERENDERED_DIR = path.resolve(process.cwd(), "dist", "public", "prerendered");
+
+function routeToPrerenderedFilename(route: string): string {
+  if (route === "/") return "index.html";
+  return `${route.replace(/^\//, "").replace(/\//g, "_")}.html`;
+}
+
+function formatLastmod(date: Date): string {
+  const iso = date.toISOString();
+  return iso.split("T")[0] ?? SERVER_START_LASTMOD;
+}
+
+function safeLastmodFromDateString(value: string | null | undefined): string | null {
+  if (!value) return null;
+  const parsed = Date.parse(value);
+  if (Number.isNaN(parsed)) return null;
+  return formatLastmod(new Date(parsed));
+}
+
+function lastmodFromPrerendered(route: string): string | null {
+  try {
+    const filePath = path.join(PRERENDERED_DIR, routeToPrerenderedFilename(route));
+    if (!fs.existsSync(filePath)) return null;
+    const stats = fs.statSync(filePath);
+    return stats.mtime ? formatLastmod(stats.mtime) : null;
+  } catch {
+    return null;
+  }
+}
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Robots.txt route
   app.get("/robots.txt", (_req: Request, res: Response) => {
-    res.header('Content-Type', 'text/plain');
+    res.header("Content-Type", "text/plain");
+    res.header(
+      "Cache-Control",
+      "no-store, no-cache, must-revalidate, max-age=0",
+    );
+    res.header("Pragma", "no-cache");
+    res.header("Expires", "0");
     res.send(`User-agent: *
 Allow: /
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://www.chriswongdds.com/sitemap.xml
+
+# Preferred host to prevent duplicate content
+Host: www.chriswongdds.com
+
+# Disallow sensitive or duplicate areas
 Disallow: /admin/
 Disallow: /api/
 Disallow: /private/
 Disallow: /*?*
 
-Sitemap: https://www.chriswongdds.com/sitemap.xml
+# Explicitly allow public pages
+Allow: /about
+Allow: /services
+Allow: /patient-resources
+Allow: /testimonials
+Allow: /patient-stories
+Allow: /blog
+Allow: /contact
+Allow: /schedule
+Allow: /zoom-whitening
+Allow: /dental-veneers
+Allow: /dental-implants
+Allow: /invisalign
+Allow: /emergency-dental
+Allow: /privacy-policy
+Allow: /terms
+Allow: /hipaa
+Allow: /accessibility
 
+User-agent: Googlebot
+Crawl-delay: 1
+
+User-agent: Bingbot
+Crawl-delay: 2
+
+# Block problematic bots
 User-agent: AhrefsBot
 Disallow: /
 
@@ -26,7 +98,8 @@ User-agent: MJ12bot
 Disallow: /
 
 User-agent: DotBot
-Disallow: /`);
+Disallow: /
+`);
   });
 
   // Sitemap route
@@ -45,9 +118,6 @@ Disallow: /`);
         host && host.includes('chriswongdds.com')
           ? canonicalBase
           : (process.env.BASE_URL || `${req.protocol}://${host}`);
-      
-      // Current date in format YYYY-MM-DD
-      const today = new Date().toISOString().split('T')[0];
       
       // Build the XML content
       let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
@@ -79,7 +149,12 @@ Disallow: /`);
       };
 
       const included = new Set<string>();
-      const addUrl = (urlPath: string, priority: string, changefreq: string) => {
+      const addUrl = (
+        urlPath: string,
+        priority: string,
+        changefreq: string,
+        lastmod: string,
+      ) => {
         if (!urlPath.startsWith("/")) {
           urlPath = `/${urlPath}`;
         }
@@ -87,7 +162,7 @@ Disallow: /`);
         included.add(urlPath);
         xml += '  <url>\n';
         xml += `    <loc>${baseUrl}${urlPath}</loc>\n`;
-        xml += `    <lastmod>${today}</lastmod>\n`;
+        xml += `    <lastmod>${lastmod}</lastmod>\n`;
         xml += `    <changefreq>${changefreq}</changefreq>\n`;
         xml += `    <priority>${priority}</priority>\n`;
         xml += '  </url>\n';
@@ -102,12 +177,20 @@ Disallow: /`);
       staticPaths.forEach((urlPath) => {
         const priority = priorityByPath[urlPath] ?? "0.7";
         const changefreq = changefreqByPath[urlPath] ?? "monthly";
-        addUrl(urlPath, priority, changefreq);
+        const lastmod =
+          lastmodFromPrerendered(urlPath) ??
+          SERVER_START_LASTMOD;
+        addUrl(urlPath, priority, changefreq, lastmod);
       });
       
       // Add blog post pages as canonical routes
-      blogPosts.forEach(post => {
-        addUrl(`/blog/${post.slug}`, "0.6", "monthly");
+      blogPosts.forEach((post) => {
+        const route = `/blog/${post.slug}`;
+        const lastmod =
+          safeLastmodFromDateString(post.date) ??
+          lastmodFromPrerendered(route) ??
+          SERVER_START_LASTMOD;
+        addUrl(route, "0.6", "monthly", lastmod);
       });
       
       // Close the XML

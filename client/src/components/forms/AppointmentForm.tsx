@@ -39,7 +39,7 @@ const AppointmentForm = () => {
       toast({
         title: "Appointment scheduled!",
         description: "You will receive a confirmation email shortly.",
-        variant: "success",
+        variant: "default",
       });
       trackGAEvent("booked_appointment");
       form.reset();
@@ -219,6 +219,7 @@ const AppointmentForm = () => {
                   placeholder="Please share any specific concerns or questions" 
                   rows={3} 
                   {...field} 
+                  value={field.value ?? ""}
                 />
               </FormControl>
               <FormMessage />

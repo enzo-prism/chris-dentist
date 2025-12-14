@@ -35,7 +35,7 @@ const ContactForm = () => {
       toast({
         title: "Message sent!",
         description: "We will get back to you as soon as possible.",
-        variant: "success",
+        variant: "default",
       });
       trackGAEvent("generate_lead");
       form.reset();

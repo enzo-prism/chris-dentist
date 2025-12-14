@@ -14,6 +14,8 @@ app.set("trust proxy", true);
 const CANONICAL_HOST = "www.chriswongdds.com";
 const CANONICAL_BASE = `https://${CANONICAL_HOST}`;
 
+type ListenOptionsWithReusePort = ListenOptions & { reusePort?: boolean };
+
 // Enforce canonical host + protocol and handle legacy slug redirects.
 app.use((req: Request, res: Response, next: NextFunction) => {
   const hostHeader = req.get("host") ?? "";
@@ -54,7 +56,22 @@ app.use(compression());
 
 // Serve static files from public directory
 const publicPath = path.resolve(process.cwd(), "public");
-app.use(express.static(publicPath, { maxAge: "1y", immutable: true }));
+app.use(
+  express.static(publicPath, {
+    maxAge: "1y",
+    immutable: true,
+    setHeaders(res, filePath) {
+      if (filePath.endsWith(`${path.sep}robots.txt`)) {
+        res.setHeader(
+          "Cache-Control",
+          "no-store, no-cache, must-revalidate, max-age=0",
+        );
+        res.setHeader("Pragma", "no-cache");
+        res.setHeader("Expires", "0");
+      }
+    },
+  }),
+);
 
 app.use((req, res, next) => {
   const start = Date.now();
@@ -113,16 +130,16 @@ app.use((req, res, next) => {
   const host = process.env.HOST || "0.0.0.0";
   const reusePortEnabled = process.env.REUSE_PORT_ENABLED === "true";
 
-  const baseListenOptions: ListenOptions = {
+  const baseListenOptions: ListenOptionsWithReusePort = {
     port,
     host,
   };
 
-  const listenOptions: ListenOptions = reusePortEnabled
+  const listenOptions: ListenOptionsWithReusePort = reusePortEnabled
     ? { ...baseListenOptions, reusePort: true }
     : baseListenOptions;
 
-  async function startServer(options: ListenOptions) {
+  async function startServer(options: ListenOptionsWithReusePort) {
     await new Promise<void>((resolve, reject) => {
       const onError = (err: NodeJS.ErrnoException) => {
         server.off("listening", onListening);
@@ -158,7 +175,7 @@ app.use((req, res, next) => {
       log(
         `port ${port} is already in use locally, retrying on ${fallbackPort}`,
       );
-      const fallbackOptions: ListenOptions = reusePortEnabled
+      const fallbackOptions: ListenOptionsWithReusePort = reusePortEnabled
         ? { ...baseListenOptions, port: fallbackPort, reusePort: true }
         : { ...baseListenOptions, port: fallbackPort };
       await startServer(fallbackOptions);

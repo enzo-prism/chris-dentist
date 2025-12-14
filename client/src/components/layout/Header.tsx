@@ -153,6 +153,7 @@ const Header = () => {
           submenu: [
             { href: "/invisalign", label: "Invisalign" },
             { href: "/dental-veneers", label: "Cosmetic Dentistry (Veneers)" },
+            { href: "/teeth-whitening-palo-alto", label: "Teeth Whitening" },
             { href: "/zoom-whitening", label: "ZOOM Whitening" },
             { href: "/dental-implants", label: "Dental Implants" },
             { href: "/emergency-dental", label: "Emergency Dental" },

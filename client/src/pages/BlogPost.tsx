@@ -20,9 +20,9 @@ import {
   type StructuredDataNode,
 } from "@/lib/structuredData";
 
-interface Params {
+type Params = Record<string, string | undefined> & {
   slug?: string;
-}
+};
 
 const BlogPost = ({ params }: RouteComponentProps<Params>) => {
   const { slug } = params ?? { slug: "" };
@@ -45,7 +45,7 @@ const BlogPost = ({ params }: RouteComponentProps<Params>) => {
         "@type": "BlogPosting",
         headline: post.title,
         description: pageDescription,
-        image: post.image,
+        image: absoluteUrl(post.image),
         datePublished: post.date,
         dateModified: post.date,
         author: {
@@ -90,6 +90,30 @@ const BlogPost = ({ params }: RouteComponentProps<Params>) => {
     const slugLower = post?.slug.toLowerCase() ?? "";
     const categoryLower = post?.category?.toLowerCase() ?? "";
 
+    if (slugLower.includes("whitening") || categoryLower.includes("whitening")) {
+      return [
+        {
+          href: "/teeth-whitening-palo-alto",
+          anchorText: "Teeth whitening in Palo Alto",
+          description: "Compare in‑office whitening and custom take‑home trays.",
+        },
+        {
+          href: "/zoom-whitening",
+          anchorText: "ZOOM! whitening",
+          description: "Fast, in‑office whitening for a noticeable change.",
+        },
+        {
+          href: "/dental-veneers",
+          anchorText: "Cosmetic veneers in Palo Alto",
+          description: "Cover deep stains and reshape teeth for a new smile.",
+        },
+        {
+          href: "/services",
+          anchorText: "Explore all services",
+        },
+      ];
+    }
+
     if (slugLower.includes("invisalign") || categoryLower.includes("invisalign")) {
       return [
         {
@@ -98,8 +122,8 @@ const BlogPost = ({ params }: RouteComponentProps<Params>) => {
           description: "Clear aligners to straighten teeth discreetly.",
         },
         {
-          href: "/zoom-whitening",
-          anchorText: "ZOOM teeth whitening",
+          href: "/teeth-whitening-palo-alto",
+          anchorText: "Teeth whitening in Palo Alto",
           description: "Finish your new smile with brighter teeth.",
         },
         {
@@ -149,9 +173,9 @@ const BlogPost = ({ params }: RouteComponentProps<Params>) => {
           description: "Porcelain or composite veneers for a new smile.",
         },
         {
-          href: "/zoom-whitening",
-          anchorText: "Professional teeth whitening",
-          description: "Brighten your smile quickly in‑office.",
+          href: "/teeth-whitening-palo-alto",
+          anchorText: "Teeth whitening in Palo Alto",
+          description: "In‑office whitening and custom take‑home trays.",
         },
         {
           href: "/invisalign",
@@ -161,6 +185,38 @@ const BlogPost = ({ params }: RouteComponentProps<Params>) => {
         {
           href: "/services",
           anchorText: "Explore all services",
+        },
+      ];
+    }
+
+    if (
+      slugLower.includes("menlo-park") ||
+      slugLower.includes("family") ||
+      slugLower.includes("kids") ||
+      slugLower.includes("pediatric") ||
+      categoryLower.includes("family") ||
+      categoryLower.includes("pediatric")
+    ) {
+      return [
+        {
+          href: "/dentist-menlo-park",
+          anchorText: "Menlo Park family dentist",
+          description:
+            "Family dental care for kids, teens, and adults—nearby in Palo Alto.",
+        },
+        {
+          href: "/pediatric-dentist-palo-alto",
+          anchorText: "Pediatric dentist for kids’ visits",
+          description: "Gentle, prevention‑focused care for children and teens.",
+        },
+        {
+          href: "/dental-cleaning-palo-alto",
+          anchorText: "Dental cleanings and checkups",
+          description: "Preventive visits that keep teeth and gums healthy.",
+        },
+        {
+          href: "/services",
+          anchorText: "Explore all dental services",
         },
       ];
     }

@@ -1,4 +1,4 @@
-import { CheckCircle, ArrowRight, Shield, Clock, Star, Users, Smile } from "lucide-react";
+import { CheckCircle, ArrowRight, Shield, Clock, Star, Users, Smile, MapPin, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import MetaTags from "@/components/common/MetaTags";
@@ -13,14 +13,17 @@ import RelatedServices, {
   type RelatedServiceLink,
 } from "@/components/common/RelatedServices";
 import {
+  buildOrganizationSchema,
+  buildPersonSchema,
+  buildWebSiteSchema,
   buildBreadcrumbSchema,
   buildFAQSchema,
-  buildHowToSchema,
   buildServiceSchema,
   type FAQEntry,
 } from "@/lib/structuredData";
 import RelatedServicePosts from "@/components/blog/RelatedServicePosts";
 import { pageDescriptions, pageTitles } from "@/lib/metaContent";
+import { officeInfo } from "@/lib/data";
 
 const invisalignFaqs: FAQEntry[] = [
   {
@@ -47,6 +50,16 @@ const invisalignFaqs: FAQEntry[] = [
     question: "How much does Invisalign cost?",
     answer:
       "Cost varies based on the amount of tooth movement needed. During your consultation we’ll outline a clear fee estimate, expected phases, and payment options. Many PPO plans include orthodontic benefits that can apply to Invisalign.",
+  },
+  {
+    question: "Will I need attachments or rubber bands?",
+    answer:
+      "Some Invisalign plans use small, tooth‑colored attachments to help aligners grip and guide specific tooth movements. Rubber bands (elastics) are sometimes used to correct bite relationships. Not every case needs these—your exam and digital scan will determine what’s appropriate.",
+  },
+  {
+    question: "How often are Invisalign checkups?",
+    answer:
+      "You’ll return for periodic checkups so we can confirm your teeth are tracking and make any needed adjustments. Visit frequency varies by plan and how your teeth respond, and we’ll outline your schedule at the start.",
   },
   {
     question: "What happens after Invisalign is finished?",
@@ -124,7 +137,21 @@ const Invisalign = () => {
     "Overbite or underbite",
     "Crossbite",
     "Open bite",
-    "Crooked or misaligned teeth"
+    "Crooked or misaligned teeth",
+    "Teeth shifting after past braces",
+  ];
+
+  const candidacyGoodFit = [
+    "Mild to moderate crowding or spacing",
+    "Relapse after previous orthodontics",
+    "Adults and teens who want removable aligners",
+    "Patients who can wear aligners 20–22 hours per day",
+  ];
+
+  const candidacyConsiderations = [
+    "Active gum disease or untreated cavities (we’ll address these first)",
+    "More complex bite issues that may be better treated with braces or specialist care",
+    "If you can’t wear aligners consistently (compliance matters)",
   ];
 
   const careInstructions = [
@@ -135,6 +162,24 @@ const Invisalign = () => {
     "Store aligners in their case when not wearing them",
     "Follow your scheduled aligner changes as directed"
   ];
+
+  const costFactors = [
+    "How much tooth movement and bite correction you need",
+    "Whether attachments, elastics, or refinements are recommended",
+    "Any dental work needed before you start (cleanings, fillings, gum care)",
+    "Retainers and follow‑up to protect your result",
+    "Orthodontic benefits through PPO insurance, plus HSA/FSA options",
+  ];
+
+  const consultationChecklist = [
+    "Share your goals (crowding, spacing, bite, finishing touches)",
+    "Ask if you’ll need attachments, elastics, or refinements",
+    "Review estimated timing and how often you’ll check in",
+    "Confirm what’s included in the plan and retainer options",
+    "Bring insurance information so we can help estimate benefits",
+  ];
+
+  const lastUpdated = "December 2025";
 
   const ageGroups = [
     {
@@ -152,18 +197,8 @@ const Invisalign = () => {
   const serviceSchema = buildServiceSchema({
     name: "Invisalign Clear Aligners",
     description:
-      "Invisible orthodontic treatment using custom clear aligners to straighten teeth discreetly for teens and adults.",
+      "Invisalign® clear aligners in Palo Alto, CA to straighten teeth discreetly for teens and adults.",
     slug: "/invisalign",
-  });
-
-  const invisalignHowTo = buildHowToSchema({
-    name: "Invisalign Treatment Journey",
-    description: "Step-by-step guide for Invisalign treatment with Dr. Wong in Palo Alto.",
-    steps: treatmentProcess.map((step) => ({
-      title: step.title,
-      description: `${step.description}${step.duration ? ` (${step.duration})` : ""}`,
-    })),
-    pagePath: "/invisalign",
   });
 
   const breadcrumbItems = [
@@ -203,11 +238,12 @@ const Invisalign = () => {
     },
   ];
 
-  const pageSchemas = [serviceSchema];
-
-  if (invisalignHowTo) {
-    pageSchemas.push(invisalignHowTo);
-  }
+  const pageSchemas = [
+    buildOrganizationSchema(),
+    buildWebSiteSchema(),
+    buildPersonSchema(),
+    serviceSchema,
+  ];
 
   if (invisalignBreadcrumbs) {
     pageSchemas.push(invisalignBreadcrumbs);
@@ -229,38 +265,131 @@ const Invisalign = () => {
       {/* Hero Section */}
       <section className="bg-gradient-to-b from-[#F5F9FC] to-white py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center"
-          >
-            <h1 className="text-4xl md:text-5xl font-bold font-heading text-[#333333] mb-6">
-              Straighten Your Teeth Invisibly with Invisalign® Treatment in Palo Alto
-            </h1>
-            <p className="text-xl text-[#333333] max-w-4xl mx-auto mb-8">
-              Achieve the smile you've always wanted with Invisalign clear aligners at Dr. Christopher B. Wong's 
-              Palo Alto practice. Virtually invisible, removable, and comfortable orthodontic treatment for teens and adults.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/schedule">
-                <Button className="bg-primary hover:bg-primary/90 text-white font-medium px-8 py-3">
-                  Schedule Consultation
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-              </Link>
-              <Link href="/contact">
-                <Button variant="outline" className="border-primary text-primary hover:bg-primary/5 px-8 py-3">
-                  Learn More
-                </Button>
-              </Link>
-            </div>
-          </motion.div>
+          <div className="grid gap-10 lg:grid-cols-12 lg:items-start">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="lg:col-span-7"
+            >
+              <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 text-primary px-4 py-2 text-sm font-semibold mb-5">
+                <MapPin className="h-4 w-4" aria-hidden="true" />
+                Palo Alto, CA
+              </div>
+              <h1 className="text-4xl md:text-5xl font-bold font-heading text-[#333333] mb-6">
+                Invisalign® in Palo Alto, CA
+              </h1>
+              <p className="text-xl text-[#333333] max-w-3xl mb-6">
+                Clear aligners for adults and teens—guided by a digital scan, a personalized plan, and
+                checkups designed to fit busy schedules.
+              </p>
+
+              <ul className="grid gap-3 sm:grid-cols-2 text-sm text-slate-700 mb-8">
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="h-5 w-5 text-primary mt-0.5 shrink-0" />
+                  Digital scan and step‑by‑step plan
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="h-5 w-5 text-primary mt-0.5 shrink-0" />
+                  Removable for eating and cleaning
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="h-5 w-5 text-primary mt-0.5 shrink-0" />
+                  Helpful for crowding, gaps, and bite issues
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="h-5 w-5 text-primary mt-0.5 shrink-0" />
+                  Retainers to maintain your result
+                </li>
+              </ul>
+
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link href="/schedule#appointment">
+                  <Button className="bg-primary hover:bg-primary/90 text-white font-medium px-8 py-3">
+                    Schedule an Invisalign consult
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+                </Link>
+                <a href={`tel:${officeInfo.phoneE164}`}>
+                  <Button
+                    variant="outline"
+                    className="border-primary text-primary hover:bg-primary/5 px-8 py-3 w-full sm:w-auto"
+                  >
+                    Call {officeInfo.phone}
+                    <Phone className="ml-2 h-5 w-5" />
+                  </Button>
+                </a>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+              className="lg:col-span-5"
+            >
+              <div className="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm space-y-6">
+                <div className="flex items-start gap-3">
+                  <MapPin className="h-5 w-5 text-primary mt-0.5 shrink-0" aria-hidden="true" />
+                  <div>
+                    <p className="text-sm font-semibold tracking-wide text-slate-900 uppercase">
+                      Office location
+                    </p>
+                    <p className="mt-2 text-slate-800 leading-relaxed">
+                      {officeInfo.address.line1}
+                      <br />
+                      {officeInfo.address.line2}
+                    </p>
+                    <a
+                      href={officeInfo.mapUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-2 inline-flex items-center text-primary font-semibold hover:underline"
+                    >
+                      Get directions
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <Phone className="h-5 w-5 text-primary mt-0.5 shrink-0" aria-hidden="true" />
+                  <div>
+                    <p className="text-sm font-semibold tracking-wide text-slate-900 uppercase">
+                      Phone
+                    </p>
+                    <a
+                      href={`tel:${officeInfo.phoneE164}`}
+                      className="mt-2 inline-flex items-center text-slate-800 font-semibold hover:text-primary transition-colors"
+                    >
+                      {officeInfo.phone}
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <Clock className="h-5 w-5 text-primary mt-0.5 shrink-0" aria-hidden="true" />
+                  <div>
+                    <p className="text-sm font-semibold tracking-wide text-slate-900 uppercase">
+                      Hours
+                    </p>
+                    <p className="mt-2 text-slate-700 leading-relaxed text-sm">
+                      Mon–Thu: {officeInfo.hours.monday}
+                      <br />
+                      Fri: {officeInfo.hours.friday}
+                      <br />
+                      Sat–Sun: {officeInfo.hours.saturday}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
       {/* What is Invisalign */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-[#F5F9FC]" id="what-is-invisalign">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -270,12 +399,17 @@ const Invisalign = () => {
               viewport={{ once: true }}
             >
               <h2 className="text-3xl font-bold font-heading text-[#333333] mb-6">
-                What is Invisalign?
+                What is Invisalign, and how does it work?
               </h2>
+              <p className="text-[#333333] mb-4 text-lg">
+                Invisalign® is a clear aligner system that straightens teeth using a series of custom‑made,
+                removable trays. Each set makes small, controlled movements, and you progress through aligners
+                as directed so your smile improves step by step.
+              </p>
               <p className="text-[#333333] mb-6 text-lg">
-                Invisalign is a revolutionary orthodontic treatment that uses a series of custom-made, 
-                clear plastic aligners to gradually move your teeth into their desired positions. 
-                Unlike traditional braces, Invisalign aligners are virtually invisible and removable.
+                Because aligners are removable, many Palo Alto patients like that they can eat normally and
+                keep up with brushing and flossing. Your plan is based on a comprehensive exam and a digital scan,
+                so we can map tooth movement precisely and monitor progress along the way.
               </p>
               <h3 className="text-xl font-semibold text-[#333333] mb-4">Invisalign Can Treat:</h3>
               <div className="space-y-3">
@@ -305,6 +439,54 @@ const Invisalign = () => {
         </div>
       </section>
 
+      {/* Candidacy */}
+      <section className="py-16 bg-white" id="invisalign-candidacy">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-12 gap-10 items-start">
+            <div className="lg:col-span-7">
+              <h2 className="text-3xl md:text-4xl font-bold font-heading text-[#333333] mb-6">
+                Is Invisalign right for you?
+              </h2>
+              <p className="text-[#333333] text-lg mb-6 max-w-3xl">
+                Invisalign can treat many alignment and bite concerns, but the best option depends on your bite,
+                gum health, and goals. The most important factor for success is consistent wear—typically 20–22
+                hours per day.
+              </p>
+
+              <h3 className="text-xl font-semibold text-[#333333] mb-4">Often a good fit for:</h3>
+              <div className="space-y-3">
+                {candidacyGoodFit.map((item) => (
+                  <div key={item} className="flex items-start">
+                    <CheckCircle className="h-5 w-5 text-primary mt-1 mr-3 flex-shrink-0" />
+                    <span className="text-[#333333]">{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="lg:col-span-5">
+              <div className="rounded-2xl border border-slate-100 bg-[#F5F9FC] p-6 shadow-sm">
+                <h3 className="text-xl font-semibold text-[#333333] mb-4">
+                  A few important considerations
+                </h3>
+                <div className="space-y-3">
+                  {candidacyConsiderations.map((item) => (
+                    <div key={item} className="flex items-start">
+                      <CheckCircle className="h-5 w-5 text-primary mt-1 mr-3 flex-shrink-0" />
+                      <span className="text-[#333333]">{item}</span>
+                    </div>
+                  ))}
+                </div>
+                <p className="mt-5 text-sm text-slate-600">
+                  If aligners aren’t the best option for long‑term stability, we’ll explain alternatives and help you
+                  choose the right path.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Benefits of Invisalign */}
       <section className="py-16 bg-[#F5F9FC]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -319,8 +501,8 @@ const Invisalign = () => {
               Why Choose Invisalign?
             </h2>
             <p className="text-[#333333] max-w-3xl mx-auto">
-              Invisalign offers numerous advantages over traditional braces, making it the preferred choice 
-              for both teens and adults seeking a more comfortable and discreet orthodontic experience.
+              Invisalign offers advantages over traditional braces for many teens and adults, especially if you
+              want a discreet option that’s easier to clean around and fits a busy Palo Alto routine.
             </p>
           </motion.div>
 
@@ -429,6 +611,40 @@ const Invisalign = () => {
 	                </div>
               </motion.div>
             ))}
+          </div>
+
+          <div className="mt-14">
+            <h3 className="text-2xl md:text-3xl font-bold font-heading text-[#333333] mb-4">
+              Attachments, elastics, and refinements—what to expect
+            </h3>
+            <p className="text-[#333333] max-w-3xl mb-8">
+              Many Invisalign plans include small details that make aligners more effective. We’ll explain what
+              your specific case needs so there are no surprises.
+            </p>
+
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="bg-[#F5F9FC] rounded-lg p-6 shadow-sm">
+                <h4 className="text-lg font-semibold text-[#333333] mb-2">Attachments</h4>
+                <p className="text-[#333333]">
+                  Tiny, tooth‑colored shapes bonded to select teeth help aligners grip and guide movements like
+                  rotations and root control.
+                </p>
+              </div>
+              <div className="bg-[#F5F9FC] rounded-lg p-6 shadow-sm">
+                <h4 className="text-lg font-semibold text-[#333333] mb-2">Elastics (rubber bands)</h4>
+                <p className="text-[#333333]">
+                  Some cases use elastics to improve bite relationships. Not everyone needs them, and we’ll show you
+                  exactly how to wear them if they’re part of your plan.
+                </p>
+              </div>
+              <div className="bg-[#F5F9FC] rounded-lg p-6 shadow-sm">
+                <h4 className="text-lg font-semibold text-[#333333] mb-2">Refinements & retainers</h4>
+                <p className="text-[#333333]">
+                  Refinement aligners are common near the end to fine‑tune details. After treatment, retainers help
+                  protect your new alignment long‑term.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -571,6 +787,85 @@ const Invisalign = () => {
         </div>
       </section>
 
+      {/* Cost and next steps */}
+      <section className="py-16 bg-white" id="invisalign-cost">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-12 gap-10 items-start">
+            <div className="lg:col-span-7">
+              <h2 className="text-3xl md:text-4xl font-bold font-heading text-[#333333] mb-6">
+                Invisalign cost in Palo Alto: what affects it
+              </h2>
+              <p className="text-[#333333] text-lg mb-6 max-w-3xl">
+                Invisalign fees vary because every bite and timeline is different. After your exam and digital scan,
+                we’ll share a clear, written estimate and walk through options for insurance and payments.
+              </p>
+
+              <h3 className="text-xl font-semibold text-[#333333] mb-4">
+                Common factors that influence cost
+              </h3>
+              <div className="space-y-3">
+                {costFactors.map((factor) => (
+                  <div key={factor} className="flex items-start">
+                    <CheckCircle className="h-5 w-5 text-primary mt-1 mr-3 flex-shrink-0" />
+                    <span className="text-[#333333]">{factor}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-8 flex flex-col sm:flex-row gap-3">
+                <Link href="/schedule#appointment">
+                  <Button className="bg-primary text-white hover:bg-primary/90 px-8 py-3">
+                    Request a consultation
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+                </Link>
+                <a href={`tel:${officeInfo.phoneE164}`}>
+                  <Button variant="outline" className="border-primary text-primary hover:bg-primary/5 px-8 py-3">
+                    Call {officeInfo.phone}
+                  </Button>
+                </a>
+              </div>
+            </div>
+
+            <div className="lg:col-span-5 space-y-6">
+              <div className="rounded-2xl border border-slate-100 bg-[#F5F9FC] p-6 shadow-sm">
+                <h3 className="text-xl font-semibold text-[#333333] mb-4">
+                  Your consultation checklist
+                </h3>
+                <div className="space-y-3">
+                  {consultationChecklist.map((item) => (
+                    <div key={item} className="flex items-start">
+                      <CheckCircle className="h-5 w-5 text-primary mt-1 mr-3 flex-shrink-0" />
+                      <span className="text-[#333333]">{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="rounded-2xl border border-slate-100 bg-[#F5F9FC] p-6 shadow-sm">
+                <h3 className="text-xl font-semibold text-[#333333] mb-2">
+                  See a real patient story
+                </h3>
+                <p className="text-[#333333] mb-5">
+                  Explore a case study that combines Invisalign with whitening and bonding to create a natural,
+                  confident smile.
+                </p>
+                <Link href="/patient-stories#invisalign-whitening-bonding-66yo">
+                  <Button className="bg-primary text-white hover:bg-primary/90">
+                    View Invisalign case study
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+              </div>
+
+              <p className="text-xs text-slate-500">
+                Last updated: {lastUpdated}
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <FAQSection
         title="Invisalign FAQs"
         subtitle="Clear answers to common questions about clear aligner treatment."
@@ -603,17 +898,17 @@ const Invisalign = () => {
               Transform your smile discreetly and comfortably.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/schedule">
+              <Link href="/schedule#appointment">
                 <Button className="bg-white text-primary hover:bg-gray-100 font-medium px-8 py-3">
                   Schedule Consultation
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
-              <Link href="/contact">
+              <a href={`tel:${officeInfo.phoneE164}`}>
                 <Button className="bg-white text-primary hover:bg-white/90 border-white px-8 py-3">
-                  Ask Questions
+                  Call {officeInfo.phone}
                 </Button>
-              </Link>
+              </a>
             </div>
           </motion.div>
         </div>

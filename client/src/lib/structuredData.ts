@@ -16,6 +16,17 @@ export type HowToStep = {
 export type StructuredDataNode = Record<string, unknown>;
 
 const PROD_DOMAIN = "www.chriswongdds.com";
+const DEFAULT_AREA_SERVED = ["Palo Alto", "Menlo Park", "Mountain View", "Stanford"] as const;
+
+const SERVICE_SLUG_TO_PATH: Record<string, string> = {
+  "preventive-dentistry": "/preventive-dentistry",
+  "restorative-dentistry": "/restorative-dentistry",
+  "pediatric-dentistry": "/pediatric-dentistry",
+  "cosmetic-dentistry": "/dental-veneers",
+  invisalign: "/invisalign",
+  "zoom-whitening": "/zoom-whitening",
+  "emergency-dental": "/emergency-dental",
+} as const;
 
 const normalizeHost = (hostname: string) => {
   if (hostname === "chriswongdds.com") {
@@ -69,13 +80,15 @@ export const buildOrganizationSchema = (options?: {
     url: baseUrl,
     telephone: officeInfo.phoneE164,
     email: officeInfo.email,
-    image: `${baseUrl}/favicon/apple-touch-icon.png`,
-    logo: `${baseUrl}/favicon/apple-touch-icon.png`,
+    image: absoluteUrl("/images/dr_wong_polaroids.png"),
+    logo: absoluteUrl("/favicon/apple-touch-icon.png"),
     priceRange: "$$",
     currenciesAccepted: "USD",
     paymentAccepted: "Cash, Credit Card, Insurance",
     sameAs: [
+      officeInfo.socialMedia.facebook,
       officeInfo.socialMedia.instagram,
+      officeInfo.socialMedia.linkedin,
       "https://www.yelp.com/biz/christopher-b-wong-dds-palo-alto",
       officeInfo.mapUrl,
     ],
@@ -89,16 +102,19 @@ export const buildOrganizationSchema = (options?: {
     },
     geo: {
       "@type": "GeoCoordinates",
-      latitude: 37.4419,
-      longitude: -122.143,
+      latitude: 37.4488473,
+      longitude: -122.1497687,
     },
+    hasMap: officeInfo.mapUrl,
+    medicalSpecialty: "https://schema.org/Dentistry",
+    isAcceptingNewPatients: true,
     openingHoursSpecification: officeInfo.openingHoursSpecification,
     contactPoint: [
       {
         "@type": "ContactPoint",
         telephone: officeInfo.phoneE164,
         contactType: "Customer Service",
-        areaServed: ["Palo Alto", "Menlo Park", "Mountain View"],
+        areaServed: DEFAULT_AREA_SERVED,
         availableLanguage: ["English"],
       },
     ],
@@ -109,9 +125,8 @@ export const buildOrganizationSchema = (options?: {
       "@type": "OfferCatalog",
       name: "Dental Services",
       itemListElement: services.map((service) => {
-        const serviceUrl = service.slug.startsWith("/")
-          ? service.slug
-          : `/services#${service.slug}`;
+        const mapped = SERVICE_SLUG_TO_PATH[service.slug];
+        const serviceUrl = mapped ?? `/services#${service.slug}`;
         return {
           "@type": "Offer",
           itemOffered: {
@@ -163,6 +178,21 @@ export const buildPersonSchema = () => {
   };
 };
 
+export const buildWebSiteSchema = () => {
+  const baseUrl = getBaseUrl();
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${baseUrl}/#website`,
+    name: officeInfo.name,
+    alternateName: "Dr. Christopher Wong Palo Alto Dentist",
+    url: absoluteUrl("/"),
+    publisher: {
+      "@id": `${baseUrl}/#organization`,
+    },
+  };
+};
+
 export const buildServiceSchema = (service: {
   name: string;
   description: string;
@@ -174,7 +204,7 @@ export const buildServiceSchema = (service: {
   const baseUrl = getBaseUrl();
   const path = service.slug.startsWith("/") ? service.slug : `/${service.slug}`;
   const url = absoluteUrl(path);
-  return {
+  const schema: StructuredDataNode = {
     "@context": "https://schema.org",
     "@type": "Service",
     "@id": `${url}#service`,
@@ -184,15 +214,15 @@ export const buildServiceSchema = (service: {
     provider: {
       "@id": `${baseUrl}/#organization`,
     },
-    areaServed: (service.areaServed ?? ["Palo Alto", "Menlo Park", "Mountain View"]).map(
-      (city) => ({
-        "@type": "City",
-        name: city,
-      }),
-    ),
+    areaServed: (service.areaServed ?? DEFAULT_AREA_SERVED).map((city) => ({
+      "@type": "City",
+      name: city,
+    })),
     image: service.image ? absoluteUrl(service.image) : `${baseUrl}/favicon/apple-touch-icon.png`,
     url,
   };
+
+  return schema;
 };
 
 export const buildItemListSchema = (services: Service[]) => {

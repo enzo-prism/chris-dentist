@@ -1,8 +1,9 @@
-import { ArrowRight, Calendar, CheckCircle, Snowflake, Gift } from "lucide-react";
+import { ArrowRight, Calendar, CheckCircle, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { officeInfo } from "@/lib/data";
 
 const HeroSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -15,20 +16,20 @@ const HeroSection = () => {
   // Features list
   const features = [
     {
-      title: "Accepting new patients",
-      description: "No waiting list required"
+      title: "New patients welcome",
+      description: "Comfort-first, unrushed visits"
     },
     {
-      title: "Insurance accepted",
-      description: "Most plans covered"
+      title: "PPO insurance accepted",
+      description: "We’ll help verify benefits"
     },
     {
-      title: "Advanced technology",
-      description: "Cutting-edge equipment"
+      title: "Modern dental technology",
+      description: "Digital imaging and planning"
     },
     {
-      title: "Family-friendly",
-      description: "All ages welcome"
+      title: "Family-friendly practice",
+      description: "Kids, teens, and adults"
     }
   ];
 
@@ -60,40 +61,31 @@ const HeroSection = () => {
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
             <div className="inline-flex items-center gap-2 rounded-full bg-white/10 text-[#f2d785] px-4 py-2 text-sm font-semibold mb-4 backdrop-blur">
-              <Snowflake className="h-4 w-4" aria-hidden="true" />
-              Warm smiles for the holidays
+              <MapPin className="h-4 w-4" aria-hidden="true" />
+              Palo Alto, CA
             </div>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-white leading-tight mb-4">
-              Palo Alto Dentist – Dr. Christopher B. Wong
+              Dentist in Palo Alto — Dr. Christopher B. Wong, DDS
             </h1>
             
             <p className="text-lg text-white/80 leading-relaxed mb-6 max-w-md">
-              Trusted by the community for long-term oral health and confident smiles—now with holiday-friendly scheduling.
+              Modern, conservative care for healthy smiles—from checkups and cleanings to Invisalign, cosmetic dentistry, and restorations.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mb-6 text-sm text-white/80">
-              <span className="inline-flex items-center gap-1 rounded-full bg-white/10 px-3 py-1">
-                🎁 Closed Dec 20 – Jan 4
-              </span>
-              <span className="inline-flex items-center gap-1 rounded-full bg-[#f2d785]/20 text-[#f2d785] px-3 py-1">
-                ✨ Reopens Jan 5, 8:00 AM
-              </span>
-            </div>
-            
             {/* CTA Buttons with updated styling */}
             <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-3 sm:space-y-0 mb-8">
               <Link href="/schedule#appointment">
                 <Button className="bg-[#f2d785] hover:bg-[#f6e2a4] text-[#0f2f27] font-medium flex items-center justify-center gap-2 px-5 py-6 h-auto rounded-full shadow-sm transition-all">
                   <Calendar className="h-4 w-4" />
-                  <span>Start your plan</span>
+                  <span>Schedule an appointment</span>
                 </Button>
               </Link>
-              <Link href="/patient-stories">
+              <Link href="/services">
                 <Button 
                   variant="outline" 
                   className="border-white/30 text-white hover:text-[#f2d785] hover:border-[#f2d785]/50 bg-white/5 font-medium flex items-center justify-center gap-2 px-5 py-6 h-auto rounded-full transition-all backdrop-blur"
                 >
-                  <span>Patient stories</span>
+                  <span>Explore services</span>
                   <ArrowRight className="h-4 w-4" />
                 </Button>
               </Link>
@@ -101,25 +93,28 @@ const HeroSection = () => {
             
             {/* Patient Trust Indicator */}
             <div className="mb-12">
-              <button
-                onClick={() => {
-                  const testimonialsSection = document.getElementById('testimonials');
-                  if (testimonialsSection) {
-                    testimonialsSection.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
-                className="group flex items-center gap-2 text-gray-500 hover:text-primary transition-colors duration-200 text-sm font-medium cursor-pointer"
+              <a
+                href={officeInfo.mapUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-2 text-white/90 hover:text-white transition-colors duration-200 text-sm font-medium"
               >
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-1" aria-hidden="true">
                   {[...Array(5)].map((_, i) => (
-                    <svg key={i} className="w-3.5 h-3.5 text-[#f2d785] fill-current" viewBox="0 0 20 20">
+                    <svg
+                      key={i}
+                      className="w-3.5 h-3.5 text-[#f2d785] fill-current"
+                      viewBox="0 0 20 20"
+                    >
                       <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                     </svg>
                   ))}
                 </div>
-                <span className="group-hover:underline text-white">316+ patient reviews on Google</span>
+                <span className="group-hover:underline">
+                  Read patient reviews on Google
+                </span>
                 <ArrowRight className="h-3.5 w-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
-              </button>
+              </a>
             </div>
             
             {/* Scroll indicator removed */}
@@ -149,24 +144,23 @@ const HeroSection = () => {
                   src="/images/hero-office-960.webp"
                   srcSet="/images/hero-office-640.webp 640w, /images/hero-office-960.webp 960w, /images/hero-office-1280.webp 1280w"
                   sizes="(max-width: 1024px) 100vw, 60vw"
-                  width={960}
-                  height={720}
-                  loading="eager"
-                  decoding="async"
-                  fetchpriority="high"
-                  alt="Dr. Wong's modern Palo Alto dental office"
-                  className="w-full h-auto object-cover rounded-2xl aspect-[4/3]"
-                />
+	                  width={960}
+	                  height={720}
+	                  loading="eager"
+	                  decoding="async"
+	                  fetchpriority="high"
+	                  alt="Dr. Wong's modern Palo Alto dental office"
+	                  className="w-full h-auto object-cover rounded-2xl aspect-[4/3]"
+	                />
               </picture>
               
               {/* Status badge */}
               <div className="absolute bottom-5 left-5 bg-white/95 px-4 py-2 rounded-full shadow-sm text-sm font-medium text-gray-900 flex items-center gap-2">
                 <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                <span>Holiday-friendly scheduling</span>
+                <span>Welcoming new patients</span>
               </div>
-              <div className="absolute top-4 right-4 bg-[#f2d785]/90 text-[#0f2f27] px-3 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1 shadow-sm">
-                <Gift className="h-4 w-4" aria-hidden="true" />
-                Plan ahead
+              <div className="absolute top-4 right-4 bg-[#f2d785]/90 text-[#0f2f27] px-3 py-1.5 rounded-full text-xs font-semibold shadow-sm">
+                Palo Alto, CA
               </div>
             </div>
             

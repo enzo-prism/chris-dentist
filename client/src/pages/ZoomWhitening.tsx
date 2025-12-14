@@ -5,7 +5,7 @@ import MetaTags from "@/components/common/MetaTags";
 import StructuredData from "@/components/seo/StructuredData";
 import OptimizedImage from "@/components/seo/OptimizedImage";
 import { pageTitles, pageDescriptions } from "@/lib/metaContent";
-import { buildBreadcrumbSchema, buildHowToSchema, buildServiceSchema } from "@/lib/structuredData";
+import { buildBreadcrumbSchema, buildServiceSchema } from "@/lib/structuredData";
 import { getTestimonialsByNames } from "@/lib/testimonials";
 import { motion } from "framer-motion";
 import { drWongImages } from "@/lib/imageUrls";
@@ -53,17 +53,6 @@ const ZoomWhitening = () => {
     serviceType: "Teeth Whitening",
   });
 
-  const howToSchema = buildHowToSchema({
-    name: "ZOOM Whitening Appointment Steps",
-    description: "What to expect during a ZOOM teeth whitening visit with Dr. Wong in Palo Alto.",
-    steps: treatmentSteps.map((step, index) => ({
-      title: step.title,
-      description: step.description,
-      duration: index === 2 ? "45-60 minutes" : undefined,
-    })),
-    pagePath: "/zoom-whitening",
-  });
-
   const breadcrumbItems = [
     { name: "Home", path: "/" },
     { name: "Services", path: "/services" },
@@ -72,6 +61,11 @@ const ZoomWhitening = () => {
   const breadcrumbSchema = buildBreadcrumbSchema(breadcrumbItems);
 
   const relatedServices: RelatedServiceLink[] = [
+    {
+      href: "/teeth-whitening-palo-alto",
+      anchorText: "Teeth whitening in Palo Alto",
+      description: "Compare in‑office whitening and custom take‑home trays.",
+    },
     {
       href: "/dental-veneers",
       anchorText: "Dental veneers in Palo Alto",
@@ -95,7 +89,6 @@ const ZoomWhitening = () => {
 
   const schemaNodes = [serviceSchema];
 
-  if (howToSchema) schemaNodes.push(howToSchema);
   if (breadcrumbSchema) schemaNodes.push(breadcrumbSchema);
   return (
     <>
@@ -125,6 +118,16 @@ const ZoomWhitening = () => {
               </h1>
               <p className="text-lg text-white/80 leading-relaxed mb-6 max-w-xl">
                 Lift deep stains, coffee discoloration, and dullness with Dr. Wong&apos;s fast, gentle ZOOM! treatment—designed for noticeably whiter teeth with minimal sensitivity.
+              </p>
+              <p className="text-sm text-white/75 leading-relaxed mb-6 max-w-xl">
+                Looking for broader{" "}
+                <Link
+                  href="/teeth-whitening-palo-alto"
+                  className="font-semibold underline underline-offset-4 hover:text-[#f2d785] transition-colors"
+                >
+                  teeth whitening options in Palo Alto
+                </Link>
+                ? Compare in‑office whitening and custom take‑home trays.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 sm:items-center">
                 <Link href="/schedule#appointment">

@@ -51,7 +51,7 @@ const PatientForm = () => {
       toast({
         title: "Form Submitted!",
         description: "Your information has been securely submitted.",
-        variant: "success",
+        variant: "default",
       });
       form.reset();
       setIsSubmitting(false);
