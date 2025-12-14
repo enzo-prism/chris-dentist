@@ -3,6 +3,7 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertAppointmentSchema, insertContactMessageSchema, insertNewsletterSubscriptionSchema } from "@shared/schema";
 import { seoByPath } from "@shared/seo";
+import { getLegacyRedirectPath } from "@shared/redirects";
 import { ZodError } from "zod";
 import { fromZodError } from "zod-validation-error";
 import fs from "fs";
@@ -168,11 +169,19 @@ Disallow: /
         xml += '  </url>\n';
       };
 
+      const resolveSitemapPath = (urlPath: string): string => {
+        const redirected = getLegacyRedirectPath(urlPath);
+        const resolved = redirected ?? urlPath;
+        return resolved.split("#")[0] ?? resolved;
+      };
+
       const staticPaths = Array.from(
         new Set(
           Object.values(seoByPath).map((entry) => entry.canonicalPath),
         ),
-      ).filter((urlPath) => urlPath && !noindexPaths.has(urlPath));
+      )
+        .map((urlPath) => resolveSitemapPath(urlPath))
+        .filter((urlPath) => urlPath && !noindexPaths.has(urlPath));
 
       staticPaths.forEach((urlPath) => {
         const priority = priorityByPath[urlPath] ?? "0.7";
