@@ -670,7 +670,7 @@ const PatientStories = () => {
               </Button>
             </Link>
             <Link href="/services">
-              <Button variant="outline" className="border-white text-white hover:bg-white/10">
+              <Button variant="outline" className="bg-white text-black hover:bg-white/90 hover:text-black">
                 View services
               </Button>
             </Link>
