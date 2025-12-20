@@ -174,7 +174,8 @@ export function serveStatic(app: Express) {
       setHeaders(res, filePath) {
         if (
           filePath.endsWith(`${path.sep}robots.txt`) ||
-          filePath.endsWith(`${path.sep}sitemap.xml`)
+          filePath.endsWith(`${path.sep}sitemap.xml`) ||
+          filePath.endsWith(`${path.sep}llms.txt`)
         ) {
           res.setHeader(
             "Cache-Control",
