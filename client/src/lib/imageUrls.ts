@@ -14,7 +14,7 @@ export const drWongImages = {
   drWongWaiting: "https://i.imgur.com/AC5lGu3.png", // Middle Right: Operatory Room
   drWongReception: "https://i.imgur.com/nGlhUdH.png", // Middle Center: Exterior Signage and Entryway
   drWongOffice: "/images/dr_wong_office.png", // Dr. Wong in his office
-  heroImage: "/images/hero-office-960.webp",
+  heroImage: "https://res.cloudinary.com/dhqpqfw6w/image/upload/v1762989226/Post-11_nohz6f.webp",
   teamPhoto: "https://i.imgur.com/ypt5eZ7.png",
   officeEntrance: "https://i.imgur.com/wt7peyr.png",
   treatmentRoom: "https://i.imgur.com/hO02YQ0.png",

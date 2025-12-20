@@ -22,9 +22,7 @@ const PreloadResources = () => {
 	        <link
 	          rel="preload"
 	          as="image"
-	          href="/images/hero-office-960.webp"
-	          imageSrcSet="/images/hero-office-640.webp 640w, /images/hero-office-960.webp 960w, /images/hero-office-1280.webp 1280w"
-	          imageSizes="(max-width: 1024px) 100vw, 60vw"
+	          href="https://res.cloudinary.com/dhqpqfw6w/image/upload/v1762989226/Post-11_nohz6f.webp"
 	          type="image/webp"
 	        />
 	      )}
