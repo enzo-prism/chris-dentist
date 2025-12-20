@@ -280,7 +280,14 @@ const Home = () => {
               Our Services
             </h2>
             <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Comprehensive dental care using the latest techniques and technology to improve your oral health and enhance your smile.
+              Comprehensive dental care using the latest techniques and technology to improve your oral health and enhance your smile.{" "}
+              <Link
+                href="/invisalign"
+                className="text-primary font-semibold hover:underline"
+              >
+                Invisalign in Palo Alto
+              </Link>{" "}
+              offers a discreet way to straighten teeth with a personalized plan.
             </p>
             <div className="w-24 h-1 bg-primary mx-auto mt-8 rounded-full"></div>
           </div>

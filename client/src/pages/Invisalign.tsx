@@ -23,7 +23,7 @@ import {
 } from "@/lib/structuredData";
 import RelatedServicePosts from "@/components/blog/RelatedServicePosts";
 import { pageDescriptions, pageTitles } from "@/lib/metaContent";
-import { officeInfo } from "@/lib/data";
+import { doctorInfo, officeInfo } from "@/lib/data";
 
 const invisalignFaqs: FAQEntry[] = [
   {
@@ -181,6 +181,13 @@ const Invisalign = () => {
 
   const lastUpdated = "December 2025";
 
+  const providerHighlights = [
+    "University of the Pacific Arthur A. Dugoni School of Dentistry graduate",
+    "Member of the American Dental Association (ADA), California Dental Association (CDA), and Santa Clara County Dental Society (SCCDS)",
+    "Digital Invisalign planning with 3D scans and step-by-step aligner staging",
+    "Clear check-ins and retainer guidance to help results stay stable",
+  ];
+
   const ageGroups = [
     {
       title: "Invisalign for Teens",
@@ -197,8 +204,10 @@ const Invisalign = () => {
   const serviceSchema = buildServiceSchema({
     name: "Invisalign Clear Aligners",
     description:
-      "Invisalign® clear aligners in Palo Alto, CA to straighten teeth discreetly for teens and adults.",
+      "Invisalign clear aligner treatment in Palo Alto, CA with digital scans, personalized plans, and flexible checkups for teens and adults.",
     slug: "/invisalign",
+    image: "/images/invisalign-treatment.jpg",
+    serviceType: "Invisalign clear aligner treatment",
   });
 
   const breadcrumbItems = [
@@ -279,9 +288,13 @@ const Invisalign = () => {
               <h1 className="text-4xl md:text-5xl font-bold font-heading text-[#333333] mb-6">
                 Invisalign® in Palo Alto, CA
               </h1>
-              <p className="text-xl text-[#333333] max-w-3xl mb-6">
-                Clear aligners for adults and teens—guided by a digital scan, a personalized plan, and
-                checkups designed to fit busy schedules.
+              <p className="text-xl text-[#333333] max-w-3xl mb-4">
+                Invisalign in Palo Alto gives adults and teens a discreet way to straighten teeth, guided by
+                a digital scan, a personalized plan, and checkups designed to fit busy schedules.
+              </p>
+              <p className="text-lg text-[#333333] max-w-3xl mb-6">
+                Invisalign Palo Alto patients appreciate clear timelines, flexible visits, and a care team
+                that keeps treatment comfortable from start to finish.
               </p>
 
               <ul className="grid gap-3 sm:grid-cols-2 text-sm text-slate-700 mb-8">
@@ -384,6 +397,57 @@ const Invisalign = () => {
                 </div>
               </div>
             </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Why Dr. Wong for Invisalign */}
+      <section className="py-14 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
+            <div>
+              <h2 className="text-3xl md:text-4xl font-bold font-heading text-[#333333] mb-4">
+                Why patients choose Dr. Wong for Invisalign in Palo Alto
+              </h2>
+              <p className="text-[#333333] text-lg mb-6 max-w-3xl">
+                Your Invisalign plan combines careful diagnostics with a conservative approach so you can
+                move through treatment confidently.
+              </p>
+              <ul className="space-y-3 text-[#333333]">
+                {providerHighlights.map((item) => (
+                  <li key={item} className="flex items-start gap-3">
+                    <CheckCircle className="h-5 w-5 text-primary mt-0.5 shrink-0" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-5 text-sm text-slate-600">
+                Want the full bio?{" "}
+                <Link href="/about" className="text-primary font-semibold hover:underline">
+                  Meet Dr. Wong
+                </Link>
+                .
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-slate-100 bg-[#F5F9FC] p-6 shadow-sm">
+              <p className="text-xs uppercase tracking-wide text-primary font-semibold">
+                Reviewed by Dr. Wong
+              </p>
+              <p className="text-xl font-bold text-[#333333] mt-2">
+                {doctorInfo.name}, {doctorInfo.title}
+              </p>
+              <p className="text-sm text-slate-600 mt-2">
+                Invisalign plans are tailored and reviewed by Dr. Wong for accuracy, comfort, and long‑term stability.
+              </p>
+              <Link
+                href="/about"
+                className="mt-4 inline-flex items-center text-sm font-semibold text-primary hover:underline"
+              >
+                View credentials and experience
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </div>
           </div>
         </div>
       </section>
@@ -879,7 +943,12 @@ const Invisalign = () => {
         subtitle="Explore other services offered by Dr. Wong in Palo Alto."
       />
 
-      <RelatedServicePosts serviceSlug="invisalign" serviceName="Invisalign Treatment" />
+      <RelatedServicePosts
+        serviceSlug="invisalign"
+        serviceName="Invisalign"
+        category="Invisalign"
+        ctaHref="/blog?category=invisalign"
+      />
 
       {/* Call to Action */}
       <section className="py-16 bg-primary text-white">

@@ -1,9 +1,9 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ArrowRight, Tag, Clock, Calendar, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import BlogPostCard from "@/components/common/BlogPostCard";
 import MetaTags from "@/components/common/MetaTags";
 import { pageTitles, pageDescriptions } from "@/lib/metaContent";
@@ -15,11 +15,25 @@ import { buildBreadcrumbSchema } from "@/lib/structuredData";
 
 const Blog = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [location] = useLocation();
+  const categoryFromQuery = useMemo(() => {
+    const search = location.split("?")[1] ?? "";
+    const params = new URLSearchParams(search);
+    const categoryParam = params.get("category");
+    if (!categoryParam) return "all";
+    return normalizeBlogCategory(categoryParam);
+  }, [location]);
+  const [selectedCategory, setSelectedCategory] = useState(categoryFromQuery);
 
   const { posts, featuredPost, categories, isLoading, isError, error } = useBlogPosts();
 
   const normalizedSearch = searchQuery.trim().toLowerCase();
+
+  useEffect(() => {
+    if (categoryFromQuery !== selectedCategory) {
+      setSelectedCategory(categoryFromQuery);
+    }
+  }, [categoryFromQuery, selectedCategory]);
 
   const filteredPosts = useMemo(() => {
     return posts.filter((post) => {

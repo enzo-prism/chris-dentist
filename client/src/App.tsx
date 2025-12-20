@@ -15,6 +15,8 @@ import Redirects from "@/components/common/Redirects";
 import Favicons from "@/components/common/Favicons";
 import PreloadResources from "@/components/seo/PreloadResources";
 import DomainRedirect from "@/components/seo/DomainRedirect";
+import StructuredData from "@/components/seo/StructuredData";
+import { buildOrganizationSchema } from "@/lib/structuredData";
 import Home from "@/pages/Home";
 import About from "@/pages/About";
 import Services from "@/pages/Services";
@@ -128,6 +130,10 @@ export function AppShell({
           <Favicons />
           <Redirects />
           <PreloadResources />
+          <StructuredData
+            data={buildOrganizationSchema()}
+            id="global-organization-schema"
+          />
           <Router />
           <Toaster />
         </WouterRouter>

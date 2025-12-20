@@ -2,22 +2,48 @@ import { AlertCircle, ArrowRight } from "lucide-react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import BlogPostCard from "@/components/common/BlogPostCard";
-import { useRelatedBlogPosts } from "@/hooks/useBlogPosts";
+import { normalizeBlogCategory, useBlogPosts } from "@/hooks/useBlogPosts";
 
 interface RelatedServicePostsProps {
   serviceSlug: string;
   serviceName: string;
   ctaHref?: string;
+  category?: string;
 }
 
 const RelatedServicePosts = ({
   serviceSlug,
   serviceName,
   ctaHref = "/blog",
+  category,
 }: RelatedServicePostsProps) => {
-  const { data, isLoading, isError, error } = useRelatedBlogPosts(serviceSlug);
-  const posts = data ?? [];
-  const displayedPosts = posts.slice(0, 3);
+  const { posts, isLoading, isError, error } = useBlogPosts();
+  const normalizedCategory = category
+    ? normalizeBlogCategory(category)
+    : null;
+  const normalizedService = serviceSlug.trim().toLowerCase();
+  const matchesCategory = (postCategory?: string | null) =>
+    normalizedCategory &&
+    normalizeBlogCategory(postCategory ?? undefined) === normalizedCategory;
+  const matchesService = (relatedServices?: string[] | null) =>
+    Boolean(
+      normalizedService &&
+        relatedServices?.some(
+          (slug) => slug.trim().toLowerCase() === normalizedService,
+        ),
+    );
+  const parsePostDate = (dateValue: string) => {
+    const parsed = Date.parse(dateValue);
+    return Number.isNaN(parsed) ? 0 : parsed;
+  };
+  const filteredPosts = posts
+    .filter((post) =>
+      normalizedCategory
+        ? matchesCategory(post.category)
+        : matchesService(post.relatedServices),
+    )
+    .sort((a, b) => parsePostDate(b.date) - parsePostDate(a.date));
+  const displayedPosts = filteredPosts.slice(0, 4);
   const hasPosts = displayedPosts.length > 0;
   const errorMessage =
     error instanceof Error
@@ -46,8 +72,8 @@ const RelatedServicePosts = ({
   const renderEmpty = (
     <div className="bg-white rounded-lg shadow-md p-8 text-center">
       <p className="text-[#333333]">
-        New {serviceName.toLowerCase()} articles are coming soon. In the meantime,
-        explore our full blog for additional resources.
+        We don’t have related articles to show right now. In the meantime,
+        explore the full blog for additional resources.
       </p>
     </div>
   );
@@ -88,7 +114,9 @@ const RelatedServicePosts = ({
           </div>
           <Link href={ctaHref}>
             <Button className="mt-6 sm:mt-0 bg-primary text-white hover:bg-primary/90 inline-flex items-center">
-              View All Articles
+              {normalizedCategory
+                ? `View all ${serviceName} articles`
+                : "View All Articles"}
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </Link>

@@ -85,6 +85,10 @@ export const buildOrganizationSchema = (options?: {
     priceRange: "$$",
     currenciesAccepted: "USD",
     paymentAccepted: "Cash, Credit Card, Insurance",
+    areaServed: DEFAULT_AREA_SERVED.map((city) => ({
+      "@type": "City",
+      name: city,
+    })),
     sameAs: [
       officeInfo.socialMedia.facebook,
       officeInfo.socialMedia.instagram,

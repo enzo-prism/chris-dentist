@@ -56,6 +56,13 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
     }
   };
 
+  const getDetailLabel = (slug: string): string => {
+    if (slug === "invisalign") {
+      return "Invisalign in Palo Alto";
+    }
+    return "View Details";
+  };
+
   return (
     <Card
       className="group flex h-full w-full flex-col overflow-hidden rounded-3xl border border-slate-100 bg-white shadow-sm transition-all duration-300 hover:shadow-lg"
@@ -89,7 +96,7 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
               variant="outline"
               className="w-full border-primary text-primary transition hover:bg-primary/5"
             >
-              View Details
+              {getDetailLabel(service.slug)}
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </Link>

@@ -104,11 +104,12 @@ export const seoByPath: Record<string, SeoDefinition> = {
     ogImage: "https://i.imgur.com/AC5lGu3.png",
   },
   "/invisalign": {
-    title: "Invisalign in Palo Alto, CA | Clear Aligners | Dr. Wong, DDS",
+    title:
+      "Invisalign Palo Alto, CA | Clear Aligners | Dr. Christopher B. Wong, DDS",
     description:
-      "Invisalign® clear aligners in Palo Alto, CA for teens and adults. Get a digital scan, a personalized plan, and flexible visits—schedule a consultation today.",
+      "Invisalign in Palo Alto with digital scans, a personalized plan, and easy checkups. Clear aligners for teens and adults—schedule a consult today.",
     canonicalPath: "/invisalign",
-    ogImage: "https://i.imgur.com/hO02YQ0.png",
+    ogImage: "/images/invisalign-treatment.jpg",
   },
   "/emergency-dental": {
     title: "Emergency Dentist in Palo Alto | Same-Day Care | Dr. Wong, DDS",
