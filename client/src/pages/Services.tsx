@@ -85,7 +85,7 @@ const Services = () => {
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold font-heading text-[#333333] mb-4">Comprehensive Dental Services</h2>
+            <h1 className="text-3xl md:text-4xl font-bold font-heading text-[#333333] mb-4">Comprehensive Dental Services</h1>
             <p className="text-[#333333] max-w-3xl mx-auto">From routine cleanings to complex restorations, we provide a full range of dental services to meet your needs.</p>
             <div className="w-24 h-1 bg-primary mx-auto mt-4"></div>
           </div>
