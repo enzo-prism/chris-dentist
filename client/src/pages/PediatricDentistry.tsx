@@ -1,6 +1,7 @@
 import MetaTags from "@/components/common/MetaTags";
 import PageBreadcrumbs from "@/components/common/PageBreadcrumbs";
 import RelatedServices, { type RelatedServiceLink } from "@/components/common/RelatedServices";
+import RelatedServicePosts from "@/components/blog/RelatedServicePosts";
 import StructuredData from "@/components/seo/StructuredData";
 import FAQSection from "@/components/common/FAQSection";
 import { Button } from "@/components/ui/button";
@@ -164,9 +165,13 @@ const PediatricDentistry = () => {
         subtitle="Explore other family‑focused care options."
         className="bg-white"
       />
+
+      <RelatedServicePosts
+        serviceSlug="pediatric-dentistry"
+        serviceName="Pediatric Dentistry"
+      />
     </>
   );
 };
 
 export default PediatricDentistry;
-

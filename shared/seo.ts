@@ -48,7 +48,7 @@ export const seoByPath: Record<string, SeoDefinition> = {
     ogImage: DEFAULT_OG_IMAGE,
   },
   "/restorative-dentistry": {
-    title: "Restorative Dentistry in Palo Alto | Fillings, Crowns & Implants | Dr. Wong, DDS",
+    title: "Restorative Dentistry in Palo Alto | Dr. Wong, DDS",
     description:
       "Restore damaged or missing teeth with restorative dentistry in Palo Alto. Dr. Wong offers fillings, crowns, bridges, and implant restorations.",
     canonicalPath: "/restorative-dentistry",
@@ -190,8 +190,7 @@ export const seoByPath: Record<string, SeoDefinition> = {
     ogImage: "https://i.imgur.com/hO02YQ0.png",
   },
   "/dental-veneers": {
-    title:
-      "Dental Veneers Palo Alto | Dr. Christopher Wong | Porcelain & Composite Veneers",
+    title: "Dental Veneers in Palo Alto | Dr. Wong, DDS",
     description:
       "Transform your smile with dental veneers in Palo Alto. Dr. Wong offers porcelain, composite, and no-prep options for beautiful results.",
     canonicalPath: "/dental-veneers",

@@ -61,7 +61,7 @@ async function resolveMetaForUrl(url: string): Promise<MetaDefinition> {
       const post = await storage.getBlogPostBySlug(slug);
       if (post) {
         return {
-          title: `${post.title} | Dr. Christopher Wong DDS`,
+          title: `${post.title} | Dr. Wong DDS`,
           description: buildExcerpt(post.content),
         };
       }

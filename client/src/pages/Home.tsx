@@ -130,6 +130,23 @@ const Home = () => {
                 restorative care, we’ll explain what we see and help you choose
                 a plan that fits your goals and schedule.
               </p>
+              <p className="text-sm text-slate-600">
+                Nearby communities:{" "}
+                <Link
+                  href="/dentist-menlo-park"
+                  className="text-primary font-semibold hover:underline"
+                >
+                  Menlo Park families
+                </Link>{" "}
+                and{" "}
+                <Link
+                  href="/dentist-stanford"
+                  className="text-primary font-semibold hover:underline"
+                >
+                  Stanford patients
+                </Link>
+                .
+              </p>
               <div className="flex flex-col sm:flex-row gap-3 pt-1">
                 <Link href="/schedule#appointment">
                   <Button className="bg-primary text-white hover:bg-primary/90">

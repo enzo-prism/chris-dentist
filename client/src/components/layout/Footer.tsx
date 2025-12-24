@@ -19,6 +19,7 @@ const Footer = () => {
     { href: "/patient-stories", label: "Patient Stories" },
     { href: "/blog", label: "Blog" },
     { href: "/dentist-menlo-park", label: "Menlo Park Families" },
+    { href: "/dentist-stanford", label: "Stanford Patients" },
     { href: "/contact", label: "Contact" }
   ];
 

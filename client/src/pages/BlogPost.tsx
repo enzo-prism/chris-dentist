@@ -24,6 +24,89 @@ type Params = Record<string, string | undefined> & {
   slug?: string;
 };
 
+type SupplementalContent = {
+  heading: string;
+  paragraphs: string[];
+  bullets?: string[];
+};
+
+function getBlogSupplementalContent(category?: string | null): SupplementalContent {
+  const normalized = category?.toLowerCase().trim() ?? "";
+
+  if (normalized.includes("invisalign")) {
+    return {
+      heading: "Invisalign tips for Palo Alto patients",
+      paragraphs: [
+        "Clear aligners work best when worn consistently and kept clean. Most tracking issues come from short wear time or trays that are not fully seated.",
+        "A consultation with a Palo Alto Invisalign provider helps set a realistic timeline, review attachments or refinements, and plan for retainers at the end.",
+      ],
+      bullets: [
+        "Wear aligners 20 to 22 hours each day",
+        "Brush and floss before putting trays back in",
+        "Bring aligners to every checkup for fit checks",
+      ],
+    };
+  }
+
+  if (normalized.includes("whitening") || normalized.includes("cosmetic")) {
+    return {
+      heading: "Cosmetic care planning in Palo Alto",
+      paragraphs: [
+        "Whitening and cosmetic treatments work best when your teeth and gums are healthy. An exam helps us confirm that sensitivity or old restorations will not limit results.",
+        "If you have veneers, bonding, or crowns, we can plan a shade strategy so your smile looks even and natural.",
+      ],
+      bullets: [
+        "Discuss sensitivity history and shade goals",
+        "Plan for maintenance touch ups",
+        "Coordinate whitening with other cosmetic work",
+      ],
+    };
+  }
+
+  if (normalized.includes("emergency")) {
+    return {
+      heading: "When to seek emergency dental care",
+      paragraphs: [
+        "Dental pain, swelling, or trauma should be evaluated quickly. Early treatment can prevent infections from spreading and reduce the need for more invasive work.",
+        "If you are not sure whether your issue is urgent, call our office. We can guide you on next steps and arrange care when possible.",
+      ],
+      bullets: [
+        "Severe or persistent tooth pain",
+        "Swelling, fever, or signs of infection",
+        "Broken, knocked out, or loose teeth",
+      ],
+    };
+  }
+
+  if (normalized.includes("family") || normalized.includes("pediatric")) {
+    return {
+      heading: "Family dentistry takeaways",
+      paragraphs: [
+        "Consistent checkups help kids and adults avoid bigger problems later. For children, early visits build comfort and allow us to monitor growth.",
+        "If your family has different schedules or needs, we can coordinate appointments and create a plan that keeps visits simple.",
+      ],
+      bullets: [
+        "Start kids visits by age one or when the first tooth appears",
+        "Ask about sealants, fluoride, and home care coaching",
+        "Combine family appointments when possible",
+      ],
+    };
+  }
+
+  return {
+    heading: "How to apply this guidance",
+    paragraphs: [
+      "Online advice is a starting point, not a diagnosis. An exam helps us confirm what is happening and which options will deliver the best long term outcome.",
+      "If you are considering treatment in Palo Alto, we can review your goals, timing, and budget and outline next steps.",
+    ],
+    bullets: [
+      "Share symptoms, goals, and any dental anxiety",
+      "Bring a list of medications and past dental work",
+      "Ask about timeline and maintenance care",
+    ],
+  };
+}
+
 const BlogPost = ({ params }: RouteComponentProps<Params>) => {
   const { slug } = params ?? { slug: "" };
   const { posts, isLoading } = useBlogPosts();
@@ -33,7 +116,7 @@ const BlogPost = ({ params }: RouteComponentProps<Params>) => {
     return posts.find((candidate) => candidate.slug === slug);
   }, [posts, slug]);
 
-  const pageTitle = post ? `${post.title} | Dr. Christopher Wong DDS` : pageTitles.blog;
+  const pageTitle = post ? `${post.title} | Dr. Wong DDS` : pageTitles.blog;
   const pageDescription = post?.content
     ? `${post.content.slice(0, 160)}${post.content.length > 160 ? "…" : ""}`
     : pageDescriptions.blog;
@@ -120,6 +203,11 @@ const BlogPost = ({ params }: RouteComponentProps<Params>) => {
           href: "/invisalign",
           anchorText: "Invisalign in Palo Alto",
           description: "Clear aligners to straighten teeth discreetly.",
+        },
+        {
+          href: "/invisalign/resources",
+          anchorText: "Invisalign resources",
+          description: "Aftercare, wear time tips, and attachment guidance.",
         },
         {
           href: "/teeth-whitening-palo-alto",
@@ -241,10 +329,7 @@ const BlogPost = ({ params }: RouteComponentProps<Params>) => {
     const flushLists = () => {
       if (bulletList) {
         blocks.push(
-          <ul
-            key={`ul-${blocks.length}`}
-            className="list-disc pl-6 space-y-2 text-gray-700 leading-relaxed"
-          >
+          <ul key={`ul-${blocks.length}`}>
             {bulletList.map((item, idx) => (
               <li key={idx}>{item}</li>
             ))}
@@ -253,10 +338,7 @@ const BlogPost = ({ params }: RouteComponentProps<Params>) => {
       }
       if (orderedList) {
         blocks.push(
-          <ol
-            key={`ol-${blocks.length}`}
-            className="list-decimal pl-6 space-y-2 text-gray-700 leading-relaxed"
-          >
+          <ol key={`ol-${blocks.length}`}>
             {orderedList.map((item, idx) => (
               <li key={idx}>{item}</li>
             ))}
@@ -291,21 +373,13 @@ const BlogPost = ({ params }: RouteComponentProps<Params>) => {
 
       if (isHeading(line)) {
         blocks.push(
-          <h2
-            key={`h2-${blocks.length}`}
-            className="text-2xl sm:text-3xl font-heading font-semibold text-[#1F2933] pt-6"
-          >
+          <h2 key={`h2-${blocks.length}`}>
             {line.replace(/[:?]$/, "")}
           </h2>,
         );
       } else {
         blocks.push(
-          <p
-            key={`p-${blocks.length}`}
-            className="text-base sm:text-lg text-gray-700 leading-relaxed"
-          >
-            {line}
-          </p>,
+          <p key={`p-${blocks.length}`}>{line}</p>,
         );
       }
     });
@@ -340,6 +414,8 @@ const BlogPost = ({ params }: RouteComponentProps<Params>) => {
       </section>
     );
   }
+
+  const supplementalContent = getBlogSupplementalContent(post.category);
 
   return (
     <>
@@ -397,10 +473,29 @@ const BlogPost = ({ params }: RouteComponentProps<Params>) => {
           <article
 	            className={cn(
 	              "bg-white rounded-3xl shadow-xl border border-[#E5E7EB]/80",
-	              "p-6 sm:p-8 space-y-4 sm:space-y-6 leading-relaxed text-gray-700 break-words",
+	              "p-6 sm:p-8 break-words",
+                "prose prose-lg prose-slate max-w-none",
+                "prose-headings:font-heading prose-headings:text-[#1F2933]",
+                "prose-p:text-slate-700 prose-li:text-slate-700 prose-li:marker:text-slate-400",
 	            )}
 	          >
-            <div className="space-y-4 sm:space-y-5">{parsedContent}</div>
+            {parsedContent}
+            {supplementalContent ? (
+              <>
+                <hr />
+                <h2>{supplementalContent.heading}</h2>
+                {supplementalContent.paragraphs.map((paragraph, index) => (
+                  <p key={`supplemental-${index}`}>{paragraph}</p>
+                ))}
+                {supplementalContent.bullets ? (
+                  <ul>
+                    {supplementalContent.bullets.map((item, index) => (
+                      <li key={`supplemental-bullet-${index}`}>{item}</li>
+                    ))}
+                  </ul>
+                ) : null}
+              </>
+            ) : null}
           </article>
         </div>
       </section>

@@ -1,6 +1,7 @@
 import MetaTags from "@/components/common/MetaTags";
 import PageBreadcrumbs from "@/components/common/PageBreadcrumbs";
 import RelatedServices, { type RelatedServiceLink } from "@/components/common/RelatedServices";
+import RelatedServicePosts from "@/components/blog/RelatedServicePosts";
 import StructuredData from "@/components/seo/StructuredData";
 import FAQSection from "@/components/common/FAQSection";
 import { Button } from "@/components/ui/button";
@@ -162,9 +163,13 @@ const PreventiveDentistry = () => {
         subtitle="Explore additional ways to maintain and restore your smile."
         className="bg-white"
       />
+
+      <RelatedServicePosts
+        serviceSlug="preventive-dentistry"
+        serviceName="Preventive Dentistry"
+      />
     </>
   );
 };
 
 export default PreventiveDentistry;
-

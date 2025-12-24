@@ -367,7 +367,7 @@ export class MemStorage implements IStorage {
   private initializeBlogPosts() {
     const blogPostsList: InsertBlogPost[] = [
       {
-        title: "Emergency Dentist in Palo Alto, CA: What to Do When You Need Care Right Now",
+        title: "Emergency Dentist in Palo Alto: What to Do Now",
         content: `Dental emergencies never happen at a convenient time. If you need an emergency dentist in Palo Alto, issues like a cracked tooth during lunch, a sudden toothache that keeps you up at night, or a knocked-out tooth after a weekend bike ride all require fast, reliable care.
 
 If you are in Palo Alto, Stanford, Menlo Park, or surrounding areas, Dr. Christopher B. Wong offers prompt, compassionate emergency dental treatment to relieve pain and protect your long-term oral health. This guide walks through common dental emergencies, what to do immediately, and when to call our office.
@@ -491,7 +491,7 @@ We are here to help quickly, safely, and with compassion.`,
         relatedServices: ["emergency-dental"],
       },
       {
-        title: "How to Choose a Family Dentist Near Menlo Park: A Simple Checklist",
+        title: "Family Dentist Near Menlo Park: Simple Checklist",
         content: `If you’re searching for a “Menlo Park family dentist,” you’re likely trying to solve a practical problem: keep your household on a consistent schedule with a team you trust. This guide shares a straightforward checklist to help you choose the right dental practice near Menlo Park.
 
 Quick checklist:
@@ -529,7 +529,7 @@ If you’d like help planning dental care for your family near Menlo Park, start
         relatedServices: ["preventive-dentistry", "pediatric-dentistry"],
       },
       {
-        title: "First Dental Visit for Kids: What Menlo Park Parents Should Expect",
+        title: "First Dental Visit for Kids: Menlo Park Guide",
         content: `A child’s first dental visit sets the tone for years of oral health. Many Menlo Park families look for a calm, friendly experience that builds confidence early. Here’s what to expect and how to prepare.
 
 When should kids start seeing a dentist?
@@ -565,7 +565,7 @@ If you’re a Menlo Park parent looking for a family dentist, a first visit is t
         relatedServices: ["pediatric-dentistry", "preventive-dentistry"],
       },
       {
-        title: "What to Expect With Invisalign in Palo Alto: Timeline, Attachments, and Cost Factors",
+        title: "Invisalign in Palo Alto: Timeline, Attachments, Cost",
         content: `Thinking about Invisalign clear aligners? This guide breaks down how Invisalign works, who it can help, typical timelines, what affects cost, and what to expect when you start treatment with a Palo Alto dentist.
 
 What Is Invisalign and How Does It Work?
@@ -606,7 +606,7 @@ If you are curious whether Invisalign is right for you, the next step is a perso
         relatedServices: ["invisalign"],
       },
       {
-        title: "Invisalign Attachments and Refinements: What They Are and Why They Matter",
+        title: "Invisalign Attachments & Refinements: Why They Matter",
         content: `If you’re researching Invisalign, you’ll often hear new terms like attachments, elastics, and refinements. These details can sound intimidating at first, but they’re usually simple tools that make clear aligners more precise—and help you end with a better, more stable result.
 
 Quick Answer: What Are Invisalign Attachments?
@@ -644,7 +644,7 @@ The best way to understand whether you’ll need attachments, elastics, or refin
         relatedServices: ["invisalign"],
       },
       {
-        title: "How Long Does Invisalign Take? Timeline Factors to Know",
+        title: "How Long Does Invisalign Take? Timeline Factors",
         content: `One of the first questions patients ask is: “How long will Invisalign take?” The honest answer is that Invisalign timelines vary. Some plans finish in months, while others take longer depending on your bite and how much tooth movement is needed.
 
 Typical Invisalign Timelines
@@ -680,7 +680,7 @@ If you want a personalized timeline estimate, schedule a consultation for an exa
         relatedServices: ["invisalign"],
       },
       {
-        title: "Retainers After Invisalign: How to Keep Your Smile Straight",
+        title: "Retainers After Invisalign: Keep Your Smile Straight",
         content: `Finishing Invisalign is exciting—your teeth look straighter, your bite feels better, and photos get easier. But the job isn’t done the day you finish aligners. Retainers are what protect your result.
 
 Why Teeth Shift After Invisalign
@@ -714,7 +714,7 @@ If you’re considering Invisalign or you’re ready to protect an existing resu
         relatedServices: ["invisalign"],
       },
       {
-        title: "Dental Veneers in Palo Alto, CA: A Natural-Looking Way to Transform Your Smile",
+        title: "Dental Veneers in Palo Alto: Natural-Looking Results",
         content: `If you're unhappy with chips, discoloration, uneven edges, or small gaps in your teeth, you don't necessarily need braces or extensive dental work to love your smile again. Dental veneers offer a conservative, highly aesthetic way to reshape and brighten teeth, often in just a few visits.
 
 At Christopher B. Wong, DDS in Palo Alto, Dr. Wong provides customized veneers designed to look like your teeth—just better. This guide walks through how veneers work, who they're for, what to expect, and how to decide whether they're the right choice for you.
@@ -806,7 +806,7 @@ Ready to explore dental veneers? Visit chriswongdds.com to request an appointmen
         relatedServices: ["dental-veneers", "cosmetic-dentistry"],
       },
       {
-        title: "How Long Does Teeth Whitening Last? A Dentist’s Guide for Palo Alto Patients",
+        title: "How Long Does Teeth Whitening Last? Palo Alto Guide",
         content: `Professional teeth whitening can be one of the fastest ways to refresh your smile. A common question we hear from Palo Alto patients is: “How long will my whitening results last?”
 
 Most people enjoy a brighter shade for about 12–24 months. Your timeline depends on your diet, oral hygiene, and whether you choose in‑office whitening, take‑home trays, or a combination.
@@ -847,7 +847,7 @@ If you’re considering teeth whitening in Palo Alto, the best next step is a qu
         relatedServices: ["zoom-whitening", "cosmetic-dentistry"],
       },
       {
-        title: "Teeth Whitening Sensitivity: What Helps (and What to Avoid)",
+        title: "Teeth Whitening Sensitivity: What Helps",
         content: `Whitening sensitivity is one of the most common concerns we hear from patients. The good news: for most people, sensitivity is temporary and manageable with the right plan.
 
 Why does whitening cause sensitivity?
@@ -881,7 +881,7 @@ In our Palo Alto practice, we tailor the strength and timing of whitening based 
         relatedServices: ["zoom-whitening", "cosmetic-dentistry"],
       },
       {
-        title: "In‑Office Whitening vs. Take‑Home Trays: Which Is Better?",
+        title: "In-Office vs. Take-Home Whitening: Which Is Better?",
         content: `If you’re comparing teeth whitening options, you’ll usually see two dentist‑supervised choices: in‑office whitening and custom take‑home trays. Both can work well, but they’re designed for different timelines and comfort needs.
 
 In‑office whitening: best for speed

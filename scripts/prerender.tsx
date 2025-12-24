@@ -28,6 +28,14 @@ function injectMeta(template: string, meta: MetaDefinition): string {
     .replace(/__META_DESCRIPTION__/g, escapeHtml(meta.description));
 }
 
+function minifyHtml(html: string): string {
+  return html
+    .replace(/<!--(?!<!\[endif\]).*?-->/gs, "")
+    .replace(/>\s+</g, "><")
+    .replace(/\s{2,}/g, " ")
+    .trim();
+}
+
 function routeToFilename(route: string): string {
   if (route === "/") return "index.html";
   return `${route.replace(/^\//, "").replace(/\//g, "_")}.html`;
@@ -146,7 +154,7 @@ async function main(): Promise<void> {
       const post = blogPosts.find((candidate) => candidate.slug === slug);
       meta = post
         ? {
-            title: `${post.title} | Dr. Christopher Wong DDS`,
+          title: `${post.title} | Dr. Wong DDS`,
             description: buildExcerpt(post.content),
           }
         : getMetaForPath("/blog");
@@ -155,6 +163,7 @@ async function main(): Promise<void> {
     }
 
     html = injectMeta(html, meta);
+    html = minifyHtml(html);
 
     const outPath = path.join(prerenderDir, routeToFilename(route));
     await fs.promises.writeFile(outPath, html, "utf-8");

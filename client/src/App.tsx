@@ -13,6 +13,7 @@ import HotjarTracking from "@/components/common/HotjarTracking";
 import SitemapLink from "@/components/common/SitemapLink";
 import Redirects from "@/components/common/Redirects";
 import Favicons from "@/components/common/Favicons";
+import SupplementalContent from "@/components/common/SupplementalContent";
 import PreloadResources from "@/components/seo/PreloadResources";
 import DomainRedirect from "@/components/seo/DomainRedirect";
 import StructuredData from "@/components/seo/StructuredData";
@@ -103,6 +104,7 @@ function Router() {
           <Route path="/blog/:slug" component={BlogPost} />
           <Route component={NotFound} />
         </Switch>
+        <SupplementalContent />
       </main>
       <Footer />
     </>

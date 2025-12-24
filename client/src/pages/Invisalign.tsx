@@ -963,6 +963,26 @@ const Invisalign = () => {
         className="bg-[#F5F9FC]"
       />
 
+      <section className="py-12 bg-white">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="rounded-2xl border border-slate-200 bg-[#F5F9FC] p-8 md:p-10">
+            <h2 className="text-2xl md:text-3xl font-heading font-bold text-[#1F2933] mb-3">
+              Want the Invisalign details?
+            </h2>
+            <p className="text-slate-700 text-lg leading-relaxed mb-6">
+              Explore wear time tips, attachment guidance, refinements, and retainer
+              planning in our Invisalign resources hub.
+            </p>
+            <Link href="/invisalign/resources">
+              <Button className="bg-primary text-white hover:bg-primary/90">
+                Explore Invisalign resources
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       <RelatedServices
         items={relatedServices}
         title="More ways we can help"
