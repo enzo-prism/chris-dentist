@@ -68,6 +68,7 @@ async function main(): Promise<void> {
     "/schedule",
     "/blog",
     "/invisalign",
+    "/invisalign/resources",
     "/dental-veneers",
     "/dental-implants",
     "/emergency-dental",

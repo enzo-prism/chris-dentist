@@ -1,10 +1,22 @@
 import { officeInfo, holidayHours } from "@shared/officeInfo";
+import { drWongImages } from "@/lib/imageUrls";
 
 export { officeInfo, holidayHours };
 
 export const doctorInfo = {
   name: "Dr. Christopher B. Wong",
   title: "DDS",
+  alternateNames: [
+    "Dr Christopher Wong",
+    "Dr. Christopher Wong",
+    "Christopher B. Wong, DDS",
+    "Dr. Wong",
+    "Wong dentist in Palo Alto",
+    "Dr. Wong, DDS",
+  ],
+  profileUrl: "/about",
+  image: drWongImages.drWongPortrait1,
+  sameAs: ["https://linkedin.com/in/drchristopherwong"],
   credentials: [
     "University of the Pacific Arthur A. Dugoni School of Dentistry Graduate",
     "American Dental Association",

@@ -6,6 +6,7 @@ const PreloadResources = () => {
   const [location] = useLocation();
   const normalizedLocation = normalizePathname(location || "/");
   const isHome = normalizedLocation === "/";
+  const isInvisalign = normalizedLocation === "/invisalign";
 
   return (
     <Helmet>
@@ -18,14 +19,17 @@ const PreloadResources = () => {
       
       {/* Preload critical images */}
       <link rel="preload" href="/favicon/apple-touch-icon.png" as="image" type="image/png" />
-	      {isHome && (
-	        <link
-	          rel="preload"
-	          as="image"
-	          href="https://res.cloudinary.com/dhqpqfw6w/image/upload/v1762989226/Post-11_nohz6f.webp"
-	          type="image/webp"
-	        />
-	      )}
+      {isHome && (
+        <link
+          rel="preload"
+          as="image"
+          href="https://res.cloudinary.com/dhqpqfw6w/image/upload/v1762989226/Post-11_nohz6f.webp"
+          type="image/webp"
+        />
+      )}
+      {isInvisalign && (
+        <link rel="preload" as="image" href="/images/invisalign-treatment.jpg" />
+      )}
       
       {/* DNS prefetch for external domains */}
       <link rel="dns-prefetch" href="//fonts.googleapis.com" />

@@ -159,13 +159,21 @@ export const buildOrganizationSchema = (options?: {
 
 export const buildPersonSchema = () => {
   const baseUrl = getBaseUrl();
+  const profileUrl = absoluteUrl(doctorInfo.profileUrl ?? "/about");
+  const imageUrl = doctorInfo.image ? absoluteUrl(doctorInfo.image) : undefined;
   return {
     "@context": "https://schema.org",
     "@type": "Person",
     "@id": `${baseUrl}/#person-dr-wong`,
     name: doctorInfo.name,
+    alternateName: doctorInfo.alternateNames,
     description: doctorInfo.bio,
     jobTitle: "Doctor of Dental Surgery",
+    honorificPrefix: "Dr.",
+    honorificSuffix: "DDS",
+    url: profileUrl,
+    ...(imageUrl ? { image: imageUrl } : {}),
+    ...(doctorInfo.sameAs?.length ? { sameAs: doctorInfo.sameAs } : {}),
     worksFor: {
       "@id": `${baseUrl}/#organization`,
     },

@@ -156,7 +156,7 @@ const Header = () => {
             { href: "/teeth-whitening-palo-alto", label: "Teeth Whitening" },
             { href: "/zoom-whitening", label: "ZOOM Whitening" },
             { href: "/dental-implants", label: "Dental Implants" },
-            { href: "/emergency-dental", label: "Emergency Dental" },
+            { href: "/emergency-dental", label: "Emergency Dentist" },
             { href: "/services", label: "View All Services" }
           ]
         },

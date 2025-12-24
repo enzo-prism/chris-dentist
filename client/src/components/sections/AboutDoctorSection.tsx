@@ -10,7 +10,9 @@ const AboutDoctorSection: React.FC = () => {
     <section id="about-doctor" className="py-16 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">About Dr. Christopher B. Wong</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+            About Dr. Christopher B. Wong, DDS
+          </h2>
           <div className="w-24 h-1 bg-primary mx-auto"></div>
         </div>
         
@@ -18,18 +20,18 @@ const AboutDoctorSection: React.FC = () => {
           <div className="md:w-1/3 mb-8 md:mb-0">
             <OptimizedImage
               src={drWongImages.drWongPortrait1}
-              alt="Dr. Christopher B. Wong"
+              alt="Dr. Christopher B. Wong, DDS portrait"
               className="w-full max-w-sm aspect-[4/5] object-cover rounded-lg shadow-xl mx-auto"
             />
             <div className="text-center mt-4">
-              <h3 className="font-bold text-lg">Dr. Christopher B. Wong</h3>
+              <h3 className="font-bold text-lg">Dr. Christopher B. Wong, DDS</h3>
               <p className="text-primary font-medium">Lead Dentist</p>
             </div>
           </div>
           <div className="md:w-2/3 md:pl-12">
             <h3 className="text-2xl font-bold text-gray-900 mb-4">Conservative Dental Care You Can Trust</h3>
             <p className="text-gray-700 mb-4">
-              Dr. Christopher Wong was born and raised in Sacramento and earned his bachelor's degree in Biology from UC Davis. 
+              Dr Christopher Wong was born and raised in Sacramento and earned his bachelor's degree in Biology from UC Davis. 
               He graduated from the prestigious University of the Pacific Arthur A. Dugoni School of Dentistry in San Francisco in 2018.
               He is passionate about delivering high-quality care using conservative dentistry to help patients achieve healthy, 
               functional, and brilliant smiles.
@@ -69,7 +71,7 @@ const AboutDoctorSection: React.FC = () => {
             <div className="mt-8">
               <Link href="/about">
                 <Button className="bg-primary text-white font-semibold px-6 py-3 rounded-md hover:bg-blue-700">
-                  Meet Our Team
+                  Meet Dr. Christopher Wong
                 </Button>
               </Link>
             </div>

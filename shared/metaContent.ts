@@ -19,6 +19,7 @@ export const pageTitles = {
   contact: seoByPath["/contact"].title,
   schedule: seoByPath["/schedule"].title,
   invisalign: seoByPath["/invisalign"].title,
+  invisalignResources: seoByPath["/invisalign/resources"].title,
   emergencyDental: seoByPath["/emergency-dental"].title,
   zoomWhitening: seoByPath["/zoom-whitening"].title,
   dentalImplants: seoByPath["/dental-implants"].title,
@@ -38,6 +39,7 @@ export const pageDescriptions = {
   contact: seoByPath["/contact"].description,
   schedule: seoByPath["/schedule"].description,
   invisalign: seoByPath["/invisalign"].description,
+  invisalignResources: seoByPath["/invisalign/resources"].description,
   emergencyDental: seoByPath["/emergency-dental"].description,
   zoomWhitening: seoByPath["/zoom-whitening"].description,
   dentalImplants: seoByPath["/dental-implants"].description,
@@ -60,4 +62,3 @@ export function getMetaForPath(pathname: string): MetaDefinition {
 }
 
 export { seoByPath, getSeoForPath, normalizePathname, buildExcerpt };
-

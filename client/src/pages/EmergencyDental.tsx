@@ -29,6 +29,10 @@ const emergencyFaqs: FAQEntry[] = [
       "A dental emergency is any problem that causes significant pain, bleeding, swelling, or risk of losing a tooth. Examples include severe toothaches, a knocked‑out tooth, a broken tooth, facial swelling from infection, or trauma to the mouth. If you’re unsure, it’s always safer to call and ask.",
   },
   {
+    question: "Do you offer an emergency dentist in Palo Alto?",
+    answer: `Yes. If you need an emergency dentist in Palo Alto, call ${officeInfo.phone} right away. We prioritize same-day urgent visits whenever possible and will guide you on the next best steps.`,
+  },
+  {
     question: "Can you see me the same day?",
     answer:
       "We prioritize urgent cases and often can see patients the same day. The sooner you contact us, the more likely we can reserve a time to diagnose the issue and relieve pain quickly.",
@@ -104,7 +108,7 @@ const EmergencyDental = () => {
     {
       step: "2", 
       title: "Contact Us Immediately",
-      description: `Call our emergency line at ${officeInfo.phone}. Dr. Wong provides 24/7 emergency dental care for his patients.`
+      description: `Call our emergency line at ${officeInfo.phone}. We prioritize same-day emergency visits whenever possible and will guide you on next steps.`
     },
     {
       step: "3",
@@ -137,14 +141,16 @@ const EmergencyDental = () => {
   const emergencyServiceSchema = buildServiceSchema({
     name: "Emergency Dental Care",
     description:
-      "24/7 emergency dental services for urgent dental problems including toothaches, broken teeth, and trauma.",
+      "Emergency dentist in Palo Alto providing same-day care for toothaches, broken teeth, infections, and dental trauma.",
     slug: "/emergency-dental",
+    serviceType: "Emergency dentist",
+    areaServed: ["Palo Alto", "Stanford", "Menlo Park", "Mountain View"],
   });
 
   const emergencyHowTo = buildHowToSchema({
     name: "What to do during a dental emergency",
     description:
-      "Immediate steps Palo Alto patients should take when experiencing a dental emergency before arriving at our office.",
+      "Immediate steps Palo Alto patients should take before arriving at our emergency dentist.",
     steps: emergencySteps.map((step) => ({
       title: step.title,
       description: step.description,
@@ -201,6 +207,8 @@ const EmergencyDental = () => {
     emergencySchemas.push(emergencyFaqSchema);
   }
 
+  const lastUpdated = "December 2025";
+
   return (
     <>
       <MetaTags 
@@ -223,11 +231,12 @@ const EmergencyDental = () => {
               <AlertTriangle className="h-16 w-16 text-orange-600" />
             </div>
             <h1 className="text-4xl md:text-5xl font-bold font-heading text-[#333333] mb-6">
-              24/7 Emergency Dental Care in Palo Alto
+              Emergency Dentist in Palo Alto, CA
             </h1>
             <p className="text-xl text-[#333333] max-w-4xl mx-auto mb-8">
-              Don't let dental pain wait. Dr. Christopher B. Wong provides immediate emergency dental care 
-              for patients in Palo Alto and surrounding areas. Available day and night for urgent dental needs.
+              If you need an emergency dentist in Palo Alto, Dr. Christopher B. Wong provides same-day care
+              for urgent toothaches, broken teeth, swelling, and dental trauma. Call now so we can guide you
+              to fast relief and clear next steps.
             </p>
             
             {/* Emergency Contact */}
@@ -235,8 +244,8 @@ const EmergencyDental = () => {
               <div className="flex items-center justify-center mb-4">
                 <Phone className="h-8 w-8 mr-3" />
                 <div>
-                  <h3 className="text-xl font-bold">Emergency Hotline</h3>
-                  <p className="text-blue-100">Available 24/7 for dental emergencies</p>
+                  <h3 className="text-xl font-bold">Emergency Line</h3>
+                  <p className="text-blue-100">Call for same-day emergency dental care</p>
                 </div>
               </div>
               <a
@@ -261,6 +270,57 @@ const EmergencyDental = () => {
               </Link>
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Local emergency dentist info */}
+      <section className="py-14 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
+            <div>
+              <h2 className="text-3xl md:text-4xl font-bold font-heading text-[#333333] mb-4">
+                Emergency dentist in Palo Alto, close to home
+              </h2>
+              <p className="text-[#333333] text-lg mb-6">
+                Our emergency dentist in Palo Alto helps patients from Palo Alto, Stanford, Menlo Park, and
+                Mountain View. Call for fast guidance, and we will prioritize urgent appointments whenever possible.
+              </p>
+              <p className="text-[#333333] text-base">
+                If you have uncontrolled bleeding, trouble breathing, or rapidly worsening facial swelling,
+                seek emergency medical care right away.
+              </p>
+            </div>
+            <div className="rounded-2xl border border-slate-100 bg-[#F8FAFC] p-6 shadow-sm space-y-4">
+              <div>
+                <p className="text-sm font-semibold tracking-wide text-slate-900 uppercase">Office location</p>
+                <p className="mt-2 text-slate-800 leading-relaxed">
+                  {officeInfo.address.line1}
+                  <br />
+                  {officeInfo.address.line2}
+                </p>
+                <a
+                  href={officeInfo.mapUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-2 inline-flex items-center text-primary font-semibold hover:underline"
+                >
+                  Get directions
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </a>
+              </div>
+              <div>
+                <p className="text-sm font-semibold tracking-wide text-slate-900 uppercase">Hours</p>
+                <p className="mt-2 text-slate-700 leading-relaxed text-sm">
+                  Mon–Thu: {officeInfo.hours.monday}
+                  <br />
+                  Fri: {officeInfo.hours.friday}
+                  <br />
+                  Sat–Sun: {officeInfo.hours.saturday}
+                </p>
+              </div>
+              <p className="text-xs text-slate-500">Reviewed by Dr. Wong · Last updated: {lastUpdated}</p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -346,6 +406,7 @@ const EmergencyDental = () => {
             {emergencySteps.map((step, index) => (
               <motion.div
                 key={index}
+                id={`step-${step.step}`}
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.2 }}
@@ -404,7 +465,7 @@ const EmergencyDental = () => {
         </div>
       </section>
 
-      {/* 24/7 Availability */}
+      {/* Same-day Availability */}
       <section className="py-16 bg-primary text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
@@ -415,28 +476,28 @@ const EmergencyDental = () => {
           >
             <Clock className="h-16 w-16 mx-auto mb-6" />
             <h2 className="text-3xl md:text-4xl font-bold font-heading mb-6">
-              Available When You Need Us Most
+              Same-day emergency dental care
             </h2>
             <p className="text-xl mb-8 max-w-3xl mx-auto">
-              Dental emergencies don't follow a schedule, and neither do we. Dr. Wong and his team are 
-              available 24/7 to provide the emergency dental care you need, when you need it.
+              Dental emergencies move fast. We reserve time for urgent visits and work to see you the same day
+              whenever possible, so you can get relief and a clear plan quickly.
             </p>
             
             <div className="grid md:grid-cols-3 gap-6 mb-8">
               <div className="bg-blue-700 rounded-lg p-6">
                 <Shield className="h-8 w-8 mx-auto mb-4" />
-                <h3 className="text-lg font-bold mb-2">Immediate Relief</h3>
-                <p className="text-blue-100">Fast pain management and emergency treatment</p>
+                <h3 className="text-lg font-bold mb-2">Fast relief</h3>
+                <p className="text-blue-100">Prompt evaluation and pain management</p>
               </div>
               <div className="bg-blue-700 rounded-lg p-6">
                 <Heart className="h-8 w-8 mx-auto mb-4" />
-                <h3 className="text-lg font-bold mb-2">Compassionate Care</h3>
-                <p className="text-blue-100">Gentle, understanding approach during stressful times</p>
+                <h3 className="text-lg font-bold mb-2">Clear next steps</h3>
+                <p className="text-blue-100">Focused guidance during stressful moments</p>
               </div>
               <div className="bg-blue-700 rounded-lg p-6">
                 <CheckCircle className="h-8 w-8 mx-auto mb-4" />
-                <h3 className="text-lg font-bold mb-2">Expert Treatment</h3>
-                <p className="text-blue-100">Years of experience handling dental emergencies</p>
+                <h3 className="text-lg font-bold mb-2">Experienced care</h3>
+                <p className="text-blue-100">Trusted clinical care for urgent needs</p>
               </div>
             </div>
 
@@ -514,8 +575,8 @@ const EmergencyDental = () => {
               Don't Wait - Get Emergency Dental Care Now
             </h2>
             <p className="text-xl text-[#333333] mb-8 max-w-3xl mx-auto">
-              If you're experiencing a dental emergency, time is critical. Contact Dr. Wong's office 
-              immediately for prompt, professional emergency dental care in Palo Alto.
+              If you're experiencing a dental emergency, time is critical. Contact our emergency dentist in
+              Palo Alto for prompt, professional care and clear next steps.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a href={`tel:${officeInfo.phoneE164}`}>

@@ -7,6 +7,9 @@ export type RedirectTarget = {
 
 const staticLegacyRedirects: Record<string, string> = {
   "/about-us": "/about",
+  "/dr-christopher-wong": "/about",
+  "/wong-dentist": "/about",
+  "/dr-wong-dds": "/about",
   "/dr-kris-hamamoto": "/about",
   "/dr-chris-wong": "/about",
   "/our-services": "/services",
@@ -17,6 +20,7 @@ const staticLegacyRedirects: Record<string, string> = {
   "/patient-reviews": "/testimonials",
   "/reviews": "/testimonials",
   "/emergency": "/emergency-dental",
+  "/emergency-dentist-palo-alto": "/emergency-dental",
   "/implants": "/dental-implants",
   "/veneers": "/dental-veneers",
   "/whitening": "/zoom-whitening",

@@ -69,7 +69,8 @@ const HeroSection = () => {
             </h1>
             
             <p className="text-lg text-white/80 leading-relaxed mb-6 max-w-md">
-              Modern, conservative care for healthy smiles—from checkups and cleanings to Invisalign, cosmetic dentistry, and restorations.
+              Modern, conservative care from Dr. Wong, DDS, your Palo Alto dentist—covering checkups, cleanings,
+              Invisalign, cosmetic dentistry, and restorations.
             </p>
 
             {/* CTA Buttons with updated styling */}

@@ -79,6 +79,7 @@ Allow: /zoom-whitening
 Allow: /dental-veneers
 Allow: /dental-implants
 Allow: /invisalign
+Allow: /invisalign/resources
 Allow: /emergency-dental
 Allow: /privacy-policy
 Allow: /terms
@@ -137,6 +138,7 @@ Disallow: /
         "/blog": "0.8",
         "/about": "0.8",
         "/invisalign": "0.9",
+        "/invisalign/resources": "0.7",
         "/dental-veneers": "0.9",
         "/dental-implants": "0.9",
         "/emergency-dental": "1.0",

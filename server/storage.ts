@@ -352,7 +352,7 @@ export class MemStorage implements IStorage {
       },
       {
         title: "Emergency Dental Care",
-        description: "24/7 emergency dental services for urgent dental problems including severe toothaches, trauma, broken teeth, and infections.",
+        description: "Same-day emergency dental services for urgent problems including severe toothaches, trauma, broken teeth, and infections.",
         image: "https://res.cloudinary.com/dhqpqfw6w/image/upload/v1763585455/Gemini_Generated_Image_3fvkl73fvkl73fvk_sbv4kj.webp",
         slug: "emergency-dental",
         featured: true
@@ -367,8 +367,8 @@ export class MemStorage implements IStorage {
   private initializeBlogPosts() {
     const blogPostsList: InsertBlogPost[] = [
       {
-        title: "Emergency Dental Care in Palo Alto, CA: What to Do When You Need a Dentist Right Now",
-        content: `Dental emergencies never happen at a convenient time. A cracked tooth during lunch, a sudden toothache that keeps you up at night, or a knocked-out tooth after a weekend bike ride all require fast, reliable care.
+        title: "Emergency Dentist in Palo Alto, CA: What to Do When You Need Care Right Now",
+        content: `Dental emergencies never happen at a convenient time. If you need an emergency dentist in Palo Alto, issues like a cracked tooth during lunch, a sudden toothache that keeps you up at night, or a knocked-out tooth after a weekend bike ride all require fast, reliable care.
 
 If you are in Palo Alto, Stanford, Menlo Park, or surrounding areas, Dr. Christopher B. Wong offers prompt, compassionate emergency dental treatment to relieve pain and protect your long-term oral health. This guide walks through common dental emergencies, what to do immediately, and when to call our office.
 

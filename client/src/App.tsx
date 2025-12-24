@@ -32,6 +32,7 @@ import Accessibility from "@/pages/Accessibility";
 import DentalVeneers from "@/pages/DentalVeneers";
 import DentalImplants from "@/pages/DentalImplants";
 import Invisalign from "@/pages/Invisalign";
+import InvisalignResources from "@/pages/InvisalignResources";
 import EmergencyDental from "@/pages/EmergencyDental";
 import ZoomWhitening from "@/pages/ZoomWhitening";
 import PreventiveDentistry from "@/pages/PreventiveDentistry";
@@ -95,6 +96,7 @@ function Router() {
           <Route path="/dentist-menlo-park" component={DentistMenloPark} />
           <Route path="/dentist-stanford" component={DentistStanford} />
           <Route path="/invisalign" component={Invisalign} />
+          <Route path="/invisalign/resources" component={InvisalignResources} />
           <Route path="/emergency-dental" component={EmergencyDental} />
           <Route path="/analytics" component={AnalyticsMinimal} />
           <Route path="/ga-test" component={GATestPage} />

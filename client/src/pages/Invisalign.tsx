@@ -17,6 +17,7 @@ import {
   buildPersonSchema,
   buildWebSiteSchema,
   buildBreadcrumbSchema,
+  buildHowToSchema,
   buildFAQSchema,
   buildServiceSchema,
   type FAQEntry,
@@ -60,6 +61,11 @@ const invisalignFaqs: FAQEntry[] = [
     question: "How often are Invisalign checkups?",
     answer:
       "You’ll return for periodic checkups so we can confirm your teeth are tracking and make any needed adjustments. Visit frequency varies by plan and how your teeth respond, and we’ll outline your schedule at the start.",
+  },
+  {
+    question: "Where is your Palo Alto Invisalign office located?",
+    answer:
+      `We’re located at ${officeInfo.address.line1}, ${officeInfo.address.line2}. We welcome Invisalign patients from Palo Alto, Menlo Park, Stanford, and Mountain View.`,
   },
   {
     question: "What happens after Invisalign is finished?",
@@ -184,7 +190,7 @@ const Invisalign = () => {
   const providerHighlights = [
     "University of the Pacific Arthur A. Dugoni School of Dentistry graduate",
     "Member of the American Dental Association (ADA), California Dental Association (CDA), and Santa Clara County Dental Society (SCCDS)",
-    "Digital Invisalign planning with 3D scans and step-by-step aligner staging",
+    "Invisalign treatment plans created and monitored by Dr. Wong using 3D digital scans",
     "Clear check-ins and retainer guidance to help results stay stable",
   ];
 
@@ -204,7 +210,7 @@ const Invisalign = () => {
   const serviceSchema = buildServiceSchema({
     name: "Invisalign Clear Aligners",
     description:
-      "Invisalign clear aligner treatment in Palo Alto, CA with digital scans, personalized plans, and flexible checkups for teens and adults.",
+      "Invisalign clear aligner treatment from a Palo Alto Invisalign dentist with digital scans, personalized plans, and flexible checkups for teens and adults.",
     slug: "/invisalign",
     image: "/images/invisalign-treatment.jpg",
     serviceType: "Invisalign clear aligner treatment",
@@ -217,6 +223,17 @@ const Invisalign = () => {
   ];
   const invisalignBreadcrumbs = buildBreadcrumbSchema(breadcrumbItems);
   const invisalignFaqSchema = buildFAQSchema(invisalignFaqs, "/invisalign");
+  const invisalignHowToSchema = buildHowToSchema({
+    name: "Invisalign treatment steps in Palo Alto",
+    description:
+      "A step-by-step overview of Invisalign treatment with Dr. Wong in Palo Alto, from consultation to aligner delivery.",
+    steps: treatmentProcess.map((step) => ({
+      title: step.title,
+      description: step.description,
+      duration: step.duration,
+    })),
+    pagePath: "/invisalign",
+  });
 
   const relatedServices: RelatedServiceLink[] = [
     {
@@ -261,6 +278,9 @@ const Invisalign = () => {
   if (invisalignFaqSchema) {
     pageSchemas.push(invisalignFaqSchema);
   }
+  if (invisalignHowToSchema) {
+    pageSchemas.push(invisalignHowToSchema);
+  }
 
   return (
     <>
@@ -289,12 +309,17 @@ const Invisalign = () => {
                 Invisalign® in Palo Alto, CA
               </h1>
               <p className="text-xl text-[#333333] max-w-3xl mb-4">
-                Invisalign in Palo Alto gives adults and teens a discreet way to straighten teeth, guided by
-                a digital scan, a personalized plan, and checkups designed to fit busy schedules.
+                Looking for an Invisalign dentist in Palo Alto? Dr. Christopher B. Wong provides clear aligner
+                treatment for adults and teens using 3D digital scans, personalized planning, and checkups built
+                for busy schedules.
               </p>
-              <p className="text-lg text-[#333333] max-w-3xl mb-6">
-                Invisalign Palo Alto patients appreciate clear timelines, flexible visits, and a care team
-                that keeps treatment comfortable from start to finish.
+              <p className="text-lg text-[#333333] max-w-3xl mb-4">
+                Invisalign Palo Alto patients appreciate clear timelines, conservative tooth movement, and a care
+                team that keeps treatment comfortable from start to finish.
+              </p>
+              <p className="text-base text-[#333333] max-w-3xl mb-6">
+                Our Cambridge Ave office welcomes Invisalign patients from Palo Alto, Menlo Park, Stanford, and
+                Mountain View.
               </p>
 
               <ul className="grid gap-3 sm:grid-cols-2 text-sm text-slate-700 mb-8">
@@ -410,8 +435,8 @@ const Invisalign = () => {
                 Why patients choose Dr. Wong for Invisalign in Palo Alto
               </h2>
               <p className="text-[#333333] text-lg mb-6 max-w-3xl">
-                Your Invisalign plan combines careful diagnostics with a conservative approach so you can
-                move through treatment confidently.
+                Your Invisalign plan is created and reviewed by a Palo Alto Invisalign dentist using careful
+                diagnostics and a conservative approach so you can move through treatment confidently.
               </p>
               <ul className="space-y-3 text-[#333333]">
                 {providerHighlights.map((item) => (
@@ -644,6 +669,7 @@ const Invisalign = () => {
             {treatmentProcess.map((step, index) => (
               <motion.div
                 key={index}
+                id={`step-${step.step}`}
                 initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -947,7 +973,7 @@ const Invisalign = () => {
         serviceSlug="invisalign"
         serviceName="Invisalign"
         category="Invisalign"
-        ctaHref="/blog?category=invisalign"
+        ctaHref="/invisalign/resources"
       />
 
       {/* Call to Action */}

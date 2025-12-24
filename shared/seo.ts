@@ -22,14 +22,14 @@ export const seoByPath: Record<string, SeoDefinition> = {
     title:
       "Palo Alto Dentist | Christopher B. Wong, DDS | Cosmetic & Family Dentistry",
     description:
-      "Palo Alto dentist Dr. Christopher B. Wong provides family, cosmetic & restorative dentistry, Invisalign, implants, and emergency care. Book online.",
+      "Palo Alto dentist Dr. Christopher B. Wong, DDS provides family, cosmetic & restorative dentistry, Invisalign, implants, and emergency care. Book online.",
     canonicalPath: "/",
     ogImage: "https://i.imgur.com/BeX3mhS.png",
   },
   "/about": {
-    title: "About Dr. Christopher Wong DDS | Palo Alto Dentist",
+    title: "Dr. Christopher B. Wong, DDS | Palo Alto Dentist",
     description:
-      "Meet Dr. Christopher Wong, experienced Palo Alto dentist with years of excellence. Learn about our patient-centered approach to dental care in Palo Alto.",
+      "Learn about Dr. Wong, DDS, a Palo Alto dentist focused on conservative care, Invisalign, and implant restoration. Looking for a Wong dentist in Palo Alto? Meet the team and our approach.",
     canonicalPath: "/about",
     ogImage: "https://i.imgur.com/iqBXT9y.png",
   },
@@ -107,14 +107,21 @@ export const seoByPath: Record<string, SeoDefinition> = {
     title:
       "Invisalign Palo Alto, CA | Clear Aligners | Dr. Christopher B. Wong, DDS",
     description:
-      "Invisalign in Palo Alto with digital scans, a personalized plan, and easy checkups. Clear aligners for teens and adults—schedule a consult today.",
+      "Invisalign dentist in Palo Alto offering clear aligners with digital scans, personalized plans, and easy checkups for teens and adults. Schedule a consult today.",
     canonicalPath: "/invisalign",
+    ogImage: "/images/invisalign-treatment.jpg",
+  },
+  "/invisalign/resources": {
+    title: "Invisalign Resources in Palo Alto | Dr. Christopher B. Wong, DDS",
+    description:
+      "Invisalign resources for Palo Alto patients: timelines, attachments, costs, and aftercare. Explore clear aligner guidance and book a consult.",
+    canonicalPath: "/invisalign/resources",
     ogImage: "/images/invisalign-treatment.jpg",
   },
   "/emergency-dental": {
     title: "Emergency Dentist in Palo Alto | Same-Day Care | Dr. Wong, DDS",
     description:
-      "24/7 emergency dental care in Palo Alto. Dr. Wong provides immediate treatment for dental emergencies including toothaches, broken teeth, and trauma.",
+      "Emergency dentist in Palo Alto offering same-day care for urgent toothaches, broken teeth, infections, and dental trauma. Call now for relief.",
     canonicalPath: "/emergency-dental",
     ogImage: "https://i.imgur.com/hO02YQ0.png",
   },

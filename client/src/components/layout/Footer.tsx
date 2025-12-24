@@ -13,7 +13,7 @@ const Footer = () => {
   // Footer link sections
   const quickLinks = [
     { href: "/", label: "Home" },
-    { href: "/about", label: "About Dr. Wong" },
+    { href: "/about", label: "Dr. Wong, DDS" },
     { href: "/services", label: "Services" },
     { href: "/patient-resources", label: "Patient Resources" },
     { href: "/patient-stories", label: "Patient Stories" },
@@ -29,7 +29,7 @@ const Footer = () => {
     { href: "/teeth-whitening-palo-alto", label: "Teeth Whitening" },
     { href: "/services#restorative-dentistry", label: "Restorative Dentistry" },
     { href: "/services#pediatric-dentistry", label: "Pediatric Dentistry" },
-    { href: "/services#emergency-dental-care", label: "Emergency Dental Care" }
+    { href: "/emergency-dental", label: "Emergency Dentist" }
   ];
 
   const legalLinks = [
