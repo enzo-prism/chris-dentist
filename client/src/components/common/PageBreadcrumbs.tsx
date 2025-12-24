@@ -30,34 +30,42 @@ const PageBreadcrumbs = ({
   return (
     <div
       className={cn(
-        "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-2",
+        "bg-[#0f2f27] border-b border-white/10",
         containerClassName,
       )}
     >
-      <Breadcrumb className={className}>
-        <BreadcrumbList>
-          {items.map((item, index) => {
-            const isLast = index === items.length - 1;
-            return (
-              <React.Fragment key={`${item.path}-${index}`}>
-                <BreadcrumbItem>
-                  {isLast ? (
-                    <BreadcrumbPage>{item.name}</BreadcrumbPage>
-                  ) : (
-                    <BreadcrumbLink href={item.path}>
-                      {item.name}
-                    </BreadcrumbLink>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+        <Breadcrumb className={cn("text-sm", className)}>
+          <BreadcrumbList className="text-white/70">
+            {items.map((item, index) => {
+              const isLast = index === items.length - 1;
+              return (
+                <React.Fragment key={`${item.path}-${index}`}>
+                  <BreadcrumbItem>
+                    {isLast ? (
+                      <BreadcrumbPage className="text-white">
+                        {item.name}
+                      </BreadcrumbPage>
+                    ) : (
+                      <BreadcrumbLink
+                        href={item.path}
+                        className="text-white/80 hover:text-white"
+                      >
+                        {item.name}
+                      </BreadcrumbLink>
+                    )}
+                  </BreadcrumbItem>
+                  {!isLast && (
+                    <BreadcrumbSeparator className="text-white/40" />
                   )}
-                </BreadcrumbItem>
-                {!isLast && <BreadcrumbSeparator />}
-              </React.Fragment>
-            );
-          })}
-        </BreadcrumbList>
-      </Breadcrumb>
+                </React.Fragment>
+              );
+            })}
+          </BreadcrumbList>
+        </Breadcrumb>
+      </div>
     </div>
   );
 };
 
 export default PageBreadcrumbs;
-
