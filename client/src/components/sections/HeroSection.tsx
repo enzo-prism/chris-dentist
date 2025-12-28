@@ -158,23 +158,23 @@ const HeroSection = () => {
             </div>
             
             {/* Features grid */}
-            <div className="space-y-4">
-              <p className="text-sm font-semibold text-white/70">Why patients choose us</p>
+            <div className="space-y-4 rounded-3xl border border-slate-200 bg-white/95 p-6 shadow-lg backdrop-blur">
+              <p className="text-sm font-semibold text-slate-500">Why patients choose us</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {features.map((feature, index) => (
                   <motion.div 
                     key={index}
-                    className="flex items-start gap-3 rounded-2xl border border-white/10 bg-white/8 p-4 backdrop-blur shadow-sm"
+                    className="flex items-start gap-3 rounded-2xl border border-slate-200/80 bg-slate-50/80 p-4 shadow-sm"
                     initial={{ opacity: 0, y: 15 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: 0.3 + (index * 0.1), ease: "easeOut" }}
                   >
-                    <div className="mt-0.5 bg-blue-500/20 rounded-full p-1.5 text-blue-200 shrink-0">
+                    <div className="mt-0.5 bg-primary/10 rounded-full p-1.5 text-primary shrink-0">
                       <CheckCircle className="h-4 w-4" />
                     </div>
                     <div>
-                      <p className="text-white font-semibold">{feature.title}</p>
-                      <p className="text-sm text-white/75 mt-1 leading-snug">{feature.description}</p>
+                      <p className="text-slate-900 font-semibold">{feature.title}</p>
+                      <p className="text-sm text-slate-600 mt-1 leading-snug">{feature.description}</p>
                     </div>
                   </motion.div>
                 ))}
