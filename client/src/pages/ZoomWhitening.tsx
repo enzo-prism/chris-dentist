@@ -8,7 +8,6 @@ import { pageTitles, pageDescriptions } from "@/lib/metaContent";
 import { buildBreadcrumbSchema, buildServiceSchema } from "@/lib/structuredData";
 import { getTestimonialsByNames } from "@/lib/testimonials";
 import { motion } from "framer-motion";
-import { drWongImages } from "@/lib/imageUrls";
 import PageBreadcrumbs from "@/components/common/PageBreadcrumbs";
 import RelatedServices, {
   type RelatedServiceLink,
@@ -167,8 +166,8 @@ const ZoomWhitening = () => {
               <div className="absolute -inset-6 bg-white/10 rounded-3xl blur-3xl" aria-hidden />
               <div className="relative rounded-3xl overflow-hidden shadow-2xl ring-1 ring-white/10">
                 <OptimizedImage
-                  src={drWongImages.drWongOffice2}
-                  alt="Patient smiling after professional teeth whitening"
+                  src="https://res.cloudinary.com/dhqpqfw6w/image/upload/v1766936713/zoom-whitening_bizgsh.webp"
+                  alt="ZOOM whitening treatment result"
                   className="w-full aspect-[4/3] object-cover"
                 />
               </div>
