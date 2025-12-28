@@ -24,7 +24,7 @@ const TestimonialQuote = ({ testimonial, className, hideStars = false }: Testimo
       </p>
       <div className="mt-6 flex flex-col gap-2 text-sm sm:text-base">
         {!hideStars && (
-          <div className="flex text-amber-400">
+          <div className="flex text-blue-500">
             {Array.from({ length: 5 }).map((_, index) => (
               <Star
                 key={`${name}-star-${index}`}

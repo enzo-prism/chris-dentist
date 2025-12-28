@@ -94,7 +94,7 @@ const Testimonials = () => {
               <div className="text-left">
                 <div className="flex items-center gap-2">
                   <h4 className="font-semibold text-white">{spotlightReview.name}</h4>
-                  <div className="flex text-amber-300">
+                  <div className="flex text-white/90">
                     {Array.from({ length: 5 }).map((_, i) => (
                       <Star
                         key={i}

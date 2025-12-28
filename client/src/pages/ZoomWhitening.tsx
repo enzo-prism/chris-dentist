@@ -100,7 +100,7 @@ const ZoomWhitening = () => {
       <PageBreadcrumbs items={breadcrumbItems} />
 
       {/* Hero */}
-      <section className="bg-gradient-to-b from-[#0f2f27] via-[#123129] to-white pt-28 pb-16 md:pb-24">
+      <section className="bg-gradient-to-b from-[#0b1f3a] via-[#123a6b] to-white pt-28 pb-16 md:pb-24">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-10 items-center">
             <motion.div
@@ -123,7 +123,7 @@ const ZoomWhitening = () => {
                 Looking for broader{" "}
                 <Link
                   href="/teeth-whitening-palo-alto"
-                  className="font-semibold underline underline-offset-4 hover:text-[#f2d785] transition-colors"
+                  className="font-semibold underline underline-offset-4 hover:text-blue-200 transition-colors"
                 >
                   teeth whitening options in Palo Alto
                 </Link>
@@ -131,28 +131,28 @@ const ZoomWhitening = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-3 sm:items-center">
                 <Link href="/schedule#appointment">
-                  <Button className="bg-[#f2d785] hover:bg-[#f6e2a4] text-[#0f2f27] font-semibold px-6 py-6 h-auto rounded-full flex items-center gap-2">
+                  <Button className="bg-primary hover:bg-primary/90 text-white font-semibold px-6 py-6 h-auto rounded-full flex items-center gap-2">
                     Book whitening visit
                     <ArrowRight className="h-4 w-4" />
                   </Button>
                 </Link>
                 <Link href="/contact">
-                  <Button variant="outline" className="border-white/40 text-white hover:text-[#f2d785] hover:border-[#f2d785]/60 bg-white/5">
+                  <Button variant="outline" className="border-white/40 text-white hover:text-blue-200 hover:border-blue-200/60 bg-white/5">
                     Ask a question
                   </Button>
                 </Link>
               </div>
               <div className="mt-6 flex flex-wrap gap-3 text-sm text-white/75">
                 <div className="inline-flex items-center gap-2 bg-white/10 px-3 py-2 rounded-full">
-                  <CheckCircle className="h-4 w-4 text-[#f2d785]" />
+                  <CheckCircle className="h-4 w-4 text-blue-200" />
                   Same-day results
                 </div>
                 <div className="inline-flex items-center gap-2 bg-white/10 px-3 py-2 rounded-full">
-                  <CheckCircle className="h-4 w-4 text-[#f2d785]" />
+                  <CheckCircle className="h-4 w-4 text-blue-200" />
                   Minimal downtime
                 </div>
                 <div className="inline-flex items-center gap-2 bg-white/10 px-3 py-2 rounded-full">
-                  <CheckCircle className="h-4 w-4 text-[#f2d785]" />
+                  <CheckCircle className="h-4 w-4 text-blue-200" />
                   Sensitivity-managed
                 </div>
               </div>
@@ -283,7 +283,7 @@ const ZoomWhitening = () => {
           <div className="grid md:grid-cols-3 gap-6">
             {whiteningTestimonials.map((testimonial, index) => (
               <div key={testimonial.name} className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
-                <div className="flex items-center gap-2 text-amber-400 mb-3">
+                <div className="flex items-center gap-2 text-blue-500 mb-3">
                   {[...Array(5)].map((_, i) => (
                     <Sparkles key={i} className={`h-4 w-4 ${i < testimonial.rating ? "fill-current" : ""}`} />
                   ))}
@@ -314,7 +314,7 @@ const ZoomWhitening = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link href="/schedule#appointment">
-              <Button className="bg-[#f2d785] text-[#0f2f27] hover:bg-[#f6e2a4] px-6 py-3 font-semibold shadow-sm">
+              <Button className="bg-primary text-white hover:bg-primary/90 px-6 py-3 font-semibold shadow-sm">
                 Schedule now
               </Button>
             </Link>

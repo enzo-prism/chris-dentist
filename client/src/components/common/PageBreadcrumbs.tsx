@@ -30,33 +30,33 @@ const PageBreadcrumbs = ({
   return (
     <div
       className={cn(
-        "bg-[#0f2f27] border-b border-white/10",
+        "bg-[#F5F9FC] border-b border-slate-200",
         containerClassName,
       )}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
         <Breadcrumb className={cn("text-sm", className)}>
-          <BreadcrumbList className="text-white/70">
+          <BreadcrumbList className="text-slate-500">
             {items.map((item, index) => {
               const isLast = index === items.length - 1;
               return (
                 <React.Fragment key={`${item.path}-${index}`}>
                   <BreadcrumbItem>
                     {isLast ? (
-                      <BreadcrumbPage className="text-white">
+                      <BreadcrumbPage className="text-slate-900">
                         {item.name}
                       </BreadcrumbPage>
                     ) : (
                       <BreadcrumbLink
                         href={item.path}
-                        className="text-white/80 hover:text-white"
+                        className="text-slate-600 hover:text-slate-900"
                       >
                         {item.name}
                       </BreadcrumbLink>
                     )}
                   </BreadcrumbItem>
                   {!isLast && (
-                    <BreadcrumbSeparator className="text-white/40" />
+                    <BreadcrumbSeparator className="text-slate-300" />
                   )}
                 </React.Fragment>
               );

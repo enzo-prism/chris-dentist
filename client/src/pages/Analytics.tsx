@@ -322,8 +322,8 @@ export default function Analytics() {
 
                   <Separator className="my-6" />
 
-                  <div className="bg-green-50 p-4 rounded-lg">
-                    <p className="text-sm text-green-800">
+                  <div className="bg-blue-50 p-4 rounded-lg">
+                    <p className="text-sm text-blue-800">
                       <CheckCircle2 className="inline w-4 h-4 mr-1" />
                       Friction: {data.behavior.friction.note}
                     </p>
@@ -411,11 +411,11 @@ export default function Analytics() {
                     </div>
                     <div className="text-center">
                       <p className="text-sm text-gray-600">Average Rating</p>
-                      <div className="flex justify-center items-center gap-1">
-                        {[...Array(5)].map((_, i) => (
-                          <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                        ))}
-                      </div>
+                        <div className="flex justify-center items-center gap-1">
+                          {[...Array(5)].map((_, i) => (
+                            <Star key={i} className="w-5 h-5 fill-blue-500 text-blue-500" />
+                          ))}
+                        </div>
                       <p className="text-lg font-semibold mt-1">{data.reputation.july.avgRatingNew.toFixed(1)}</p>
                     </div>
                     <div className="text-center">
@@ -437,7 +437,7 @@ export default function Analytics() {
                             <Badge variant="outline">{quote.source} • {quote.date}</Badge>
                             <div className="flex gap-1">
                               {[...Array(5)].map((_, i) => (
-                                <Star key={i} className="w-3 h-3 fill-yellow-400 text-yellow-400" />
+                                <Star key={i} className="w-3 h-3 fill-blue-500 text-blue-500" />
                               ))}
                             </div>
                           </div>
@@ -451,7 +451,7 @@ export default function Analytics() {
                             <Badge variant="outline">{quote.source} • {quote.date}</Badge>
                             <div className="flex gap-1">
                               {[...Array(5)].map((_, i) => (
-                                <Star key={i} className="w-3 h-3 fill-yellow-400 text-yellow-400" />
+                                <Star key={i} className="w-3 h-3 fill-blue-500 text-blue-500" />
                               ))}
                             </div>
                           </div>
@@ -508,7 +508,7 @@ export default function Analytics() {
                             <div className="space-y-1">
                               {highlight.evidence.map((item, i) => (
                                 <div key={i} className="flex items-center gap-2">
-                                  <CheckCircle2 className="w-3 h-3 text-green-600 flex-shrink-0" />
+                                  <CheckCircle2 className="w-3 h-3 text-blue-600 flex-shrink-0" />
                                   <span className="text-xs text-gray-500">{item}</span>
                                 </div>
                               ))}

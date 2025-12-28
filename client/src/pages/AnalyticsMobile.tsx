@@ -39,7 +39,7 @@ function MetricCard({ label, value, trend, icon: Icon }: {
           <p className="text-xs text-gray-600 mb-1">{label}</p>
           <p className="text-xl font-bold text-gray-900">{value}</p>
           {trend && (
-            <p className="text-xs text-green-600 mt-1 flex items-center">
+            <p className="text-xs text-blue-600 mt-1 flex items-center">
               <TrendingUp className="w-3 h-3 mr-0.5" />
               {trend}
             </p>
@@ -491,8 +491,8 @@ export default function Analytics() {
                     </AccordionItem>
                   </Accordion>
 
-                  <div className="mt-4 p-3 bg-green-50 rounded-lg">
-                    <p className="text-xs text-green-800 flex items-start">
+                  <div className="mt-4 p-3 bg-blue-50 rounded-lg">
+                    <p className="text-xs text-blue-800 flex items-start">
                       <CheckCircle2 className="w-4 h-4 mr-1 flex-shrink-0 mt-0.5" />
                       {data.behavior.friction.note}
                     </p>
@@ -604,7 +604,7 @@ export default function Analytics() {
                       <p className="text-xs text-gray-600 mb-1">Rating</p>
                       <div className="flex justify-center items-center">
                         {[...Array(5)].map((_, i) => (
-                          <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                          <Star key={i} className="w-4 h-4 fill-blue-500 text-blue-500" />
                         ))}
                       </div>
                     </div>
@@ -628,7 +628,7 @@ export default function Analytics() {
                           </Badge>
                           <div className="flex gap-0.5">
                             {[...Array(5)].map((_, i) => (
-                              <Star key={i} className="w-3 h-3 fill-yellow-400 text-yellow-400" />
+                              <Star key={i} className="w-3 h-3 fill-blue-500 text-blue-500" />
                             ))}
                           </div>
                         </div>
@@ -687,7 +687,7 @@ export default function Analytics() {
                         <div className="space-y-1">
                           {highlight.evidence.slice(0, 2).map((item, i) => (
                             <div key={i} className="flex items-start gap-1.5">
-                              <CheckCircle2 className="w-3 h-3 text-green-600 flex-shrink-0 mt-0.5" />
+                              <CheckCircle2 className="w-3 h-3 text-blue-600 flex-shrink-0 mt-0.5" />
                               <span className="text-xs text-gray-500">{item}</span>
                             </div>
                           ))}

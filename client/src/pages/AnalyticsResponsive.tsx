@@ -68,7 +68,7 @@ function MetricCard({
             <p className="text-xs text-gray-500 mt-1 hidden lg:block">{description}</p>
           )}
           {trend && (
-            <p className="text-xs sm:text-sm text-green-600 mt-1 flex items-center">
+            <p className="text-xs sm:text-sm text-blue-600 mt-1 flex items-center">
               {trend.includes('down') ? (
                 <TrendingDown className="w-3 h-3 mr-0.5 text-red-600" />
               ) : (
@@ -188,10 +188,10 @@ export default function Analytics() {
   // Navigation sections with icons
   const sections = [
     { value: "overview", label: "Overview", icon: BarChart3, color: "text-blue-600" },
-    { value: "acquisition", label: "Acquisition", icon: Users, color: "text-green-600" },
+    { value: "acquisition", label: "Acquisition", icon: Users, color: "text-blue-600" },
     { value: "behavior", label: "Behavior", icon: Activity, color: "text-purple-600" },
     { value: "search", label: "Search", icon: Search, color: "text-orange-600" },
-    { value: "reputation", label: "Reputation", icon: Star, color: "text-yellow-600" },
+    { value: "reputation", label: "Reputation", icon: Star, color: "text-blue-500" },
     { value: "highlights", label: "Highlights", icon: Award, color: "text-pink-600" },
     { value: "targets", label: "Targets", icon: Target, color: "text-indigo-600" }
   ];
@@ -468,7 +468,7 @@ export default function Analytics() {
 	                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
 	                              {inProgressData.preview.earlyIndicators.map((indicator, index) => (
 	                                <div key={index} className="flex items-start gap-2">
-	                                  <TrendingUp className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
+	                                  <TrendingUp className="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" />
 	                                  <span className="text-xs text-gray-600">{indicator}</span>
 	                                </div>
 	                              ))}
@@ -818,7 +818,7 @@ export default function Analytics() {
                       <CardContent>
                         <div className="space-y-2">
                           <div className="flex items-start gap-2">
-                            <CheckCircle2 className="w-4 h-4 text-green-600 mt-0.5" />
+                            <CheckCircle2 className="w-4 h-4 text-blue-600 mt-0.5" />
                             <p className="text-xs text-gray-600">Direct traffic leads at 36.8%, indicating strong brand recognition</p>
                           </div>
                           <div className="flex items-start gap-2">
@@ -913,7 +913,7 @@ export default function Analytics() {
                             <div className="flex items-center gap-3">
                               <div className={cn(
                                 "w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold",
-                                index === 0 ? "bg-green-600" : index === 1 ? "bg-blue-600" : "bg-gray-600"
+                                index === 0 ? "bg-blue-700" : index === 1 ? "bg-blue-500" : "bg-gray-600"
                               )}>
                                 {index + 1}
                               </div>
@@ -928,15 +928,15 @@ export default function Analytics() {
                 </div>
 
                 {/* Friction Analysis */}
-                <Card className="border-green-200 bg-green-50">
+                <Card className="border-blue-200 bg-blue-50">
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
-                      <CheckCircle2 className="w-5 h-5 text-green-600" />
+                      <CheckCircle2 className="w-5 h-5 text-blue-600" />
                       Friction Analysis
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-sm text-green-800">{data.behavior.friction.note}</p>
+                    <p className="text-sm text-blue-800">{data.behavior.friction.note}</p>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -1072,7 +1072,7 @@ export default function Analytics() {
                         <p className="text-sm text-gray-600 mb-2">Average Rating</p>
 	                        <div className="flex justify-center items-center gap-1 mb-2">
 	                          {[...Array(5)].map((_, i) => (
-	                            <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400" />
+	                            <Star key={i} className="w-6 h-6 fill-blue-500 text-blue-500" />
 	                          ))}
 	                        </div>
 	                        <p className="text-2xl font-bold">{julyAnalyticsData.reputation.july.avgRatingNew.toFixed(1)}</p>
@@ -1106,7 +1106,7 @@ export default function Analytics() {
                               <Badge variant="outline">{quote.source} • {quote.date}</Badge>
                               <div className="flex gap-0.5">
                                 {[...Array(5)].map((_, i) => (
-                                  <Star key={i} className="w-3 h-3 fill-yellow-400 text-yellow-400" />
+                                  <Star key={i} className="w-3 h-3 fill-blue-500 text-blue-500" />
                                 ))}
                               </div>
                             </div>
@@ -1191,7 +1191,7 @@ export default function Analytics() {
                           <div className="space-y-2">
                             {highlight.evidence.map((item, i) => (
                               <div key={i} className="flex items-start gap-2">
-                                <CheckCircle2 className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
+                                <CheckCircle2 className="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" />
                                 <span className="text-xs text-gray-500">{item}</span>
                               </div>
                             ))}

@@ -16,8 +16,8 @@ const ThankYou = () => {
         <div className="max-w-md w-full text-center">
           {/* Success Icon */}
           <div className="flex justify-center mb-8">
-            <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center">
-              <CheckCircle className="w-10 h-10 text-green-600" />
+            <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center">
+              <CheckCircle className="w-10 h-10 text-blue-600" />
             </div>
           </div>
           

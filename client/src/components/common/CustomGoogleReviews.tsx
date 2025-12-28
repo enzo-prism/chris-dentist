@@ -62,7 +62,7 @@ const CustomGoogleReviews = ({ className = '' }: CustomGoogleReviewsProps) => {
           <div>
             <h3 className="text-lg font-semibold text-gray-800">Google Reviews</h3>
             <div className="flex items-center">
-              <div className="flex text-yellow-400 mr-2">
+              <div className="flex text-blue-500 mr-2">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="h-4 w-4" fill="currentColor" />
                 ))}
@@ -108,7 +108,7 @@ const CustomGoogleReviews = ({ className = '' }: CustomGoogleReviewsProps) => {
                   <p className="text-xs text-gray-500">{review.date}</p>
                 </div>
               </div>
-              <div className="flex text-yellow-400">
+              <div className="flex text-blue-500">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="h-4 w-4" fill={i < review.rating ? "currentColor" : "none"} />
                 ))}

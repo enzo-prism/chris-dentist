@@ -35,18 +35,18 @@ const HeroSection = () => {
 
   return (
     <section 
-      className="bg-gradient-to-b from-[#0f2f27] via-[#123129] to-white pb-16 md:pb-20 overflow-hidden relative"
+      className="bg-gradient-to-b from-[#0b1f3a] via-[#123a6b] to-white pb-16 md:pb-20 overflow-hidden relative"
       style={{
         marginTop: 'calc(var(--header-height, 136px) * -1)',
         paddingTop: 'var(--header-height, 136px)'
       }}
     >
-      {/* Festive background accents */}
+      {/* Background accents */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,#1a4a3f_0%,transparent_40%),radial-gradient(circle_at_top_right,#1a4a3f_0%,transparent_40%)] opacity-70"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(2px_2px_at_20%_30%,rgba(242,215,133,0.18),transparent),radial-gradient(2px_2px_at_70%_60%,rgba(242,215,133,0.2),transparent),radial-gradient(1.5px_1.5px_at_40%_80%,rgba(255,255,255,0.18),transparent)]"></div>
-        <div className="absolute -top-48 -right-32 w-80 h-80 bg-gradient-to-br from-[#f2d785]/25 to-transparent rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-48 -left-32 w-96 h-96 bg-gradient-to-tr from-[#d83b52]/15 to-transparent rounded-full blur-3xl"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,#1e3a8a_0%,transparent_40%),radial-gradient(circle_at_top_right,#1e3a8a_0%,transparent_40%)] opacity-70"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(2px_2px_at_20%_30%,rgba(147,197,253,0.18),transparent),radial-gradient(2px_2px_at_70%_60%,rgba(147,197,253,0.2),transparent),radial-gradient(1.5px_1.5px_at_40%_80%,rgba(255,255,255,0.18),transparent)]"></div>
+        <div className="absolute -top-48 -right-32 w-80 h-80 bg-gradient-to-br from-[#93c5fd]/25 to-transparent rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-48 -left-32 w-96 h-96 bg-gradient-to-tr from-[#60a5fa]/20 to-transparent rounded-full blur-3xl"></div>
       </div>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -60,7 +60,7 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
-            <div className="inline-flex items-center gap-2 rounded-full bg-white/10 text-[#f2d785] px-4 py-2 text-sm font-semibold mb-4 backdrop-blur">
+            <div className="inline-flex items-center gap-2 rounded-full bg-white/10 text-blue-200 px-4 py-2 text-sm font-semibold mb-4 backdrop-blur">
               <MapPin className="h-4 w-4" aria-hidden="true" />
               Palo Alto, CA
             </div>
@@ -76,7 +76,7 @@ const HeroSection = () => {
             {/* CTA Buttons with updated styling */}
             <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-3 sm:space-y-0 mb-8">
               <Link href="/schedule#appointment">
-                <Button className="bg-[#f2d785] hover:bg-[#f6e2a4] text-[#0f2f27] font-medium flex items-center justify-center gap-2 px-5 py-6 h-auto rounded-full shadow-sm transition-all">
+                <Button className="bg-primary hover:bg-primary/90 text-white font-medium flex items-center justify-center gap-2 px-5 py-6 h-auto rounded-full shadow-sm transition-all">
                   <Calendar className="h-4 w-4" />
                   <span>Schedule an appointment</span>
                 </Button>
@@ -84,7 +84,7 @@ const HeroSection = () => {
               <Link href="/services">
                 <Button 
                   variant="outline" 
-                  className="border-white/30 text-white hover:text-[#f2d785] hover:border-[#f2d785]/50 bg-white/5 font-medium flex items-center justify-center gap-2 px-5 py-6 h-auto rounded-full transition-all backdrop-blur"
+                  className="border-white/30 text-white hover:text-blue-200 hover:border-blue-200/60 bg-white/5 font-medium flex items-center justify-center gap-2 px-5 py-6 h-auto rounded-full transition-all backdrop-blur"
                 >
                   <span>Explore services</span>
                   <ArrowRight className="h-4 w-4" />
@@ -104,7 +104,7 @@ const HeroSection = () => {
                   {[...Array(5)].map((_, i) => (
                     <svg
                       key={i}
-                      className="w-3.5 h-3.5 text-[#f2d785] fill-current"
+                      className="w-3.5 h-3.5 text-blue-200 fill-current"
                       viewBox="0 0 20 20"
                     >
                       <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -149,10 +149,10 @@ const HeroSection = () => {
               
               {/* Status badge */}
               <div className="absolute bottom-5 left-5 bg-white/95 px-4 py-2 rounded-full shadow-sm text-sm font-medium text-gray-900 flex items-center gap-2">
-                <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                <span className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span>
                 <span>Welcoming new patients</span>
               </div>
-              <div className="absolute top-4 right-4 bg-[#f2d785]/90 text-[#0f2f27] px-3 py-1.5 rounded-full text-xs font-semibold shadow-sm">
+              <div className="absolute top-4 right-4 bg-blue-100/90 text-blue-900 px-3 py-1.5 rounded-full text-xs font-semibold shadow-sm">
                 Palo Alto, CA
               </div>
             </div>
@@ -169,7 +169,7 @@ const HeroSection = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: 0.3 + (index * 0.1), ease: "easeOut" }}
                   >
-                    <div className="mt-0.5 bg-[#f2d785]/20 rounded-full p-1.5 text-[#f2d785] shrink-0">
+                    <div className="mt-0.5 bg-blue-500/20 rounded-full p-1.5 text-blue-200 shrink-0">
                       <CheckCircle className="h-4 w-4" />
                     </div>
                     <div>

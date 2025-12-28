@@ -539,7 +539,7 @@ const EmergencyDental = () => {
                 viewport={{ once: true }}
                 className="flex items-start bg-white p-6 rounded-lg shadow-md"
               >
-                <CheckCircle className="h-5 w-5 text-green-600 mt-1 mr-3 flex-shrink-0" />
+                <CheckCircle className="h-5 w-5 text-blue-600 mt-1 mr-3 flex-shrink-0" />
                 <span className="text-[#333333]">{tip}</span>
               </motion.div>
             ))}

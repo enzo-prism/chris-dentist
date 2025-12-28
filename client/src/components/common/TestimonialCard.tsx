@@ -13,9 +13,9 @@ const TestimonialCard = ({ testimonial, index = 0, disableAnimation = false }: T
   const { name, rating, text, image } = testimonial;
   const gradients = [
     "from-[#EEF5FF] to-white",
-    "from-[#FFF5F7] to-white",
-    "from-[#F5FBF7] to-white",
-    "from-[#F7F5FF] to-white",
+    "from-[#F3F7FF] to-white",
+    "from-[#F5F9FF] to-white",
+    "from-[#EFF6FF] to-white",
   ];
   const gradientClass = gradients[index % gradients.length];
   const hasImage = Boolean(image && image.trim().length > 0);
@@ -28,7 +28,7 @@ const TestimonialCard = ({ testimonial, index = 0, disableAnimation = false }: T
       </div>
 
       <CardContent className="p-6 sm:p-7 relative z-10">
-        <div className="flex items-center justify-end mb-4 text-amber-400">
+        <div className="flex items-center justify-end mb-4 text-blue-500">
           {Array.from({ length: 5 }).map((_, i) => (
             <Star
               key={i}

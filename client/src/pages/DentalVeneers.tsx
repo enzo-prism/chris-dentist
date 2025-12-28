@@ -48,7 +48,7 @@ const DentalVeneers = () => {
       process: "Applied directly and sculpted in a single appointment",
       idealFor: "Patients looking for a budget-friendly, quicker, and often more conservative solution for minor chips, gaps, or discoloration.",
       lifespan: "5-7 years with proper care",
-      color: "bg-green-50 border-green-200"
+      color: "bg-sky-50 border-sky-200"
     },
     {
       title: "No-Prep Veneers (Lumineers®)",
@@ -62,7 +62,7 @@ const DentalVeneers = () => {
       ],
       process: "Quick application with minimal tooth preparation",
       idealFor: "Patients with minor cosmetic imperfections who prioritize preservation of natural tooth enamel.",
-      color: "bg-purple-50 border-purple-200"
+      color: "bg-slate-50 border-slate-200"
     }
   ];
 

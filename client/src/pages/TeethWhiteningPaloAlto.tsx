@@ -563,7 +563,7 @@ const TeethWhiteningPaloAlto = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link href="/schedule#appointment">
-              <Button className="bg-[#f2d785] text-[#0f2f27] hover:bg-[#f6e2a4] font-semibold">
+              <Button className="bg-primary text-white hover:bg-primary/90 font-semibold">
                 Book whitening visit
               </Button>
             </Link>
