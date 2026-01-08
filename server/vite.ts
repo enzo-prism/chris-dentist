@@ -10,18 +10,24 @@ import viteConfig from "../vite.config";
 import { nanoid } from "nanoid";
 import {
   buildExcerpt,
-  getMetaForPath,
   pageDescriptions,
   pageTitles,
-  type MetaDefinition,
 } from "@shared/metaContent";
 import { storage } from "./storage";
-import { seoByPath } from "@shared/seo";
+import { getSeoForPath, seoByPath } from "@shared/seo";
 
 const viteLogger = createLogger();
 
 const BLOG_PREFIX = "/blog/";
 const KNOWN_PATHS = new Set(Object.keys(seoByPath));
+const DEFAULT_ORIGIN = "https://www.chriswongdds.com";
+
+type HtmlMeta = {
+  title: string;
+  description: string;
+  canonicalPath: string;
+  ogImage: string;
+};
 
 async function isKnownPagePath(pathname: string): Promise<boolean> {
   if (KNOWN_PATHS.has(pathname)) return true;
@@ -52,8 +58,10 @@ function normalizePathname(url: string): string {
   return pathname;
 }
 
-async function resolveMetaForUrl(url: string): Promise<MetaDefinition> {
+async function resolveMetaForUrl(url: string): Promise<HtmlMeta> {
   const pathname = normalizePathname(url);
+  const defaultSeo = getSeoForPath("/");
+  const fallbackOgImage = defaultSeo.ogImage ?? "/images/dr_wong_polaroids.png";
 
   if (pathname.startsWith(BLOG_PREFIX) && pathname !== "/blog") {
     const slug = pathname.slice(BLOG_PREFIX.length);
@@ -63,25 +71,47 @@ async function resolveMetaForUrl(url: string): Promise<MetaDefinition> {
         return {
           title: `${post.title} | Dr. Wong DDS`,
           description: buildExcerpt(post.content),
+          canonicalPath: pathname,
+          ogImage: post.image || fallbackOgImage,
         };
       }
     }
   }
 
   if (KNOWN_PATHS.has(pathname)) {
-    return getMetaForPath(pathname);
+    const seo = getSeoForPath(pathname);
+    return {
+      title: seo.title,
+      description: seo.description,
+      canonicalPath: seo.canonicalPath,
+      ogImage: seo.ogImage ?? fallbackOgImage,
+    };
   }
 
   return {
     title: pageTitles.notFound,
     description: pageDescriptions.notFound,
+    canonicalPath: pathname,
+    ogImage: fallbackOgImage,
   };
 }
 
-function injectMeta(template: string, meta: MetaDefinition): string {
+function resolveAbsoluteUrl(value: string): string {
+  if (value.startsWith("http")) return value;
+  const normalized = value.startsWith("/") ? value : `/${value}`;
+  return `${DEFAULT_ORIGIN}${normalized}`;
+}
+
+function injectMeta(template: string, meta: HtmlMeta): string {
+  const canonicalUrl = resolveAbsoluteUrl(meta.canonicalPath || "/");
+  const ogImageUrl = resolveAbsoluteUrl(
+    meta.ogImage || "/images/dr_wong_polaroids.png",
+  );
   return template
     .replace(/__META_TITLE__/g, escapeHtml(meta.title))
-    .replace(/__META_DESCRIPTION__/g, escapeHtml(meta.description));
+    .replace(/__META_DESCRIPTION__/g, escapeHtml(meta.description))
+    .replace(/__CANONICAL_URL__/g, escapeHtml(canonicalUrl))
+    .replace(/__OG_IMAGE__/g, escapeHtml(ogImageUrl));
 }
 
 export function log(message: string, source = "express") {
