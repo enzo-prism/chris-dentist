@@ -8,7 +8,7 @@ import OptimizedImage from "@/components/seo/OptimizedImage";
 import { Button } from "@/components/ui/button";
 import HolidayHoursNotice from "@/components/common/HolidayHoursNotice";
 import StructuredData from "@/components/seo/StructuredData";
-import { officeInfo } from "@/lib/data";
+import { holidayHours, officeInfo } from "@/lib/data";
 import PageBreadcrumbs from "@/components/common/PageBreadcrumbs";
 import {
   buildBreadcrumbSchema,
@@ -49,11 +49,13 @@ const Contact = () => {
         </div>
       </section>
 
-      <section className="bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <HolidayHoursNotice variant="card" />
-        </div>
-      </section>
+      {holidayHours.active && (
+        <section className="bg-white">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <HolidayHoursNotice variant="card" />
+          </div>
+        </section>
+      )}
 
       {/* Appointment Section - Moved to top and given an ID for direct navigation */}
       <section id="appointment">

@@ -7,7 +7,7 @@ import { pageTitles, pageDescriptions } from "@/lib/metaContent";
 import { useEffect } from "react";
 import OptimizedImage from "@/components/seo/OptimizedImage";
 import HolidayHoursNotice from "@/components/common/HolidayHoursNotice";
-import { officeInfo } from "@/lib/data";
+import { holidayHours, officeInfo } from "@/lib/data";
 import StructuredData from "@/components/seo/StructuredData";
 import PageBreadcrumbs from "@/components/common/PageBreadcrumbs";
 import { buildBreadcrumbSchema, type StructuredDataNode } from "@/lib/structuredData";
@@ -55,11 +55,13 @@ const Schedule = () => {
         </div>
       </section>
 
-      <section className="bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <HolidayHoursNotice variant="card" />
-        </div>
-      </section>
+      {holidayHours.active && (
+        <section className="bg-white">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <HolidayHoursNotice variant="card" />
+          </div>
+        </section>
+      )}
 
       {/* Appointment Section - Moved to top and given an ID for direct navigation */}
       <section id="appointment">
