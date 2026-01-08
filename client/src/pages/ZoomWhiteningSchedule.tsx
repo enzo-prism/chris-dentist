@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { CalendarDays, Camera, CheckCircle, Clock, Sparkles } from "lucide-react";
 import MetaTags from "@/components/common/MetaTags";
 import { Button } from "@/components/ui/button";
@@ -5,7 +6,83 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { officeInfo } from "@/lib/data";
 
+const WEEKDAY_TIME_WINDOWS = [
+  { value: "8:00 AM - 9:00 AM", label: "8:00 AM - 9:00 AM" },
+  { value: "9:00 AM - 10:00 AM", label: "9:00 AM - 10:00 AM" },
+  { value: "10:00 AM - 11:00 AM", label: "10:00 AM - 11:00 AM" },
+  { value: "11:00 AM - 12:00 PM", label: "11:00 AM - 12:00 PM" },
+  { value: "12:00 PM - 1:00 PM", label: "12:00 PM - 1:00 PM" },
+  { value: "1:00 PM - 2:00 PM", label: "1:00 PM - 2:00 PM" },
+  { value: "2:00 PM - 3:00 PM", label: "2:00 PM - 3:00 PM" },
+  { value: "3:00 PM - 4:00 PM", label: "3:00 PM - 4:00 PM" },
+  { value: "4:00 PM - 5:00 PM", label: "4:00 PM - 5:00 PM" },
+];
+
+const FRIDAY_TIME_WINDOWS = WEEKDAY_TIME_WINDOWS.slice(0, 6);
+
+const selectClassName =
+  "h-12 w-full rounded-xl border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50";
+
+const getDayOfWeek = (value: string): number | null => {
+  if (!value) return null;
+  const date = new Date(`${value}T00:00:00`);
+  if (Number.isNaN(date.getTime())) return null;
+  return date.getDay();
+};
+
+const isWeekend = (dayOfWeek: number | null): boolean =>
+  dayOfWeek === 0 || dayOfWeek === 6;
+
+const getTimeWindows = (dayOfWeek: number | null) => {
+  if (dayOfWeek === 5) return FRIDAY_TIME_WINDOWS;
+  if (dayOfWeek !== null && dayOfWeek >= 1 && dayOfWeek <= 4) {
+    return WEEKDAY_TIME_WINDOWS;
+  }
+  return [];
+};
+
 const ZoomWhiteningSchedule = () => {
+  const [preferredDate1, setPreferredDate1] = useState("");
+  const [preferredTime1, setPreferredTime1] = useState("");
+  const [preferredDate2, setPreferredDate2] = useState("");
+  const [preferredTime2, setPreferredTime2] = useState("");
+
+  const preferredDay1 = getDayOfWeek(preferredDate1);
+  const preferredDay2 = getDayOfWeek(preferredDate2);
+  const timeWindows1 = getTimeWindows(preferredDay1);
+  const timeWindows2 = getTimeWindows(preferredDay2);
+  const isWeekend1 = isWeekend(preferredDay1);
+  const isWeekend2 = isWeekend(preferredDay2);
+
+  const handlePreferredDate1Change = (value: string) => {
+    const day = getDayOfWeek(value);
+    const windows = getTimeWindows(day);
+    setPreferredDate1(value);
+    setPreferredTime1((current) =>
+      windows.some((window) => window.value === current) ? current : "",
+    );
+  };
+
+  const handlePreferredDate2Change = (value: string) => {
+    const day = getDayOfWeek(value);
+    const windows = getTimeWindows(day);
+    setPreferredDate2(value);
+    setPreferredTime2((current) =>
+      windows.some((window) => window.value === current) ? current : "",
+    );
+  };
+
+  const timePlaceholder1 = preferredDate1
+    ? isWeekend1
+      ? "Office is closed on weekends"
+      : "Select a 1-hour window"
+    : "Pick a date first";
+  const timePlaceholder2 = preferredDate2
+    ? isWeekend2
+      ? "Office is closed on weekends"
+      : "Select a 1-hour window"
+    : "Pick a date first";
+
   return (
     <>
       <MetaTags
@@ -52,7 +129,7 @@ const ZoomWhiteningSchedule = () => {
               <div className="mt-6 rounded-2xl bg-white/10 p-4 text-sm text-white/85">
                 <p className="font-semibold text-white">Choose two times that work for you.</p>
                 <p className="mt-1">
-                  Pick two date and time options within office hours. We will confirm the best fit.
+                  Pick two date and 1-hour time windows within office hours. We will confirm the best fit.
                 </p>
               </div>
             </div>
@@ -60,7 +137,7 @@ const ZoomWhiteningSchedule = () => {
             <div className="rounded-3xl bg-white/95 p-6 sm:p-8 text-[#162338] shadow-2xl ring-1 ring-white/40 backdrop-blur">
               <h2 className="text-2xl sm:text-3xl font-bold font-heading">Request your visit</h2>
               <p className="mt-2 text-sm sm:text-base text-slate-600">
-                Enter your name, then select two possible appointment windows. All times are Pacific.
+                Enter your name, then select two possible 1-hour windows. All times are Pacific.
               </p>
 
               <form
@@ -104,21 +181,44 @@ const ZoomWhiteningSchedule = () => {
                         name="preferredDate1"
                         type="date"
                         required
+                        value={preferredDate1}
+                        onChange={(event) => handlePreferredDate1Change(event.target.value)}
                         className="h-12 rounded-xl"
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="preferredTime1">Time</Label>
-                      <Input
+                      <Label htmlFor="preferredTime1">Time window (1 hour)</Label>
+                      <select
                         id="preferredTime1"
                         name="preferredTime1"
-                        type="time"
-                        min="08:00"
-                        max="17:00"
-                        step="900"
                         required
-                        className="h-12 rounded-xl"
-                      />
+                        value={preferredTime1}
+                        onChange={(event) => setPreferredTime1(event.target.value)}
+                        className={selectClassName}
+                        disabled={!preferredDate1}
+                      >
+                        <option value="" disabled>
+                          {timePlaceholder1}
+                        </option>
+                        {timeWindows1.map((window) => (
+                          <option key={window.value} value={window.value}>
+                            {window.label}
+                          </option>
+                        ))}
+                      </select>
+                      {isWeekend1 && preferredDate1 ? (
+                        <p className="text-xs text-rose-600">
+                          Office is closed on weekends. Please choose a weekday date.
+                        </p>
+                      ) : preferredDate1 ? (
+                        <p className="text-xs text-slate-500">
+                          Friday windows end at 2:00 PM.
+                        </p>
+                      ) : (
+                        <p className="text-xs text-slate-500">
+                          Select a date to see available time windows.
+                        </p>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -136,21 +236,44 @@ const ZoomWhiteningSchedule = () => {
                         name="preferredDate2"
                         type="date"
                         required
+                        value={preferredDate2}
+                        onChange={(event) => handlePreferredDate2Change(event.target.value)}
                         className="h-12 rounded-xl"
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="preferredTime2">Time</Label>
-                      <Input
+                      <Label htmlFor="preferredTime2">Time window (1 hour)</Label>
+                      <select
                         id="preferredTime2"
                         name="preferredTime2"
-                        type="time"
-                        min="08:00"
-                        max="17:00"
-                        step="900"
                         required
-                        className="h-12 rounded-xl"
-                      />
+                        value={preferredTime2}
+                        onChange={(event) => setPreferredTime2(event.target.value)}
+                        className={selectClassName}
+                        disabled={!preferredDate2}
+                      >
+                        <option value="" disabled>
+                          {timePlaceholder2}
+                        </option>
+                        {timeWindows2.map((window) => (
+                          <option key={window.value} value={window.value}>
+                            {window.label}
+                          </option>
+                        ))}
+                      </select>
+                      {isWeekend2 && preferredDate2 ? (
+                        <p className="text-xs text-rose-600">
+                          Office is closed on weekends. Please choose a weekday date.
+                        </p>
+                      ) : preferredDate2 ? (
+                        <p className="text-xs text-slate-500">
+                          Friday windows end at 2:00 PM.
+                        </p>
+                      ) : (
+                        <p className="text-xs text-slate-500">
+                          Select a date to see available time windows.
+                        </p>
+                      )}
                     </div>
                   </div>
                 </div>
