@@ -99,8 +99,21 @@ const ZoomWhitening = () => {
       <PageBreadcrumbs items={breadcrumbItems} />
 
       {/* Hero */}
-      <section className="bg-gradient-to-b from-[#0b1f3a] via-[#123a6b] to-white pt-28 pb-16 md:pb-24">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden bg-[#0b1f3a] pt-28 pb-16 md:pb-24">
+        <div
+          className="absolute inset-0 bg-gradient-to-b from-[#0b1f3a] via-[#123a6b] to-[#163b68]"
+          aria-hidden="true"
+        />
+        <div
+          className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,#1f4d89_0%,transparent_55%),radial-gradient(circle_at_top_right,#0b2445_0%,transparent_45%)] opacity-80"
+          aria-hidden="true"
+        />
+        <div
+          className="absolute bottom-0 left-0 right-0 h-28 bg-gradient-to-b from-transparent to-white"
+          aria-hidden="true"
+        />
+
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-10 items-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -108,21 +121,21 @@ const ZoomWhitening = () => {
               transition={{ duration: 0.6 }}
               className="text-white"
             >
-              <div className="inline-flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full text-xs font-semibold mb-4 backdrop-blur">
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/15 px-4 py-2 text-xs font-semibold text-white backdrop-blur mb-4">
                 <Sun className="h-4 w-4" />
                 In-office ZOOM! Whitening
               </div>
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-heading leading-tight mb-4">
                 Brighter teeth in one visit with ZOOM! Whitening in Palo Alto
               </h1>
-              <p className="text-lg text-white/80 leading-relaxed mb-6 max-w-xl">
+              <p className="text-lg text-blue-100 leading-relaxed mb-6 max-w-xl">
                 Lift deep stains, coffee discoloration, and dullness with Dr. Wong&apos;s fast, gentle ZOOM! treatment—designed for noticeably whiter teeth with minimal sensitivity.
               </p>
-              <p className="text-sm text-white/75 leading-relaxed mb-6 max-w-xl">
+              <p className="text-sm text-blue-100/80 leading-relaxed mb-6 max-w-xl">
                 Looking for broader{" "}
                 <Link
                   href="/teeth-whitening-palo-alto"
-                  className="font-semibold underline underline-offset-4 hover:text-blue-200 transition-colors"
+                  className="font-semibold text-white underline underline-offset-4 hover:text-blue-100 transition-colors"
                 >
                   teeth whitening options in Palo Alto
                 </Link>
@@ -130,28 +143,31 @@ const ZoomWhitening = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-3 sm:items-center">
                 <Link href="/schedule#appointment">
-                  <Button className="bg-primary hover:bg-primary/90 text-white font-semibold px-6 py-6 h-auto rounded-full flex items-center gap-2">
+                  <Button className="bg-white text-[#0b1f3a] hover:bg-blue-50 font-semibold px-6 py-6 h-auto rounded-full flex items-center gap-2 shadow-lg shadow-black/20">
                     Book whitening visit
                     <ArrowRight className="h-4 w-4" />
                   </Button>
                 </Link>
                 <Link href="/contact">
-                  <Button variant="outline" className="border-white/40 text-white hover:text-blue-200 hover:border-blue-200/60 bg-white/5">
+                  <Button
+                    variant="outline"
+                    className="border-white/60 text-white hover:text-white hover:border-white/80 bg-white/10 hover:bg-white/20"
+                  >
                     Ask a question
                   </Button>
                 </Link>
               </div>
-              <div className="mt-6 flex flex-wrap gap-3 text-sm text-white/75">
-                <div className="inline-flex items-center gap-2 bg-white/10 px-3 py-2 rounded-full">
-                  <CheckCircle className="h-4 w-4 text-blue-200" />
+              <div className="mt-6 flex flex-wrap gap-3 text-sm text-white/90">
+                <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/15 px-3 py-2 shadow-sm backdrop-blur">
+                  <CheckCircle className="h-4 w-4 text-blue-100" />
                   Same-day results
                 </div>
-                <div className="inline-flex items-center gap-2 bg-white/10 px-3 py-2 rounded-full">
-                  <CheckCircle className="h-4 w-4 text-blue-200" />
+                <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/15 px-3 py-2 shadow-sm backdrop-blur">
+                  <CheckCircle className="h-4 w-4 text-blue-100" />
                   Minimal downtime
                 </div>
-                <div className="inline-flex items-center gap-2 bg-white/10 px-3 py-2 rounded-full">
-                  <CheckCircle className="h-4 w-4 text-blue-200" />
+                <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/15 px-3 py-2 shadow-sm backdrop-blur">
+                  <CheckCircle className="h-4 w-4 text-blue-100" />
                   Sensitivity-managed
                 </div>
               </div>
@@ -163,8 +179,8 @@ const ZoomWhitening = () => {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="relative"
             >
-              <div className="absolute -inset-6 bg-white/10 rounded-3xl blur-3xl" aria-hidden />
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl ring-1 ring-white/10">
+              <div className="absolute -inset-6 rounded-3xl bg-white/10 blur-3xl" aria-hidden />
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl ring-1 ring-white/20">
                 <OptimizedImage
                   src="https://res.cloudinary.com/dhqpqfw6w/image/upload/v1766936713/zoom-whitening_bizgsh.webp"
                   alt="ZOOM whitening treatment result"
