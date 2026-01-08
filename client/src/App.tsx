@@ -36,6 +36,7 @@ import Invisalign from "@/pages/Invisalign";
 import InvisalignResources from "@/pages/InvisalignResources";
 import EmergencyDental from "@/pages/EmergencyDental";
 import ZoomWhitening from "@/pages/ZoomWhitening";
+import ZoomWhiteningSchedule from "@/pages/ZoomWhiteningSchedule";
 import PreventiveDentistry from "@/pages/PreventiveDentistry";
 import RestorativeDentistry from "@/pages/RestorativeDentistry";
 import PediatricDentistry from "@/pages/PediatricDentistry";
@@ -99,6 +100,7 @@ function Router() {
           <Route path="/invisalign" component={Invisalign} />
           <Route path="/invisalign/resources" component={InvisalignResources} />
           <Route path="/emergency-dental" component={EmergencyDental} />
+          <Route path="/zoom-whitening/schedule" component={ZoomWhiteningSchedule} />
           <Route path="/analytics" component={AnalyticsMinimal} />
           <Route path="/ga-test" component={GATestPage} />
           <Route path="/blog/:slug" component={BlogPost} />
