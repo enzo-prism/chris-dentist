@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { CalendarDays, Camera, CheckCircle, Clock, Sparkles } from "lucide-react";
 import { Link } from "wouter";
 import MetaTags from "@/components/common/MetaTags";
@@ -23,6 +23,8 @@ const FRIDAY_TIME_WINDOWS = WEEKDAY_TIME_WINDOWS.slice(0, 6);
 
 const selectClassName =
   "h-12 w-full rounded-xl border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50";
+
+const FORM_ENDPOINT = "https://formspree.io/f/mrebndyq";
 
 const getDayOfWeek = (value: string): number | null => {
   if (!value) return null;
@@ -57,6 +59,7 @@ const formatDate = (value: string) => {
 };
 
 const ZoomWhiteningSchedule = () => {
+  const formRef = useRef<HTMLFormElement | null>(null);
   const [preferredDate1, setPreferredDate1] = useState("");
   const [preferredTime1, setPreferredTime1] = useState("");
   const [preferredDate2, setPreferredDate2] = useState("");
@@ -103,17 +106,15 @@ const ZoomWhiteningSchedule = () => {
 
   const isSubmitting = submissionStatus === "submitting";
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const submitForm = async (form: HTMLFormElement) => {
     if (isSubmitting) return;
     setSubmissionStatus("submitting");
     setSubmissionError("");
 
-    const form = event.currentTarget;
     const formData = new FormData(form);
 
     try {
-      const response = await fetch(form.action, {
+      const response = await fetch(FORM_ENDPOINT, {
         method: "POST",
         body: formData,
         headers: {
@@ -137,6 +138,19 @@ const ZoomWhiteningSchedule = () => {
       setSubmissionError("Something went wrong. Please try again.");
       setSubmissionStatus("error");
     }
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    if (!form.reportValidity()) return;
+    await submitForm(form);
+  };
+
+  const handleButtonClick = () => {
+    const form = formRef.current;
+    if (!form || !form.reportValidity()) return;
+    void submitForm(form);
   };
 
   return (
@@ -266,11 +280,11 @@ const ZoomWhiteningSchedule = () => {
                   </p>
 
                   <form
-                    action="https://formspree.io/f/mrebndyq"
                     method="POST"
                     className="mt-6 space-y-6"
                     onSubmit={handleSubmit}
                     aria-busy={isSubmitting}
+                    ref={formRef}
                   >
                     <div className="grid gap-4 sm:grid-cols-2">
                       <div className="space-y-2">
@@ -425,9 +439,10 @@ const ZoomWhiteningSchedule = () => {
 
                     <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                       <Button
-                        type="submit"
+                        type="button"
                         className="h-12 w-full rounded-full px-6 text-base sm:w-auto"
                         disabled={isSubmitting}
+                        onClick={handleButtonClick}
                       >
                         {isSubmitting ? "Submitting..." : "Submit scheduling request"}
                       </Button>
