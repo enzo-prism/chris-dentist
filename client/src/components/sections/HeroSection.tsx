@@ -49,7 +49,7 @@ const HeroSection = () => {
         <div className="absolute -bottom-48 -left-32 w-96 h-96 bg-gradient-to-tr from-[#60a5fa]/20 to-transparent rounded-full blur-3xl"></div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-6 sm:pt-8 lg:pt-10">
 
         {/* Hero layout */}
         <div className="flex flex-col lg:flex-row items-center lg:items-start gap-12 lg:gap-16">
