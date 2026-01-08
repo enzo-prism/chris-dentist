@@ -22,11 +22,12 @@ const BLOG_PREFIX = "/blog/";
 const KNOWN_PATHS = new Set(Object.keys(seoByPath));
 const DEFAULT_ORIGIN = "https://www.chriswongdds.com";
 
-type HtmlMeta = {
+export type HtmlMeta = {
   title: string;
   description: string;
   canonicalPath: string;
   ogImage: string;
+  type: "website" | "article";
 };
 
 async function isKnownPagePath(pathname: string): Promise<boolean> {
@@ -73,6 +74,7 @@ async function resolveMetaForUrl(url: string): Promise<HtmlMeta> {
           description: buildExcerpt(post.content),
           canonicalPath: pathname,
           ogImage: post.image || fallbackOgImage,
+          type: "article",
         };
       }
     }
@@ -85,6 +87,7 @@ async function resolveMetaForUrl(url: string): Promise<HtmlMeta> {
       description: seo.description,
       canonicalPath: seo.canonicalPath,
       ogImage: seo.ogImage ?? fallbackOgImage,
+      type: "website",
     };
   }
 
@@ -93,6 +96,7 @@ async function resolveMetaForUrl(url: string): Promise<HtmlMeta> {
     description: pageDescriptions.notFound,
     canonicalPath: pathname,
     ogImage: fallbackOgImage,
+    type: "website",
   };
 }
 
@@ -102,16 +106,158 @@ function resolveAbsoluteUrl(value: string): string {
   return `${DEFAULT_ORIGIN}${normalized}`;
 }
 
-function injectMeta(template: string, meta: HtmlMeta): string {
+function setAttribute(tag: string, attribute: string, value: string): string {
+  const pattern = new RegExp(`\\s${attribute}=(["']).*?\\1`, "i");
+  if (pattern.test(tag)) {
+    return tag.replace(pattern, ` ${attribute}="${value}"`);
+  }
+  return tag.replace(/\s*\/?>\s*$/, ` ${attribute}="${value}"$&`);
+}
+
+export function injectMeta(template: string, meta: HtmlMeta): string {
   const canonicalUrl = resolveAbsoluteUrl(meta.canonicalPath || "/");
   const ogImageUrl = resolveAbsoluteUrl(
     meta.ogImage || "/images/dr_wong_polaroids.png",
   );
-  return template
-    .replace(/__META_TITLE__/g, escapeHtml(meta.title))
-    .replace(/__META_DESCRIPTION__/g, escapeHtml(meta.description))
-    .replace(/__CANONICAL_URL__/g, escapeHtml(canonicalUrl))
-    .replace(/__OG_IMAGE__/g, escapeHtml(ogImageUrl));
+  const safeTitle = escapeHtml(meta.title);
+  const safeDescription = escapeHtml(meta.description);
+  const safeCanonicalUrl = escapeHtml(canonicalUrl);
+  const safeOgImageUrl = escapeHtml(ogImageUrl);
+
+  let html = template
+    .replace(/__META_TITLE__/g, safeTitle)
+    .replace(/__META_DESCRIPTION__/g, safeDescription)
+    .replace(/__CANONICAL_URL__/g, safeCanonicalUrl)
+    .replace(/__OG_IMAGE__/g, safeOgImageUrl);
+
+  const headOpenMatch = /<head[^>]*>/i.exec(html);
+  const headCloseMatch = /<\/head>/i.exec(html);
+  if (!headOpenMatch || !headCloseMatch) {
+    return html;
+  }
+
+  const headStart = headOpenMatch.index + headOpenMatch[0].length;
+  const headEnd = headCloseMatch.index;
+  let headContent = html.slice(headStart, headEnd);
+
+  const additions: string[] = [];
+
+  const upsertTitle = (value: string) => {
+    const pattern = /<title[^>]*>.*?<\/title>/gis;
+    const matches = headContent.match(pattern);
+    if (!matches) {
+      additions.push(`<title>${value}</title>`);
+      return;
+    }
+    if (matches.length > 1) {
+      headContent = headContent.replace(pattern, "");
+      additions.push(`<title>${value}</title>`);
+      return;
+    }
+    headContent = headContent.replace(pattern, `<title>${value}</title>`);
+  };
+
+  const upsertTag = (
+    pattern: RegExp,
+    tag: string,
+    attribute: "content" | "href",
+    value: string,
+  ) => {
+    const matches = headContent.match(pattern);
+    if (!matches) {
+      additions.push(tag);
+      return;
+    }
+    if (matches.length > 1) {
+      headContent = headContent.replace(pattern, "");
+      additions.push(tag);
+      return;
+    }
+    headContent = headContent.replace(pattern, (match) =>
+      setAttribute(match, attribute, value),
+    );
+  };
+
+  upsertTitle(safeTitle);
+  upsertTag(
+    /<meta[^>]+name=["']description["'][^>]*>/gi,
+    `<meta name="description" content="${safeDescription}" />`,
+    "content",
+    safeDescription,
+  );
+  upsertTag(
+    /<link[^>]+rel=["']canonical["'][^>]*>/gi,
+    `<link rel="canonical" href="${safeCanonicalUrl}" />`,
+    "href",
+    safeCanonicalUrl,
+  );
+  upsertTag(
+    /<meta[^>]+property=["']og:type["'][^>]*>/gi,
+    `<meta property="og:type" content="${meta.type}" />`,
+    "content",
+    meta.type,
+  );
+  upsertTag(
+    /<meta[^>]+property=["']og:title["'][^>]*>/gi,
+    `<meta property="og:title" content="${safeTitle}" />`,
+    "content",
+    safeTitle,
+  );
+  upsertTag(
+    /<meta[^>]+property=["']og:description["'][^>]*>/gi,
+    `<meta property="og:description" content="${safeDescription}" />`,
+    "content",
+    safeDescription,
+  );
+  upsertTag(
+    /<meta[^>]+property=["']og:url["'][^>]*>/gi,
+    `<meta property="og:url" content="${safeCanonicalUrl}" />`,
+    "content",
+    safeCanonicalUrl,
+  );
+  upsertTag(
+    /<meta[^>]+property=["']og:image["'][^>]*>/gi,
+    `<meta property="og:image" content="${safeOgImageUrl}" />`,
+    "content",
+    safeOgImageUrl,
+  );
+  upsertTag(
+    /<meta[^>]+(?:property|name)=["']twitter:card["'][^>]*>/gi,
+    `<meta property="twitter:card" content="summary_large_image" />`,
+    "content",
+    "summary_large_image",
+  );
+  upsertTag(
+    /<meta[^>]+(?:property|name)=["']twitter:title["'][^>]*>/gi,
+    `<meta property="twitter:title" content="${safeTitle}" />`,
+    "content",
+    safeTitle,
+  );
+  upsertTag(
+    /<meta[^>]+(?:property|name)=["']twitter:description["'][^>]*>/gi,
+    `<meta property="twitter:description" content="${safeDescription}" />`,
+    "content",
+    safeDescription,
+  );
+  upsertTag(
+    /<meta[^>]+(?:property|name)=["']twitter:image["'][^>]*>/gi,
+    `<meta property="twitter:image" content="${safeOgImageUrl}" />`,
+    "content",
+    safeOgImageUrl,
+  );
+  upsertTag(
+    /<meta[^>]+(?:property|name)=["']twitter:url["'][^>]*>/gi,
+    `<meta property="twitter:url" content="${safeCanonicalUrl}" />`,
+    "content",
+    safeCanonicalUrl,
+  );
+
+  if (additions.length > 0) {
+    const injection = `\n    ${additions.join("\n    ")}\n`;
+    headContent = `${headContent}${injection}`;
+  }
+
+  return `${html.slice(0, headStart)}${headContent}${html.slice(headEnd)}`;
 }
 
 export function log(message: string, source = "express") {
