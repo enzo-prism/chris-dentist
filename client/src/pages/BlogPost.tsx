@@ -116,7 +116,7 @@ const BlogPost = ({ params }: RouteComponentProps<Params>) => {
     return posts.find((candidate) => candidate.slug === slug);
   }, [posts, slug]);
 
-  const pageTitle = post ? `${post.title} | Dr. Wong DDS` : pageTitles.blog;
+  const pageTitle = post ? `${post.title} | Christopher B. Wong, DDS` : pageTitles.blog;
   const pageDescription = post?.content
     ? `${post.content.slice(0, 160)}${post.content.length > 160 ? "…" : ""}`
     : pageDescriptions.blog;

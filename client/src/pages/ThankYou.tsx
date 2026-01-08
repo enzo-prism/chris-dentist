@@ -7,7 +7,7 @@ const ThankYou = () => {
   return (
     <>
       <MetaTags 
-        title="Thank You - Appointment Scheduled | Dr. Christopher B. Wong DDS"
+        title="Thank You - Appointment Scheduled | Christopher B. Wong, DDS"
         description="Thank you for scheduling your appointment with Dr. Wong's dental practice in Palo Alto. We look forward to providing exceptional care at your upcoming visit."
         robots="noindex, nofollow, noarchive"
       />

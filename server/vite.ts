@@ -69,7 +69,7 @@ async function resolveMetaForUrl(url: string): Promise<HtmlMeta> {
       const post = await storage.getBlogPostBySlug(slug);
       if (post) {
         return {
-          title: `${post.title} | Dr. Wong DDS`,
+          title: `${post.title} | Christopher B. Wong, DDS`,
           description: buildExcerpt(post.content),
           canonicalPath: pathname,
           ogImage: post.image || fallbackOgImage,

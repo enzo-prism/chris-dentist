@@ -24,7 +24,7 @@ export const pageTitles = {
   zoomWhitening: seoByPath["/zoom-whitening"].title,
   dentalImplants: seoByPath["/dental-implants"].title,
   analytics: seoByPath["/analytics"].title,
-  notFound: "Page Not Found | Dr. Christopher Wong Palo Alto DDS",
+  notFound: "Page Not Found | Christopher B. Wong, DDS",
   default: seoByPath["/"].title,
 } as const;
 

@@ -129,6 +129,7 @@ Disallow: /
         "/thank-you",
         "/analytics",
         "/ga-test",
+        "/zoom-whitening/schedule",
       ]);
 
       const priorityByPath: Record<string, string> = {

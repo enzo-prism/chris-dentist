@@ -27,7 +27,7 @@ export default function MetaTags({
   const routeSeo = getSeoForPath(normalizedLocation);
 
   const resolvedTitle =
-    title ?? routeSeo.title ?? "Palo Alto Dentist | Dr. Christopher Wong DDS";
+    title ?? routeSeo.title ?? "Palo Alto Dentist | Christopher B. Wong, DDS";
   const resolvedDescription =
     description ??
     routeSeo.description ??
