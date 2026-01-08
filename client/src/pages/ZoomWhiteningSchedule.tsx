@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { CalendarDays, Camera, CheckCircle, Clock, Sparkles } from "lucide-react";
+import { Link } from "wouter";
 import MetaTags from "@/components/common/MetaTags";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -302,6 +303,31 @@ const ZoomWhiteningSchedule = () => {
                   </div>
                 </div>
               </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white py-12 sm:py-16">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="rounded-3xl border border-slate-200 bg-gradient-to-r from-slate-50 via-white to-slate-50 p-6 sm:p-10 shadow-sm">
+            <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+                  Learn more
+                </p>
+                <h2 className="mt-2 text-2xl sm:text-3xl font-bold font-heading text-[#162338]">
+                  See how ZOOM! Whitening works
+                </h2>
+                <p className="mt-2 text-sm sm:text-base text-slate-600 max-w-2xl">
+                  Review the in-office process, timeline, and expected results before your visit.
+                </p>
+              </div>
+              <Link href="/zoom-whitening">
+                <Button className="h-12 w-full rounded-full px-6 text-base md:w-auto">
+                  Explore the ZOOM! process
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
