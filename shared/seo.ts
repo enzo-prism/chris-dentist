@@ -133,7 +133,7 @@ export const seoByPath: Record<string, SeoDefinition> = {
     ogImage: "https://i.imgur.com/qK5nPtS.png",
   },
   "/zoom-whitening/schedule": {
-    title: "ZOOM! Whitening Schedule | Christopher B. Wong, DDS",
+    title: "Invite Only - Whitening Appointment Schedule",
     description:
       "Private scheduling page for invited patients booking a complimentary in-office ZOOM! Whitening session with photo and video capture.",
     canonicalPath: "/zoom-whitening/schedule",

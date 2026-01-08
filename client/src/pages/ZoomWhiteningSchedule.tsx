@@ -156,7 +156,7 @@ const ZoomWhiteningSchedule = () => {
   return (
     <>
       <MetaTags
-        title="ZOOM! Whitening Schedule - Christopher B. Wong, DDS"
+        title="Invite Only - Whitening Appointment Schedule"
         description="Private scheduling page for invited patients booking a complimentary in-office ZOOM! Whitening session with photo and video capture."
         canonicalPath="/zoom-whitening/schedule"
         robots="noindex, nofollow, noarchive"
