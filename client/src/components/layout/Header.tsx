@@ -222,10 +222,10 @@ const Header = () => {
       {/* Main Navigation Bar */}
       <div 
         className={cn(
-          "w-full transition-all duration-300 border-b border-white/5 relative z-[101]",
+          "w-full transition-all duration-300 border-b border-slate-200 relative z-[101]",
           scrolled 
-            ? "bg-[#102a4a]/95 backdrop-blur-md shadow-lg py-2" 
-            : "bg-[#102a4a] py-4"
+            ? "bg-white shadow-lg py-2" 
+            : "bg-white py-4"
         )}
 	      >
 	        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -238,9 +238,9 @@ const Header = () => {
 			                "group relative z-[102] min-w-0 shrink",
 			                !desktopCollapsed && "lg:shrink-0"
 			              )}
-			            >
+	            >
 	              <div className="flex items-center gap-3 min-w-0">
-	                <div className="relative overflow-hidden rounded-lg bg-white/5 p-1 ring-1 ring-white/10 transition-all group-hover:bg-white/10">
+	                <div className="relative overflow-hidden rounded-lg bg-white p-1 ring-1 ring-slate-200 transition-all group-hover:bg-slate-50">
 	                  <img 
 	                    src="/logo.png" 
 	                    alt="Dr. Wong Logo" 
@@ -248,10 +248,10 @@ const Header = () => {
 	                  />
 	                </div>
 	                <div className="flex flex-col min-w-0">
-	                  <span className="text-sm sm:text-lg lg:text-base xl:text-lg font-serif tracking-wide text-white group-hover:text-blue-200 transition-colors truncate">
+	                  <span className="text-sm sm:text-lg lg:text-base xl:text-lg font-serif tracking-wide text-slate-900 group-hover:text-primary transition-colors truncate">
 	                    Christopher B. Wong, DDS
 	                  </span>
-	                  <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.2em] text-white/50 group-hover:text-white/70 transition-colors lg:hidden xl:block truncate">
+	                  <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.2em] text-slate-500 group-hover:text-slate-600 transition-colors lg:hidden xl:block truncate">
 	                    Cosmetic & Family Dentistry
 	                  </span>
 	                </div>
@@ -278,8 +278,8 @@ const Header = () => {
 	                      <span className={cn(
 	                        "flex items-center gap-1.5 py-2 text-xs xl:text-sm font-medium tracking-wide transition-colors cursor-pointer relative z-[102] whitespace-nowrap",
 	                        isActive(link.href) || (link.submenu && isParentActive(link.submenu))
-	                          ? "text-blue-200" 
-	                          : "text-white/90 hover:text-blue-200"
+	                          ? "text-primary" 
+	                          : "text-slate-700 hover:text-primary"
 	                      )}>
 	                        {link.label}
 	                        {link.submenu && (
@@ -289,10 +289,10 @@ const Header = () => {
 	                    </Link>
 
 	                    {/* Animated Underline */}
-	                    {(isActive(link.href) || (link.submenu && isParentActive(link.submenu))) && (
+	                      {(isActive(link.href) || (link.submenu && isParentActive(link.submenu))) && (
 	                      <motion.div 
 	                        layoutId="activeNav"
-	                        className="absolute -bottom-1 left-0 right-0 h-0.5 bg-blue-300 z-[101]"
+	                        className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary z-[101]"
 	                        initial={false}
 	                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
 	                      />
@@ -350,7 +350,7 @@ const Header = () => {
 	            <button
 	              onClick={toggleMobileMenu}
 	              className={cn(
-	                "relative z-50 p-2 text-white hover:text-blue-200 transition-colors",
+	                "relative z-50 p-2 text-slate-900 hover:text-primary transition-colors",
 	                !desktopCollapsed && "lg:hidden"
 	              )}
 	              aria-label="Toggle menu"

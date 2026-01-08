@@ -46,7 +46,7 @@ export const officeInfo = {
 export type OfficeInfo = typeof officeInfo;
 
 export const holidayHours = {
-  active: true,
+  active: false,
   id: "winter-break-2025-2026",
   title: "Winter holiday hours",
   description:
