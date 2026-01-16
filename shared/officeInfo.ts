@@ -46,18 +46,17 @@ export const officeInfo = {
 export type OfficeInfo = typeof officeInfo;
 
 export const holidayHours = {
-  active: false,
-  id: "winter-break-2025-2026",
-  title: "Winter holiday hours",
+  active: true,
+  id: "office-closure-jan-19",
+  title: "Monday, January 19th",
   description:
-    "We’ll be closed after Friday, December 19 and will reopen on Monday, January 5, 2026 at 8:00 AM.",
+    "Our Palo Alto office will be closed for the day. We reopen Tuesday, January 20th at 8:00 AM.",
   entries: [
-    { day: "Friday, December 19", hours: "8:00 AM – 1:00 PM" },
-    { day: "December 20 – January 4", hours: "Closed for the holidays" },
-    { day: "Monday, January 5, 2026", hours: "Reopening at 8:00 AM" },
+    { day: "Monday, January 19th", hours: "Closed" },
+    { day: "Tuesday, January 20th", hours: "8:00 AM - 5:00 PM" },
   ],
   cta: {
-    label: "Plan your January visit",
+    label: "Schedule after January 19th",
     href: "/schedule#appointment",
   },
 } as const;

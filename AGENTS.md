@@ -1,5 +1,8 @@
 # Repository Guidelines
 
+## Tooling Restrictions
+Do not use MCP tools for this project.
+
 ## Project Structure & Module Organization
 The workspace splits into `client`, `server`, and `shared`. `client/src` contains the Vite React app—UI primitives in `components`, pages in `pages`, hooks in `hooks`, utilities in `lib`. Express lives in `server` (`index.ts` bootstrap, `routes.ts` handlers, `storage.ts` in-memory data, `vite.ts` dev wiring) and shares schema types from `shared/schema.ts`; deployable assets sit in `public`, while `attached_assets/` is reference-only.
 

@@ -264,6 +264,18 @@ export const testimonialSeedData: SeedTestimonial[] = [
     text: "The hygienist Angelisa is great! Very pleasant manner, explains things thoroughly, does great work! I actually enjoy going to see her!",
   },
   {
+    name: "Ang N.",
+    rating: 5,
+    location: "Google Review",
+    text: "11/22/25 - I always have an awesome experience at Dr. Wong's office. He's caring, professional, and makes everything easy to understand. You can tell he truly looks out for his patients. And Angelisa, my hygienist, is amazing! Cleanings with her are fun, gentle, and somehow fly by. I leave with sparkling teeth and in a great mood every single time. :) Highly recommend this office if you want a team that's both skilled and a joy to visit!",
+  },
+  {
+    name: "Martha H.",
+    rating: 5,
+    location: "Google Review",
+    text: "12/29/25 - Dr. Wong is an incredibly skilled dentist & I like that he is conservative in his approach to work that may be needed. The staff is always friendly and welcoming. Kelty at the front desk is so sweet, and Rachel is extremely knowledgeable about my dental insurance coverage. Angelisa & Helen are the best hygienists--I feel like",
+  },
+  {
     name: "Sam Kintzer",
     rating: 5,
     text: "Excellent throughout.",
