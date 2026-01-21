@@ -46,7 +46,7 @@ export const officeInfo = {
 export type OfficeInfo = typeof officeInfo;
 
 export const holidayHours = {
-  active: true,
+  active: false,
   id: "office-closure-jan-19",
   title: "Monday, January 19th",
   description:
