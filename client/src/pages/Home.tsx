@@ -10,7 +10,7 @@ import MetaTags from "@/components/common/MetaTags";
 import FAQSection from "@/components/common/FAQSection";
 import StructuredData from "@/components/seo/StructuredData";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, CheckCircle, Phone } from "lucide-react";
+import { ArrowRight, BadgePercent, CheckCircle, Gift, Phone } from "lucide-react";
 import { Link } from "wouter";
 import { Service, Testimonial } from "@shared/schema";
 import { motion } from "framer-motion";
@@ -207,6 +207,80 @@ const Home = () => {
                     Sat–Sun: {officeInfo.hours.saturday}
                   </p>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Limited-time offers */}
+      <section id="offers" className="py-14 md:py-20 bg-gradient-to-b from-white via-[#F5F9FC] to-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+            <div className="lg:col-span-4 space-y-4">
+              <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 text-primary px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em]">
+                <BadgePercent className="h-4 w-4" />
+                Limited-time offers
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold font-heading text-[#1F2933]">
+                New patient specials
+              </h2>
+              <p className="text-slate-700 leading-relaxed">
+                Start your care with added value. These offers are available for a short time and
+                designed to make your first visit feel even better.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Link href="/schedule#appointment">
+                  <Button className="bg-primary text-white hover:bg-primary/90">
+                    Claim an offer
+                  </Button>
+                </Link>
+                <Link href="/contact">
+                  <Button variant="outline" className="border-primary text-primary hover:bg-primary/5">
+                    Ask a question
+                  </Button>
+                </Link>
+              </div>
+              <p className="text-xs text-slate-500">
+                Offers are available for new patients and subject to availability.
+              </p>
+            </div>
+
+            <div className="lg:col-span-8 grid gap-6 sm:grid-cols-2">
+              <div className="relative overflow-hidden rounded-3xl border border-emerald-100 bg-white p-6 shadow-sm">
+                <div className="absolute -top-10 -right-10 h-24 w-24 rounded-full bg-emerald-100/70 blur-2xl" aria-hidden="true" />
+                <div className="flex items-center gap-2 text-emerald-700 text-xs font-semibold uppercase tracking-[0.18em]">
+                  <Gift className="h-4 w-4" />
+                  New patient gift
+                </div>
+                <h3 className="mt-3 text-xl font-semibold text-slate-900">
+                  Free premium toothbrush
+                </h3>
+                <p className="mt-2 text-sm text-slate-600 leading-relaxed">
+                  Included with your first exam and cleaning. Ask our team to reserve yours when you schedule.
+                </p>
+                <Link href="/schedule#appointment" className="mt-4 inline-flex items-center text-sm font-semibold text-emerald-700 hover:text-emerald-800">
+                  Book your first visit
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </div>
+
+              <div className="relative overflow-hidden rounded-3xl border border-blue-100 bg-white p-6 shadow-sm">
+                <div className="absolute -bottom-10 -right-10 h-28 w-28 rounded-full bg-blue-100/70 blur-2xl" aria-hidden="true" />
+                <div className="flex items-center gap-2 text-blue-700 text-xs font-semibold uppercase tracking-[0.18em]">
+                  <BadgePercent className="h-4 w-4" />
+                  Invisalign savings
+                </div>
+                <h3 className="mt-3 text-xl font-semibold text-slate-900">
+                  $1,000 off Invisalign treatment
+                </h3>
+                <p className="mt-2 text-sm text-slate-600 leading-relaxed">
+                  Save on a personalized Invisalign plan with clear aligners and digital planning.
+                </p>
+                <Link href="/invisalign" className="mt-4 inline-flex items-center text-sm font-semibold text-blue-700 hover:text-blue-800">
+                  Explore Invisalign
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
               </div>
             </div>
           </div>
