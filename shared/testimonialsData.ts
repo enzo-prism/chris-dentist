@@ -16,7 +16,8 @@ export const testimonialSeedData: SeedTestimonial[] = [
   {
     name: "Chad B.",
     rating: 5,
-    text: "Highly recommended. Dr. Wong has continued the high standards and professionalism of his predecessor, Dr. Hamamoto.",
+    location: "Yelp Review",
+    text: "8/2/25 - Highly recommended. Dr. Wong has continued the high standards and professionalism of his predecessor, Dr. Hamamoto. Similarly, Angelisa is one of the best hygienists, very attentive and thorough, and the front office support staff are always helpful (and make sure appointments aren't missed!).",
   },
   {
     name: "Kat Vasilakos",
@@ -266,14 +267,20 @@ export const testimonialSeedData: SeedTestimonial[] = [
   {
     name: "Ang N.",
     rating: 5,
-    location: "Google Review",
+    location: "Yelp Review",
     text: "11/22/25 - I always have an awesome experience at Dr. Wong's office. He's caring, professional, and makes everything easy to understand. You can tell he truly looks out for his patients. And Angelisa, my hygienist, is amazing! Cleanings with her are fun, gentle, and somehow fly by. I leave with sparkling teeth and in a great mood every single time. :) Highly recommend this office if you want a team that's both skilled and a joy to visit!",
   },
   {
     name: "Martha H.",
     rating: 5,
-    location: "Google Review",
+    location: "Yelp Review",
     text: "12/29/25 - Dr. Wong is an incredibly skilled dentist & I like that he is conservative in his approach to work that may be needed. The staff is always friendly and welcoming. Kelty at the front desk is so sweet, and Rachel is extremely knowledgeable about my dental insurance coverage. Angelisa & Helen are the best hygienists--I feel like",
+  },
+  {
+    name: "Elyse M.",
+    rating: 5,
+    location: "Yelp Review",
+    text: "9/6/25 - I found the doctor easy to talk to and they made sure I understood all the advice given. The support staff were efficient and the waiting time was reasonable. The doctor's approach was practical and patient focused which made me feel comfortable discussing my concerns.",
   },
   {
     name: "Sam Kintzer",
