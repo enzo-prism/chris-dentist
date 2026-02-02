@@ -46,17 +46,17 @@ export const officeInfo = {
 export type OfficeInfo = typeof officeInfo;
 
 export const holidayHours = {
-  active: false,
-  id: "office-closure-jan-19",
-  title: "Monday, January 19th",
+  active: true,
+  id: "office-closure-2026-02-16",
+  title: "Monday, February 16th, 2026",
   description:
-    "Our Palo Alto office will be closed for the day. We reopen Tuesday, January 20th at 8:00 AM.",
+    "Our Palo Alto office will be closed on Monday, February 16th, 2026. We reopen Tuesday, February 17th, 2026 at 8:00 AM.",
   entries: [
-    { day: "Monday, January 19th", hours: "Closed" },
-    { day: "Tuesday, January 20th", hours: "8:00 AM - 5:00 PM" },
+    { day: "Monday, February 16th, 2026", hours: "Closed" },
+    { day: "Tuesday, February 17th, 2026", hours: "8:00 AM - 5:00 PM" },
   ],
   cta: {
-    label: "Schedule after January 19th",
+    label: "Schedule after February 16th, 2026",
     href: "/schedule#appointment",
   },
 } as const;
