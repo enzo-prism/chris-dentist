@@ -124,6 +124,132 @@ export const supplementalContentByPath: Record<string, SupplementalBlock[]> = {
       ],
     },
   ],
+  "/dentist-mountain-view": [
+    {
+      heading: "Dental care near Mountain View",
+      paragraphs: [
+        "Mountain View patients visit our Palo Alto office for preventive cleanings, Invisalign, and restorative care. We focus on conservative treatment plans and clear explanations so you know what to expect.",
+        "If you are coming from Mountain View, we will share the easiest route and parking tips before your visit. Many patients schedule checkups on the same day as work or school commitments in the Peninsula.",
+      ],
+      bullets: [
+        "Preventive care, Invisalign, and cosmetic options",
+        "Family-friendly visits for kids and teens",
+        "Same-day emergency slots when available",
+      ],
+    },
+  ],
+  "/dentist-los-altos": [
+    {
+      heading: "Personalized care for Los Altos patients",
+      paragraphs: [
+        "Los Altos patients choose our nearby Palo Alto dental office for attentive care and long-term planning. We review your goals, explain options, and focus on protecting healthy tooth structure.",
+        `Our office is located at ${officeAddress}, and we can share arrival tips and parking guidance when you schedule.`,
+      ],
+      bullets: [
+        "Preventive checkups and cleanings",
+        "Cosmetic care like whitening and veneers",
+        "Restorative dentistry with clear next steps",
+      ],
+    },
+  ],
+  "/dentist-los-altos-hills": [
+    {
+      heading: "Dental care near Los Altos Hills",
+      paragraphs: [
+        "Los Altos Hills patients visit our Palo Alto office for preventive cleanings, Invisalign, cosmetic dentistry, and restorative care. We focus on conservative treatment plans and clear explanations so you know what to expect.",
+        `Our office is located at ${officeAddress}, and we can share arrival tips and parking guidance when you schedule.`,
+      ],
+      bullets: [
+        "Preventive exams and cleanings",
+        "Cosmetic options like whitening and veneers",
+        "Same-day emergency visits when available",
+      ],
+    },
+  ],
+  "/dentist-sunnyvale": [
+    {
+      heading: "Care for Sunnyvale families",
+      paragraphs: [
+        "Sunnyvale patients choose our Palo Alto dental office for consistent, family-friendly care. We prioritize prevention and help you plan next steps with clarity and comfort in mind.",
+        "From cleanings and fillings to Invisalign and cosmetic options, we tailor recommendations to fit your goals and schedule.",
+      ],
+      bullets: [
+        "Family dentistry for kids through seniors",
+        "Clear Invisalign planning and follow-up",
+        "Restorative solutions that protect function",
+      ],
+    },
+  ],
+  "/dentist-cupertino": [
+    {
+      heading: "Care for Cupertino families",
+      paragraphs: [
+        "Cupertino patients choose our Palo Alto dental office for consistent, family-friendly care. We prioritize prevention and help you plan next steps with clarity and comfort in mind.",
+        "From cleanings and fillings to Invisalign and cosmetic options, we tailor recommendations to fit your goals and schedule.",
+      ],
+      bullets: [
+        "Family dentistry for kids through seniors",
+        "Clear Invisalign planning and follow-up",
+        "Restorative solutions that protect function",
+      ],
+    },
+  ],
+  "/dentist-redwood-city": [
+    {
+      heading: "Care for Redwood City families",
+      paragraphs: [
+        "Redwood City patients visit our Palo Alto office for preventive cleanings, restorative care, and cosmetic dentistry. We focus on conservative treatment plans and clear explanations so you know what to expect.",
+        "If you are coming from Redwood City, we will share the easiest route and parking tips before your visit.",
+      ],
+      bullets: [
+        "Preventive care and digital exams",
+        "Cosmetic options like whitening and veneers",
+        "Same-day emergency slots when available",
+      ],
+    },
+  ],
+  "/dentist-atherton": [
+    {
+      heading: "Care for Atherton families",
+      paragraphs: [
+        "Atherton patients choose our Palo Alto dental office for consistent, family-friendly care. We prioritize prevention and help you plan next steps with clarity and comfort in mind.",
+        "From cleanings and fillings to Invisalign and cosmetic options, we tailor recommendations to fit your goals and schedule.",
+      ],
+      bullets: [
+        "Family dentistry for kids through seniors",
+        "Clear Invisalign planning and follow-up",
+        "Restorative solutions that protect function",
+      ],
+    },
+  ],
+  "/dentist-redwood-shores": [
+    {
+      heading: "Care for Redwood Shores families",
+      paragraphs: [
+        "Redwood Shores patients visit our Palo Alto office for preventive cleanings, restorative care, and cosmetic dentistry. We focus on conservative treatment plans and clear explanations so you know what to expect.",
+        "If you are coming from Redwood Shores, we will share the easiest route and parking tips before your visit.",
+      ],
+      bullets: [
+        "Preventive care and digital exams",
+        "Cosmetic options like whitening and veneers",
+        "Same-day emergency slots when available",
+      ],
+    },
+  ],
+  "/locations": [
+    {
+      heading: "Locations served from our Palo Alto office",
+      paragraphs: [
+        "Our Palo Alto dental office welcomes patients from across the Peninsula. Use this page to find the city closest to you, then explore location-specific FAQs and service highlights.",
+        "All appointments take place at our Palo Alto office, and we will share parking tips and arrival guidance when you schedule.",
+      ],
+      bullets: [
+        "Family dentistry and Invisalign for nearby cities",
+        "Emergency care when urgent issues arise",
+        "Clear estimates and treatment planning",
+      ],
+    },
+  ],
   "/emergency-dental": [
     {
       heading: "How we handle dental emergencies",

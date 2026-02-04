@@ -85,6 +85,17 @@ Allow: /privacy-policy
 Allow: /terms
 Allow: /hipaa
 Allow: /accessibility
+Allow: /dentist-menlo-park
+Allow: /dentist-stanford
+Allow: /dentist-mountain-view
+Allow: /dentist-los-altos
+Allow: /dentist-los-altos-hills
+Allow: /dentist-sunnyvale
+Allow: /dentist-cupertino
+Allow: /dentist-redwood-city
+Allow: /dentist-atherton
+Allow: /dentist-redwood-shores
+Allow: /locations
 
 User-agent: Googlebot
 Crawl-delay: 1
@@ -143,6 +154,17 @@ Disallow: /
         "/dental-veneers": "0.9",
         "/dental-implants": "0.9",
         "/emergency-dental": "1.0",
+        "/locations": "0.8",
+        "/dentist-menlo-park": "0.8",
+        "/dentist-stanford": "0.8",
+        "/dentist-mountain-view": "0.8",
+        "/dentist-los-altos": "0.8",
+        "/dentist-los-altos-hills": "0.8",
+        "/dentist-sunnyvale": "0.8",
+        "/dentist-cupertino": "0.8",
+        "/dentist-redwood-city": "0.8",
+        "/dentist-atherton": "0.8",
+        "/dentist-redwood-shores": "0.8",
       };
 
       const changefreqByPath: Record<string, string> = {
@@ -150,6 +172,20 @@ Disallow: /
         "/services": "weekly",
         "/schedule": "weekly",
         "/blog": "weekly",
+      };
+
+      const lastUpdatedByPath: Record<string, string> = {
+        "/dentist-menlo-park": "2026-02-01",
+        "/dentist-stanford": "2026-02-01",
+        "/dentist-mountain-view": "2026-02-01",
+        "/dentist-los-altos": "2026-02-01",
+        "/dentist-los-altos-hills": "2026-02-01",
+        "/dentist-sunnyvale": "2026-02-01",
+        "/dentist-cupertino": "2026-02-01",
+        "/dentist-redwood-city": "2026-02-01",
+        "/dentist-atherton": "2026-02-01",
+        "/dentist-redwood-shores": "2026-02-01",
+        "/locations": "2026-02-01",
       };
 
       const included = new Set<string>();
@@ -190,6 +226,7 @@ Disallow: /
         const priority = priorityByPath[urlPath] ?? "0.7";
         const changefreq = changefreqByPath[urlPath] ?? "monthly";
         const lastmod =
+          lastUpdatedByPath[urlPath] ??
           lastmodFromPrerendered(urlPath) ??
           SERVER_START_LASTMOD;
         addUrl(urlPath, priority, changefreq, lastmod);

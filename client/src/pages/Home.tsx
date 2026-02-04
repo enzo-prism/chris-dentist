@@ -19,6 +19,7 @@ import { buildInsertTestimonial, testimonialSeedData } from "@shared/testimonial
 import { officeInfo } from "@/lib/data";
 import {
   buildFAQSchema,
+  buildAggregateRatingFromTestimonials,
   buildOrganizationSchema,
   buildPersonSchema,
   buildWebSiteSchema,
@@ -92,8 +93,13 @@ const Home = () => {
       },
     ];
 
+    const aggregateRating = buildAggregateRatingFromTestimonials(testimonialsData);
+    const organizationSchema = buildOrganizationSchema({
+      services: services ?? [],
+      ...(aggregateRating ? { aggregateRating } : {}),
+    });
     const schemaNodes = [
-      buildOrganizationSchema({ services: services ?? [] }),
+      organizationSchema,
       buildPersonSchema(),
       buildWebSiteSchema(),
     ];
@@ -130,6 +136,10 @@ const Home = () => {
                 restorative care, we’ll explain what we see and help you choose
                 a plan that fits your goals and schedule.
               </p>
+              <p className="text-lg text-slate-700 leading-relaxed">
+                Our Palo Alto dental office is located at {officeInfo.address.line1},{" "}
+                {officeInfo.address.city}, {officeInfo.address.region} {officeInfo.address.postalCode}.
+              </p>
               <p className="text-sm text-slate-600">
                 Nearby communities:{" "}
                 <Link
@@ -137,16 +147,110 @@ const Home = () => {
                   className="text-primary font-semibold hover:underline"
                 >
                   Menlo Park families
-                </Link>{" "}
-                and{" "}
+                </Link>
+                ,{" "}
                 <Link
                   href="/dentist-stanford"
                   className="text-primary font-semibold hover:underline"
                 >
                   Stanford patients
                 </Link>
+                ,{" "}
+                <Link
+                  href="/dentist-mountain-view"
+                  className="text-primary font-semibold hover:underline"
+                >
+                  Mountain View families
+                </Link>
+                ,{" "}
+                <Link
+                  href="/dentist-los-altos"
+                  className="text-primary font-semibold hover:underline"
+                >
+                  Los Altos patients
+                </Link>
+                ,{" "}
+                <Link
+                  href="/dentist-los-altos-hills"
+                  className="text-primary font-semibold hover:underline"
+                >
+                  Los Altos Hills patients
+                </Link>
+                ,{" "}
+                <Link
+                  href="/dentist-sunnyvale"
+                  className="text-primary font-semibold hover:underline"
+                >
+                  Sunnyvale families
+                </Link>
+                ,{" "}
+                <Link
+                  href="/dentist-cupertino"
+                  className="text-primary font-semibold hover:underline"
+                >
+                  Cupertino families
+                </Link>
+                ,{" "}
+                <Link
+                  href="/dentist-redwood-city"
+                  className="text-primary font-semibold hover:underline"
+                >
+                  Redwood City patients
+                </Link>
+                ,{" "}
+                <Link
+                  href="/dentist-atherton"
+                  className="text-primary font-semibold hover:underline"
+                >
+                  Atherton patients
+                </Link>
+                , and{" "}
+                <Link
+                  href="/dentist-redwood-shores"
+                  className="text-primary font-semibold hover:underline"
+                >
+                  Redwood Shores patients
+                </Link>
                 .
               </p>
+              <div className="mt-4 rounded-2xl border border-slate-200 bg-white/80 p-4 shadow-sm">
+                <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+                  Service areas
+                </p>
+                <div className="mt-2 flex flex-wrap gap-x-4 gap-y-2 text-sm text-slate-700">
+                  <span className="font-semibold text-slate-900">Palo Alto</span>
+                  <Link href="/dentist-menlo-park" className="text-primary font-semibold hover:underline">
+                    Menlo Park
+                  </Link>
+                  <Link href="/dentist-stanford" className="text-primary font-semibold hover:underline">
+                    Stanford
+                  </Link>
+                  <Link href="/dentist-mountain-view" className="text-primary font-semibold hover:underline">
+                    Mountain View
+                  </Link>
+                  <Link href="/dentist-los-altos" className="text-primary font-semibold hover:underline">
+                    Los Altos
+                  </Link>
+                  <Link href="/dentist-los-altos-hills" className="text-primary font-semibold hover:underline">
+                    Los Altos Hills
+                  </Link>
+                  <Link href="/dentist-sunnyvale" className="text-primary font-semibold hover:underline">
+                    Sunnyvale
+                  </Link>
+                  <Link href="/dentist-cupertino" className="text-primary font-semibold hover:underline">
+                    Cupertino
+                  </Link>
+                  <Link href="/dentist-redwood-city" className="text-primary font-semibold hover:underline">
+                    Redwood City
+                  </Link>
+                  <Link href="/dentist-atherton" className="text-primary font-semibold hover:underline">
+                    Atherton
+                  </Link>
+                  <Link href="/dentist-redwood-shores" className="text-primary font-semibold hover:underline">
+                    Redwood Shores
+                  </Link>
+                </div>
+              </div>
               <div className="flex flex-col sm:flex-row gap-3 pt-1">
                 <Link href="/schedule#appointment">
                   <Button className="bg-primary text-white hover:bg-primary/90">

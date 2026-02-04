@@ -12,6 +12,9 @@ import StructuredData from "@/components/seo/StructuredData";
 import PageBreadcrumbs from "@/components/common/PageBreadcrumbs";
 import {
   buildBreadcrumbSchema,
+  buildAggregateRatingFromTestimonials,
+  buildOrganizationSchema,
+  buildReviewSchemas,
   type StructuredDataNode,
 } from "@/lib/structuredData";
 
@@ -43,6 +46,15 @@ const Testimonials = () => {
   ];
   const testimonialsBreadcrumb = buildBreadcrumbSchema(breadcrumbItems);
   const structuredDataNodes: StructuredDataNode[] = [];
+
+  const aggregateRating = buildAggregateRatingFromTestimonials(reviews);
+  structuredDataNodes.push(
+    buildOrganizationSchema({
+      ...(aggregateRating ? { aggregateRating } : {}),
+    }),
+  );
+  const reviewSchemas = buildReviewSchemas(reviews);
+  structuredDataNodes.push(...reviewSchemas);
 
   if (testimonialsBreadcrumb) {
     structuredDataNodes.push(testimonialsBreadcrumb);

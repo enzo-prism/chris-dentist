@@ -189,6 +189,69 @@ export const seoByPath: Record<string, SeoDefinition> = {
     canonicalPath: "/dentist-stanford",
     ogImage: DEFAULT_OG_IMAGE,
   },
+  "/dentist-mountain-view": {
+    title: "Mountain View Family Dentist | Nearby Palo Alto Care | Christopher B. Wong, DDS",
+    description:
+      "Mountain View families visit our nearby Palo Alto office for cleanings, fillings, Invisalign, cosmetic dentistry, and emergency care.",
+    canonicalPath: "/dentist-mountain-view",
+    ogImage: DEFAULT_OG_IMAGE,
+  },
+  "/dentist-los-altos": {
+    title: "Los Altos Dentist | Personalized Palo Alto Care | Christopher B. Wong, DDS",
+    description:
+      "Los Altos patients choose our Palo Alto dentist for preventive care, cosmetic improvements, restorations, Invisalign, and urgent visits.",
+    canonicalPath: "/dentist-los-altos",
+    ogImage: DEFAULT_OG_IMAGE,
+  },
+  "/dentist-los-altos-hills": {
+    title: "Los Altos Hills Dentist | Nearby Palo Alto Care | Christopher B. Wong, DDS",
+    description:
+      "Los Altos Hills patients visit our Palo Alto office for preventive care, cosmetic dentistry, restorative treatment, Invisalign, and emergency visits.",
+    canonicalPath: "/dentist-los-altos-hills",
+    ogImage: DEFAULT_OG_IMAGE,
+  },
+  "/dentist-sunnyvale": {
+    title: "Sunnyvale Family Dentist | Nearby Palo Alto Care | Christopher B. Wong, DDS",
+    description:
+      "Sunnyvale families choose our Palo Alto dentist for cleanings, fillings, Invisalign, cosmetic dentistry, and same-day emergency care.",
+    canonicalPath: "/dentist-sunnyvale",
+    ogImage: DEFAULT_OG_IMAGE,
+  },
+  "/dentist-cupertino": {
+    title: "Cupertino Family Dentist | Nearby Palo Alto Care | Christopher B. Wong, DDS",
+    description:
+      "Cupertino families visit our Palo Alto office for cleanings, fillings, Invisalign, cosmetic dentistry, and emergency care.",
+    canonicalPath: "/dentist-cupertino",
+    ogImage: DEFAULT_OG_IMAGE,
+  },
+  "/dentist-redwood-city": {
+    title: "Redwood City Dentist | Nearby Palo Alto Care | Christopher B. Wong, DDS",
+    description:
+      "Redwood City patients choose our Palo Alto dentist for preventive care, restorative treatment, Invisalign, and urgent visits.",
+    canonicalPath: "/dentist-redwood-city",
+    ogImage: DEFAULT_OG_IMAGE,
+  },
+  "/dentist-atherton": {
+    title: "Atherton Dentist | Nearby Palo Alto Care | Christopher B. Wong, DDS",
+    description:
+      "Atherton patients visit our Palo Alto office for preventive care, restorative treatment, Invisalign, cosmetic dentistry, and emergency visits.",
+    canonicalPath: "/dentist-atherton",
+    ogImage: DEFAULT_OG_IMAGE,
+  },
+  "/dentist-redwood-shores": {
+    title: "Redwood Shores Dentist | Nearby Palo Alto Care | Christopher B. Wong, DDS",
+    description:
+      "Redwood Shores patients choose our Palo Alto dentist for cleanings, fillings, Invisalign, cosmetic dentistry, and urgent visits.",
+    canonicalPath: "/dentist-redwood-shores",
+    ogImage: DEFAULT_OG_IMAGE,
+  },
+  "/locations": {
+    title: "Locations Served | Palo Alto Dentist | Christopher B. Wong, DDS",
+    description:
+      "Explore the Peninsula locations we serve from our Palo Alto dental office, including Menlo Park, Stanford, Mountain View, Los Altos, and more.",
+    canonicalPath: "/locations",
+    ogImage: DEFAULT_OG_IMAGE,
+  },
   "/dental-implants": {
     title: "Dental Implants in Palo Alto | Implant Restoration | Christopher B. Wong, DDS",
     description:

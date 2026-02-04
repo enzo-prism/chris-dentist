@@ -160,6 +160,23 @@ const Header = () => {
             { href: "/services", label: "View All Services" }
           ]
         },
+    { 
+      href: "/locations", 
+      label: "Locations",
+      submenu: [
+        { href: "/dentist-menlo-park", label: "Menlo Park" },
+        { href: "/dentist-stanford", label: "Stanford" },
+        { href: "/dentist-mountain-view", label: "Mountain View" },
+        { href: "/dentist-los-altos", label: "Los Altos" },
+        { href: "/dentist-los-altos-hills", label: "Los Altos Hills" },
+        { href: "/dentist-sunnyvale", label: "Sunnyvale" },
+        { href: "/dentist-cupertino", label: "Cupertino" },
+        { href: "/dentist-redwood-city", label: "Redwood City" },
+        { href: "/dentist-atherton", label: "Atherton" },
+        { href: "/dentist-redwood-shores", label: "Redwood Shores" },
+        { href: "/locations", label: "All Locations" }
+      ]
+    },
     { href: "/patient-stories", label: "Patient Stories" },
     { href: "/testimonials", label: "Testimonials" },
     { href: "/contact", label: "Contact" }

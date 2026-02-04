@@ -14,57 +14,57 @@ import {
   buildBreadcrumbSchema,
   buildFAQSchema,
   buildOrganizationSchema,
-  buildPersonSchema,
   buildReviewSchemas,
+  buildPersonSchema,
   buildWebSiteSchema,
   type StructuredDataNode,
 } from "@/lib/structuredData";
 import { Link } from "wouter";
 
-const DentistMenloPark = () => {
-  const seo = getSeoForPath("/dentist-menlo-park");
+const DentistAtherton = () => {
+  const seo = getSeoForPath("/dentist-atherton");
 
   const familyTestimonials = getTestimonialsByNames([
-    "Michael Austin",
-    "Ashley Chung",
-    "Giordano Bruno Beretta",
+    "Amy Hamachi",
+    "Kristi Luchini",
+    "Sarah Chase",
   ]);
 
   const breadcrumbItems = [
     { name: "Home", path: "/" },
-    { name: "Menlo Park Family Dentist", path: "/dentist-menlo-park" },
+    { name: "Atherton Dentist", path: "/dentist-atherton" },
   ];
 
   const faqs = [
     {
-      question: "Do you accept patients from Menlo Park?",
+      question: "Do you accept patients from Atherton?",
       answer:
-        "Yes. Many of our patients live or work in Menlo Park and appreciate how close our Palo Alto office is for routine and urgent care.",
+        "Yes. Atherton patients visit our Palo Alto office for preventive care, restorative treatment, Invisalign, and cosmetic dentistry.",
+    },
+    {
+      question: "How far is your office from Atherton?",
+      answer:
+        "We are a short drive from Atherton. When you schedule, we will share the easiest routes and arrival tips.",
     },
     {
       question: "Do you see kids, teens, and adults?",
       answer:
-        "Yes. We’re a family practice and care for children, teens, adults, and seniors. We focus on prevention first and explain options clearly so families can make confident decisions.",
+        "Yes. We provide family dentistry for every age and focus on prevention, comfort, and clear explanations.",
     },
     {
-      question: "Can family members book appointments together?",
+      question: "Do you offer Invisalign for Atherton patients?",
       answer:
-        "Often, yes. If you’d like to coordinate visits for multiple family members, call our team and we’ll do our best to find times that fit your schedule.",
+        "Yes. Invisalign is a popular option for Atherton patients who want a discreet orthodontic plan.",
     },
     {
-      question: "What care is most common for Menlo Park families?",
+      question: "Can you help with dental emergencies?",
       answer:
-        "Preventive checkups and cleanings, cavity fillings, crowns, Invisalign, and cosmetic dentistry are common reasons Menlo Park families see us. We also help with urgent toothaches and broken teeth when needed.",
+        "Yes. If you have sudden pain, swelling, or a broken tooth, call us and we will help you find a same-day visit when available.",
     },
     {
-      question: "Is parking easy at your office?",
+      question: "Do you accept PPO dental insurance?",
       answer:
-        "Yes. Our Palo Alto location has nearby street and lot parking, and we’ll share the best options when you schedule.",
-    },
-    {
-      question: "How far are you from Menlo Park?",
-      answer:
-        "Our office is located in Palo Alto, a short drive from Menlo Park. Once you schedule, we’ll share the easiest arrival tips and directions.",
+        "We work with many PPO plans and will help verify benefits before treatment.",
     },
   ];
 
@@ -78,7 +78,7 @@ const DentistMenloPark = () => {
   structuredDataNodes.push(buildPersonSchema());
   structuredDataNodes.push(buildWebSiteSchema());
   const breadcrumbSchema = buildBreadcrumbSchema(breadcrumbItems);
-  const faqSchema = buildFAQSchema(faqs, "/dentist-menlo-park");
+  const faqSchema = buildFAQSchema(faqs, "/dentist-atherton");
   if (breadcrumbSchema) structuredDataNodes.push(breadcrumbSchema);
   if (faqSchema) structuredDataNodes.push(faqSchema);
   structuredDataNodes.push(...buildReviewSchemas(familyTestimonials));
@@ -86,32 +86,32 @@ const DentistMenloPark = () => {
   const relatedServices: RelatedServiceLink[] = [
     {
       href: "/pediatric-dentist-palo-alto",
-      anchorText: "Pediatric dentist for Menlo Park families",
-      description: "Gentle kids’ dentistry in a calm, family-friendly environment.",
+      anchorText: "Pediatric dentist near Atherton",
+      description: "Gentle care for kids and teens in a calm environment.",
     },
     {
       href: "/dental-cleaning-palo-alto",
-      anchorText: "Dental cleanings near Menlo Park",
-      description: "Preventive visits that help avoid surprises.",
+      anchorText: "Dental cleanings near Atherton",
+      description: "Preventive visits that keep small issues from growing.",
     },
     {
       href: "/cavity-fillings-palo-alto",
-      anchorText: "Tooth‑colored fillings in Palo Alto",
-      description: "Conservative repairs for cavities.",
+      anchorText: "Tooth-colored fillings in Palo Alto",
+      description: "Conservative repairs for cavities and cracks.",
     },
     {
       href: "/invisalign",
-      anchorText: "Invisalign near Menlo Park",
+      anchorText: "Invisalign near Atherton",
       description: "Clear aligners for teens and adults.",
     },
     {
       href: "/emergency-dental",
-      anchorText: "Emergency dentist near Menlo Park",
-      description: "Same‑day help for toothaches, broken teeth, and trauma.",
+      anchorText: "Emergency dentist near Atherton",
+      description: "Same-day help for toothaches and dental trauma.",
     },
   ];
 
-  const lastUpdated = "December 2025";
+  const lastUpdated = "February 2026";
 
   return (
     <>
@@ -125,20 +125,18 @@ const DentistMenloPark = () => {
             <div className="lg:col-span-7 space-y-6">
               <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 text-primary px-4 py-2 text-sm font-semibold w-fit">
                 <MapPin className="h-4 w-4" aria-hidden="true" />
-                Near Menlo Park
+                Near Atherton
               </div>
               <h1 className="text-4xl md:text-5xl font-bold font-heading text-[#1F2933]">
-                Menlo Park Family Dentist — Care Nearby in Palo Alto
+                Atherton Dentist - Care Nearby in Palo Alto
               </h1>
               <p className="text-lg text-slate-700 leading-relaxed max-w-3xl">
-                If you’re looking for a family dentist in Menlo Park, our office is a short drive away in Palo Alto.
-                Dr. Christopher B. Wong provides modern, conservative care for children, teens, adults, and seniors—
-                with clear communication and a calm environment.
+                Atherton patients visit Dr. Christopher B. Wong for modern, conservative dental care in nearby Palo Alto.
+                We serve kids, teens, adults, and seniors with a focus on comfort, clear explanations, and long-term oral health.
               </p>
               <p className="text-lg text-slate-700 leading-relaxed max-w-3xl">
-                Families often come to us for preventive cleanings, cavity repair, Invisalign, and help with sudden
-                toothaches. We focus on protecting healthy tooth structure, catching problems early, and making dental
-                visits feel straightforward for every age.
+                Common visits include preventive cleanings, cavity fillings, Invisalign, and emergency dental care. We help you
+                understand your options so you can choose the best next step for your smile.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-3">
@@ -159,7 +157,7 @@ const DentistMenloPark = () => {
               <ul className="grid gap-3 sm:grid-cols-2 text-sm text-slate-700 pt-2">
                 {[
                   "Family dentistry for kids through seniors",
-                  "Prevention‑first, conservative approach",
+                  "Prevention-first, conservative approach",
                   "Digital imaging and modern planning",
                   "Help verifying PPO insurance benefits",
                 ].map((item) => (
@@ -218,11 +216,11 @@ const DentistMenloPark = () => {
                       Hours
                     </p>
                     <p className="mt-2 text-slate-700 leading-relaxed text-sm">
-                      Mon–Thu: {officeInfo.hours.monday}
+                      Mon-Thu: {officeInfo.hours.monday}
                       <br />
                       Fri: {officeInfo.hours.friday}
                       <br />
-                      Sat–Sun: {officeInfo.hours.saturday}
+                      Sat-Sun: {officeInfo.hours.saturday}
                     </p>
                   </div>
                 </div>
@@ -236,12 +234,12 @@ const DentistMenloPark = () => {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
           <div className="space-y-6">
             <h2 className="text-3xl font-bold font-heading text-[#1F2933]">
-              Family dentistry for Menlo Park families
+              Family dentistry for Atherton patients
             </h2>
             <p className="text-slate-700 leading-relaxed">
-              “Family dentist” should mean more than a convenient location. It should feel easy to keep everyone’s care
-              on track—from first cleanings to adult restorative work. We take time to explain what we see, make sure
-              kids feel comfortable, and recommend treatment that supports long‑term oral health.
+              Atherton families often want a practice that feels calm, consistent, and easy to work with. We focus on
+              prevention, clear communication, and conservative care so you can keep dental health on track without
+              surprises.
             </p>
             <p className="text-slate-700 leading-relaxed">
               If your child needs a gentle start, our{" "}
@@ -251,8 +249,8 @@ const DentistMenloPark = () => {
               >
                 pediatric dentist team
               </Link>{" "}
-              focuses on prevention, confidence, and age‑appropriate coaching. For adults, our goal is conservative care
-              that protects healthy tooth structure and keeps future treatment simpler.
+              emphasizes comfort and confidence. For adults, we prioritize early detection and treatment that protects
+              healthy tooth structure.
             </p>
           </div>
 
@@ -264,12 +262,12 @@ const DentistMenloPark = () => {
               <div className="rounded-2xl border border-slate-100 bg-[#F5F9FC] p-6">
                 <h3 className="text-xl font-semibold text-slate-900 mb-3">Kids</h3>
                 <p className="text-slate-700 leading-relaxed">
-                  Gentle visits focused on prevention, cavity risk reduction, and building comfort early.
+                  Gentle visits focused on prevention, cavity risk reduction, and healthy routines.
                   Explore{" "}
                   <Link href="/pediatric-dentist-palo-alto" className="text-primary font-semibold hover:underline">
                     pediatric dentistry
                   </Link>{" "}
-                  for Menlo Park families.
+                  for Atherton families.
                 </p>
               </div>
               <div className="rounded-2xl border border-slate-100 bg-[#F5F9FC] p-6">
@@ -280,7 +278,7 @@ const DentistMenloPark = () => {
                   <Link href="/invisalign" className="text-primary font-semibold hover:underline">
                     Invisalign
                   </Link>{" "}
-                  because it’s discreet and removable.
+                  because it is discreet and removable.
                 </p>
               </div>
               <div className="rounded-2xl border border-slate-100 bg-[#F5F9FC] p-6">
@@ -301,7 +299,7 @@ const DentistMenloPark = () => {
               <div className="rounded-2xl border border-slate-100 bg-[#F5F9FC] p-6">
                 <h3 className="text-xl font-semibold text-slate-900 mb-3">Seniors</h3>
                 <p className="text-slate-700 leading-relaxed">
-                  Support for older restorations, bite wear, and long‑term maintenance. If a tooth breaks or starts
+                  Support for older restorations, bite wear, and long-term maintenance. If a tooth breaks or starts
                   hurting, our{" "}
                   <Link href="/emergency-dental" className="text-primary font-semibold hover:underline">
                     emergency dental care
@@ -314,17 +312,17 @@ const DentistMenloPark = () => {
 
           <div className="space-y-6">
             <h2 className="text-3xl font-bold font-heading text-[#1F2933]">
-              Common visits for Menlo Park families
+              Common visits for Atherton families
             </h2>
             <p className="text-slate-700 leading-relaxed">
-              We’re known for thorough, comfortable preventive visits—and for making the next steps easy when something
-              needs attention. Common needs include routine{" "}
+              We are known for thorough preventive visits and clear next steps when something needs attention. Common
+              needs include routine{" "}
               <Link href="/dental-cleaning-palo-alto" className="text-primary font-semibold hover:underline">
                 cleanings and exams
               </Link>
               ,{" "}
               <Link href="/cavity-fillings-palo-alto" className="text-primary font-semibold hover:underline">
-                tooth‑colored fillings
+                tooth-colored fillings
               </Link>
               , and{" "}
               <Link href="/crowns-palo-alto" className="text-primary font-semibold hover:underline">
@@ -333,23 +331,23 @@ const DentistMenloPark = () => {
               when a tooth needs added protection.
             </p>
             <p className="text-slate-700 leading-relaxed">
-              If you’re considering orthodontics,{" "}
+              If you are considering orthodontics,{" "}
               <Link href="/invisalign" className="text-primary font-semibold hover:underline">
                 Invisalign
               </Link>{" "}
-              is a popular option for Menlo Park patients because it fits work and school schedules. For cosmetic goals,
+              is a popular option for Atherton patients because it fits work and school schedules. For cosmetic goals,
               we also offer whitening and veneers when appropriate.
             </p>
           </div>
 
           <div className="rounded-2xl border border-slate-100 bg-[#F5F9FC] p-6 md:p-8">
             <h2 className="text-2xl md:text-3xl font-bold font-heading text-[#1F2933] mb-4">
-              Scheduling for busy families
+              Planning your visit from Atherton
             </h2>
             <p className="text-slate-700 leading-relaxed mb-6">
-              If you’d like to coordinate appointments for multiple family members, call our team and we’ll help build
-              a plan that fits school, work, and after‑hours constraints. We’ll also share parking tips and arrival
-              guidance so your visit feels predictable.
+              Our Palo Alto office is located at {officeInfo.address.line1}, {officeInfo.address.line2}. We will share
+              parking and arrival tips when you schedule. If you would like to coordinate appointments for multiple family
+              members, call our team and we will help build a plan that fits your calendar.
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
               <Link href="/schedule#appointment">
@@ -360,7 +358,7 @@ const DentistMenloPark = () => {
               </Link>
               <Link href="/patient-resources#insurance">
                 <Button variant="outline" className="border-primary text-primary hover:bg-primary/5">
-                  Insurance & forms
+                  Insurance and forms
                 </Button>
               </Link>
             </div>
@@ -368,7 +366,6 @@ const DentistMenloPark = () => {
         </div>
       </section>
 
-      {/* Patient trust */}
       <section className="py-12 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
@@ -376,8 +373,7 @@ const DentistMenloPark = () => {
               Trusted by families across the Peninsula
             </h2>
             <p className="mt-4 text-sm text-[#4B5563] sm:text-base max-w-3xl mx-auto">
-              Patients appreciate the calm environment, conservative care, and clear explanations—whether they’re coming
-              in for a first visit or continuing long‑term maintenance.
+              Patients appreciate the calm environment, conservative care, and clear explanations at every visit.
             </p>
           </div>
 
@@ -396,7 +392,7 @@ const DentistMenloPark = () => {
       <section className="py-12 bg-[#F5F9FC]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold font-heading text-[#1F2933] mb-6">
-            Menlo Park family dentist FAQs
+            Atherton dentist FAQs
           </h2>
           <Accordion type="single" collapsible className="space-y-3">
             {faqs.map((faq) => (
@@ -427,4 +423,4 @@ const DentistMenloPark = () => {
   );
 };
 
-export default DentistMenloPark;
+export default DentistAtherton;

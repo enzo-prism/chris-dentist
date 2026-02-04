@@ -20,6 +20,15 @@ const Footer = () => {
     { href: "/blog", label: "Blog" },
     { href: "/dentist-menlo-park", label: "Menlo Park Families" },
     { href: "/dentist-stanford", label: "Stanford Patients" },
+    { href: "/dentist-mountain-view", label: "Mountain View Families" },
+    { href: "/dentist-los-altos", label: "Los Altos Patients" },
+    { href: "/dentist-los-altos-hills", label: "Los Altos Hills Patients" },
+    { href: "/dentist-sunnyvale", label: "Sunnyvale Families" },
+    { href: "/dentist-cupertino", label: "Cupertino Families" },
+    { href: "/dentist-redwood-city", label: "Redwood City Patients" },
+    { href: "/dentist-atherton", label: "Atherton Patients" },
+    { href: "/dentist-redwood-shores", label: "Redwood Shores Patients" },
+    { href: "/locations", label: "All Locations" },
     { href: "/contact", label: "Contact" }
   ];
 
@@ -45,6 +54,8 @@ const Footer = () => {
     { icon: <FaInstagram className="h-4 w-4" />, href: officeInfo.socialMedia.instagram, label: "Instagram", rel: "noopener noreferrer" }
   ];
 
+  const businessUrl = "https://www.chriswongdds.com";
+
   return (
     <footer className="bg-primary bg-opacity-95 text-white">
       {/* Desktop footer - hidden on mobile */}
@@ -52,26 +63,42 @@ const Footer = () => {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10">
             {/* Practice Info */}
-            <div>
-              <h3 className="text-lg font-medium tracking-tight mb-4">Dr. Christopher B. Wong</h3>
-              <p className="text-sm text-white/80 mb-6 leading-relaxed">Comprehensive dental care in a comfortable, state-of-the-art environment.</p>
+            <div itemScope itemType="https://schema.org/Dentist">
+              <meta itemProp="url" content={businessUrl} />
+              <h3 className="text-lg font-medium tracking-tight mb-4" itemProp="name">Dr. Christopher B. Wong</h3>
+              <p className="text-sm text-white/80 mb-6 leading-relaxed">
+                Comprehensive dental care in a comfortable, state-of-the-art environment.
+              </p>
               <div className="space-y-4">
                 <p className="flex items-center text-sm text-white/90">
                   <Phone className="h-4 w-4 mr-3 flex-shrink-0 text-white/70" />
                   <a
                     href={`tel:${officeInfo.phoneE164}`}
                     className="hover:text-white transition-colors"
+                    itemProp="telephone"
                   >
                     {officeInfo.phone}
                   </a>
                 </p>
 
-                <p className="flex items-start text-sm text-white/90">
+                <div className="flex items-start text-sm text-white/90">
                   <MapPin className="h-4 w-4 mr-3 mt-0.5 flex-shrink-0 text-white/70" />
-                  <span>
-                    {officeInfo.address.line1}, {officeInfo.address.line2}
-                  </span>
-                </p>
+                  <address
+                    className="not-italic"
+                    itemProp="address"
+                    itemScope
+                    itemType="https://schema.org/PostalAddress"
+                  >
+                    <span itemProp="streetAddress">{officeInfo.address.line1}</span>
+                    <br />
+                    <span>
+                      <span itemProp="addressLocality">{officeInfo.address.city}</span>,{" "}
+                      <span itemProp="addressRegion">{officeInfo.address.region}</span>{" "}
+                      <span itemProp="postalCode">{officeInfo.address.postalCode}</span>
+                    </span>
+                    <meta itemProp="addressCountry" content={officeInfo.address.country} />
+                  </address>
+                </div>
                 <div className="flex space-x-3 mt-3">
                   {socialMedia.map((social, index) => (
                     <a 
@@ -81,6 +108,7 @@ const Footer = () => {
                       aria-label={social.label}
                       rel="noopener noreferrer"
                       target="_blank"
+                      itemProp="sameAs"
                     >
                       {social.icon}
                     </a>
@@ -159,8 +187,9 @@ const Footer = () => {
       {/* Mobile footer - visible only on mobile */}
       <div className="md:hidden py-8">
         <div className="max-w-md mx-auto px-5">
-          <div className="text-center mb-8">
-            <h3 className="text-lg font-medium mb-2">Dr. Christopher B. Wong</h3>
+          <div className="text-center mb-8" itemScope itemType="https://schema.org/Dentist">
+            <meta itemProp="url" content={businessUrl} />
+            <h3 className="text-lg font-medium mb-2" itemProp="name">Dr. Christopher B. Wong</h3>
             <p className="text-sm text-white/80 mb-4">Comprehensive dental care in Palo Alto</p>
             
             <div className="flex justify-center space-x-3 mb-4">
@@ -187,17 +216,30 @@ const Footer = () => {
                 <a
                   href={`tel:${officeInfo.phoneE164}`}
                   className="hover:text-white transition-colors"
+                  itemProp="telephone"
                 >
                   {officeInfo.phone}
                 </a>
               </p>
 
-              <p className="flex items-start text-sm">
+              <div className="flex items-start text-sm">
                 <MapPin className="h-4 w-4 mr-3 mt-0.5 flex-shrink-0 text-white/70" />
-                <span>
-                  {officeInfo.address.line1}, {officeInfo.address.line2}
-                </span>
-              </p>
+                <address
+                  className="not-italic"
+                  itemProp="address"
+                  itemScope
+                  itemType="https://schema.org/PostalAddress"
+                >
+                  <span itemProp="streetAddress">{officeInfo.address.line1}</span>
+                  <br />
+                  <span>
+                    <span itemProp="addressLocality">{officeInfo.address.city}</span>,{" "}
+                    <span itemProp="addressRegion">{officeInfo.address.region}</span>{" "}
+                    <span itemProp="postalCode">{officeInfo.address.postalCode}</span>
+                  </span>
+                  <meta itemProp="addressCountry" content={officeInfo.address.country} />
+                </address>
+              </div>
             </div>
           </div>
           

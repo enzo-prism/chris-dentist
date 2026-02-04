@@ -143,7 +143,7 @@ export function injectMeta(template: string, meta: HtmlMeta): string {
   const additions: string[] = [];
 
   const upsertTitle = (value: string) => {
-    const pattern = /<title[^>]*>.*?<\/title>/gis;
+    const pattern = /<title[^>]*>[\s\S]*?<\/title>/gi;
     const matches = headContent.match(pattern);
     if (!matches) {
       additions.push(`<title>${value}</title>`);

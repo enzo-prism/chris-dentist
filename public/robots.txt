@@ -33,6 +33,17 @@ Allow: /privacy-policy
 Allow: /terms
 Allow: /hipaa
 Allow: /accessibility
+Allow: /dentist-menlo-park
+Allow: /dentist-stanford
+Allow: /dentist-mountain-view
+Allow: /dentist-los-altos
+Allow: /dentist-los-altos-hills
+Allow: /dentist-sunnyvale
+Allow: /dentist-cupertino
+Allow: /dentist-redwood-city
+Allow: /dentist-atherton
+Allow: /dentist-redwood-shores
+Allow: /locations
 
 User-agent: Googlebot
 Crawl-delay: 1

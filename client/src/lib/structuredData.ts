@@ -16,7 +16,19 @@ export type HowToStep = {
 export type StructuredDataNode = Record<string, unknown>;
 
 const PROD_DOMAIN = "www.chriswongdds.com";
-const DEFAULT_AREA_SERVED = ["Palo Alto", "Menlo Park", "Mountain View", "Stanford"] as const;
+const DEFAULT_AREA_SERVED = [
+  "Palo Alto",
+  "Menlo Park",
+  "Mountain View",
+  "Stanford",
+  "Los Altos",
+  "Los Altos Hills",
+  "Sunnyvale",
+  "Cupertino",
+  "Redwood City",
+  "Atherton",
+  "Redwood Shores",
+] as const;
 
 const SERVICE_SLUG_TO_PATH: Record<string, string> = {
   "preventive-dentistry": "/preventive-dentistry",

@@ -10,6 +10,7 @@ import HolidayHoursNotice from "@/components/common/HolidayHoursNotice";
 import StructuredData from "@/components/seo/StructuredData";
 import { holidayHours, officeInfo } from "@/lib/data";
 import PageBreadcrumbs from "@/components/common/PageBreadcrumbs";
+import { Link } from "wouter";
 import {
   buildBreadcrumbSchema,
   buildOrganizationSchema,
@@ -43,8 +44,14 @@ const Contact = () => {
       <section className="bg-[#F5F9FC] py-12 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold font-heading text-[#333333] mb-6">Schedule Your Appointment</h1>
-            <p className="text-xl text-[#333333] max-w-3xl mx-auto">Book your visit with Dr. Wong's dental practice. We offer flexible scheduling to fit your busy lifestyle.</p>
+            <h1 className="text-4xl md:text-5xl font-bold font-heading text-[#333333] mb-6">
+              Contact Our Palo Alto Dental Office
+            </h1>
+            <p className="text-xl text-[#333333] max-w-3xl mx-auto">
+              Schedule your visit with Dr. Wong’s dental practice at {officeInfo.address.line1},{" "}
+              {officeInfo.address.city}, {officeInfo.address.region} {officeInfo.address.postalCode}.
+              We offer flexible appointment times for new and returning patients.
+            </p>
           </div>
         </div>
       </section>
@@ -71,7 +78,10 @@ const Contact = () => {
             <div className="w-24 h-1 bg-primary mx-auto mt-4"></div>
           </div>
           
-          <div className="grid md:grid-cols-2 gap-8 items-center">
+          <div className="grid md:grid-cols-2 gap-8 items-center" itemScope itemType="https://schema.org/Dentist">
+            <meta itemProp="url" content="https://www.chriswongdds.com/contact" />
+            <meta itemProp="name" content="Christopher B. Wong, DDS" />
+            <meta itemProp="image" content="https://www.chriswongdds.com/images/dr_wong_polaroids.png" />
             <div className="rounded-lg overflow-hidden shadow-md">
               <OptimizedImage
                 src="https://i.imgur.com/rIGaK9S.png"
@@ -91,9 +101,21 @@ const Contact = () => {
                     rel="noopener noreferrer"
                     className="text-[#333333] hover:text-primary transition-colors"
                   >
-                    {officeInfo.address.line1}
-                    <br />
-                    {officeInfo.address.line2}
+                    <address
+                      className="not-italic"
+                      itemProp="address"
+                      itemScope
+                      itemType="https://schema.org/PostalAddress"
+                    >
+                      <span itemProp="streetAddress">{officeInfo.address.line1}</span>
+                      <br />
+                      <span>
+                        <span itemProp="addressLocality">{officeInfo.address.city}</span>,{" "}
+                        <span itemProp="addressRegion">{officeInfo.address.region}</span>{" "}
+                        <span itemProp="postalCode">{officeInfo.address.postalCode}</span>
+                      </span>
+                      <meta itemProp="addressCountry" content={officeInfo.address.country} />
+                    </address>
                   </a>
                 </div>
               </div>
@@ -112,20 +134,21 @@ const Contact = () => {
                 </div>
               </div>
               
-              <div className="flex items-start">
-                <Phone className="h-6 w-6 text-primary mr-3 mt-1 flex-shrink-0" />
-                <div>
-                  <h4 className="font-semibold mb-1">Phone</h4>
-                  <p className="text-[#333333]">
-                    <a
-                      href={`tel:${officeInfo.phoneE164}`}
-                      className="hover:text-primary transition-colors"
-                    >
-                      {officeInfo.phone}
-                    </a>
-                  </p>
+                <div className="flex items-start">
+                  <Phone className="h-6 w-6 text-primary mr-3 mt-1 flex-shrink-0" />
+                  <div>
+                    <h4 className="font-semibold mb-1">Phone</h4>
+                    <p className="text-[#333333]">
+                      <a
+                        href={`tel:${officeInfo.phoneE164}`}
+                        className="hover:text-primary transition-colors"
+                        itemProp="telephone"
+                      >
+                        {officeInfo.phone}
+                      </a>
+                    </p>
+                  </div>
                 </div>
-              </div>
 
               <a
                 href={officeInfo.mapUrl}
@@ -141,6 +164,52 @@ const Contact = () => {
               
 
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-12 bg-[#F5F9FC]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl md:text-3xl font-bold font-heading text-[#333333] mb-3">
+              Serving Palo Alto and Nearby Peninsula Communities
+            </h2>
+            <p className="text-[#333333] max-w-3xl mx-auto">
+              Our Palo Alto dental office welcomes patients from surrounding neighborhoods and cities. Find
+              the right visit for your location and care goals below.
+            </p>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {[
+              { href: "/dentist-menlo-park", label: "Menlo Park family dentist" },
+              { href: "/dentist-stanford", label: "Stanford dentist" },
+              { href: "/dentist-mountain-view", label: "Mountain View family dentist" },
+              { href: "/dentist-los-altos", label: "Los Altos dentist" },
+              { href: "/dentist-los-altos-hills", label: "Los Altos Hills dentist" },
+              { href: "/dentist-sunnyvale", label: "Sunnyvale family dentist" },
+              { href: "/dentist-cupertino", label: "Cupertino family dentist" },
+              { href: "/dentist-redwood-city", label: "Redwood City dentist" },
+              { href: "/dentist-atherton", label: "Atherton dentist" },
+              { href: "/dentist-redwood-shores", label: "Redwood Shores dentist" },
+              { href: "/locations", label: "All locations" },
+              { href: "/dental-cleaning-palo-alto", label: "Dental cleanings in Palo Alto" },
+              { href: "/pediatric-dentist-palo-alto", label: "Pediatric dentist in Palo Alto" },
+              { href: "/teeth-whitening-palo-alto", label: "Teeth whitening in Palo Alto" },
+              { href: "/emergency-dental", label: "Emergency dentist in Palo Alto" },
+            ].map((item) => (
+              <Link key={item.href} href={item.href}>
+                <div className="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:shadow-md">
+                  <h3 className="text-lg font-semibold text-slate-900 group-hover:text-primary">
+                    {item.label}
+                  </h3>
+                  <span className="mt-3 inline-flex items-center text-sm font-semibold text-primary">
+                    Learn more
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </span>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>

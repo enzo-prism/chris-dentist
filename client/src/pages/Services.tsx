@@ -13,6 +13,7 @@ import PageBreadcrumbs from "@/components/common/PageBreadcrumbs";
 import FAQSection from "@/components/common/FAQSection";
 import {
   buildBreadcrumbSchema,
+  buildFAQSchema,
   buildItemListSchema,
   buildOrganizationSchema,
   type FAQEntry,
@@ -73,6 +74,89 @@ const Services = () => {
     servicesSchemas.push(serviceBreadcrumbs);
   }
 
+  const preventiveFaqSchema = buildFAQSchema(preventiveDentistryFaqs, "/services");
+  if (preventiveFaqSchema) {
+    servicesSchemas.push(preventiveFaqSchema);
+  }
+
+  const localServiceLinks = [
+    {
+      href: "/dental-cleaning-palo-alto",
+      title: "Dental cleaning in Palo Alto",
+      description: "Preventive visits designed to keep gums healthy and cavities away.",
+    },
+    {
+      href: "/teeth-whitening-palo-alto",
+      title: "Teeth whitening in Palo Alto",
+      description: "In-office and take-home options with dentist supervision.",
+    },
+    {
+      href: "/cavity-fillings-palo-alto",
+      title: "Cavity fillings in Palo Alto",
+      description: "Tooth-colored restorations that look natural and feel comfortable.",
+    },
+    {
+      href: "/crowns-palo-alto",
+      title: "Dental crowns in Palo Alto",
+      description: "Custom protection for cracked or heavily restored teeth.",
+    },
+    {
+      href: "/pediatric-dentist-palo-alto",
+      title: "Pediatric dentist in Palo Alto",
+      description: "Gentle care for kids and teens in a family-friendly setting.",
+    },
+    {
+      href: "/dentist-menlo-park",
+      title: "Menlo Park family dentist",
+      description: "Convenient care nearby in our Palo Alto office.",
+    },
+    {
+      href: "/dentist-mountain-view",
+      title: "Mountain View family dentist",
+      description: "Comprehensive care close to Mountain View families.",
+    },
+    {
+      href: "/dentist-los-altos",
+      title: "Los Altos dentist",
+      description: "Personalized dental care just minutes away in Palo Alto.",
+    },
+    {
+      href: "/dentist-los-altos-hills",
+      title: "Los Altos Hills dentist",
+      description: "Personalized care for families near Los Altos Hills.",
+    },
+    {
+      href: "/dentist-sunnyvale",
+      title: "Sunnyvale family dentist",
+      description: "Family-friendly care close to Sunnyvale patients.",
+    },
+    {
+      href: "/dentist-cupertino",
+      title: "Cupertino family dentist",
+      description: "Comprehensive care near Cupertino families.",
+    },
+    {
+      href: "/dentist-redwood-city",
+      title: "Redwood City dentist",
+      description: "Conservative care for patients across the Peninsula.",
+    },
+    {
+      href: "/dentist-atherton",
+      title: "Atherton dentist",
+      description: "Modern care for Atherton families near Palo Alto.",
+    },
+    {
+      href: "/dentist-redwood-shores",
+      title: "Redwood Shores dentist",
+      description: "Family-friendly care for Redwood Shores patients.",
+    },
+    {
+      href: "/locations",
+      title: "All locations",
+      description: "Explore every Peninsula community we serve.",
+    },
+  ];
+
   return (
     <>
       <MetaTags 
@@ -85,8 +169,13 @@ const Services = () => {
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h1 className="text-3xl md:text-4xl font-bold font-heading text-[#333333] mb-4">Comprehensive Dental Services</h1>
-            <p className="text-[#333333] max-w-3xl mx-auto">From routine cleanings to complex restorations, we provide a full range of dental services to meet your needs.</p>
+            <h1 className="text-3xl md:text-4xl font-bold font-heading text-[#333333] mb-4">
+              Comprehensive Dental Services in Palo Alto, CA
+            </h1>
+            <p className="text-[#333333] max-w-3xl mx-auto">
+              From routine cleanings to complex restorations, we provide a full range of dental services for
+              patients in Palo Alto and nearby communities like Menlo Park and Stanford.
+            </p>
             <div className="w-24 h-1 bg-primary mx-auto mt-4"></div>
           </div>
           
@@ -109,6 +198,37 @@ const Services = () => {
               ))}
             </div>
           )}
+        </div>
+      </section>
+
+      <section className="py-12 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl md:text-3xl font-bold font-heading text-[#333333] mb-3">
+              Popular Palo Alto Dental Services
+            </h2>
+            <p className="text-[#333333] max-w-3xl mx-auto">
+              Explore the most requested treatments in our Palo Alto office and learn more about care for
+              nearby neighborhoods and families.
+            </p>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {localServiceLinks.map((link) => (
+              <Link key={link.href} href={link.href}>
+                <div className="group h-full rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:shadow-md">
+                  <h3 className="text-lg font-semibold text-slate-900 group-hover:text-primary">
+                    {link.title}
+                  </h3>
+                  <p className="mt-2 text-sm text-slate-600">{link.description}</p>
+                  <span className="mt-4 inline-flex items-center text-sm font-semibold text-primary">
+                    Learn more
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 

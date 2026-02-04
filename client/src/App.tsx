@@ -47,6 +47,15 @@ import CrownsPaloAlto from "@/pages/CrownsPaloAlto";
 import PediatricDentistPaloAlto from "@/pages/PediatricDentistPaloAlto";
 import DentistMenloPark from "@/pages/DentistMenloPark";
 import DentistStanford from "@/pages/DentistStanford";
+import DentistMountainView from "@/pages/DentistMountainView";
+import DentistLosAltos from "@/pages/DentistLosAltos";
+import DentistLosAltosHills from "@/pages/DentistLosAltosHills";
+import DentistSunnyvale from "@/pages/DentistSunnyvale";
+import DentistCupertino from "@/pages/DentistCupertino";
+import DentistRedwoodCity from "@/pages/DentistRedwoodCity";
+import DentistAtherton from "@/pages/DentistAtherton";
+import DentistRedwoodShores from "@/pages/DentistRedwoodShores";
+import Locations from "@/pages/Locations";
 import AnalyticsMinimal from "@/pages/AnalyticsMinimal";
 import GATestPage from "@/pages/GATestPage";
 import Blog from "@/pages/Blog";
@@ -97,6 +106,15 @@ function Router() {
           <Route path="/pediatric-dentist-palo-alto" component={PediatricDentistPaloAlto} />
           <Route path="/dentist-menlo-park" component={DentistMenloPark} />
           <Route path="/dentist-stanford" component={DentistStanford} />
+          <Route path="/dentist-mountain-view" component={DentistMountainView} />
+          <Route path="/dentist-los-altos" component={DentistLosAltos} />
+          <Route path="/dentist-los-altos-hills" component={DentistLosAltosHills} />
+          <Route path="/dentist-sunnyvale" component={DentistSunnyvale} />
+          <Route path="/dentist-cupertino" component={DentistCupertino} />
+          <Route path="/dentist-redwood-city" component={DentistRedwoodCity} />
+          <Route path="/dentist-atherton" component={DentistAtherton} />
+          <Route path="/dentist-redwood-shores" component={DentistRedwoodShores} />
+          <Route path="/locations" component={Locations} />
           <Route path="/invisalign" component={Invisalign} />
           <Route path="/invisalign/resources" component={InvisalignResources} />
           <Route path="/emergency-dental" component={EmergencyDental} />

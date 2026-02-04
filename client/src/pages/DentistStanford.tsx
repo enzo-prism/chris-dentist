@@ -6,11 +6,24 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Button } from "@/components/ui/button";
 import { officeInfo } from "@/lib/data";
 import { getSeoForPath } from "@/lib/seo";
-import { buildBreadcrumbSchema, buildFAQSchema, type StructuredDataNode } from "@/lib/structuredData";
+import {
+  buildAggregateRatingFromTestimonials,
+  buildBreadcrumbSchema,
+  buildFAQSchema,
+  buildOrganizationSchema,
+  buildReviewSchemas,
+  type StructuredDataNode,
+} from "@/lib/structuredData";
 import { Link } from "wouter";
+import { getTestimonialsByNames } from "@/lib/testimonials";
 
 const DentistStanford = () => {
   const seo = getSeoForPath("/dentist-stanford");
+  const familyTestimonials = getTestimonialsByNames([
+    "Madison Ho",
+    "Kevin Zhang",
+    "Sandra Bell",
+  ]);
   const breadcrumbItems = [
     { name: "Home", path: "/" },
     { name: "Stanford Dentist", path: "/dentist-stanford" },
@@ -40,6 +53,13 @@ const DentistStanford = () => {
   ];
 
   const structuredDataNodes: StructuredDataNode[] = [];
+  const aggregateRating = buildAggregateRatingFromTestimonials(familyTestimonials);
+  structuredDataNodes.push(
+    buildOrganizationSchema({
+      ...(aggregateRating ? { aggregateRating } : {}),
+    }),
+  );
+  structuredDataNodes.push(...buildReviewSchemas(familyTestimonials));
   const breadcrumbSchema = buildBreadcrumbSchema(breadcrumbItems);
   const faqSchema = buildFAQSchema(faqs, "/dentist-stanford");
   if (breadcrumbSchema) structuredDataNodes.push(breadcrumbSchema);
