@@ -14,7 +14,7 @@ import {
   pageTitles,
 } from "@shared/metaContent";
 import { storage } from "./storage";
-import { getSeoForPath, seoByPath } from "@shared/seo";
+import { DEFAULT_ROBOTS, NOINDEX_ROBOTS, getSeoForPath, seoByPath } from "@shared/seo";
 
 const viteLogger = createLogger();
 
@@ -28,6 +28,7 @@ export type HtmlMeta = {
   canonicalPath: string;
   ogImage: string;
   type: "website" | "article";
+  robots?: string;
 };
 
 async function isKnownPagePath(pathname: string): Promise<boolean> {
@@ -75,6 +76,7 @@ async function resolveMetaForUrl(url: string): Promise<HtmlMeta> {
           canonicalPath: pathname,
           ogImage: post.image || fallbackOgImage,
           type: "article",
+          robots: DEFAULT_ROBOTS,
         };
       }
     }
@@ -88,6 +90,7 @@ async function resolveMetaForUrl(url: string): Promise<HtmlMeta> {
       canonicalPath: seo.canonicalPath,
       ogImage: seo.ogImage ?? fallbackOgImage,
       type: "website",
+      robots: seo.robots,
     };
   }
 
@@ -97,6 +100,7 @@ async function resolveMetaForUrl(url: string): Promise<HtmlMeta> {
     canonicalPath: pathname,
     ogImage: fallbackOgImage,
     type: "website",
+    robots: NOINDEX_ROBOTS,
   };
 }
 
@@ -123,6 +127,7 @@ export function injectMeta(template: string, meta: HtmlMeta): string {
   const safeDescription = escapeHtml(meta.description);
   const safeCanonicalUrl = escapeHtml(canonicalUrl);
   const safeOgImageUrl = escapeHtml(ogImageUrl);
+  const safeRobots = escapeHtml(meta.robots ?? DEFAULT_ROBOTS);
 
   let html = template
     .replace(/__META_TITLE__/g, safeTitle)
@@ -186,6 +191,12 @@ export function injectMeta(template: string, meta: HtmlMeta): string {
     safeDescription,
   );
   upsertTag(
+    /<meta[^>]+name=["']robots["'][^>]*>/gi,
+    `<meta name="robots" content="${safeRobots}" />`,
+    "content",
+    safeRobots,
+  );
+  upsertTag(
     /<link[^>]+rel=["']canonical["'][^>]*>/gi,
     `<link rel="canonical" href="${safeCanonicalUrl}" />`,
     "href",
@@ -223,31 +234,31 @@ export function injectMeta(template: string, meta: HtmlMeta): string {
   );
   upsertTag(
     /<meta[^>]+(?:property|name)=["']twitter:card["'][^>]*>/gi,
-    `<meta property="twitter:card" content="summary_large_image" />`,
+    `<meta name="twitter:card" content="summary_large_image" />`,
     "content",
     "summary_large_image",
   );
   upsertTag(
     /<meta[^>]+(?:property|name)=["']twitter:title["'][^>]*>/gi,
-    `<meta property="twitter:title" content="${safeTitle}" />`,
+    `<meta name="twitter:title" content="${safeTitle}" />`,
     "content",
     safeTitle,
   );
   upsertTag(
     /<meta[^>]+(?:property|name)=["']twitter:description["'][^>]*>/gi,
-    `<meta property="twitter:description" content="${safeDescription}" />`,
+    `<meta name="twitter:description" content="${safeDescription}" />`,
     "content",
     safeDescription,
   );
   upsertTag(
     /<meta[^>]+(?:property|name)=["']twitter:image["'][^>]*>/gi,
-    `<meta property="twitter:image" content="${safeOgImageUrl}" />`,
+    `<meta name="twitter:image" content="${safeOgImageUrl}" />`,
     "content",
     safeOgImageUrl,
   );
   upsertTag(
     /<meta[^>]+(?:property|name)=["']twitter:url["'][^>]*>/gi,
-    `<meta property="twitter:url" content="${safeCanonicalUrl}" />`,
+    `<meta name="twitter:url" content="${safeCanonicalUrl}" />`,
     "content",
     safeCanonicalUrl,
   );
@@ -319,10 +330,19 @@ export async function setupVite(app: Express, server: Server) {
       const meta = await resolveMetaForUrl(url);
       template = injectMeta(template, meta);
       const page = await vite.transformIndexHtml(url, template);
-      res
-        .status(isKnown ? 200 : 404)
-        .set({ "Content-Type": "text/html" })
-        .end(page);
+
+      const status = isKnown ? 200 : 404;
+      const robotsDirective =
+        status === 404 ? NOINDEX_ROBOTS : (meta.robots ?? DEFAULT_ROBOTS);
+      const shouldSetXRobots =
+        status === 404 || robotsDirective.toLowerCase().includes("noindex");
+
+      const headers: Record<string, string> = { "Content-Type": "text/html" };
+      if (shouldSetXRobots) {
+        headers["X-Robots-Tag"] = robotsDirective;
+      }
+
+      res.status(status).set(headers).end(page);
     } catch (e) {
       vite.ssrFixStacktrace(e as Error);
       next(e);
@@ -409,14 +429,26 @@ export function serveStatic(app: Express) {
       );
       const meta = await resolveMetaForUrl(req.originalUrl);
       template = injectMeta(template, meta);
+
+      const status = isKnown ? 200 : 404;
+      const robotsDirective =
+        status === 404 ? NOINDEX_ROBOTS : (meta.robots ?? DEFAULT_ROBOTS);
+      const shouldSetXRobots =
+        status === 404 || robotsDirective.toLowerCase().includes("noindex");
+
+      const headers: Record<string, string> = {
+        "Content-Type": "text/html",
+        "Cache-Control": "no-store, no-cache, must-revalidate, max-age=0",
+        Pragma: "no-cache",
+        Expires: "0",
+      };
+      if (shouldSetXRobots) {
+        headers["X-Robots-Tag"] = robotsDirective;
+      }
+
       res
-        .status(isKnown ? 200 : 404)
-        .set({
-          "Content-Type": "text/html",
-          "Cache-Control": "no-store, no-cache, must-revalidate, max-age=0",
-          Pragma: "no-cache",
-          Expires: "0",
-        })
+        .status(status)
+        .set(headers)
         .send(template);
     } catch (error) {
       next(error);

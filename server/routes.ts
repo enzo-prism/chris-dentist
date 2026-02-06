@@ -2,7 +2,7 @@ import type { Express, Request, Response } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertAppointmentSchema, insertContactMessageSchema, insertNewsletterSubscriptionSchema } from "@shared/schema";
-import { seoByPath } from "@shared/seo";
+import { buildExcerpt, seoByPath } from "@shared/seo";
 import { getLegacyRedirectPath } from "@shared/redirects";
 import { ZodError } from "zod";
 import { fromZodError } from "zod-validation-error";
@@ -38,6 +38,15 @@ function lastmodFromPrerendered(route: string): string | null {
   } catch {
     return null;
   }
+}
+
+function escapeXml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
 }
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -136,12 +145,13 @@ Disallow: /
       let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
       xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
       
-      const noindexPaths = new Set<string>([
-        "/thank-you",
-        "/analytics",
-        "/ga-test",
-        "/zoom-whitening/schedule",
-      ]);
+      const noindexPaths = new Set<string>(
+        Object.values(seoByPath)
+          .filter((entry) =>
+            (entry.robots ?? "").toLowerCase().includes("noindex"),
+          )
+          .map((entry) => entry.canonicalPath),
+      );
 
       const priorityByPath: Record<string, string> = {
         "/": "1.0",
@@ -250,6 +260,67 @@ Disallow: /
     } catch (error) {
       console.error("Error generating sitemap:", error);
       res.status(500).send("Error generating sitemap");
+    }
+  });
+
+  // RSS feed route
+  app.get("/rss.xml", async (_req: Request, res: Response) => {
+    try {
+      const canonicalBase = "https://www.chriswongdds.com";
+      const blogSeo = seoByPath["/blog"];
+
+      const posts = (await storage.getBlogPosts()).slice();
+      posts.sort((a, b) => {
+        const aTime = Date.parse(a.date);
+        const bTime = Date.parse(b.date);
+        if (Number.isNaN(aTime) && Number.isNaN(bTime)) return 0;
+        if (Number.isNaN(aTime)) return 1;
+        if (Number.isNaN(bTime)) return -1;
+        return bTime - aTime;
+      });
+
+      const channelTitle = blogSeo?.title ?? "Dental Health Blog";
+      const channelDescription = blogSeo?.description ?? "";
+      const channelLink = `${canonicalBase}/blog`;
+
+      const itemsXml = posts
+        .map((post) => {
+          const link = `${canonicalBase}/blog/${post.slug}`;
+          const parsedDate = Date.parse(post.date);
+          const pubDateXml = Number.isNaN(parsedDate)
+            ? ""
+            : `\n      <pubDate>${new Date(parsedDate).toUTCString()}</pubDate>`;
+          const description = buildExcerpt(post.content);
+
+          return `    <item>
+      <title>${escapeXml(post.title)}</title>
+      <link>${escapeXml(link)}</link>
+      <guid isPermaLink="true">${escapeXml(link)}</guid>${pubDateXml}
+      <description>${escapeXml(description)}</description>
+    </item>`;
+        })
+        .join("\n");
+
+      const rss = `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>${escapeXml(channelTitle)}</title>
+    <link>${escapeXml(channelLink)}</link>
+    <description>${escapeXml(channelDescription)}</description>
+${itemsXml ? `${itemsXml}\n` : ""}  </channel>
+</rss>`;
+
+      res.header("Content-Type", "application/rss+xml; charset=utf-8");
+      res.header(
+        "Cache-Control",
+        "no-store, no-cache, must-revalidate, max-age=0",
+      );
+      res.header("Pragma", "no-cache");
+      res.header("Expires", "0");
+      res.send(rss);
+    } catch (error) {
+      console.error("Error generating rss feed:", error);
+      res.status(500).send("Error generating rss feed");
     }
   });
 

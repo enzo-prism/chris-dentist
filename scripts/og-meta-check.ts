@@ -34,7 +34,7 @@ assertHas(/property=["']og:title["']/i, "og:title tag");
 assertHas(/property=["']og:description["']/i, "og:description tag");
 assertHas(/property=["']og:url["']/i, "og:url tag");
 assertHas(/rel=["']canonical["']/i, "canonical tag");
-assertHas(/property=["']twitter:image["']/i, "twitter:image tag");
+assertHas(/name=["']twitter:image["']/i, "twitter:image tag");
 assertHas(/<title>Invite Only - Whitening Appointment Schedule<\/title>/i, "title tag");
 assertHas(/name=["']description["']/i, "meta description tag");
 assertAbsent(/__OG_IMAGE__/i, "og image placeholder");

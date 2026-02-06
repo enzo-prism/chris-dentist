@@ -1,6 +1,6 @@
 import { Helmet } from "@/lib/helmet";
 import { drWongImages } from "@/lib/imageUrls";
-import { getSeoForPath, normalizePathname } from "@/lib/seo";
+import { DEFAULT_ROBOTS, getSeoForPath, normalizePathname } from "@/lib/seo";
 import { useLocation } from "wouter";
 
 interface MetaTagsProps {
@@ -20,7 +20,7 @@ export default function MetaTags({
   canonicalPath,
   url,
   type = "website",
-  robots = "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1",
+  robots,
 }: MetaTagsProps) {
   const [location] = useLocation();
   const normalizedLocation = normalizePathname(location || "/");
@@ -48,6 +48,8 @@ export default function MetaTags({
     ? resolvedImage
     : `${defaultOrigin}${resolvedImage.startsWith("/") ? resolvedImage : `/${resolvedImage}`}`;
 
+  const resolvedRobots = robots ?? routeSeo.robots ?? DEFAULT_ROBOTS;
+
   const isServer = typeof window === "undefined";
   
   return (
@@ -62,7 +64,7 @@ export default function MetaTags({
       )}
       
       {/* SEO and duplicate content prevention */}
-      <meta name="robots" content={robots} />
+      <meta name="robots" content={resolvedRobots} />
       {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
       
       {/* Open Graph / Facebook */}
@@ -73,11 +75,11 @@ export default function MetaTags({
       <meta property="og:image" content={fullImageUrl} />
       
       {/* Twitter */}
-      <meta property="twitter:card" content="summary_large_image" />
-      <meta property="twitter:url" content={normalizedUrl} />
-      <meta property="twitter:title" content={resolvedTitle} />
-      <meta property="twitter:description" content={resolvedDescription} />
-      <meta property="twitter:image" content={fullImageUrl} />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:url" content={normalizedUrl} />
+      <meta name="twitter:title" content={resolvedTitle} />
+      <meta name="twitter:description" content={resolvedDescription} />
+      <meta name="twitter:image" content={fullImageUrl} />
     </Helmet>
   );
 }

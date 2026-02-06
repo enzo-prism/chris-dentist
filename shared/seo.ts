@@ -5,7 +5,12 @@ export type SeoDefinition = {
   description: string;
   canonicalPath: string;
   ogImage?: string;
+  robots?: string;
 };
+
+export const DEFAULT_ROBOTS =
+  "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1";
+export const NOINDEX_ROBOTS = "noindex, nofollow, noarchive";
 
 const DEFAULT_OG_IMAGE = "/images/dr_wong_polaroids.png";
 
@@ -138,6 +143,7 @@ export const seoByPath: Record<string, SeoDefinition> = {
       "Private scheduling page for invited patients booking a complimentary in-office ZOOM! Whitening session with photo and video capture.",
     canonicalPath: "/zoom-whitening/schedule",
     ogImage: "https://i.imgur.com/qK5nPtS.png",
+    robots: NOINDEX_ROBOTS,
   },
   "/teeth-whitening-palo-alto": {
     title: "Palo Alto Teeth Whitening | In-Office & Take-Home Options | Christopher B. Wong, DDS",
@@ -300,6 +306,7 @@ export const seoByPath: Record<string, SeoDefinition> = {
       "Thank you for scheduling your appointment with Dr. Wong's dental practice in Palo Alto. We look forward to providing exceptional care at your upcoming visit.",
     canonicalPath: "/thank-you",
     ogImage: DEFAULT_OG_IMAGE,
+    robots: NOINDEX_ROBOTS,
   },
   "/analytics": {
     title: "Analytics Dashboard | Practice Performance Metrics | Christopher B. Wong, DDS",
@@ -307,12 +314,14 @@ export const seoByPath: Record<string, SeoDefinition> = {
       "Secure analytics dashboard showing practice performance metrics, marketing ROI, and patient engagement data for Dr. Wong's dental practice.",
     canonicalPath: "/analytics",
     ogImage: DEFAULT_OG_IMAGE,
+    robots: NOINDEX_ROBOTS,
   },
   "/ga-test": {
     title: "Google Analytics Test Page",
     description: "Internal testing page for Google Analytics events.",
     canonicalPath: "/ga-test",
     ogImage: DEFAULT_OG_IMAGE,
+    robots: NOINDEX_ROBOTS,
   },
 };
 
@@ -321,18 +330,23 @@ const DEFAULT_SEO: SeoDefinition = {
   description: seoByPath["/"].description,
   canonicalPath: "/",
   ogImage: DEFAULT_OG_IMAGE,
+  robots: DEFAULT_ROBOTS,
 };
 
 export function getSeoForPath(pathname: string): SeoDefinition {
   const normalized = normalizePathname(pathname);
   const entry = seoByPath[normalized];
   if (entry) {
-    return entry;
+    return {
+      ...entry,
+      robots: entry.robots ?? DEFAULT_ROBOTS,
+    };
   }
 
   return {
     ...DEFAULT_SEO,
     canonicalPath: normalized,
+    robots: DEFAULT_SEO.robots ?? DEFAULT_ROBOTS,
   };
 }
 

@@ -4,29 +4,13 @@ import React from "react";
 import { renderToString } from "react-dom/server";
 import { QueryClient } from "@tanstack/react-query";
 import { AppShell } from "../client/src/App";
-import {
-  buildExcerpt,
-  getMetaForPath,
-  type MetaDefinition,
-} from "../shared/metaContent";
+import type { BlogPost } from "../shared/schema";
+import { buildExcerpt, DEFAULT_ROBOTS, getSeoForPath } from "../shared/seo";
 import { storage } from "../server/storage";
+import { injectMeta, type HtmlMeta } from "../server/vite";
 
 // Ensure classic JSX runtimes used by tsx have React in scope.
 (globalThis as any).React = React;
-
-function escapeHtml(value: string): string {
-  return value
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
-}
-
-function injectMeta(template: string, meta: MetaDefinition): string {
-  return template
-    .replace(/__META_TITLE__/g, escapeHtml(meta.title))
-    .replace(/__META_DESCRIPTION__/g, escapeHtml(meta.description));
-}
 
 function minifyHtml(html: string): string {
   return html
@@ -39,6 +23,40 @@ function minifyHtml(html: string): string {
 function routeToFilename(route: string): string {
   if (route === "/") return "index.html";
   return `${route.replace(/^\//, "").replace(/\//g, "_")}.html`;
+}
+
+function resolveHtmlMetaForRoute(
+  route: string,
+  blogPosts: readonly BlogPost[],
+): HtmlMeta {
+  const defaultSeo = getSeoForPath("/");
+  const fallbackOgImage = defaultSeo.ogImage ?? "/images/dr_wong_polaroids.png";
+
+  if (route.startsWith("/blog/") && route !== "/blog") {
+    const slug = route.slice("/blog/".length);
+    const post = blogPosts.find((candidate) => candidate.slug === slug);
+
+    if (post) {
+      return {
+        title: `${post.title} | Christopher B. Wong, DDS`,
+        description: buildExcerpt(post.content),
+        canonicalPath: route,
+        ogImage: post.image || fallbackOgImage,
+        type: "article",
+        robots: DEFAULT_ROBOTS,
+      };
+    }
+  }
+
+  const seo = getSeoForPath(route);
+  return {
+    title: seo.title,
+    description: seo.description,
+    canonicalPath: seo.canonicalPath,
+    ogImage: seo.ogImage ?? fallbackOgImage,
+    type: "website",
+    robots: seo.robots,
+  };
 }
 
 async function main(): Promise<void> {
@@ -157,20 +175,7 @@ async function main(): Promise<void> {
       }
     }
 
-    let meta: MetaDefinition;
-    if (route.startsWith("/blog/") && route !== "/blog") {
-      const slug = route.slice("/blog/".length);
-      const post = blogPosts.find((candidate) => candidate.slug === slug);
-      meta = post
-        ? {
-          title: `${post.title} | Dr. Wong DDS`,
-            description: buildExcerpt(post.content),
-          }
-        : getMetaForPath("/blog");
-    } else {
-      meta = getMetaForPath(route);
-    }
-
+    const meta = resolveHtmlMetaForRoute(route, blogPosts);
     html = injectMeta(html, meta);
     html = minifyHtml(html);
 
