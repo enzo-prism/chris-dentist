@@ -48,6 +48,8 @@ const TestimonialCard = ({ testimonial, index = 0, disableAnimation = false }: T
             <img
               src={image}
               alt={name}
+              width={48}
+              height={48}
               className="w-12 h-12 rounded-full object-cover mr-3 border border-white/60 shadow-sm"
               loading="lazy"
               decoding="async"

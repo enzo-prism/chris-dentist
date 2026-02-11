@@ -76,6 +76,8 @@ const OptimizedImage = ({
         <img
           src={placeholder}
           alt=""
+          width={width ?? 1200}
+          height={height ?? 900}
           className="absolute inset-0 w-full h-full object-cover blur-sm"
           style={{ objectPosition }}
           aria-hidden="true"
@@ -86,8 +88,8 @@ const OptimizedImage = ({
         alt={alt}
         srcSet={srcSet}
         sizes={sizes}
-        width={width}
-        height={height}
+        width={width ?? 1200}
+        height={height ?? 900}
         loading={priority ? 'eager' : 'lazy'}
         decoding={priority ? 'sync' : 'async'}
         {...(fetchPriority ? ({ fetchpriority: fetchPriority } as any) : {})}

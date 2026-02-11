@@ -13,21 +13,28 @@ import PageBreadcrumbs from "@/components/common/PageBreadcrumbs";
 import { Link } from "wouter";
 import {
   buildBreadcrumbSchema,
-  buildOrganizationSchema,
   type StructuredDataNode,
+  absoluteUrl,
 } from "@/lib/structuredData";
 
 const Contact = () => {
-  const contactOrganization: StructuredDataNode = {
-    ...buildOrganizationSchema(),
-    hasMap: officeInfo.mapUrl,
+  const contactPageSchema: StructuredDataNode = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${absoluteUrl("/contact")}#webpage`,
+    name: "Contact Our Palo Alto Dental Office",
+    url: absoluteUrl("/contact"),
+    description: pageDescriptions.contact,
+    about: {
+      "@id": `${absoluteUrl("/")}#organization`,
+    },
   };
   const breadcrumbItems = [
     { name: "Home", path: "/" },
     { name: "Contact", path: "/contact" },
   ];
   const contactBreadcrumbs = buildBreadcrumbSchema(breadcrumbItems);
-  const contactSchemas: StructuredDataNode[] = [contactOrganization];
+  const contactSchemas: StructuredDataNode[] = [contactPageSchema];
   if (contactBreadcrumbs) {
     contactSchemas.push(contactBreadcrumbs);
   }

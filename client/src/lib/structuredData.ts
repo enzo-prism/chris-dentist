@@ -73,6 +73,14 @@ export const absoluteUrl = (path = "/") => {
   return `${base}${safePath}`;
 };
 
+export const schemaId = (path: string, fragment: string) => {
+  const normalizedPath = path.startsWith("/") ? path : `/${path}`;
+  const normalizedFragment = fragment.startsWith("#")
+    ? fragment.slice(1)
+    : fragment;
+  return `${absoluteUrl(normalizedPath)}#${normalizedFragment}`;
+};
+
 export const buildOrganizationSchema = (options?: {
   services?: Pick<Service, "title" | "description" | "slug">[];
   aggregateRating?: {
@@ -85,7 +93,7 @@ export const buildOrganizationSchema = (options?: {
   const schema: StructuredDataNode = {
     "@context": "https://schema.org",
     "@type": "Dentist",
-    "@id": `${baseUrl}/#organization`,
+    "@id": schemaId("/", "organization"),
     name: officeInfo.name,
     description:
       "Premier Palo Alto dentist Dr. Christopher Wong provides exceptional dental care across preventive, restorative, and cosmetic dentistry.",
@@ -170,13 +178,12 @@ export const buildOrganizationSchema = (options?: {
 };
 
 export const buildPersonSchema = () => {
-  const baseUrl = getBaseUrl();
   const profileUrl = absoluteUrl(doctorInfo.profileUrl ?? "/about");
   const imageUrl = doctorInfo.image ? absoluteUrl(doctorInfo.image) : undefined;
   return {
     "@context": "https://schema.org",
     "@type": "Person",
-    "@id": `${baseUrl}/#person-dr-wong`,
+    "@id": schemaId("/", "person-dr-wong"),
     name: doctorInfo.name,
     alternateName: doctorInfo.alternateNames,
     description: doctorInfo.bio,
@@ -187,7 +194,7 @@ export const buildPersonSchema = () => {
     ...(imageUrl ? { image: imageUrl } : {}),
     ...(doctorInfo.sameAs?.length ? { sameAs: doctorInfo.sameAs } : {}),
     worksFor: {
-      "@id": `${baseUrl}/#organization`,
+      "@id": schemaId("/", "organization"),
     },
     alumniOf: [
       {
@@ -203,16 +210,15 @@ export const buildPersonSchema = () => {
 };
 
 export const buildWebSiteSchema = () => {
-  const baseUrl = getBaseUrl();
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "@id": `${baseUrl}/#website`,
+    "@id": schemaId("/", "website"),
     name: officeInfo.name,
     alternateName: "Dr. Christopher Wong Palo Alto Dentist",
     url: absoluteUrl("/"),
     publisher: {
-      "@id": `${baseUrl}/#organization`,
+      "@id": schemaId("/", "organization"),
     },
   };
 };
@@ -231,12 +237,12 @@ export const buildServiceSchema = (service: {
   const schema: StructuredDataNode = {
     "@context": "https://schema.org",
     "@type": "Service",
-    "@id": `${url}#service`,
+    "@id": schemaId(path, "service"),
     name: service.name,
     description: service.description,
     serviceType: service.serviceType ?? service.name,
     provider: {
-      "@id": `${baseUrl}/#organization`,
+      "@id": schemaId("/", "organization"),
     },
     areaServed: (service.areaServed ?? DEFAULT_AREA_SERVED).map((city) => ({
       "@type": "City",

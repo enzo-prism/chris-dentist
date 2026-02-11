@@ -14,9 +14,7 @@ import FAQSection from "@/components/common/FAQSection";
 import {
   buildBreadcrumbSchema,
   buildFAQSchema,
-  buildItemListSchema,
-  buildOrganizationSchema,
-  type FAQEntry,
+  buildItemListSchema,  type FAQEntry,
 } from "@/lib/structuredData";
 
 const preventiveDentistryFaqs: FAQEntry[] = [
@@ -53,9 +51,6 @@ const Services = () => {
   });
 
   const servicesSchemas = [
-    buildOrganizationSchema({
-      services: services ?? [],
-    }),
   ];
 
   const itemListSchema =

@@ -6,6 +6,24 @@ export type SeoDefinition = {
   canonicalPath: string;
   ogImage?: string;
   robots?: string;
+  indexable: boolean;
+  priority: number;
+  changefreq: "daily" | "weekly" | "monthly";
+  lastmod?: string;
+  schemaType?: "WebPage" | "Service" | "Article" | "LocalBusiness";
+};
+
+type SeoDefinitionInput = Omit<
+  SeoDefinition,
+  "indexable" | "priority" | "changefreq"
+> &
+  Partial<Pick<SeoDefinition, "indexable" | "priority" | "changefreq">>;
+
+export type SitemapEntry = {
+  canonicalPath: string;
+  priority: number;
+  changefreq: "daily" | "weekly" | "monthly";
+  lastmod?: string;
 };
 
 export const DEFAULT_ROBOTS =
@@ -13,6 +31,8 @@ export const DEFAULT_ROBOTS =
 export const NOINDEX_ROBOTS = "noindex, nofollow, noarchive";
 
 const DEFAULT_OG_IMAGE = "/images/dr_wong_polaroids.png";
+const DEFAULT_PRIORITY = 0.7;
+const DEFAULT_CHANGEFREQ: SitemapEntry["changefreq"] = "monthly";
 
 export function normalizePathname(pathname: string): string {
   const trimmed = pathname.split(/[?#]/)[0] || "/";
@@ -22,7 +42,7 @@ export function normalizePathname(pathname: string): string {
   return trimmed;
 }
 
-export const seoByPath: Record<string, SeoDefinition> = {
+const seoByPathSource: Record<string, SeoDefinitionInput> = {
   "/": {
     title:
       "Palo Alto Dentist | Christopher B. Wong, DDS | Cosmetic & Family Dentistry",
@@ -325,29 +345,158 @@ export const seoByPath: Record<string, SeoDefinition> = {
   },
 };
 
+const PRIORITY_OVERRIDES: Record<string, number> = {
+  "/": 1.0,
+  "/services": 0.9,
+  "/schedule": 0.9,
+  "/blog": 0.8,
+  "/about": 0.8,
+  "/invisalign": 0.9,
+  "/invisalign/resources": 0.7,
+  "/dental-veneers": 0.9,
+  "/dental-implants": 0.9,
+  "/emergency-dental": 1.0,
+  "/locations": 0.8,
+  "/dentist-menlo-park": 0.8,
+  "/dentist-stanford": 0.8,
+  "/dentist-mountain-view": 0.8,
+  "/dentist-los-altos": 0.8,
+  "/dentist-los-altos-hills": 0.8,
+  "/dentist-sunnyvale": 0.8,
+  "/dentist-cupertino": 0.8,
+  "/dentist-redwood-city": 0.8,
+  "/dentist-atherton": 0.8,
+  "/dentist-redwood-shores": 0.8,
+};
+
+const CHANGEFREQ_OVERRIDES: Partial<
+  Record<string, SitemapEntry["changefreq"]>
+> = {
+  "/": "weekly",
+  "/services": "weekly",
+  "/schedule": "weekly",
+  "/blog": "weekly",
+};
+
+const LASTMOD_OVERRIDES: Partial<Record<string, string>> = {
+  "/dentist-menlo-park": "2026-02-01",
+  "/dentist-stanford": "2026-02-01",
+  "/dentist-mountain-view": "2026-02-01",
+  "/dentist-los-altos": "2026-02-01",
+  "/dentist-los-altos-hills": "2026-02-01",
+  "/dentist-sunnyvale": "2026-02-01",
+  "/dentist-cupertino": "2026-02-01",
+  "/dentist-redwood-city": "2026-02-01",
+  "/dentist-atherton": "2026-02-01",
+  "/dentist-redwood-shores": "2026-02-01",
+  "/locations": "2026-02-01",
+};
+
+function resolveIndexable(entry: SeoDefinitionInput): boolean {
+  if (entry.indexable !== undefined) return entry.indexable;
+  const robotsDirective = (entry.robots ?? DEFAULT_ROBOTS).toLowerCase();
+  return !robotsDirective.includes("noindex");
+}
+
+function resolveSchemaType(pathname: string): SeoDefinition["schemaType"] {
+  if (pathname.startsWith("/blog/")) return "Article";
+  if (
+    pathname.startsWith("/dentist-") ||
+    pathname === "/locations" ||
+    pathname === "/contact"
+  ) {
+    return "LocalBusiness";
+  }
+  if (
+    pathname === "/services" ||
+    pathname.includes("dentistry") ||
+    pathname.includes("whitening") ||
+    pathname.includes("veneers") ||
+    pathname.includes("implants") ||
+    pathname.includes("invisalign") ||
+    pathname.includes("emergency")
+  ) {
+    return "Service";
+  }
+  return "WebPage";
+}
+
+export const seoByPath: Record<string, SeoDefinition> = Object.fromEntries(
+  Object.entries(seoByPathSource).map(([path, entry]) => {
+    const indexable = resolveIndexable(entry);
+    return [
+      path,
+      {
+        ...entry,
+        robots: entry.robots ?? (indexable ? DEFAULT_ROBOTS : NOINDEX_ROBOTS),
+        indexable,
+        priority: entry.priority ?? PRIORITY_OVERRIDES[path] ?? DEFAULT_PRIORITY,
+        changefreq:
+          entry.changefreq ?? CHANGEFREQ_OVERRIDES[path] ?? DEFAULT_CHANGEFREQ,
+        lastmod: entry.lastmod ?? LASTMOD_OVERRIDES[path],
+        schemaType: entry.schemaType ?? resolveSchemaType(path),
+      },
+    ];
+  }),
+) as Record<string, SeoDefinition>;
+
 const DEFAULT_SEO: SeoDefinition = {
   title: seoByPath["/"].title,
   description: seoByPath["/"].description,
   canonicalPath: "/",
   ogImage: DEFAULT_OG_IMAGE,
   robots: DEFAULT_ROBOTS,
+  indexable: true,
+  priority: PRIORITY_OVERRIDES["/"] ?? DEFAULT_PRIORITY,
+  changefreq: CHANGEFREQ_OVERRIDES["/"] ?? DEFAULT_CHANGEFREQ,
+  schemaType: "WebPage",
 };
 
 export function getSeoForPath(pathname: string): SeoDefinition {
   const normalized = normalizePathname(pathname);
   const entry = seoByPath[normalized];
   if (entry) {
-    return {
-      ...entry,
-      robots: entry.robots ?? DEFAULT_ROBOTS,
-    };
+    return entry;
   }
 
   return {
     ...DEFAULT_SEO,
     canonicalPath: normalized,
-    robots: DEFAULT_SEO.robots ?? DEFAULT_ROBOTS,
+    schemaType: resolveSchemaType(normalized),
   };
+}
+
+export function getIndexablePaths(): string[] {
+  const seen = new Set<string>();
+  const paths: string[] = [];
+
+  Object.values(seoByPath).forEach((entry) => {
+    if (!entry.indexable) return;
+    if (seen.has(entry.canonicalPath)) return;
+    seen.add(entry.canonicalPath);
+    paths.push(entry.canonicalPath);
+  });
+
+  return paths;
+}
+
+export function getSitemapEntries(): SitemapEntry[] {
+  const seen = new Set<string>();
+  const entries: SitemapEntry[] = [];
+
+  Object.values(seoByPath).forEach((entry) => {
+    if (!entry.indexable) return;
+    if (seen.has(entry.canonicalPath)) return;
+    seen.add(entry.canonicalPath);
+    entries.push({
+      canonicalPath: entry.canonicalPath,
+      priority: entry.priority,
+      changefreq: entry.changefreq,
+      lastmod: entry.lastmod,
+    });
+  });
+
+  return entries;
 }
 
 export function buildExcerpt(text: string, limit = 160): string {

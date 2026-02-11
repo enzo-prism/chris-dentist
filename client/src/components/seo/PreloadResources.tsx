@@ -23,8 +23,8 @@ const PreloadResources = () => {
         <link
           rel="preload"
           as="image"
-          href="https://res.cloudinary.com/dhqpqfw6w/image/upload/v1762989226/Post-11_nohz6f.webp"
-          type="image/webp"
+          href="/images/hero-office-1280.avif"
+          type="image/avif"
         />
       )}
       {isInvisalign && (

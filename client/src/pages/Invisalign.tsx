@@ -12,11 +12,7 @@ import FAQSection from "@/components/common/FAQSection";
 import RelatedServices, {
   type RelatedServiceLink,
 } from "@/components/common/RelatedServices";
-import {
-  buildOrganizationSchema,
-  buildPersonSchema,
-  buildWebSiteSchema,
-  buildBreadcrumbSchema,
+import {  buildBreadcrumbSchema,
   buildHowToSchema,
   buildFAQSchema,
   buildServiceSchema,
@@ -265,9 +261,6 @@ const Invisalign = () => {
   ];
 
   const pageSchemas = [
-    buildOrganizationSchema(),
-    buildWebSiteSchema(),
-    buildPersonSchema(),
     serviceSchema,
   ];
 

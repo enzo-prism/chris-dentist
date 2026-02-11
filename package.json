@@ -12,6 +12,8 @@
     "build": "vite build && tsx scripts/prerender.tsx && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist",
     "start": "NODE_ENV=production node dist/index.js",
     "check:business-info": "tsx scripts/check-business-info.ts",
+    "check:seo-regression": "tsx scripts/seo-regression.ts",
+    "check:lighthouse-budget": "node scripts/lighthouse-budget.mjs",
     "check": "tsx scripts/check-business-info.ts && tsc",
     "db:push": "drizzle-kit push"
   },

@@ -2,7 +2,7 @@ import type { Express, Request, Response } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertAppointmentSchema, insertContactMessageSchema, insertNewsletterSubscriptionSchema } from "@shared/schema";
-import { buildExcerpt, seoByPath } from "@shared/seo";
+import { buildExcerpt, getSitemapEntries, seoByPath } from "@shared/seo";
 import { getLegacyRedirectPath } from "@shared/redirects";
 import { ZodError } from "zod";
 import { fromZodError } from "zod-validation-error";
@@ -63,48 +63,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
 Allow: /
 Crawl-delay: 1
 
-# Sitemap location
 Sitemap: https://www.chriswongdds.com/sitemap.xml
-
-# Preferred host to prevent duplicate content
 Host: www.chriswongdds.com
 
-# Disallow sensitive or duplicate areas
 Disallow: /admin/
 Disallow: /api/
 Disallow: /private/
-Disallow: /*?*
-
-# Explicitly allow public pages
-Allow: /about
-Allow: /services
-Allow: /patient-resources
-Allow: /testimonials
-Allow: /patient-stories
-Allow: /blog
-Allow: /contact
-Allow: /schedule
-Allow: /zoom-whitening
-Allow: /dental-veneers
-Allow: /dental-implants
-Allow: /invisalign
-Allow: /invisalign/resources
-Allow: /emergency-dental
-Allow: /privacy-policy
-Allow: /terms
-Allow: /hipaa
-Allow: /accessibility
-Allow: /dentist-menlo-park
-Allow: /dentist-stanford
-Allow: /dentist-mountain-view
-Allow: /dentist-los-altos
-Allow: /dentist-los-altos-hills
-Allow: /dentist-sunnyvale
-Allow: /dentist-cupertino
-Allow: /dentist-redwood-city
-Allow: /dentist-atherton
-Allow: /dentist-redwood-shores
-Allow: /locations
+Disallow: /analytics
+Disallow: /ga-test
+Disallow: /thank-you
+Disallow: /zoom-whitening/schedule
 
 User-agent: Googlebot
 Crawl-delay: 1
@@ -147,56 +115,9 @@ Disallow: /
       
       const noindexPaths = new Set<string>(
         Object.values(seoByPath)
-          .filter((entry) =>
-            (entry.robots ?? "").toLowerCase().includes("noindex"),
-          )
+          .filter((entry) => !entry.indexable)
           .map((entry) => entry.canonicalPath),
       );
-
-      const priorityByPath: Record<string, string> = {
-        "/": "1.0",
-        "/services": "0.9",
-        "/schedule": "0.9",
-        "/blog": "0.8",
-        "/about": "0.8",
-        "/invisalign": "0.9",
-        "/invisalign/resources": "0.7",
-        "/dental-veneers": "0.9",
-        "/dental-implants": "0.9",
-        "/emergency-dental": "1.0",
-        "/locations": "0.8",
-        "/dentist-menlo-park": "0.8",
-        "/dentist-stanford": "0.8",
-        "/dentist-mountain-view": "0.8",
-        "/dentist-los-altos": "0.8",
-        "/dentist-los-altos-hills": "0.8",
-        "/dentist-sunnyvale": "0.8",
-        "/dentist-cupertino": "0.8",
-        "/dentist-redwood-city": "0.8",
-        "/dentist-atherton": "0.8",
-        "/dentist-redwood-shores": "0.8",
-      };
-
-      const changefreqByPath: Record<string, string> = {
-        "/": "weekly",
-        "/services": "weekly",
-        "/schedule": "weekly",
-        "/blog": "weekly",
-      };
-
-      const lastUpdatedByPath: Record<string, string> = {
-        "/dentist-menlo-park": "2026-02-01",
-        "/dentist-stanford": "2026-02-01",
-        "/dentist-mountain-view": "2026-02-01",
-        "/dentist-los-altos": "2026-02-01",
-        "/dentist-los-altos-hills": "2026-02-01",
-        "/dentist-sunnyvale": "2026-02-01",
-        "/dentist-cupertino": "2026-02-01",
-        "/dentist-redwood-city": "2026-02-01",
-        "/dentist-atherton": "2026-02-01",
-        "/dentist-redwood-shores": "2026-02-01",
-        "/locations": "2026-02-01",
-      };
 
       const included = new Set<string>();
       const addUrl = (
@@ -224,22 +145,29 @@ Disallow: /
         return resolved.split("#")[0] ?? resolved;
       };
 
-      const staticPaths = Array.from(
-        new Set(
-          Object.values(seoByPath).map((entry) => entry.canonicalPath),
-        ),
-      )
-        .map((urlPath) => resolveSitemapPath(urlPath))
-        .filter((urlPath) => urlPath && !noindexPaths.has(urlPath));
+      const staticEntries = getSitemapEntries()
+        .map((entry) => {
+          const resolvedPath = resolveSitemapPath(entry.canonicalPath);
+          return {
+            ...entry,
+            canonicalPath: resolvedPath,
+          };
+        })
+        .filter(
+          (entry) => entry.canonicalPath && !noindexPaths.has(entry.canonicalPath),
+        );
 
-      staticPaths.forEach((urlPath) => {
-        const priority = priorityByPath[urlPath] ?? "0.7";
-        const changefreq = changefreqByPath[urlPath] ?? "monthly";
+      staticEntries.forEach((entry) => {
         const lastmod =
-          lastUpdatedByPath[urlPath] ??
-          lastmodFromPrerendered(urlPath) ??
+          entry.lastmod ??
+          lastmodFromPrerendered(entry.canonicalPath) ??
           SERVER_START_LASTMOD;
-        addUrl(urlPath, priority, changefreq, lastmod);
+        addUrl(
+          entry.canonicalPath,
+          entry.priority.toFixed(1),
+          entry.changefreq,
+          lastmod,
+        );
       });
       
       // Add blog post pages as canonical routes

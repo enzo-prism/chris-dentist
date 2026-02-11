@@ -17,7 +17,11 @@ import SupplementalContent from "@/components/common/SupplementalContent";
 import PreloadResources from "@/components/seo/PreloadResources";
 import DomainRedirect from "@/components/seo/DomainRedirect";
 import StructuredData from "@/components/seo/StructuredData";
-import { buildOrganizationSchema } from "@/lib/structuredData";
+import {
+  buildOrganizationSchema,
+  buildPersonSchema,
+  buildWebSiteSchema,
+} from "@/lib/structuredData";
 import Home from "@/pages/Home";
 import About from "@/pages/About";
 import Services from "@/pages/Services";
@@ -56,11 +60,12 @@ import DentistRedwoodCity from "@/pages/DentistRedwoodCity";
 import DentistAtherton from "@/pages/DentistAtherton";
 import DentistRedwoodShores from "@/pages/DentistRedwoodShores";
 import Locations from "@/pages/Locations";
-import AnalyticsMinimal from "@/pages/AnalyticsMinimal";
-import GATestPage from "@/pages/GATestPage";
 import Blog from "@/pages/Blog";
 import BlogPost from "@/pages/BlogPost";
 import PatientStories from "@/pages/PatientStories";
+
+const AnalyticsMinimal = React.lazy(() => import("@/pages/AnalyticsMinimal"));
+const GATestPage = React.lazy(() => import("@/pages/GATestPage"));
 
 function ScrollToTop() {
   const [location] = useLocation();
@@ -78,52 +83,54 @@ function Router() {
       <ScrollToTop />
       <Header />
       <main style={{ paddingTop: 'var(--header-height, 136px)' }}>
-        <Switch>
-          <Route path="/" component={Home} />
-          <Route path="/about" component={About} />
-          <Route path="/services" component={Services} />
-          <Route path="/patient-resources" component={PatientResources} />
-          <Route path="/testimonials" component={Testimonials} />
-          <Route path="/patient-stories" component={PatientStories} />
-          <Route path="/contact" component={Contact} />
-          <Route path="/schedule" component={Schedule} />
-          <Route path="/blog" component={Blog} />
-          <Route path="/thank-you" component={ThankYou} />
-          <Route path="/privacy-policy" component={PrivacyPolicy} />
-          <Route path="/terms" component={TermsOfService} />
-          <Route path="/hipaa" component={HipaaNotice} />
-          <Route path="/accessibility" component={Accessibility} />
-          <Route path="/dental-veneers" component={DentalVeneers} />
-          <Route path="/dental-implants" component={DentalImplants} />
-          <Route path="/zoom-whitening" component={ZoomWhitening} />
-          <Route path="/preventive-dentistry" component={PreventiveDentistry} />
-          <Route path="/restorative-dentistry" component={RestorativeDentistry} />
-          <Route path="/pediatric-dentistry" component={PediatricDentistry} />
-          <Route path="/teeth-whitening-palo-alto" component={TeethWhiteningPaloAlto} />
-          <Route path="/dental-cleaning-palo-alto" component={DentalCleaningPaloAlto} />
-          <Route path="/cavity-fillings-palo-alto" component={CavityFillingsPaloAlto} />
-          <Route path="/crowns-palo-alto" component={CrownsPaloAlto} />
-          <Route path="/pediatric-dentist-palo-alto" component={PediatricDentistPaloAlto} />
-          <Route path="/dentist-menlo-park" component={DentistMenloPark} />
-          <Route path="/dentist-stanford" component={DentistStanford} />
-          <Route path="/dentist-mountain-view" component={DentistMountainView} />
-          <Route path="/dentist-los-altos" component={DentistLosAltos} />
-          <Route path="/dentist-los-altos-hills" component={DentistLosAltosHills} />
-          <Route path="/dentist-sunnyvale" component={DentistSunnyvale} />
-          <Route path="/dentist-cupertino" component={DentistCupertino} />
-          <Route path="/dentist-redwood-city" component={DentistRedwoodCity} />
-          <Route path="/dentist-atherton" component={DentistAtherton} />
-          <Route path="/dentist-redwood-shores" component={DentistRedwoodShores} />
-          <Route path="/locations" component={Locations} />
-          <Route path="/invisalign" component={Invisalign} />
-          <Route path="/invisalign/resources" component={InvisalignResources} />
-          <Route path="/emergency-dental" component={EmergencyDental} />
-          <Route path="/zoom-whitening/schedule" component={ZoomWhiteningSchedule} />
-          <Route path="/analytics" component={AnalyticsMinimal} />
-          <Route path="/ga-test" component={GATestPage} />
-          <Route path="/blog/:slug" component={BlogPost} />
-          <Route component={NotFound} />
-        </Switch>
+        <React.Suspense fallback={<div className="min-h-[40vh]" />}>
+          <Switch>
+            <Route path="/" component={Home} />
+            <Route path="/about" component={About} />
+            <Route path="/services" component={Services} />
+            <Route path="/patient-resources" component={PatientResources} />
+            <Route path="/testimonials" component={Testimonials} />
+            <Route path="/patient-stories" component={PatientStories} />
+            <Route path="/contact" component={Contact} />
+            <Route path="/schedule" component={Schedule} />
+            <Route path="/blog" component={Blog} />
+            <Route path="/thank-you" component={ThankYou} />
+            <Route path="/privacy-policy" component={PrivacyPolicy} />
+            <Route path="/terms" component={TermsOfService} />
+            <Route path="/hipaa" component={HipaaNotice} />
+            <Route path="/accessibility" component={Accessibility} />
+            <Route path="/dental-veneers" component={DentalVeneers} />
+            <Route path="/dental-implants" component={DentalImplants} />
+            <Route path="/zoom-whitening" component={ZoomWhitening} />
+            <Route path="/preventive-dentistry" component={PreventiveDentistry} />
+            <Route path="/restorative-dentistry" component={RestorativeDentistry} />
+            <Route path="/pediatric-dentistry" component={PediatricDentistry} />
+            <Route path="/teeth-whitening-palo-alto" component={TeethWhiteningPaloAlto} />
+            <Route path="/dental-cleaning-palo-alto" component={DentalCleaningPaloAlto} />
+            <Route path="/cavity-fillings-palo-alto" component={CavityFillingsPaloAlto} />
+            <Route path="/crowns-palo-alto" component={CrownsPaloAlto} />
+            <Route path="/pediatric-dentist-palo-alto" component={PediatricDentistPaloAlto} />
+            <Route path="/dentist-menlo-park" component={DentistMenloPark} />
+            <Route path="/dentist-stanford" component={DentistStanford} />
+            <Route path="/dentist-mountain-view" component={DentistMountainView} />
+            <Route path="/dentist-los-altos" component={DentistLosAltos} />
+            <Route path="/dentist-los-altos-hills" component={DentistLosAltosHills} />
+            <Route path="/dentist-sunnyvale" component={DentistSunnyvale} />
+            <Route path="/dentist-cupertino" component={DentistCupertino} />
+            <Route path="/dentist-redwood-city" component={DentistRedwoodCity} />
+            <Route path="/dentist-atherton" component={DentistAtherton} />
+            <Route path="/dentist-redwood-shores" component={DentistRedwoodShores} />
+            <Route path="/locations" component={Locations} />
+            <Route path="/invisalign" component={Invisalign} />
+            <Route path="/invisalign/resources" component={InvisalignResources} />
+            <Route path="/emergency-dental" component={EmergencyDental} />
+            <Route path="/zoom-whitening/schedule" component={ZoomWhiteningSchedule} />
+            <Route path="/analytics" component={AnalyticsMinimal} />
+            <Route path="/ga-test" component={GATestPage} />
+            <Route path="/blog/:slug" component={BlogPost} />
+            <Route component={NotFound} />
+          </Switch>
+        </React.Suspense>
         <SupplementalContent />
       </main>
       <Footer />
@@ -155,7 +162,11 @@ export function AppShell({
           <Redirects />
           <PreloadResources />
           <StructuredData
-            data={buildOrganizationSchema()}
+            data={[
+              buildOrganizationSchema(),
+              buildPersonSchema(),
+              buildWebSiteSchema(),
+            ]}
             id="global-organization-schema"
           />
           <Router />

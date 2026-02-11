@@ -5,7 +5,12 @@ import { renderToString } from "react-dom/server";
 import { QueryClient } from "@tanstack/react-query";
 import { AppShell } from "../client/src/App";
 import type { BlogPost } from "../shared/schema";
-import { buildExcerpt, DEFAULT_ROBOTS, getSeoForPath } from "../shared/seo";
+import {
+  buildExcerpt,
+  DEFAULT_ROBOTS,
+  getSeoForPath,
+  seoByPath,
+} from "../shared/seo";
 import { storage } from "../server/storage";
 import { injectMeta, type HtmlMeta } from "../server/vite";
 
@@ -80,50 +85,12 @@ async function main(): Promise<void> {
     storage.getBlogPosts(),
   ]);
 
-  const marketingRoutes = [
-    "/",
-    "/about",
-    "/services",
-    "/preventive-dentistry",
-    "/restorative-dentistry",
-    "/pediatric-dentistry",
-    "/patient-resources",
-    "/testimonials",
-    "/patient-stories",
-    "/contact",
-    "/schedule",
-    "/blog",
-    "/invisalign",
-    "/invisalign/resources",
-    "/dental-veneers",
-    "/dental-implants",
-    "/emergency-dental",
-    "/zoom-whitening",
-    "/teeth-whitening-palo-alto",
-    "/dental-cleaning-palo-alto",
-    "/cavity-fillings-palo-alto",
-    "/crowns-palo-alto",
-    "/pediatric-dentist-palo-alto",
-    "/dentist-menlo-park",
-    "/dentist-stanford",
-    "/dentist-mountain-view",
-    "/dentist-los-altos",
-    "/dentist-los-altos-hills",
-    "/dentist-sunnyvale",
-    "/dentist-cupertino",
-    "/dentist-redwood-city",
-    "/dentist-atherton",
-    "/dentist-redwood-shores",
-    "/locations",
-    "/privacy-policy",
-    "/terms",
-    "/hipaa",
-    "/accessibility",
-    "/thank-you",
-  ] as const;
+  const staticRoutes = Object.values(seoByPath).map(
+    (entry) => entry.canonicalPath,
+  );
 
   const blogRoutes = blogPosts.map((post) => `/blog/${post.slug}`);
-  const routes = Array.from(new Set([...marketingRoutes, ...blogRoutes]));
+  const routes = Array.from(new Set([...staticRoutes, ...blogRoutes]));
 
   for (const route of routes) {
     const queryClient = new QueryClient({

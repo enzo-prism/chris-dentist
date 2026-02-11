@@ -6,12 +6,8 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Button } from "@/components/ui/button";
 import { officeInfo } from "@/lib/data";
 import { getSeoForPath } from "@/lib/seo";
-import {
-  buildAggregateRatingFromTestimonials,
-  buildBreadcrumbSchema,
-  buildFAQSchema,
-  buildOrganizationSchema,
-  buildReviewSchemas,
+import {  buildBreadcrumbSchema,
+  buildFAQSchema,  buildReviewSchemas,
   type StructuredDataNode,
 } from "@/lib/structuredData";
 import { Link } from "wouter";
@@ -53,12 +49,6 @@ const DentistStanford = () => {
   ];
 
   const structuredDataNodes: StructuredDataNode[] = [];
-  const aggregateRating = buildAggregateRatingFromTestimonials(familyTestimonials);
-  structuredDataNodes.push(
-    buildOrganizationSchema({
-      ...(aggregateRating ? { aggregateRating } : {}),
-    }),
-  );
   structuredDataNodes.push(...buildReviewSchemas(familyTestimonials));
   const breadcrumbSchema = buildBreadcrumbSchema(breadcrumbItems);
   const faqSchema = buildFAQSchema(faqs, "/dentist-stanford");

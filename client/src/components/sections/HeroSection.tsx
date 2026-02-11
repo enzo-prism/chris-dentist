@@ -135,11 +135,19 @@ const HeroSection = () => {
             <div className="relative rounded-2xl overflow-hidden shadow-lg ring-1 ring-white/10 mb-12">
               <picture>
                 <source
+                  type="image/avif"
+                  srcSet="/images/hero-office-640.avif 640w, /images/hero-office-960.avif 960w, /images/hero-office-1280.avif 1280w"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1280px) 60vw, 1280px"
+                />
+                <source
                   type="image/webp"
-                  srcSet="https://res.cloudinary.com/dhqpqfw6w/image/upload/v1762989226/Post-11_nohz6f.webp"
+                  srcSet="/images/hero-office-640.webp 640w, /images/hero-office-960.webp 960w, /images/hero-office-1280.webp 1280w"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1280px) 60vw, 1280px"
                 />
                 <img
-                  src="https://res.cloudinary.com/dhqpqfw6w/image/upload/v1762989226/Post-11_nohz6f.webp"
+                  src="/images/hero-office-1280.webp"
+                  srcSet="/images/hero-office-640.webp 640w, /images/hero-office-960.webp 960w, /images/hero-office-1280.webp 1280w"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1280px) 60vw, 1280px"
 	                  width={960}
 	                  height={720}
 	                  loading="eager"

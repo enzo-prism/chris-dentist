@@ -23,8 +23,6 @@ import {
 import { getTestimonialsByNames } from "@/lib/testimonials";
 import {
   buildBreadcrumbSchema,
-  buildOrganizationSchema,
-  buildPersonSchema,
 } from "@/lib/structuredData";
 
 const weddingCarouselImages = [
@@ -80,10 +78,7 @@ const About = () => {
     },
   ];
 
-  const aboutSchema = [
-    buildOrganizationSchema(),
-    buildPersonSchema(),
-  ];
+  const aboutSchema = [];
 
   const breadcrumbItems = [
     { name: "Home", path: "/" },

@@ -10,12 +10,7 @@ import { getSeoForPath } from "@/lib/seo";
 import { getTestimonialsByNames } from "@/lib/testimonials";
 import {
   buildBreadcrumbSchema,
-  buildFAQSchema,
-  buildOrganizationSchema,
-  buildPersonSchema,
-  buildServiceSchema,
-  buildWebSiteSchema,
-  type StructuredDataNode,
+  buildFAQSchema,  buildServiceSchema,  type StructuredDataNode,
 } from "@/lib/structuredData";
 import { ArrowRight, CheckCircle, Clock, MapPin, Phone, Sparkles } from "lucide-react";
 import { Link } from "wouter";
@@ -119,9 +114,6 @@ const TeethWhiteningPaloAlto = () => {
   });
 
   const structuredDataNodes: StructuredDataNode[] = [
-    buildOrganizationSchema(),
-    buildPersonSchema(),
-    buildWebSiteSchema(),
     whiteningServiceSchema,
   ];
   const breadcrumbSchema = buildBreadcrumbSchema(breadcrumbItems);

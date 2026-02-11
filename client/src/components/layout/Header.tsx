@@ -261,6 +261,8 @@ const Header = () => {
 	                  <img 
 	                    src="/logo.png" 
 	                    alt="Dr. Wong Logo" 
+	                    width={220}
+	                    height={72}
 	                    className="h-9 sm:h-10 lg:h-9 xl:h-10 w-auto object-contain"
 	                  />
 	                </div>

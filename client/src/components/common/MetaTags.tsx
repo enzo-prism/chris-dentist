@@ -49,6 +49,21 @@ export default function MetaTags({
     : `${defaultOrigin}${resolvedImage.startsWith("/") ? resolvedImage : `/${resolvedImage}`}`;
 
   const resolvedRobots = robots ?? routeSeo.robots ?? DEFAULT_ROBOTS;
+  const pageSchema = {
+    "@context": "https://schema.org",
+    "@type": routeSeo.schemaType ?? "WebPage",
+    "@id": `${canonicalUrl}#webpage`,
+    name: resolvedTitle,
+    description: resolvedDescription,
+    url: canonicalUrl,
+    isPartOf: {
+      "@id": `${defaultOrigin}/#website`,
+    },
+    about: {
+      "@id": `${defaultOrigin}/#organization`,
+    },
+    ...(routeSeo.lastmod ? { dateModified: routeSeo.lastmod } : {}),
+  };
 
   const isServer = typeof window === "undefined";
   
@@ -80,6 +95,10 @@ export default function MetaTags({
       <meta name="twitter:title" content={resolvedTitle} />
       <meta name="twitter:description" content={resolvedDescription} />
       <meta name="twitter:image" content={fullImageUrl} />
+
+      <script type="application/ld+json">
+        {JSON.stringify(pageSchema)}
+      </script>
     </Helmet>
   );
 }

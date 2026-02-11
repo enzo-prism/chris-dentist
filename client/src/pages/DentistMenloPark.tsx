@@ -9,15 +9,8 @@ import { officeInfo } from "@/lib/data";
 import { getSeoForPath } from "@/lib/seo";
 import { getTestimonialsByNames } from "@/lib/testimonials";
 import { ArrowRight, CheckCircle, Clock, MapPin, Phone } from "lucide-react";
-import {
-  buildAggregateRatingFromTestimonials,
-  buildBreadcrumbSchema,
-  buildFAQSchema,
-  buildOrganizationSchema,
-  buildPersonSchema,
-  buildReviewSchemas,
-  buildWebSiteSchema,
-  type StructuredDataNode,
+import {  buildBreadcrumbSchema,
+  buildFAQSchema,  buildReviewSchemas,  type StructuredDataNode,
 } from "@/lib/structuredData";
 import { Link } from "wouter";
 
@@ -69,14 +62,6 @@ const DentistMenloPark = () => {
   ];
 
   const structuredDataNodes: StructuredDataNode[] = [];
-  const aggregateRating = buildAggregateRatingFromTestimonials(familyTestimonials);
-  structuredDataNodes.push(
-    buildOrganizationSchema({
-      ...(aggregateRating ? { aggregateRating } : {}),
-    }),
-  );
-  structuredDataNodes.push(buildPersonSchema());
-  structuredDataNodes.push(buildWebSiteSchema());
   const breadcrumbSchema = buildBreadcrumbSchema(breadcrumbItems);
   const faqSchema = buildFAQSchema(faqs, "/dentist-menlo-park");
   if (breadcrumbSchema) structuredDataNodes.push(breadcrumbSchema);

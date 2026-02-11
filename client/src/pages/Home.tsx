@@ -19,10 +19,6 @@ import { buildInsertTestimonial, testimonialSeedData } from "@shared/testimonial
 import { officeInfo } from "@/lib/data";
 import {
   buildFAQSchema,
-  buildAggregateRatingFromTestimonials,
-  buildOrganizationSchema,
-  buildPersonSchema,
-  buildWebSiteSchema,
   type FAQEntry,
 } from "@/lib/structuredData";
 
@@ -93,16 +89,7 @@ const Home = () => {
       },
     ];
 
-    const aggregateRating = buildAggregateRatingFromTestimonials(testimonialsData);
-    const organizationSchema = buildOrganizationSchema({
-      services: services ?? [],
-      ...(aggregateRating ? { aggregateRating } : {}),
-    });
-    const schemaNodes = [
-      organizationSchema,
-      buildPersonSchema(),
-      buildWebSiteSchema(),
-    ];
+    const schemaNodes = [];
     const faqSchema = buildFAQSchema(homeFaqs, "/");
     if (faqSchema) {
       schemaNodes.push(faqSchema);

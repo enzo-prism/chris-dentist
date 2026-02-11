@@ -192,6 +192,8 @@ const CaseStory = ({ study, index, onShare, copiedId }: CaseStoryProps) => {
               <img
                 src={optimizeImageSrc(study.heroImage, 1200)}
                 alt={`${study.title} hero`}
+                width={1200}
+                height={900}
                 className="w-full h-full object-cover"
                 loading="lazy"
                 decoding="async"
@@ -237,6 +239,8 @@ const CaseStory = ({ study, index, onShare, copiedId }: CaseStoryProps) => {
                         <img
                           src={optimizeImageSrc(image.src, 720)}
                           alt={image.alt}
+                          width={720}
+                          height={540}
                           className="w-full h-full object-cover"
                           loading="lazy"
                           decoding="async"
@@ -272,6 +276,8 @@ const CaseStory = ({ study, index, onShare, copiedId }: CaseStoryProps) => {
                   <img
                     src={optimizeImageSrc(image.src, 900)}
                     alt={image.alt}
+                    width={900}
+                    height={675}
                     className="w-full h-full object-cover"
                     loading="lazy"
                     decoding="async"
