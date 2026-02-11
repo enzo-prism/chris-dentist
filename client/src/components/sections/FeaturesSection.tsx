@@ -1,4 +1,4 @@
-import { Heart, Award, Star, Users, Sparkles } from "lucide-react";
+import { Heart, Star, Users } from "lucide-react";
 import { motion } from "framer-motion";
 
 const FeaturesSection = () => {
@@ -40,7 +40,7 @@ const FeaturesSection = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section heading */}
         <div className="text-center mb-12 md:mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-gray-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-gray-900 text-balance mb-4">
             Why Choose Dr. Wong
           </h2>
           <p className="text-base text-gray-600 max-w-2xl mx-auto">
@@ -59,7 +59,7 @@ const FeaturesSection = () => {
           {features.map((feature, index) => (
             <motion.div 
               key={index} 
-              className="bg-white p-6 md:p-8 rounded-xl border border-gray-100 shadow-sm hover:shadow transition-all duration-300 group"
+              className="group rounded-xl border border-gray-100 bg-white p-6 shadow-sm transition-[box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:shadow md:p-8"
               variants={item}
             >
               <div className="bg-primary/10 rounded-full p-3 w-12 h-12 flex items-center justify-center mb-5 group-hover:bg-primary/15 transition-colors">

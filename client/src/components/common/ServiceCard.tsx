@@ -1,9 +1,8 @@
 
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
+import ButtonLink from "@/components/common/ButtonLink";
 
 import { Service } from "@shared/schema";
 import { getServiceGradient } from "@/lib/serviceGradients";
@@ -65,7 +64,7 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
 
   return (
     <Card
-      className="group flex h-full w-full flex-col overflow-hidden rounded-3xl border border-slate-100 bg-white shadow-sm transition-all duration-300 hover:shadow-lg"
+      className="group flex h-full w-full flex-col overflow-hidden rounded-3xl border border-slate-100 bg-white shadow-sm transition-[box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:shadow-lg"
       id={service.slug}
     >
       <div
@@ -91,21 +90,21 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
 
       <CardFooter className="px-6 pb-6 pt-0 md:px-7 md:pb-7">
         <div className="grid w-full gap-3">
-          <Link href={getDetailPath(service.slug)} className="w-full">
-            <Button
-              variant="outline"
-              className="w-full border-primary text-primary transition hover:bg-primary/5"
-            >
-              {getDetailLabel(service.slug)}
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-          </Link>
-          <Link href="/schedule#appointment" className="w-full">
-            <Button className="w-full bg-primary text-white transition hover:bg-primary/90">
-              {getCtaText(service.title)}
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-          </Link>
+          <ButtonLink
+            href={getDetailPath(service.slug)}
+            variant="outline"
+            className="w-full border-primary text-primary transition-colors hover:bg-primary/5"
+          >
+            {getDetailLabel(service.slug)}
+            <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
+          </ButtonLink>
+          <ButtonLink
+            href="/schedule#appointment"
+            className="w-full bg-primary text-white transition-colors hover:bg-primary/90"
+          >
+            {getCtaText(service.title)}
+            <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
+          </ButtonLink>
         </div>
       </CardFooter>
     </Card>

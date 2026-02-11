@@ -9,7 +9,7 @@ import TypeFormEmbed from "@/components/forms/TypeFormEmbed";
 import MetaTags from "@/components/common/MetaTags";
 import FAQSection from "@/components/common/FAQSection";
 import StructuredData from "@/components/seo/StructuredData";
-import { Button } from "@/components/ui/button";
+import ButtonLink from "@/components/common/ButtonLink";
 import { ArrowRight, BadgePercent, CheckCircle, Gift, Phone } from "lucide-react";
 import { Link } from "wouter";
 import { Service, Testimonial } from "@shared/schema";
@@ -239,16 +239,19 @@ const Home = () => {
                 </div>
               </div>
               <div className="flex flex-col sm:flex-row gap-3 pt-1">
-                <Link href="/schedule#appointment">
-                  <Button className="bg-primary text-white hover:bg-primary/90">
-                    Request an appointment
-                  </Button>
-                </Link>
-                <Link href="/services">
-                  <Button variant="outline" className="border-primary text-primary hover:bg-primary/5">
-                    Explore dental services
-                  </Button>
-                </Link>
+                <ButtonLink
+                  href="/schedule#appointment"
+                  className="bg-primary text-white hover:bg-primary/90"
+                >
+                  Request an appointment
+                </ButtonLink>
+                <ButtonLink
+                  href="/services"
+                  variant="outline"
+                  className="border-primary text-primary hover:bg-primary/5"
+                >
+                  Explore dental services
+                </ButtonLink>
               </div>
             </div>
 
@@ -321,16 +324,19 @@ const Home = () => {
                 designed to make your first visit feel even better.
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
-                <Link href="/schedule#appointment">
-                  <Button className="bg-primary text-white hover:bg-primary/90">
-                    Claim an offer
-                  </Button>
-                </Link>
-                <Link href="/contact">
-                  <Button variant="outline" className="border-primary text-primary hover:bg-primary/5">
-                    Ask a question
-                  </Button>
-                </Link>
+                <ButtonLink
+                  href="/schedule#appointment"
+                  className="bg-primary text-white hover:bg-primary/90"
+                >
+                  Claim an offer
+                </ButtonLink>
+                <ButtonLink
+                  href="/contact"
+                  variant="outline"
+                  className="border-primary text-primary hover:bg-primary/5"
+                >
+                  Ask a question
+                </ButtonLink>
               </div>
               <p className="text-xs text-slate-500">
                 Offers are available for new patients and subject to availability.
@@ -417,7 +423,7 @@ const Home = () => {
               {testimonialsToShow.map((_, index) => (
                 <span
                   key={`dot-${index}`}
-                  className={`h-2.5 w-2.5 rounded-full transition-all ${
+                  className={`h-2.5 w-2.5 rounded-full transition-[width,background-color] ${
                     activeTestimonial === index ? "bg-primary w-3" : "bg-slate-300"
                   }`}
                 />
@@ -438,12 +444,13 @@ const Home = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="mt-12 flex justify-center"
           >
-            <Link href="/testimonials">
-              <Button className="bg-primary hover:bg-primary/90 text-white font-medium px-6 py-3 rounded-full inline-flex items-center gap-2 shadow-sm transition hover:shadow-md hover:scale-105">
-                Read more patient stories
-                <ArrowRight className="h-4 w-4" />
-              </Button>
-            </Link>
+            <ButtonLink
+              href="/testimonials"
+              className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-medium text-white shadow-sm transition-[transform,box-shadow,background-color] hover:scale-105 hover:bg-primary/90 hover:shadow-md"
+            >
+              Read more patient stories
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </ButtonLink>
           </motion.div>
         </div>
       </section>
@@ -454,42 +461,50 @@ const Home = () => {
       <AboutDoctorSection />
 
       {/* Services Section */}
-	      <section id="services" className="py-16 md:py-20 bg-gradient-to-b from-white to-gray-50/30">
-	        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section
+        id="services"
+        className="bg-gradient-to-b from-white to-gray-50/30 py-16 md:py-20"
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* Header */}
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold font-heading text-gray-900 mb-6">
+          <div className="mb-16 text-center">
+            <h2 className="mb-6 font-heading text-3xl font-bold text-gray-900 md:text-4xl lg:text-5xl">
               Our Services
             </h2>
-            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Comprehensive dental care using the latest techniques and technology to improve your oral health and enhance your smile.{" "}
+            <p className="mx-auto max-w-3xl text-lg leading-relaxed text-gray-600 md:text-xl">
+              Comprehensive dental care using the latest techniques and
+              technology to improve your oral health and enhance your smile.{" "}
               <Link
                 href="/invisalign"
-                className="text-primary font-semibold hover:underline"
+                className="font-semibold text-primary hover:underline"
               >
                 Invisalign in Palo Alto
               </Link>{" "}
-              offers a discreet way to straighten teeth with a personalized plan.
+              offers a discreet way to straighten teeth with a personalized
+              plan.
             </p>
-            <div className="w-24 h-1 bg-primary mx-auto mt-8 rounded-full"></div>
+            <div className="mx-auto mt-8 h-1 w-24 rounded-full bg-primary" />
           </div>
-          
+
           {/* Services Grid - Responsive: 1 column on mobile, 3 columns on desktop */}
           {isLoadingServices ? (
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
+            <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 md:gap-8 lg:grid-cols-3">
               {[...Array(3)].map((_, index) => (
-                <div key={index} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden animate-pulse">
-                  <div className="w-full h-48 md:h-56 bg-gray-200"></div>
+                <div
+                  key={index}
+                  className="animate-pulse overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm"
+                >
+                  <div className="h-48 w-full bg-gray-200 md:h-56" />
                   <div className="p-6 md:p-8">
-                    <div className="h-6 bg-gray-200 rounded w-3/4 mb-3"></div>
-                    <div className="h-4 bg-gray-200 rounded w-full mb-2"></div>
-                    <div className="h-4 bg-gray-200 rounded w-2/3"></div>
+                    <div className="mb-3 h-6 w-3/4 rounded bg-gray-200" />
+                    <div className="mb-2 h-4 w-full rounded bg-gray-200" />
+                    <div className="h-4 w-2/3 rounded bg-gray-200" />
                   </div>
                 </div>
               ))}
             </div>
           ) : (
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
+            <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 md:gap-8 lg:grid-cols-3">
               {services?.slice(0, 3).map((service) => (
                 <div key={service.id} className="h-full">
                   <ServiceCard service={service} />
@@ -497,50 +512,56 @@ const Home = () => {
               ))}
             </div>
           )}
-          
+
           {/* CTA Button */}
-          <div className="text-center mt-16">
-            <Link href="/services">
-              <Button className="bg-primary hover:bg-primary/90 text-white font-medium px-8 py-4 rounded-full inline-flex items-center gap-2 shadow-sm transition-all hover:shadow-md hover:scale-105">
-                <span>View All Services</span>
-                <ArrowRight className="h-5 w-5" />
-              </Button>
-            </Link>
+          <div className="mt-16 text-center">
+            <ButtonLink
+              href="/services"
+              className="inline-flex items-center gap-2 rounded-full bg-primary px-8 py-4 font-medium text-white shadow-sm transition-[transform,box-shadow,background-color] hover:scale-105 hover:bg-primary/90 hover:shadow-md"
+            >
+              <span>View All Services</span>
+              <ArrowRight className="h-5 w-5" aria-hidden="true" />
+            </ButtonLink>
           </div>
-	        </div>
-	      </section>
+        </div>
+      </section>
 
-        <FAQSection
-          title="Palo Alto dentist FAQs"
-          subtitle="Quick answers about visiting our office, insurance, and scheduling."
-          items={homeFaqs}
-          className="bg-white"
-        />
+      <FAQSection
+        title="Palo Alto dentist FAQs"
+        subtitle="Quick answers about visiting our office, insurance, and scheduling."
+        items={homeFaqs}
+        className="bg-white"
+      />
 
-	      {/* Appointment Section */}
-	      <section id="appointment" className="py-16 bg-[#F5F9FC]">
-	        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white rounded-lg shadow-xl overflow-hidden">
+      {/* Appointment Section */}
+      <section id="appointment" className="bg-[#F5F9FC] py-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="overflow-hidden rounded-lg bg-white shadow-xl">
             <div className="md:flex">
-              <div className="md:w-1/2 bg-primary p-8 md:p-12 text-white">
-                <h2 className="text-3xl font-bold font-heading mb-4">Schedule Your Appointment</h2>
-                <p className="mb-6">Choose between in-person visits or convenient virtual consultations for your initial assessment.</p>
+              <div className="bg-primary p-8 text-white md:w-1/2 md:p-12">
+                <h2 className="mb-4 font-heading text-3xl font-bold">
+                  Schedule Your Appointment
+                </h2>
+                <p className="mb-6">
+                  Choose between in-person visits or convenient virtual
+                  consultations for your initial assessment.
+                </p>
                 <div className="mb-6">
-                  <div className="flex items-center mb-3">
-                    <CheckCircle className="h-5 w-5 mr-3" />
+                  <div className="mb-3 flex items-center">
+                    <CheckCircle className="mr-3 h-5 w-5" />
                     <span>HIPAA-compliant secure scheduling</span>
                   </div>
-                  <div className="flex items-center mb-3">
-                    <CheckCircle className="h-5 w-5 mr-3" />
+                  <div className="mb-3 flex items-center">
+                    <CheckCircle className="mr-3 h-5 w-5" />
                     <span>Same-day appointments available</span>
                   </div>
                   <div className="flex items-center">
-                    <CheckCircle className="h-5 w-5 mr-3" />
+                    <CheckCircle className="mr-3 h-5 w-5" />
                     <span>Easy rescheduling if needed</span>
                   </div>
                 </div>
-                <div className="p-4 bg-blue-900 bg-opacity-50 rounded-lg mb-6">
-                  <h3 className="font-bold mb-2">Office Hours</h3>
+                <div className="mb-6 rounded-lg bg-blue-900 p-4 bg-opacity-50">
+                  <h3 className="mb-2 font-bold">Office Hours</h3>
                   <div className="grid grid-cols-2 gap-2 text-sm">
                     <div>Monday - Thursday</div>
                     <div>{officeInfo.hours.monday}</div>
@@ -552,72 +573,27 @@ const Home = () => {
                 </div>
                 <a
                   href={`tel:${officeInfo.phoneE164}`}
-                  className="flex items-center text-xl font-bold hover:text-blue-200 transition-colors"
+                  className="flex items-center text-xl font-bold transition-colors hover:text-blue-200"
                 >
-                  <Phone className="h-6 w-6 mr-2" />
+                  <Phone className="mr-2 h-6 w-6" aria-hidden="true" />
                   {officeInfo.phone}
                 </a>
               </div>
-              
-              <div className="md:w-1/2 p-8 md:p-12">
-                <h3 className="text-xl font-bold font-heading text-[#333333] mb-4">Book Your Visit</h3>
-                <p className="text-[#333333] mb-6">Fill out the form below to schedule your appointment. We'll get back to you promptly to confirm your visit.</p>
-	                <TypeFormEmbed 
-	                  formId="01JPZ57W1F3352Q1X0XK6P9SNV" 
-	                  className="min-h-[320px] sm:min-h-[400px] w-full" 
-	                />
+
+              <div className="p-8 md:w-1/2 md:p-12">
+                <h3 className="mb-4 font-heading text-xl font-bold text-[#333333]">
+                  Book Your Visit
+                </h3>
+                <p className="mb-6 text-[#333333]">
+                  Fill out the form below to schedule your appointment. We'll
+                  get back to you promptly to confirm your visit.
+                </p>
+                <TypeFormEmbed
+                  formId="01JPZ57W1F3352Q1X0XK6P9SNV"
+                  className="min-h-[320px] w-full sm:min-h-[400px]"
+                />
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials Section */}
-      <section id="testimonials" className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold font-heading text-[#333333] mb-4">What Our Patients Say</h2>
-            <p className="text-[#333333] max-w-3xl mx-auto">Real experiences from our patients who have trusted us with their dental care.</p>
-            <div className="w-24 h-1 bg-primary mx-auto mt-4"></div>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            {testimonialsData.slice(0, 3).map((testimonial, index) => (
-              <TestimonialCard key={`${testimonial.id}-${index}`} testimonial={testimonial} index={index} />
-            ))}
-          </div>
-          
-	          {/* Local Dental Practice Info */}
-	          <div className="mt-12 mb-10 bg-white rounded-lg shadow-lg overflow-hidden">
-	            <div className="p-6 bg-primary text-white text-center">
-	              <h3 className="text-xl font-bold mb-2">Your Trusted Palo Alto Dental Practice</h3>
-	              <p className="text-blue-100">Serving Palo Alto, Menlo Park, Stanford, and surrounding communities</p>
-	            </div>
-	            <div className="p-6">
-	              <div className="grid md:grid-cols-3 gap-6 text-center">
-	                <div>
-	                  <div className="text-lg font-bold text-primary mb-2">Conservative care</div>
-	                  <p className="text-gray-600">Clear options, no pressure</p>
-	                </div>
-	                <div>
-	                  <div className="text-lg font-bold text-primary mb-2">Comprehensive dentistry</div>
-	                  <p className="text-gray-600">Preventive, cosmetic, restorative</p>
-	                </div>
-	                <div>
-	                  <div className="text-lg font-bold text-primary mb-2">Urgent visits</div>
-	                  <p className="text-gray-600">Call us for emergency care</p>
-	                </div>
-	              </div>
-	            </div>
-	          </div>
-          
-          <div className="text-center mt-8">
-            <Link href="/testimonials">
-              <span className="text-primary font-semibold hover:text-blue-700 inline-flex items-center cursor-pointer">
-                Read More Patient Stories
-                <ArrowRight className="h-5 w-5 ml-1" />
-              </span>
-            </Link>
           </div>
         </div>
       </section>

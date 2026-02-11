@@ -81,8 +81,14 @@ function Router() {
   return (
     <>
       <ScrollToTop />
+      <a href="#main-content" className="skip-link">
+        Skip to main content
+      </a>
       <Header />
-      <main style={{ paddingTop: 'var(--header-height, 136px)' }}>
+      <main
+        id="main-content"
+        style={{ paddingTop: "var(--header-height, 136px)" }}
+      >
         <React.Suspense fallback={<div className="min-h-[40vh]" />}>
           <Switch>
             <Route path="/" component={Home} />

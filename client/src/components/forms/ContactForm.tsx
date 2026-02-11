@@ -59,7 +59,11 @@ const ContactForm = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-4"
+        autoComplete="off"
+      >
         <div className="grid md:grid-cols-2 gap-4">
           <FormField
             control={form.control}
@@ -68,7 +72,11 @@ const ContactForm = () => {
               <FormItem>
                 <FormLabel className="text-[#333333] font-semibold">Full Name</FormLabel>
                 <FormControl>
-                  <Input placeholder="Jane Doe" {...field} />
+                  <Input
+                    placeholder="Jane Doe…"
+                    autoComplete="name"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -81,7 +89,15 @@ const ContactForm = () => {
               <FormItem>
                 <FormLabel className="text-[#333333] font-semibold">Email Address</FormLabel>
                 <FormControl>
-                  <Input placeholder="janedoe@example.com" type="email" {...field} />
+                  <Input
+                    placeholder="jane.doe@example.com…"
+                    type="email"
+                    autoComplete="email"
+                    spellCheck={false}
+                    autoCorrect="off"
+                    autoCapitalize="none"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -96,7 +112,13 @@ const ContactForm = () => {
             <FormItem>
               <FormLabel className="text-[#333333] font-semibold">Phone Number</FormLabel>
               <FormControl>
-                <Input placeholder={officeInfo.phone} {...field} />
+                <Input
+                  type="tel"
+                  inputMode="tel"
+                  autoComplete="tel"
+                  placeholder={`${officeInfo.phone}…`}
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -109,7 +131,11 @@ const ContactForm = () => {
           render={({ field }) => (
             <FormItem>
               <FormLabel className="text-[#333333] font-semibold">Subject</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+                name={field.name}
+              >
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder="Select a subject" />
@@ -135,10 +161,11 @@ const ContactForm = () => {
             <FormItem>
               <FormLabel className="text-[#333333] font-semibold">Message</FormLabel>
               <FormControl>
-                <Textarea 
-                  placeholder="How can we help you?" 
-                  rows={4} 
-                  {...field} 
+                <Textarea
+                  placeholder="How can we help you…?"
+                  autoComplete="off"
+                  rows={4}
+                  {...field}
                 />
               </FormControl>
               <FormMessage />
@@ -146,26 +173,22 @@ const ContactForm = () => {
           )}
         />
 
-        <div className="flex items-start space-x-2">
-          <Checkbox
-            id="contact-privacy"
-            required
-            className="mt-1"
-          />
+        <div className="flex items-start gap-3 rounded-md border border-slate-200 p-3 focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/25">
+          <Checkbox id="contact-privacy" required className="mt-0.5" />
           <label
             htmlFor="contact-privacy"
-            className="text-sm text-[#333333] cursor-pointer"
+            className="cursor-pointer text-sm leading-relaxed text-[#333333]"
           >
             I understand that my information is being collected in accordance with HIPAA privacy practices and consent to being contacted.
           </label>
         </div>
 
-        <Button 
-          type="submit" 
+        <Button
+          type="submit"
           className="w-full bg-primary hover:bg-blue-700 text-white font-semibold py-3"
           disabled={isSubmitting}
         >
-          {isSubmitting ? "Sending..." : "Send Message"}
+          {isSubmitting ? "Sending…" : "Send Message"}
         </Button>
       </form>
     </Form>

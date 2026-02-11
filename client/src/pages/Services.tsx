@@ -1,10 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import ButtonLink from "@/components/common/ButtonLink";
 import { Link } from "wouter";
 import ServiceCard from "@/components/common/ServiceCard";
 import MetaTags from "@/components/common/MetaTags";
-import { drWongImages } from "@/lib/imageUrls";
 import { pageTitles, pageDescriptions } from "@/lib/metaContent";
 import { Service } from "@shared/schema";
 import OptimizedImage from "@/components/seo/OptimizedImage";
@@ -249,11 +248,12 @@ const Services = () => {
                 <p className="text-[#333333]">Please contact our office to verify your specific plan's coverage before your appointment.</p>
               </div>
               
-              <Link href="/patient-resources#insurance">
-                <Button className="bg-primary text-white font-semibold px-6 py-3 rounded-md hover:bg-blue-700">
-                  Learn More About Insurance
-                </Button>
-              </Link>
+              <ButtonLink
+                href="/patient-resources#insurance"
+                className="rounded-md bg-primary px-6 py-3 font-semibold text-white hover:bg-blue-700"
+              >
+                Learn More About Insurance
+              </ButtonLink>
             </div>
             <div className="md:w-1/2 md:pl-12">
               <OptimizedImage
@@ -272,16 +272,19 @@ const Services = () => {
           <h2 className="text-3xl md:text-4xl font-bold font-heading text-white mb-6">Ready to Schedule Your Appointment?</h2>
           <p className="text-white text-xl mb-8 max-w-3xl mx-auto">Contact us today to book your visit and take the first step toward optimal dental health.</p>
           <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-            <Link href="/schedule#appointment">
-              <Button className="bg-white text-primary hover:bg-gray-100 font-semibold px-8 py-3 rounded-md">
-                Schedule Appointment
-              </Button>
-            </Link>
-            <Link href="/contact">
-              <Button variant="outline" className="bg-transparent border-2 border-white text-white hover:bg-white/10 font-semibold px-8 py-3 rounded-md">
-                Contact Us
-              </Button>
-            </Link>
+            <ButtonLink
+              href="/schedule#appointment"
+              className="rounded-md bg-white px-8 py-3 font-semibold text-primary hover:bg-gray-100"
+            >
+              Schedule Appointment
+            </ButtonLink>
+            <ButtonLink
+              href="/contact"
+              variant="outline"
+              className="rounded-md border-2 border-white bg-transparent px-8 py-3 font-semibold text-white hover:bg-white/10"
+            >
+              Contact Us
+            </ButtonLink>
           </div>
         </div>
       </section>
