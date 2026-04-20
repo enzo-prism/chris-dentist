@@ -35,6 +35,12 @@ This release improves local SEO coverage, booking-funnel analytics, structured d
 - Updated hero and appointment messaging to better differentiate Dr. Wong and emphasize conservative, comfort-first care.
 - Kept the stale holiday closure notice inactive and normalized its default office-hours state.
 
+### Deployment compatibility
+- Added a Vercel-ready Express entrypoint so the app can be deployed as a server-backed site instead of being misdetected as Next.js.
+- Added file-based `vercel.json` configuration to force the correct framework preset and build command.
+- Moved generated client bundles to a dedicated `/_build` path and added a sync step so Vercel can serve built static assets while the Express app handles routes and APIs.
+- Verified the repo now completes `vercel build` successfully and can produce a preview deployment with Lambda output.
+
 ## Key files changed
 - `client/src/components/common/GoogleAnalytics.tsx`
 - `client/src/components/forms/TypeFormEmbed.tsx`
@@ -51,11 +57,16 @@ This release improves local SEO coverage, booking-funnel analytics, structured d
 - `client/src/pages/Home.tsx`
 - `client/src/pages/PediatricDentistPaloAlto.tsx`
 - `client/src/pages/Schedule.tsx`
+- `server/app.ts`
+- `server/index.ts`
+- `server.ts`
 - `server/vite.ts`
+- `scripts/vercel-sync-static.mjs`
 - `shared/metaContent.ts`
 - `shared/officeInfo.ts`
 - `shared/seo.ts`
 - `shared/structuredData.ts`
+- `vercel.json`
 
 ## Validation
 - `pnpm check` ✅
