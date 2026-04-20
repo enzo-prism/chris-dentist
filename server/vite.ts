@@ -2,11 +2,9 @@ import express, { type Express } from "express";
 import fs from "fs";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
-import { createServer as createViteServer, createLogger } from "vite";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 import { type Server } from "http";
-import viteConfig from "../vite.config";
 import { nanoid } from "nanoid";
 import {
   buildBlogMetaDescription,
@@ -15,8 +13,6 @@ import {
 } from "@shared/metaContent";
 import { storage } from "./storage";
 import { DEFAULT_ROBOTS, NOINDEX_ROBOTS, getSeoForPath, seoByPath } from "@shared/seo";
-
-const viteLogger = createLogger();
 
 const BLOG_PREFIX = "/blog/";
 const KNOWN_PATHS = new Set(Object.keys(seoByPath));
@@ -283,6 +279,13 @@ export function log(message: string, source = "express") {
 }
 
 export async function setupVite(app: Express, server: Server) {
+  const [{ createServer: createViteServer, createLogger }, viteConfigModule] = await Promise.all([
+    import("vite"),
+    import("../vite.config"),
+  ]);
+  const viteConfig = viteConfigModule.default;
+  const viteLogger = createLogger();
+
   const serverOptions = {
     middlewareMode: true,
     hmr: { server },
