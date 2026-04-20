@@ -9,7 +9,7 @@ import { type Server } from "http";
 import viteConfig from "../vite.config";
 import { nanoid } from "nanoid";
 import {
-  buildExcerpt,
+  buildBlogMetaDescription,
   pageDescriptions,
   pageTitles,
 } from "@shared/metaContent";
@@ -72,7 +72,7 @@ async function resolveMetaForUrl(url: string): Promise<HtmlMeta> {
       if (post) {
         return {
           title: `${post.title} | Christopher B. Wong, DDS`,
-          description: buildExcerpt(post.content),
+          description: buildBlogMetaDescription(post.title),
           canonicalPath: pathname,
           ogImage: post.image || fallbackOgImage,
           type: "article",

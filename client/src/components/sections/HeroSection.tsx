@@ -1,27 +1,32 @@
-import { ArrowRight, Calendar, CheckCircle, MapPin } from "lucide-react";
+import { ArrowRight, Calendar, CheckCircle, MapPin, Phone, ShieldCheck, Star } from "lucide-react";
 import ButtonLink from "@/components/common/ButtonLink";
 import { motion } from "framer-motion";
 import { officeInfo } from "@/lib/data";
 
 const HeroSection = () => {
-  // Features list
   const features = [
     {
-      title: "New patients welcome",
-      description: "Comfort-first, unrushed visits"
+      title: "Conservative care",
+      description: "Treatment plans built to protect healthy tooth structure",
     },
     {
-      title: "PPO insurance accepted",
-      description: "We’ll help verify benefits"
+      title: "317+ Google reviews",
+      description: "Trusted by Palo Alto and Peninsula families",
     },
     {
-      title: "Modern dental technology",
-      description: "Digital imaging and planning"
+      title: "Digital imaging and planning",
+      description: "Modern tools for clearer diagnoses and smoother visits",
     },
     {
-      title: "Family-friendly practice",
-      description: "Kids, teens, and adults"
-    }
+      title: "New patients + PPO welcome",
+      description: "Kids, adults, cosmetic care, Invisalign, and emergencies",
+    },
+  ];
+
+  const proofPoints = [
+    "University of the Pacific Dugoni-trained dentist",
+    "Comfort-first, pressure-free visits",
+    "Emergency support when time matters",
   ];
 
   return (
@@ -32,7 +37,6 @@ const HeroSection = () => {
         paddingTop: "var(--header-height, 136px)",
       }}
     >
-      {/* Background accents */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,#1e3a8a_0%,transparent_45%),radial-gradient(circle_at_top_right,#1e3a8a_0%,transparent_45%)] opacity-60" />
         <div className="absolute inset-0 bg-[radial-gradient(2px_2px_at_20%_30%,rgba(147,197,253,0.14),transparent),radial-gradient(2px_2px_at_70%_60%,rgba(147,197,253,0.16),transparent),radial-gradient(1.5px_1.5px_at_40%_80%,rgba(255,255,255,0.15),transparent)]" />
@@ -41,10 +45,7 @@ const HeroSection = () => {
       </div>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-6 sm:pt-8 lg:pt-10">
-
-        {/* Hero layout */}
         <div className="flex flex-col lg:flex-row items-center lg:items-start gap-12 lg:gap-16">
-          {/* Text content - left side */}
           <motion.div
             className="w-full lg:w-5/12 lg:sticky lg:top-28"
             initial={{ opacity: 0, y: 20 }}
@@ -56,16 +57,27 @@ const HeroSection = () => {
               Palo Alto, CA
             </div>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-white leading-tight mb-4">
-              Dentist in Palo Alto — Dr. Christopher B. Wong, DDS
+              Palo Alto dentist for calm, modern, conservative care
             </h1>
-            
-            <p className="text-lg text-white/80 leading-relaxed mb-6 max-w-md">
-              Modern, conservative care from Dr. Wong, DDS, your Palo Alto dentist—covering checkups, cleanings,
-              Invisalign, cosmetic dentistry, and restorations.
+
+            <p className="text-lg text-white/85 leading-relaxed mb-4 max-w-xl">
+              Dr. Christopher B. Wong helps patients stay ahead of dental problems with clear guidance,
+              modern technology, and treatment plans that respect your time, comfort, and long-term health.
+            </p>
+            <p className="text-base text-white/75 leading-relaxed mb-6 max-w-xl">
+              Come for cleanings, Invisalign, cosmetic work, implant restoration, or urgent visits when something hurts.
             </p>
 
-            {/* CTA Buttons with updated styling */}
-            <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-3 sm:space-y-0 mb-8">
+            <ul className="grid gap-2 text-sm text-blue-100 mb-7">
+              {proofPoints.map((item) => (
+                <li key={item} className="flex items-start gap-2">
+                  <ShieldCheck className="h-4 w-4 mt-0.5 shrink-0 text-blue-200" aria-hidden="true" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-3 sm:space-y-0 mb-4">
               <ButtonLink
                 href="/schedule#appointment"
                 className="h-auto rounded-full bg-primary px-5 py-6 font-medium text-white shadow-sm transition-[background-color,transform] hover:bg-primary/90"
@@ -74,16 +86,43 @@ const HeroSection = () => {
                 <span>Schedule an appointment</span>
               </ButtonLink>
               <ButtonLink
-                href="/services"
+                href={`tel:${officeInfo.phoneE164}`}
                 variant="outline"
                 className="h-auto rounded-full border-white/30 bg-white/5 px-5 py-6 font-medium text-white backdrop-blur transition-[color,border-color,background-color] hover:border-blue-200/60 hover:text-blue-200"
+              >
+                <Phone className="h-4 w-4" aria-hidden="true" />
+                <span>Call {officeInfo.phone}</span>
+              </ButtonLink>
+            </div>
+
+            <div className="mb-8">
+              <ButtonLink
+                href="/services"
+                variant="ghost"
+                className="inline-flex h-auto px-0 py-0 text-blue-100 hover:text-white hover:bg-transparent"
               >
                 <span>Explore services</span>
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </ButtonLink>
             </div>
-            
-            {/* Patient Trust Indicator */}
+
+            <div className="mb-12 rounded-2xl border border-white/10 bg-white/8 px-4 py-4 backdrop-blur">
+              <div className="flex flex-wrap items-center gap-3 text-sm text-white/90">
+                <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1.5">
+                  <Star className="h-4 w-4 text-blue-200" aria-hidden="true" />
+                  317+ Google reviews
+                </span>
+                <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1.5">
+                  <CheckCircle className="h-4 w-4 text-blue-200" aria-hidden="true" />
+                  New patients welcome
+                </span>
+                <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1.5">
+                  <CheckCircle className="h-4 w-4 text-blue-200" aria-hidden="true" />
+                  PPO plans accepted
+                </span>
+              </div>
+            </div>
+
             <div className="mb-12">
               <a
                 href={officeInfo.mapUrl}
@@ -102,30 +141,21 @@ const HeroSection = () => {
                     </svg>
                   ))}
                 </div>
-                <span className="group-hover:underline">
-                  Read patient reviews on Google
-                </span>
-                <span className="ml-2 text-white/70 text-xs sm:text-sm">
-                  317+ Google reviews
-                </span>
+                <span className="group-hover:underline">Read patient reviews on Google</span>
                 <ArrowRight
                   className="h-3.5 w-3.5 opacity-0 transition-opacity group-hover:opacity-100"
                   aria-hidden="true"
                 />
               </a>
             </div>
-            
-            {/* Scroll indicator removed */}
           </motion.div>
 
-          {/* Right side: Image and features */}
           <motion.div
             className="w-full lg:w-7/12"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
           >
-            {/* Main image with styling */}
             <div className="relative rounded-2xl overflow-hidden shadow-lg ring-1 ring-white/10 mb-12">
               <picture>
                 <source
@@ -152,7 +182,6 @@ const HeroSection = () => {
                 />
               </picture>
 
-              {/* Status badge */}
               <div className="absolute bottom-5 left-5 bg-white/95 px-4 py-2 rounded-full shadow-sm text-sm font-medium text-gray-900 flex items-center gap-2">
                 <span className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span>
                 <span>Welcoming new patients</span>
@@ -161,8 +190,7 @@ const HeroSection = () => {
                 Palo Alto, CA
               </div>
             </div>
-            
-            {/* Features grid */}
+
             <div className="space-y-4 rounded-3xl border border-slate-200 bg-white/95 p-6 shadow-lg backdrop-blur">
               <p className="text-sm font-semibold text-slate-500">Why patients choose us</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -172,7 +200,7 @@ const HeroSection = () => {
                     className="flex items-start gap-3 rounded-2xl border border-slate-200/80 bg-slate-50/80 p-4 shadow-sm"
                     initial={{ opacity: 0, y: 15 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: 0.3 + (index * 0.1), ease: "easeOut" }}
+                    transition={{ duration: 0.4, delay: 0.3 + index * 0.1, ease: "easeOut" }}
                   >
                     <div className="mt-0.5 bg-primary/10 rounded-full p-1.5 text-primary shrink-0">
                       <CheckCircle className="h-4 w-4" />

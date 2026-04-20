@@ -1,11 +1,11 @@
 import { useMemo } from "react";
-import { RouteComponentProps, useLocation } from "wouter";
+import { Link, RouteComponentProps, useLocation } from "wouter";
 import { useBlogPosts } from "@/hooks/useBlogPosts";
 import MetaTags from "@/components/common/MetaTags";
 import { pageDescriptions, pageTitles } from "@/lib/metaContent";
-import { getSeoForPath } from "@/lib/seo";
+import { buildBlogMetaDescription, getSeoForPath } from "@/lib/seo";
 import OptimizedImage from "@/components/seo/OptimizedImage";
-import { ArrowLeft, Calendar, Clock, Tag } from "lucide-react";
+import { ArrowLeft, Calendar, Clock, Phone, Tag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import StructuredData from "@/components/seo/StructuredData";
@@ -19,6 +19,7 @@ import {
   buildBreadcrumbSchema,
   type StructuredDataNode,
 } from "@/lib/structuredData";
+import { officeInfo } from "@/lib/data";
 
 type Params = Record<string, string | undefined> & {
   slug?: string;
@@ -117,8 +118,8 @@ const BlogPost = ({ params }: RouteComponentProps<Params>) => {
   }, [posts, slug]);
 
   const pageTitle = post ? `${post.title} | Christopher B. Wong, DDS` : pageTitles.blog;
-  const pageDescription = post?.content
-    ? `${post.content.slice(0, 160)}${post.content.length > 160 ? "…" : ""}`
+  const pageDescription = post
+    ? buildBlogMetaDescription(post.title)
     : pageDescriptions.blog;
   const blogOgImage = getSeoForPath("/blog").ogImage;
   const pageUrl = absoluteUrl(`/blog/${slug}`);
@@ -273,6 +274,30 @@ const BlogPost = ({ params }: RouteComponentProps<Params>) => {
         {
           href: "/services",
           anchorText: "Explore all services",
+        },
+      ];
+    }
+
+    if (slugLower.includes("implant") || categoryLower.includes("implant")) {
+      return [
+        {
+          href: "/dental-implants",
+          anchorText: "Dental implants in Palo Alto",
+          description: "Replace missing teeth with long-term, natural-looking restorations.",
+        },
+        {
+          href: "/services#restorative-dentistry",
+          anchorText: "Restorative dentistry",
+          description: "Crowns, bridges, and repairs that restore chewing comfort.",
+        },
+        {
+          href: "/emergency-dental",
+          anchorText: "Emergency dental care",
+          description: "Fast help when damage, pain, or infection needs urgent attention.",
+        },
+        {
+          href: "/schedule#appointment",
+          anchorText: "Schedule an implant consultation",
         },
       ];
     }
@@ -496,6 +521,42 @@ const BlogPost = ({ params }: RouteComponentProps<Params>) => {
                 ) : null}
               </>
             ) : null}
+            <div className="mt-10 rounded-2xl border border-slate-200 bg-slate-50 p-6 not-prose">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
+                Next best step
+              </p>
+              <h2 className="mt-2 text-2xl font-heading font-bold text-slate-900">
+                Want help applying this to your smile?
+              </h2>
+              <p className="mt-2 text-slate-700">
+                Here are the most relevant treatment pages for this topic, plus the fastest way to reach the office.
+              </p>
+              <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                {relatedServices.slice(0, 4).map((item) => (
+                  <Link key={item.href} href={item.href}>
+                    <div className="rounded-xl border border-slate-200 bg-white p-4 transition hover:border-primary/40 hover:shadow-sm cursor-pointer">
+                      <p className="font-semibold text-slate-900">{item.anchorText}</p>
+                      {item.description ? (
+                        <p className="mt-1 text-sm text-slate-600">{item.description}</p>
+                      ) : null}
+                    </div>
+                  </Link>
+                ))}
+              </div>
+              <div className="mt-4 flex flex-col gap-3 sm:flex-row">
+                <Link href="/schedule#appointment">
+                  <Button className="bg-primary text-white hover:bg-primary/90">
+                    Schedule an appointment
+                  </Button>
+                </Link>
+                <a href={`tel:${officeInfo.phoneE164}`}>
+                  <Button variant="outline" className="border-primary text-primary hover:bg-primary/5">
+                    <Phone className="mr-2 h-4 w-4" />
+                    Call {officeInfo.phone}
+                  </Button>
+                </a>
+              </div>
+            </div>
           </article>
         </div>
       </section>

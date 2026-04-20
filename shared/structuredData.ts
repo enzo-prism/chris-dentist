@@ -17,7 +17,7 @@ export function buildDentistJsonLd(): JsonLdObject {
   const instagram = officeInfo.socialMedia.instagram;
   return {
     "@context": "https://schema.org",
-    "@type": "Dentist",
+    "@type": ["Dentist", "LocalBusiness", "MedicalBusiness"],
     "@id": `${SITE_URL}/#dentist`,
     name: officeInfo.name,
     url: `${SITE_URL}/`,
@@ -27,6 +27,12 @@ export function buildDentistJsonLd(): JsonLdObject {
     medicalSpecialty: "https://schema.org/Dentistry",
     sameAs: instagram ? [instagram] : undefined,
     openingHoursSpecification: officeInfo.openingHoursSpecification,
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: 37.4488473,
+      longitude: -122.1497687,
+    },
+    hasMap: officeInfo.mapUrl,
   };
 }
 

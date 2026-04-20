@@ -1,23 +1,43 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { officeInfo } from "@/lib/data";
+import { trackBookingEvent } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 
 interface TypeFormEmbedProps {
   formId: string;
   className?: string;
   style?: CSSProperties;
+  analyticsLocation?: string;
 }
 
 const TYPEFORM_SCRIPT_SRC = "https://embed.typeform.com/next/embed.js";
 const TYPEFORM_SCRIPT_ID = "typeform-embed-script";
 
+type TypeformWidgetInstance = {
+  unmount?: () => void;
+};
+
+type TypeformQuestionPayload = {
+  ref?: string;
+};
+
+type TypeformSubmitPayload = {
+  responseId?: string;
+};
+
 declare global {
   interface Window {
     __typeformScriptPromise?: Promise<void>;
+    tf?: {
+      createWidget?: (
+        formId: string,
+        options: Record<string, unknown>,
+      ) => TypeformWidgetInstance;
+    };
   }
 }
 
-const hasTypeformGlobal = (): boolean => typeof (window as any).tf !== "undefined";
+const hasTypeformGlobal = (): boolean => typeof window.tf?.createWidget === "function";
 
 const loadTypeformScript = (): Promise<void> => {
   if (typeof window === "undefined") {
@@ -65,29 +85,133 @@ const loadTypeformScript = (): Promise<void> => {
   return window.__typeformScriptPromise;
 };
 
-const TypeFormEmbed = ({ formId, className, style }: TypeFormEmbedProps) => {
+const TypeFormEmbed = ({
+  formId,
+  className,
+  style,
+  analyticsLocation = "schedule_form",
+}: TypeFormEmbedProps) => {
+  const pagePath =
+    typeof window === "undefined" ? undefined : window.location.pathname;
   const containerRef = useRef<HTMLDivElement>(null);
-  const [scriptReady, setScriptReady] = useState(false);
+  const widgetRef = useRef<TypeformWidgetInstance | null>(null);
+  const [formReady, setFormReady] = useState(false);
   const [scriptError, setScriptError] = useState(false);
+  const hasStartedRef = useRef(false);
+  const currentStepRef = useRef(0);
+  const lastQuestionRef = useRef<string | null>(null);
 
   useEffect(() => {
-    let mounted = true;
-    loadTypeformScript()
-      .then(() => {
-        if (mounted) {
-          setScriptReady(true);
+    let isMounted = true;
+
+    const initializeWidget = async () => {
+      try {
+        await loadTypeformScript();
+        if (!isMounted || !containerRef.current || !window.tf?.createWidget) {
+          return;
         }
-      })
-      .catch(() => {
-        if (mounted) {
+
+        containerRef.current.innerHTML = "";
+        currentStepRef.current = 0;
+        lastQuestionRef.current = null;
+        hasStartedRef.current = false;
+
+        widgetRef.current = window.tf.createWidget(formId, {
+          container: containerRef.current,
+          inlineOnMobile: true,
+          medium: analyticsLocation,
+          hidden: {
+            source: analyticsLocation,
+          },
+          onReady: () => {
+            if (!isMounted) return;
+            setFormReady(true);
+            trackBookingEvent("booking_form_ready", {
+              form_id: formId,
+              form_location: analyticsLocation,
+              page_path: pagePath,
+            });
+          },
+          onStarted: () => {
+            if (hasStartedRef.current) return;
+            hasStartedRef.current = true;
+            trackBookingEvent("booking_form_start", {
+              form_id: formId,
+              form_location: analyticsLocation,
+              page_path: pagePath,
+            });
+          },
+          onQuestionChanged: (payload: TypeformQuestionPayload) => {
+            const nextQuestionRef = payload?.ref || `step-${currentStepRef.current + 1}`;
+
+            if (!hasStartedRef.current) {
+              hasStartedRef.current = true;
+              trackBookingEvent("booking_form_start", {
+                form_id: formId,
+                form_location: analyticsLocation,
+                page_path: pagePath,
+              });
+            }
+
+            if (lastQuestionRef.current) {
+              trackBookingEvent("booking_form_step_complete", {
+                form_id: formId,
+                form_location: analyticsLocation,
+                page_path: pagePath,
+                step_number: currentStepRef.current,
+                step_ref: lastQuestionRef.current,
+              });
+            }
+
+            currentStepRef.current += 1;
+            lastQuestionRef.current = nextQuestionRef;
+
+            trackBookingEvent("booking_form_step_view", {
+              form_id: formId,
+              form_location: analyticsLocation,
+              page_path: pagePath,
+              step_number: currentStepRef.current,
+              step_ref: nextQuestionRef,
+            });
+          },
+          onSubmit: (payload: TypeformSubmitPayload) => {
+            if (lastQuestionRef.current && currentStepRef.current > 0) {
+              trackBookingEvent("booking_form_step_complete", {
+                form_id: formId,
+                form_location: analyticsLocation,
+                page_path: pagePath,
+                step_number: currentStepRef.current,
+                step_ref: lastQuestionRef.current,
+              });
+            }
+
+            trackBookingEvent("booking_form_submit", {
+              form_id: formId,
+              form_location: analyticsLocation,
+              page_path: pagePath,
+              step_count: currentStepRef.current,
+              response_id: payload?.responseId,
+            });
+          },
+        });
+      } catch {
+        if (isMounted) {
           setScriptError(true);
         }
-      });
+      }
+    };
+
+    initializeWidget();
 
     return () => {
-      mounted = false;
+      isMounted = false;
+      widgetRef.current?.unmount?.();
+      widgetRef.current = null;
+      if (containerRef.current) {
+        containerRef.current.innerHTML = "";
+      }
     };
-  }, []);
+  }, [analyticsLocation, formId]);
 
   if (scriptError) {
     return (
@@ -113,14 +237,13 @@ const TypeFormEmbed = ({ formId, className, style }: TypeFormEmbedProps) => {
     <>
       <div
         ref={containerRef}
-        data-tf-live={formId}
         data-testid="typeform-embed"
         className={className}
         style={style}
-        aria-busy={!scriptReady}
+        aria-busy={!formReady}
         aria-live="polite"
       />
-      {!scriptReady ? (
+      {!formReady ? (
         <p className="mt-3 text-center text-xs text-slate-500">
           Loading secure form…
         </p>

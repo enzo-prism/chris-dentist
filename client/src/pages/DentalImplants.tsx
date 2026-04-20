@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, CheckCircle, Heart, Shield, Clock, Smile, Users, Award } from "lucide-react";
+import { officeInfo } from "@/lib/data";
+import { ArrowRight, CheckCircle, Heart, Shield, Clock, Smile, Users, Award, Phone } from "lucide-react";
 import TestimonialQuote from "@/components/testimonials/TestimonialQuote";
 import { getTestimonialsByNames } from "@/lib/testimonials";
 import StructuredData from "@/components/seo/StructuredData";
@@ -199,30 +200,44 @@ const DentalImplants = () => {
 
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary to-blue-700 text-white py-12 sm:py-16 lg:py-20">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold font-heading mb-4 sm:mb-6 leading-tight">
-              Dental Implants in Palo Alto: A Comprehensive Guide to Restoring Your Smile
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-blue-100 mb-4">
+              Missing tooth replacement
+            </div>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-heading mb-4 sm:mb-6 leading-tight">
+              Dental implants in Palo Alto that restore your smile and your bite
             </h1>
-            <p className="text-base sm:text-lg lg:text-xl text-blue-100 mb-6 sm:mb-8 max-w-3xl mx-auto leading-relaxed">
-              Are you missing one or more teeth and looking for a permanent, natural-looking solution in Palo Alto? 
-              Dental implants offer a revolutionary way to restore not just the appearance of your smile, but its full function and health.
+            <p className="text-base sm:text-lg lg:text-xl text-blue-100 mb-4 sm:mb-6 max-w-3xl mx-auto leading-relaxed">
+              If you’re missing one tooth or several, Dr. Wong helps you plan a long-term implant solution that looks natural, chews comfortably, and protects the rest of your smile.
             </p>
-            <p className="text-sm sm:text-base lg:text-lg text-blue-100 mb-6 sm:mb-8 max-w-3xl mx-auto leading-relaxed">
-              At the practice of Christopher B. Wong, DDS, we specialize in advanced implant dentistry, 
-              providing durable, comfortable, and aesthetically pleasing tooth replacement options.
+            <p className="text-sm sm:text-base lg:text-lg text-blue-100/90 mb-6 sm:mb-8 max-w-3xl mx-auto leading-relaxed">
+              Expect clear guidance, conservative planning, trusted surgical partners when needed, and a restoration designed around function, comfort, and appearance.
             </p>
-            <Link href="/schedule">
-              <Button className="bg-white text-primary hover:bg-gray-100 font-medium px-6 py-3 sm:px-8 sm:py-3 text-base sm:text-lg w-full sm:w-auto">
-                <span className="hidden sm:inline">Schedule Your Dental Implant Consultation Today</span>
-                <span className="sm:hidden">Schedule Consultation</span>
-                <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
-              </Button>
-            </Link>
+            <div className="flex flex-wrap items-center justify-center gap-3 mb-8 text-sm text-white/90">
+              <span className="rounded-full border border-white/20 bg-white/10 px-3 py-2">Single tooth, bridge, and implant-supported denture options</span>
+              <span className="rounded-full border border-white/20 bg-white/10 px-3 py-2">Digital planning and clear next steps</span>
+              <span className="rounded-full border border-white/20 bg-white/10 px-3 py-2">New patients and second opinions welcome</span>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Link href="/schedule#appointment">
+                <Button className="bg-white text-primary hover:bg-gray-100 font-medium px-6 py-3 sm:px-8 sm:py-3 text-base sm:text-lg w-full sm:w-auto">
+                  <span className="hidden sm:inline">Schedule your implant consultation</span>
+                  <span className="sm:hidden">Schedule consultation</span>
+                  <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
+                </Button>
+              </Link>
+              <a href={`tel:${officeInfo.phoneE164}`}>
+                <Button variant="outline" className="border-white/70 bg-white/10 text-white hover:bg-white/20 hover:text-white">
+                  <Phone className="mr-2 h-4 w-4" />
+                  Call {officeInfo.phone}
+                </Button>
+              </a>
+            </div>
           </motion.div>
         </div>
       </section>

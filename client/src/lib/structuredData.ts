@@ -92,7 +92,7 @@ export const buildOrganizationSchema = (options?: {
   const services = options?.services ?? [];
   const schema: StructuredDataNode = {
     "@context": "https://schema.org",
-    "@type": "Dentist",
+    "@type": ["Dentist", "LocalBusiness", "MedicalBusiness"],
     "@id": schemaId("/", "organization"),
     name: officeInfo.name,
     description:
@@ -130,6 +130,25 @@ export const buildOrganizationSchema = (options?: {
       longitude: -122.1497687,
     },
     hasMap: officeInfo.mapUrl,
+    location: {
+      "@type": "Place",
+      "@id": schemaId("/", "location"),
+      name: `${officeInfo.name} office`,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: officeInfo.address.line1,
+        addressLocality: officeInfo.address.city,
+        addressRegion: officeInfo.address.region,
+        postalCode: officeInfo.address.postalCode,
+        addressCountry: officeInfo.address.country,
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: 37.4488473,
+        longitude: -122.1497687,
+      },
+      hasMap: officeInfo.mapUrl,
+    },
     medicalSpecialty: "https://schema.org/Dentistry",
     isAcceptingNewPatients: true,
     openingHoursSpecification: officeInfo.openingHoursSpecification,
@@ -138,6 +157,13 @@ export const buildOrganizationSchema = (options?: {
         "@type": "ContactPoint",
         telephone: officeInfo.phoneE164,
         contactType: "Customer Service",
+        areaServed: DEFAULT_AREA_SERVED,
+        availableLanguage: ["English"],
+      },
+      {
+        "@type": "ContactPoint",
+        telephone: officeInfo.phoneE164,
+        contactType: "Emergency",
         areaServed: DEFAULT_AREA_SERVED,
         availableLanguage: ["English"],
       },

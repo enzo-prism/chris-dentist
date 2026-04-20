@@ -6,7 +6,12 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Button } from "@/components/ui/button";
 import { officeInfo } from "@/lib/data";
 import { getSeoForPath } from "@/lib/seo";
-import { buildBreadcrumbSchema, buildFAQSchema, type StructuredDataNode } from "@/lib/structuredData";
+import {
+  buildBreadcrumbSchema,
+  buildFAQSchema,
+  buildServiceSchema,
+  type StructuredDataNode,
+} from "@/lib/structuredData";
 import { Link } from "wouter";
 
 const CavityFillingsPaloAlto = () => {
@@ -45,8 +50,16 @@ const CavityFillingsPaloAlto = () => {
   ];
 
   const structuredDataNodes: StructuredDataNode[] = [];
+  const fillingServiceSchema = buildServiceSchema({
+    name: "Cavity Fillings in Palo Alto",
+    description:
+      "Tooth-colored cavity fillings in Palo Alto with a conservative approach that removes decay early and restores strength with natural-looking composite.",
+    slug: "/cavity-fillings-palo-alto",
+    serviceType: "Composite Dental Fillings",
+  });
   const breadcrumbSchema = buildBreadcrumbSchema(breadcrumbItems);
   const faqSchema = buildFAQSchema(faqs, "/cavity-fillings-palo-alto");
+  structuredDataNodes.push(fillingServiceSchema);
   if (breadcrumbSchema) structuredDataNodes.push(breadcrumbSchema);
   if (faqSchema) structuredDataNodes.push(faqSchema);
 

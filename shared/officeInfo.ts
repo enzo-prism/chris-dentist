@@ -1,3 +1,20 @@
+export type HolidayHoursEntry = {
+  day: string;
+  hours: string;
+};
+
+export type HolidayHours = {
+  active: boolean;
+  id: string;
+  title: string;
+  description: string;
+  entries: HolidayHoursEntry[];
+  cta?: {
+    label: string;
+    href: string;
+  };
+};
+
 export const officeInfo = {
   name: "Christopher B. Wong, DDS",
   phoneE164: "+16503266319",
@@ -45,15 +62,15 @@ export const officeInfo = {
 
 export type OfficeInfo = typeof officeInfo;
 
-export const holidayHours = {
+export const holidayHours: HolidayHours = {
   active: false,
-  id: "office-closure-2026-02-16",
-  title: "No active office closures",
+  id: "office-hours-default",
+  title: "Regular office hours",
   description:
-    "Our office has returned to regular operating hours.",
+    "Our office is operating on its normal schedule.",
   entries: [],
   cta: {
     label: "View our hours",
     href: "/schedule#appointment",
   },
-} as const;
+};

@@ -3,6 +3,7 @@ import {
   getSeoForPath,
   normalizePathname,
   buildExcerpt,
+  buildBlogMetaDescription,
   type SeoDefinition,
 } from "./seo";
 
@@ -61,4 +62,10 @@ export function getMetaForPath(pathname: string): MetaDefinition {
   return { title, description };
 }
 
-export { seoByPath, getSeoForPath, normalizePathname, buildExcerpt };
+export {
+  seoByPath,
+  getSeoForPath,
+  normalizePathname,
+  buildExcerpt,
+  buildBlogMetaDescription,
+};

@@ -3,6 +3,7 @@ export {
   getSeoForPath,
   normalizePathname,
   buildExcerpt,
+  buildBlogMetaDescription,
   DEFAULT_ROBOTS,
   NOINDEX_ROBOTS,
   getIndexablePaths,

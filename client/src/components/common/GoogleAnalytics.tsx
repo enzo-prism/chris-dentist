@@ -1,8 +1,38 @@
 import { useEffect, useCallback, useRef } from "react";
 import { useLocation } from "wouter";
+import { trackBookingEvent, trackPhoneClick } from "@/lib/analytics";
 
 const GA_MEASUREMENT_ID = "G-94WRBJY51J";
 const GA_SCRIPT_ID = "ga-gtag-script";
+
+const isScheduleIntentLink = (href: string) => {
+  if (!href) return false;
+
+  if (href.startsWith("/schedule")) {
+    return true;
+  }
+
+  if (href.startsWith("#appointment")) {
+    return true;
+  }
+
+  try {
+    const url = new URL(href, window.location.origin);
+    return url.pathname === "/schedule";
+  } catch {
+    return false;
+  }
+};
+
+const getElementLabel = (element: Element | null) => {
+  if (!element) return undefined;
+  return (
+    element.getAttribute("aria-label") ||
+    element.getAttribute("title") ||
+    element.textContent?.replace(/\s+/g, " ").trim() ||
+    undefined
+  );
+};
 
 // This component handles Google Analytics page view tracking for SPAs
 const GoogleAnalytics = () => {
@@ -40,7 +70,6 @@ const GoogleAnalytics = () => {
     }
   }, []);
 
-  // Track page views
   const trackPageView = useCallback((path: string) => {
     if (typeof window === "undefined") return;
 
@@ -78,12 +107,48 @@ const GoogleAnalytics = () => {
     };
   }, [loadAnalyticsScript]);
 
-  // Listen for location changes and send page views to GA
   useEffect(() => {
     trackPageView(location);
   }, [location, trackPageView]);
 
-  return null; // This component doesn't render anything
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const handleDocumentClick = (event: MouseEvent) => {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+
+      const link = target.closest("a");
+      if (!link) return;
+
+      const href = link.getAttribute("href") ?? "";
+      const label = getElementLabel(link);
+
+      if (href.startsWith("tel:")) {
+        trackPhoneClick({
+          page_path: location,
+          phone_number: href.replace(/^tel:/, ""),
+          click_text: label,
+        });
+        return;
+      }
+
+      if (isScheduleIntentLink(href)) {
+        trackBookingEvent("schedule_cta_click", {
+          page_path: location,
+          destination: href,
+          click_text: label,
+        });
+      }
+    };
+
+    document.addEventListener("click", handleDocumentClick);
+    return () => {
+      document.removeEventListener("click", handleDocumentClick);
+    };
+  }, [location]);
+
+  return null;
 };
 
 export default GoogleAnalytics;

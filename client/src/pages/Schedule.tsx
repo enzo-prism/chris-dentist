@@ -47,8 +47,8 @@ const Schedule = () => {
       <section className="bg-[#F5F9FC] py-12 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold font-heading text-[#333333] mb-6">Schedule Your Appointment</h1>
-            <p className="text-xl text-[#333333] max-w-3xl mx-auto">Book your visit with Dr. Wong's dental practice. We offer flexible scheduling to fit your busy lifestyle.</p>
+            <h1 className="text-4xl md:text-5xl font-bold font-heading text-[#333333] mb-6">Schedule your appointment</h1>
+            <p className="text-xl text-[#333333] max-w-3xl mx-auto">Request online below, or call the office if you want the fastest help finding an opening, coordinating family visits, or dealing with something urgent.</p>
           </div>
         </div>
       </section>

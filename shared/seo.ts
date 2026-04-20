@@ -45,9 +45,9 @@ export function normalizePathname(pathname: string): string {
 const seoByPathSource: Record<string, SeoDefinitionInput> = {
   "/": {
     title:
-      "Palo Alto Dentist | Christopher B. Wong, DDS | Cosmetic & Family Dentistry",
+      "Palo Alto Dentist | Family, Invisalign, Implants & Emergency Care | Christopher B. Wong, DDS",
     description:
-      "Palo Alto dentist Dr. Christopher B. Wong, DDS provides family, cosmetic & restorative dentistry, Invisalign, implants, and emergency care. Book online.",
+      "Palo Alto dentist Dr. Christopher B. Wong, DDS provides family, cosmetic, restorative, Invisalign, implant, and emergency dental care with modern, conservative treatment plans. Book online or call.",
     canonicalPath: "/",
     ogImage: "https://i.imgur.com/BeX3mhS.png",
   },
@@ -122,17 +122,17 @@ const seoByPathSource: Record<string, SeoDefinitionInput> = {
     ogImage: "https://i.imgur.com/nGlhUdH.png",
   },
   "/schedule": {
-    title: "Book Appointment | Palo Alto Dentist | Christopher B. Wong, DDS",
+    title: "Schedule a Dentist Appointment in Palo Alto | Christopher B. Wong, DDS",
     description:
-      "Schedule your appointment with Palo Alto dentist Dr. Christopher Wong. New patients welcome. Easy online booking for dental care in Palo Alto.",
+      "Schedule a dentist appointment in Palo Alto with Dr. Christopher Wong. New patients welcome for cleanings, emergencies, Invisalign consults, cosmetic care, and second opinions.",
     canonicalPath: "/schedule",
     ogImage: "https://i.imgur.com/AC5lGu3.png",
   },
   "/invisalign": {
     title:
-      "Invisalign Palo Alto, CA | Clear Aligners | Christopher B. Wong, DDS",
+      "Invisalign Dentist in Palo Alto | Clear Aligners for Adults & Teens | Christopher B. Wong, DDS",
     description:
-      "Invisalign dentist in Palo Alto offering clear aligners with digital scans, personalized plans, and easy checkups for teens and adults. Schedule a consult today.",
+      "Invisalign dentist in Palo Alto offering clear aligners for adults and teens, with digital scans, personalized plans, attachment guidance, and easy checkups. Schedule a consult today.",
     canonicalPath: "/invisalign",
     ogImage: "/images/invisalign-treatment.jpg",
   },
@@ -144,16 +144,16 @@ const seoByPathSource: Record<string, SeoDefinitionInput> = {
     ogImage: "/images/invisalign-treatment.jpg",
   },
   "/emergency-dental": {
-    title: "Emergency Dentist in Palo Alto | Same-Day Care | Christopher B. Wong, DDS",
+    title: "Emergency Dentist Palo Alto | Same-Day Toothache & Broken Tooth Care | Christopher B. Wong, DDS",
     description:
-      "Emergency dentist in Palo Alto offering same-day care for urgent toothaches, broken teeth, infections, and dental trauma. Call now for relief.",
+      "Emergency dentist in Palo Alto offering same-day care for toothaches, swelling, broken teeth, infections, and dental trauma. Call now for fast relief and next steps.",
     canonicalPath: "/emergency-dental",
     ogImage: "https://i.imgur.com/hO02YQ0.png",
   },
   "/zoom-whitening": {
-    title: "ZOOM Whitening in Palo Alto | In-Office Teeth Whitening | Christopher B. Wong, DDS",
+    title: "Teeth Whitening Palo Alto | ZOOM In-Office Whitening | Christopher B. Wong, DDS",
     description:
-      "In‑office ZOOM! whitening in Palo Alto for a noticeably brighter smile. Professional isolation, shade planning, and sensitivity management—book a visit.",
+      "Professional teeth whitening in Palo Alto with in-office ZOOM treatment, shade planning, and sensitivity management for a brighter smile in one visit.",
     canonicalPath: "/zoom-whitening",
     ogImage: "https://i.imgur.com/qK5nPtS.png",
   },
@@ -166,9 +166,9 @@ const seoByPathSource: Record<string, SeoDefinitionInput> = {
     robots: NOINDEX_ROBOTS,
   },
   "/teeth-whitening-palo-alto": {
-    title: "Palo Alto Teeth Whitening | In-Office & Take-Home Options | Christopher B. Wong, DDS",
+    title: "Teeth Whitening Palo Alto | In-Office & Take-Home Options | Christopher B. Wong, DDS",
     description:
-      "Palo Alto teeth whitening with dentist‑supervised options: in‑office whitening and custom take‑home trays. Safe care with sensitivity planning—schedule a visit.",
+      "Teeth whitening in Palo Alto with dentist-supervised options, including in-office whitening and custom take-home trays. Safe care with sensitivity planning and realistic shade goals.",
     canonicalPath: "/teeth-whitening-palo-alto",
     ogImage: DEFAULT_OG_IMAGE,
   },
@@ -202,30 +202,30 @@ const seoByPathSource: Record<string, SeoDefinitionInput> = {
     ogImage: DEFAULT_OG_IMAGE,
   },
   "/dentist-menlo-park": {
-    title: "Menlo Park Family Dentist | Nearby Palo Alto Care | Christopher B. Wong, DDS",
+    title: "Menlo Park Family Dentist | Palo Alto Invisalign, Cleanings & Emergency Care | Christopher B. Wong, DDS",
     description:
-      "Family dentist near Menlo Park for kids, teens, adults, and seniors. Preventive checkups, cleanings, fillings, Invisalign, and emergency care—visit our nearby Palo Alto office.",
+      "Menlo Park families visit our nearby Palo Alto dentist for cleanings, cavity care, Invisalign, cosmetic dentistry, and same-day emergency visits. New patients welcome.",
     canonicalPath: "/dentist-menlo-park",
     ogImage: DEFAULT_OG_IMAGE,
   },
   "/dentist-stanford": {
-    title: "Stanford Dentist | Convenient Palo Alto Dental Care | Christopher B. Wong, DDS",
+    title: "Stanford Dentist | Palo Alto Cleanings, Invisalign & Emergency Care | Christopher B. Wong, DDS",
     description:
-      "Stanford students and families choose Dr. Wong in Palo Alto for cleanings, Invisalign, restorations, and same‑day emergency visits.",
+      "Stanford students, faculty, and families choose our Palo Alto dentist for cleanings, Invisalign, restorative care, cosmetic dentistry, and same-day emergency visits.",
     canonicalPath: "/dentist-stanford",
     ogImage: DEFAULT_OG_IMAGE,
   },
   "/dentist-mountain-view": {
-    title: "Mountain View Family Dentist | Nearby Palo Alto Care | Christopher B. Wong, DDS",
+    title: "Mountain View Dentist | Palo Alto Cleanings, Invisalign & Emergency Care | Christopher B. Wong, DDS",
     description:
-      "Mountain View families visit our nearby Palo Alto office for cleanings, fillings, Invisalign, cosmetic dentistry, and emergency care.",
+      "Mountain View patients visit our nearby Palo Alto office for cleanings, fillings, Invisalign, cosmetic dentistry, restorative care, and emergency visits.",
     canonicalPath: "/dentist-mountain-view",
     ogImage: DEFAULT_OG_IMAGE,
   },
   "/dentist-los-altos": {
-    title: "Los Altos Dentist | Personalized Palo Alto Care | Christopher B. Wong, DDS",
+    title: "Los Altos Dentist | Palo Alto Preventive, Cosmetic & Emergency Care | Christopher B. Wong, DDS",
     description:
-      "Los Altos patients choose our Palo Alto dentist for preventive care, cosmetic improvements, restorations, Invisalign, and urgent visits.",
+      "Los Altos patients choose our Palo Alto dentist for preventive care, cosmetic treatment, Invisalign, implant restoration, and urgent visits with clear guidance.",
     canonicalPath: "/dentist-los-altos",
     ogImage: DEFAULT_OG_IMAGE,
   },
@@ -237,9 +237,9 @@ const seoByPathSource: Record<string, SeoDefinitionInput> = {
     ogImage: DEFAULT_OG_IMAGE,
   },
   "/dentist-sunnyvale": {
-    title: "Sunnyvale Family Dentist | Nearby Palo Alto Care | Christopher B. Wong, DDS",
+    title: "Sunnyvale Dentist | Palo Alto Cleanings, Invisalign & Emergency Care | Christopher B. Wong, DDS",
     description:
-      "Sunnyvale families choose our Palo Alto dentist for cleanings, fillings, Invisalign, cosmetic dentistry, and same-day emergency care.",
+      "Sunnyvale families choose our Palo Alto dentist for cleanings, fillings, Invisalign, cosmetic dentistry, and same-day emergency care in a calm, modern office.",
     canonicalPath: "/dentist-sunnyvale",
     ogImage: DEFAULT_OG_IMAGE,
   },
@@ -251,9 +251,9 @@ const seoByPathSource: Record<string, SeoDefinitionInput> = {
     ogImage: DEFAULT_OG_IMAGE,
   },
   "/dentist-redwood-city": {
-    title: "Redwood City Dentist | Nearby Palo Alto Care | Christopher B. Wong, DDS",
+    title: "Redwood City Dentist | Palo Alto Preventive, Invisalign & Emergency Care | Christopher B. Wong, DDS",
     description:
-      "Redwood City patients choose our Palo Alto dentist for preventive care, restorative treatment, Invisalign, and urgent visits.",
+      "Redwood City patients choose our Palo Alto dentist for preventive care, restorative treatment, Invisalign, cosmetic dentistry, and urgent visits close to home.",
     canonicalPath: "/dentist-redwood-city",
     ogImage: DEFAULT_OG_IMAGE,
   },
@@ -279,9 +279,9 @@ const seoByPathSource: Record<string, SeoDefinitionInput> = {
     ogImage: DEFAULT_OG_IMAGE,
   },
   "/dental-implants": {
-    title: "Dental Implants in Palo Alto | Implant Restoration | Christopher B. Wong, DDS",
+    title: "Dental Implants Palo Alto | Missing Tooth Replacement | Christopher B. Wong, DDS",
     description:
-      "Replace missing teeth with dental implants in Palo Alto. Dr. Wong offers implant planning, placement partners, and natural-looking restorations.",
+      "Replace missing teeth with dental implants in Palo Alto. Dr. Wong offers implant planning, trusted surgical partners, and natural-looking restorations built for long-term function.",
     canonicalPath: "/dental-implants",
     ogImage: "https://i.imgur.com/hO02YQ0.png",
   },
@@ -503,4 +503,12 @@ export function buildExcerpt(text: string, limit = 160): string {
   const normalized = text.replace(/\s+/g, " ").trim();
   if (normalized.length <= limit) return normalized;
   return `${normalized.slice(0, Math.max(limit - 1, 0))}…`;
+}
+
+export function buildBlogMetaDescription(title: string, limit = 160): string {
+  const cleanedTitle = title.replace(/[.?!:]+$/g, "").trim();
+  return buildExcerpt(
+    `Learn about ${cleanedTitle} from Dr. Christopher Wong, DDS in Palo Alto, including practical next steps, treatment options, and when to schedule care.`,
+    limit,
+  );
 }

@@ -584,12 +584,15 @@ const Home = () => {
                 <h3 className="mb-4 font-heading text-xl font-bold text-[#333333]">
                   Book Your Visit
                 </h3>
-                <p className="mb-6 text-[#333333]">
-                  Fill out the form below to schedule your appointment. We'll
-                  get back to you promptly to confirm your visit.
+                <p className="mb-4 text-[#333333]">
+                  Fill out the form below to request an appointment, or call if you want the fastest help finding a time.
+                </p>
+                <p className="mb-6 text-sm text-slate-600">
+                  Fastest option: <a href={`tel:${officeInfo.phoneE164}`} className="font-semibold text-primary hover:underline">call {officeInfo.phone}</a>
                 </p>
                 <TypeFormEmbed
                   formId="01JPZ57W1F3352Q1X0XK6P9SNV"
+                  analyticsLocation="home_appointment_section"
                   className="min-h-[320px] w-full sm:min-h-[400px]"
                 />
               </div>
