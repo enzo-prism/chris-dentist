@@ -11,7 +11,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
-import { trackGAEvent } from "@/lib/analytics";
+import { trackContactEvent } from "@/lib/analytics";
+import { buildLeadAttribution } from "@/lib/attribution";
 import { officeInfo } from "@/lib/data";
 
 const ContactForm = () => {
@@ -37,7 +38,11 @@ const ContactForm = () => {
         description: "We will get back to you as soon as possible.",
         variant: "default",
       });
-      trackGAEvent("generate_lead");
+      trackContactEvent({
+        form_location: "native_contact_form",
+        lead_type: "contact",
+        lead_channel: "native_form",
+      });
       form.reset();
       setIsSubmitting(false);
     },
@@ -54,7 +59,13 @@ const ContactForm = () => {
 
   const onSubmit = (data: InsertContactMessage) => {
     setIsSubmitting(true);
-    contactMutation.mutate(data);
+    contactMutation.mutate({
+      ...data,
+      attribution: buildLeadAttribution({
+        submissionForm: "native_contact_form",
+        submissionType: "contact",
+      }),
+    });
   };
 
   return (

@@ -133,6 +133,7 @@ export class MemStorage implements IStorage {
       ...appointmentData, 
       id, 
       notes: appointmentData.notes === undefined ? null : appointmentData.notes,
+      attribution: appointmentData.attribution ?? null,
       createdAt: new Date() 
     };
     this.appointments.set(id, appointment);
@@ -153,6 +154,7 @@ export class MemStorage implements IStorage {
     const message: ContactMessage = { 
       ...messageData, 
       id, 
+      attribution: messageData.attribution ?? null,
       createdAt: new Date() 
     };
     this.contactMessages.set(id, message);

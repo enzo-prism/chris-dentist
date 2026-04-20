@@ -12,7 +12,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
-import { trackGAEvent } from "@/lib/analytics";
+import { trackBookingEvent } from "@/lib/analytics";
+import { buildLeadAttribution } from "@/lib/attribution";
 import { officeInfo } from "@/lib/data";
 import { cn } from "@/lib/utils";
 
@@ -42,7 +43,10 @@ const AppointmentForm = () => {
         description: "You will receive a confirmation email shortly.",
         variant: "default",
       });
-      trackGAEvent("booked_appointment");
+      trackBookingEvent("booking_form_submit", {
+        form_location: "native_appointment_form",
+        booking_channel: "native_form",
+      });
       form.reset();
       setIsSubmitting(false);
     },
@@ -59,7 +63,13 @@ const AppointmentForm = () => {
 
   const onSubmit = (data: InsertAppointment) => {
     setIsSubmitting(true);
-    appointmentMutation.mutate(data);
+    appointmentMutation.mutate({
+      ...data,
+      attribution: buildLeadAttribution({
+        submissionForm: "native_appointment_form",
+        submissionType: "appointment",
+      }),
+    });
   };
 
   return (

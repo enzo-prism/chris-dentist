@@ -1,6 +1,7 @@
 import { useEffect, useCallback, useRef } from "react";
 import { useLocation } from "wouter";
 import { trackBookingEvent, trackPhoneClick } from "@/lib/analytics";
+import { persistAttribution } from "@/lib/attribution";
 
 const GA_MEASUREMENT_ID = "G-94WRBJY51J";
 const GA_SCRIPT_ID = "ga-gtag-script";
@@ -108,6 +109,7 @@ const GoogleAnalytics = () => {
   }, [loadAnalyticsScript]);
 
   useEffect(() => {
+    persistAttribution();
     trackPageView(location);
   }, [location, trackPageView]);
 

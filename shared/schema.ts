@@ -3,6 +3,33 @@ import { sql } from "drizzle-orm";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
+export const attributionTouchSchema = z.object({
+  utmSource: z.string().optional(),
+  utmMedium: z.string().optional(),
+  utmCampaign: z.string().optional(),
+  utmTerm: z.string().optional(),
+  utmContent: z.string().optional(),
+  gclid: z.string().optional(),
+  landingPage: z.string().optional(),
+  referrer: z.string().optional(),
+  capturedAt: z.string().optional(),
+});
+
+export const leadAttributionSchema = z.object({
+  firstTouch: attributionTouchSchema.optional(),
+  lastTouch: attributionTouchSchema.optional(),
+  sessionLandingPage: z.string().optional(),
+  sessionReferrer: z.string().optional(),
+  sessionStartAt: z.string().optional(),
+  submissionPagePath: z.string().optional(),
+  submissionPageUrl: z.string().optional(),
+  submissionForm: z.string().optional(),
+  submissionType: z.string().optional(),
+});
+
+export type AttributionTouch = z.infer<typeof attributionTouchSchema>;
+export type LeadAttribution = z.infer<typeof leadAttributionSchema>;
+
 // Users schema
 export const users = pgTable("users", {
   id: serial("id").primaryKey(),
@@ -26,13 +53,18 @@ export const appointments = pgTable("appointments", {
   time: text("time").notNull(),
   type: text("type").notNull(), // in-person or virtual
   notes: text("notes"),
+  attribution: jsonb("attribution").$type<LeadAttribution | null>(),
   createdAt: timestamp("created_at").defaultNow(),
 });
 
-export const insertAppointmentSchema = createInsertSchema(appointments).omit({
-  id: true,
-  createdAt: true,
-});
+export const insertAppointmentSchema = createInsertSchema(appointments)
+  .omit({
+    id: true,
+    createdAt: true,
+  })
+  .extend({
+    attribution: leadAttributionSchema.optional(),
+  });
 
 // Contact messages schema
 export const contactMessages = pgTable("contact_messages", {
@@ -42,13 +74,18 @@ export const contactMessages = pgTable("contact_messages", {
   phone: text("phone").notNull(),
   subject: text("subject").notNull(),
   message: text("message").notNull(),
+  attribution: jsonb("attribution").$type<LeadAttribution | null>(),
   createdAt: timestamp("created_at").defaultNow(),
 });
 
-export const insertContactMessageSchema = createInsertSchema(contactMessages).omit({
-  id: true,
-  createdAt: true,
-});
+export const insertContactMessageSchema = createInsertSchema(contactMessages)
+  .omit({
+    id: true,
+    createdAt: true,
+  })
+  .extend({
+    attribution: leadAttributionSchema.optional(),
+  });
 
 // Newsletter subscriptions schema
 export const newsletterSubscriptions = pgTable("newsletter_subscriptions", {

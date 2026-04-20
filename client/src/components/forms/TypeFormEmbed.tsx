@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { officeInfo } from "@/lib/data";
 import { trackBookingEvent } from "@/lib/analytics";
+import { getTypeformHiddenFields, persistAttribution } from "@/lib/attribution";
 import { cn } from "@/lib/utils";
 
 interface TypeFormEmbedProps {
@@ -92,7 +93,9 @@ const TypeFormEmbed = ({
   analyticsLocation = "schedule_form",
 }: TypeFormEmbedProps) => {
   const pagePath =
-    typeof window === "undefined" ? undefined : window.location.pathname;
+    typeof window === "undefined"
+      ? undefined
+      : `${window.location.pathname}${window.location.search}`;
   const containerRef = useRef<HTMLDivElement>(null);
   const widgetRef = useRef<TypeformWidgetInstance | null>(null);
   const [formReady, setFormReady] = useState(false);
@@ -115,20 +118,25 @@ const TypeFormEmbed = ({
         currentStepRef.current = 0;
         lastQuestionRef.current = null;
         hasStartedRef.current = false;
+        persistAttribution();
 
         widgetRef.current = window.tf.createWidget(formId, {
           container: containerRef.current,
           inlineOnMobile: true,
           medium: analyticsLocation,
-          hidden: {
+          hidden: getTypeformHiddenFields({
             source: analyticsLocation,
-          },
+            form_id: formId,
+            form_location: analyticsLocation,
+            booking_channel: "typeform",
+          }),
           onReady: () => {
             if (!isMounted) return;
             setFormReady(true);
             trackBookingEvent("booking_form_ready", {
               form_id: formId,
               form_location: analyticsLocation,
+              booking_channel: "typeform",
               page_path: pagePath,
             });
           },
@@ -138,6 +146,7 @@ const TypeFormEmbed = ({
             trackBookingEvent("booking_form_start", {
               form_id: formId,
               form_location: analyticsLocation,
+              booking_channel: "typeform",
               page_path: pagePath,
             });
           },
@@ -149,6 +158,7 @@ const TypeFormEmbed = ({
               trackBookingEvent("booking_form_start", {
                 form_id: formId,
                 form_location: analyticsLocation,
+                booking_channel: "typeform",
                 page_path: pagePath,
               });
             }
@@ -157,6 +167,7 @@ const TypeFormEmbed = ({
               trackBookingEvent("booking_form_step_complete", {
                 form_id: formId,
                 form_location: analyticsLocation,
+                booking_channel: "typeform",
                 page_path: pagePath,
                 step_number: currentStepRef.current,
                 step_ref: lastQuestionRef.current,
@@ -169,6 +180,7 @@ const TypeFormEmbed = ({
             trackBookingEvent("booking_form_step_view", {
               form_id: formId,
               form_location: analyticsLocation,
+              booking_channel: "typeform",
               page_path: pagePath,
               step_number: currentStepRef.current,
               step_ref: nextQuestionRef,
@@ -179,6 +191,7 @@ const TypeFormEmbed = ({
               trackBookingEvent("booking_form_step_complete", {
                 form_id: formId,
                 form_location: analyticsLocation,
+                booking_channel: "typeform",
                 page_path: pagePath,
                 step_number: currentStepRef.current,
                 step_ref: lastQuestionRef.current,
@@ -188,6 +201,7 @@ const TypeFormEmbed = ({
             trackBookingEvent("booking_form_submit", {
               form_id: formId,
               form_location: analyticsLocation,
+              booking_channel: "typeform",
               page_path: pagePath,
               step_count: currentStepRef.current,
               response_id: payload?.responseId,
