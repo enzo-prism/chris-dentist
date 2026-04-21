@@ -6,6 +6,7 @@ import { normalizeBlogCategory, useBlogPosts } from "@/hooks/useBlogPosts";
 
 interface RelatedServicePostsProps {
   serviceSlug: string;
+  serviceSlugs?: string[];
   serviceName: string;
   ctaHref?: string;
   category?: string;
@@ -13,6 +14,7 @@ interface RelatedServicePostsProps {
 
 const RelatedServicePosts = ({
   serviceSlug,
+  serviceSlugs,
   serviceName,
   ctaHref = "/blog",
   category,
@@ -21,15 +23,21 @@ const RelatedServicePosts = ({
   const normalizedCategory = category
     ? normalizeBlogCategory(category)
     : null;
-  const normalizedService = serviceSlug.trim().toLowerCase();
+  const normalizedServices = Array.from(
+    new Set(
+      [serviceSlug, ...(serviceSlugs ?? [])]
+        .map((slug) => slug.trim().toLowerCase())
+        .filter(Boolean),
+    ),
+  );
   const matchesCategory = (postCategory?: string | null) =>
     normalizedCategory &&
     normalizeBlogCategory(postCategory ?? undefined) === normalizedCategory;
   const matchesService = (relatedServices?: string[] | null) =>
     Boolean(
-      normalizedService &&
-        relatedServices?.some(
-          (slug) => slug.trim().toLowerCase() === normalizedService,
+      normalizedServices.length &&
+        relatedServices?.some((slug) =>
+          normalizedServices.includes(slug.trim().toLowerCase()),
         ),
     );
   const parsePostDate = (dateValue: string) => {

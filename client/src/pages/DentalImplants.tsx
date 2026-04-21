@@ -592,7 +592,12 @@ const DentalImplants = () => {
         subtitle="See other treatments we offer in Palo Alto."
       />
 
-      <RelatedServicePosts serviceSlug="dental-implants" serviceName="Dental Implants" />
+      <RelatedServicePosts
+        serviceSlug="dental-implants"
+        serviceSlugs={["restorative-dentistry"]}
+        serviceName="Dental Implants"
+        category="Restorative Dentistry"
+      />
 
       {/* CTA Section */}
       <section className="py-12 sm:py-16 bg-primary text-white">

@@ -160,7 +160,6 @@ Disallow: /
       staticEntries.forEach((entry) => {
         const lastmod =
           entry.lastmod ??
-          lastmodFromPrerendered(entry.canonicalPath) ??
           SERVER_START_LASTMOD;
         addUrl(
           entry.canonicalPath,
@@ -175,7 +174,6 @@ Disallow: /
         const route = `/blog/${post.slug}`;
         const lastmod =
           safeLastmodFromDateString(post.date) ??
-          lastmodFromPrerendered(route) ??
           SERVER_START_LASTMOD;
         addUrl(route, "0.6", "monthly", lastmod);
       });

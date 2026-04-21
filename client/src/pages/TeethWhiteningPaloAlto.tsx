@@ -1,5 +1,6 @@
 import MetaTags from "@/components/common/MetaTags";
 import PageBreadcrumbs from "@/components/common/PageBreadcrumbs";
+import RelatedServicePosts from "@/components/blog/RelatedServicePosts";
 import RelatedServices, { type RelatedServiceLink } from "@/components/common/RelatedServices";
 import StructuredData from "@/components/seo/StructuredData";
 import TestimonialQuote from "@/components/testimonials/TestimonialQuote";
@@ -542,6 +543,13 @@ const TeethWhiteningPaloAlto = () => {
         title="Related services"
         subtitle="Combine whitening with other smile‑enhancing treatments."
         className="bg-white"
+      />
+
+      <RelatedServicePosts
+        serviceSlug="zoom-whitening"
+        serviceSlugs={["cosmetic-dentistry"]}
+        serviceName="Teeth Whitening"
+        category="Teeth Whitening"
       />
 
       <section className="py-12 bg-primary text-white">

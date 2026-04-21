@@ -1,4 +1,5 @@
 import MetaTags from "@/components/common/MetaTags";
+import RelatedServicePosts from "@/components/blog/RelatedServicePosts";
 import PageBreadcrumbs from "@/components/common/PageBreadcrumbs";
 import RelatedServices, { type RelatedServiceLink } from "@/components/common/RelatedServices";
 import StructuredData from "@/components/seo/StructuredData";
@@ -172,9 +173,14 @@ const RestorativeDentistry = () => {
         subtitle="If you need a specific restoration, explore these pages."
         className="bg-white"
       />
+
+      <RelatedServicePosts
+        serviceSlug="restorative-dentistry"
+        serviceName="Restorative Dentistry"
+        category="Restorative Dentistry"
+      />
     </>
   );
 };
 
 export default RestorativeDentistry;
-
